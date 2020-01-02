@@ -123,3 +123,49 @@
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::after {
   color: $dark-gray;
 }
+.choice{
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+
+    &[disabled]{
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: .5;
+    }
+
+    .icon{
+        text-align: center;
+        vertical-align: middle;
+        height: 116px;
+        width: 116px;
+        border-radius: 50%;
+        color: $default-color;
+        margin: 0 auto 20px;
+        border: 1px solid $light-gray;
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+    }
+
+    i{
+        font-size: 30px;
+        line-height: 116px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    &:hover,
+    &.active{
+        .icon{
+            border-color: #2ca8ff;
+        }
+    }
+
+    input[type="radio"],
+    input[type="checkbox"]{
+        position: absolute;
+        left: -10000px;
+        z-index: -1;
+    }
+}

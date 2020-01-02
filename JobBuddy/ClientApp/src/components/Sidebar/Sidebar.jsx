@@ -1,27 +1,15 @@
-/*!
-
-=========================================================
-* Now UI Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 /*eslint-disable*/
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Nav } from "reactstrap";
+import { Nav, Collapse } from "reactstrap";
+// react plugin for creating notifications over the dashboard
+import NotificationAlert from "react-notification-alert";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
+import Button from 'components/CustomButton/CustomButton';
+
+import avatar from "assets/img/ryan.jpg";
 import logo from "logo-white.svg";
 
 var ps;
@@ -29,11 +17,33 @@ var ps;
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      openAvatar: false
+    };
     this.activeRoute.bind(this);
+    this.minimizeSidebar = this.minimizeSidebar.bind(this);
   }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
+  }
+  minimizeSidebar() {
+    var message = "Sidebar has ";
+    if (document.body.classList.contains("sidebar-mini")) {
+      message += "expanded...";
+    } else {
+      message += "collapsed...";
+    }
+    document.body.classList.toggle("sidebar-mini");
+    var options = {};
+    options = {
+      place: "tr",
+      message: message,
+      type: "info",
+      icon: "now-ui-icons ui-1_bell-53",
+      autoDismiss: 7
+    };
+    this.refs.notificationAlert.notificationAlert(options);
   }
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -50,10 +60,12 @@ class Sidebar extends React.Component {
   }
   render() {
     return (
-      <div className="sidebar" data-color={this.props.backgroundColor}>
+      <div>
+      <NotificationAlert ref="notificationAlert" />
+      <div className="sidebar" data-color="blue">
         <div className="logo">
           <a
-            href="https://www.creative-tim.com?ref=nudr-sidebar"
+            href="#"
             className="simple-text logo-mini"
             target="_blank"
           >
@@ -62,15 +74,71 @@ class Sidebar extends React.Component {
             </div>
           </a>
           <a
-            href="https://www.creative-tim.com?ref=nudr-sidebar"
+            href="#"
             className="simple-text logo-normal"
             target="_blank"
           >
             Job Buddy
           </a>
+          <div className="navbar-minimize">
+              <Button
+                simple
+                neutral
+                icon
+                round
+                id="minimizeSidebar"
+                onClick={this.minimizeSidebar}
+              >
+                <i className="now-ui-icons text_align-center visible-on-sidebar-regular" />
+                <i className="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini" />
+              </Button>
+            </div>
         </div>
+
         <div className="sidebar-wrapper" ref="sidebar">
-          <Nav>
+            <div className="user">
+              <div className="photo">
+                <img src={avatar} alt="Avatar" />
+              </div>
+              <div className="info">
+                <a
+                  data-toggle="collapse"
+                  aria-expanded={this.state.openAvatar}
+                  onClick={() =>
+                    this.setState({ openAvatar: !this.state.openAvatar })
+                  }
+                >
+                  <span>
+                    Ryan Gosling
+                    <b className="caret" />
+                  </span>
+                </a>
+                <Collapse isOpen={this.state.openAvatar}>
+                  <ul className="nav">
+                    <li>
+                      <a>
+                        {/* <span className="sidebar-mini-icon">MP</span> */}
+                        <span className="sidebar-normal">My Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        {/* <span className="sidebar-mini-icon">EP</span> */}
+                        <span className="sidebar-normal">Edit Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        {/* <span className="sidebar-mini-icon">S</span> */}
+                        <span className="sidebar-normal">Settings</span>
+                      </a>
+                    </li>
+                  </ul>
+                </Collapse>
+              </div>
+            </div>
+
+            <Nav>
             {this.props.routes.map((prop, key) => {
               if (prop.redirect) return null;
               return (
@@ -95,6 +163,7 @@ class Sidebar extends React.Component {
           </Nav>
         </div>
       </div>
+    </div>
     );
   }
 }

@@ -43,7 +43,7 @@ const thead = ["Name", "Country", "City", "Salary"];
 const tbody = [
   {
     className: "table-success",
-    data: ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"]
+    data: ["Dakota Rice", "Africa", "Oud-Turnhout", "$36,738"]
   },
   {
     className: "",

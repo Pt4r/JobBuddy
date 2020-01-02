@@ -60,6 +60,12 @@
     background: linear-gradient($color 0%, $bottomColor 80%);
 }
 
+@mixin panel-gradient($color) {
+  background: $color;  /* fallback for old browsers */
+  background: linear-gradient(160deg, $color 0%, darken($black-color,5) 100%);
+  background-size: 105%;
+}
+
 @mixin sidebar-color($color){
   &:after{
     background: $color;

@@ -7,10 +7,6 @@
         display: none;
     }
 
-    [data-notify="container"].alert{
-      min-width: 400px;
-    }
-
     #minimizeSidebar{
         display: none;
     }
@@ -19,8 +15,6 @@
       width: 86% !important;
       float: right !important;
     }
-
-
 
     .timeline:before,
     .timeline>li>.timeline-badge {
@@ -153,6 +147,9 @@
 
 
     @include sidebar();
+    .navbar-nav .dropdown-menu {
+      position: static !important;
+    }
 }
 
 @media screen and (min-width: 992px){
@@ -163,12 +160,6 @@
     .navbar .navbar-toggle{
         display: none;
     }
-
-    // .navbar.fixed-top{
-    //     width: $sidebar-width;
-    //     right: 0;
-    //     left: auto;
-    // }
 
     .navbar-nav{
         .nav-link{
@@ -208,11 +199,6 @@
         }
     }
 
-    .user-profile [class*="col-"] {
-      padding-left: 15px !important;
-      padding-right: 15px !important;
-    }
-
   .card-stats [class*="col-"] .statistics::after {
     display: none;
   }
@@ -233,6 +219,10 @@
     .landing-page .section-story-overview .image-container:nth-child(2){
         margin-left: 0;
         margin-bottom: 30px;
+    }
+    .ReactTable .actions-right .btn {
+      display: block;
+      margin-left: auto;
     }
 }
 
