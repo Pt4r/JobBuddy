@@ -37,8 +37,12 @@
         font-size: $btn-icon-font-size-regular;
         overflow: hidden;
         position: relative;
-        line-height: normal;
+        line-height: inherit;
 
+        &.btn-fa{
+            font-size: $btn-icon-font-size-fa;
+            line-height: inherit;
+        }
         &.btn-simple{
             padding: 0;
         }

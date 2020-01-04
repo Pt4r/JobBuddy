@@ -22,6 +22,8 @@ import Typography from "views/Typography.jsx";
 import TableList from "views/TableList.jsx";
 import Maps from "views/Maps.jsx";
 import UserPage from "views/UserPage.jsx";
+import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
+import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 
 var dashRoutes = [
   {
@@ -72,6 +74,21 @@ var dashRoutes = [
     icon: "design-2_ruler-pencil",
     component: Typography,
     layout: "/admin"
+  },
+  {
+    collapse: true,
+    path: ApplicationPaths.Profile,
+    name: "Account",
+    state: "openComponents",
+    icon: "education_atom",
+    views: [
+      {
+        path: ApplicationPaths.LogOut,
+        name: "Log out",
+        mini: "LO",
+        component: ApiAuthorizationRoutes
+      }
+    ]
   }
 ];
 export default dashRoutes;

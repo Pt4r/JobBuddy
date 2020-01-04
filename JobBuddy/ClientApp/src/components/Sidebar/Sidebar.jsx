@@ -7,7 +7,7 @@ import NotificationAlert from "react-notification-alert";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import Button from 'components/CustomButton/CustomButton';
+import { Button } from 'components';
 
 import avatar from "assets/img/ryan.jpg";
 import logo from "logo-white.svg";
@@ -109,7 +109,7 @@ class Sidebar extends React.Component {
                   }
                 >
                   <span>
-                    Ryan Gosling
+                    Darth Maul
                     <b className="caret" />
                   </span>
                 </a>
@@ -141,16 +141,54 @@ class Sidebar extends React.Component {
             <Nav>
             {this.props.routes.map((prop, key) => {
               if (prop.redirect) return null;
+              if (prop.collapse) {
+                var st = {};
+                st[prop["state"]] = !this.state[prop.state];
+                return (
+                  <li className={this.activeRoute(prop.path)} key={key}>
+                    <a
+                      data-toggle="collapse"
+                      aria-expanded={this.state[prop.state]}
+                      onClick={() => this.setState(st)}
+                    >
+                      <i className={"now-ui-icons " + prop.icon} />
+                      <p>
+                        {prop.name}
+                        <b className="caret" />
+                      </p>
+                    </a>
+                    <Collapse isOpen={this.state[prop.state]}>
+                      <ul className="nav">
+                        {prop.views.map((prop, key) => {
+                          if (prop.redirect) return null;
+                          return (
+                            <li
+                              className={this.activeRoute(prop.path)}
+                              key={key}
+                            >
+                              <NavLink
+                                to={prop.path}
+                                activeClassName="active"
+                              >
+                                <span className="sidebar-mini-icon">
+                                  {prop.mini}
+                                </span>
+                                <span className="sidebar-normal">
+                                  {prop.name}
+                                </span>
+                              </NavLink>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </Collapse>
+                  </li>
+                );
+              }
               return (
-                <li
-                  className={
-                    this.activeRoute(prop.layout + prop.path) +
-                    (prop.pro ? " active active-pro" : "")
-                  }
-                  key={key}
-                >
+                <li className={this.activeRoute(prop.path)} key={key}>
                   <NavLink
-                    to={prop.layout + prop.path}
+                    to={prop.path}
                     className="nav-link"
                     activeClassName="active"
                   >
