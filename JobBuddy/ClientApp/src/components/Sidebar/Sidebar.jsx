@@ -41,7 +41,7 @@ class Sidebar extends React.Component {
       message: message,
       type: "info",
       icon: "now-ui-icons ui-1_bell-53",
-      autoDismiss: 7
+      autoDismiss: 2
     };
     this.refs.notificationAlert.notificationAlert(options);
   }
@@ -83,7 +83,7 @@ class Sidebar extends React.Component {
           <div className="navbar-minimize">
               <Button
                 simple
-                neutral
+                outlineWhite
                 icon
                 round
                 id="minimizeSidebar"

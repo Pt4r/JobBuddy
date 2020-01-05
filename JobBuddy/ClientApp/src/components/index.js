@@ -21,6 +21,7 @@ import ImageUpload from './CustomUpload/ImageUpload';
 import PictureUpload from './CustomUpload/PictureUpload';
 
 import Footer from './Footer/Footer';
+import PagesFooter from './Footer/PagesFooter';
 
 import FormInputs from './FormInputs/FormInputs';
 
@@ -66,8 +67,9 @@ export {
     // CustomUpload
     ImageUpload,
     PictureUpload,
-    // Footer
+    // Footers
     Footer,
+    PagesFooter,
     // FormInputs
     FormInputs,
     // // Header

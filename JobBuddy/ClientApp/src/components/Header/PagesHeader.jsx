@@ -49,7 +49,7 @@ class PagesHeader extends React.Component {
               </NavbarToggler>
             </div>
             <Link to="/" className="navbar-brand">
-              Now Ui Dashboard Pro - React
+              JobBuddy
             </Link>
           </div>
           <Collapse isOpen={this.state.isOpen} navbar>

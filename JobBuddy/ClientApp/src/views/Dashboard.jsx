@@ -69,7 +69,7 @@ class Dashboard extends React.Component {
               <Card className="card-chart">
                 <CardHeader>
                   <h5 className="card-category">Global Sales</h5>
-                  <CardTitle tag="h4">Shipped Products does this update on the fly now it does?</CardTitle>
+                  <CardTitle tag="h4">Shipped Products does this update?</CardTitle>
                   <UncontrolledDropdown>
                     <DropdownToggle
                       className="btn-round btn-outline-default btn-icon"
@@ -97,7 +97,7 @@ class Dashboard extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <div className="stats">
-                    <i className="now-ui-icons arrows-1_refresh-69" /> Just
+                    <i className="now-ui-icons loader_refresh spin" /> Just
                     Updated
                   </div>
                 </CardFooter>
@@ -135,7 +135,7 @@ class Dashboard extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <div className="stats">
-                    <i className="now-ui-icons arrows-1_refresh-69" /> Just
+                    <i className="now-ui-icons loader_refresh spin" /> Just
                     Updated
                   </div>
                 </CardFooter>

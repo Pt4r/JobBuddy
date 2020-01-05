@@ -618,7 +618,7 @@ Copyright (c) 2015 Daniel Eden
   .show > .btn-neutral.dropdown-toggle:focus,
   .show > .btn-neutral.dropdown-toggle:hover {
     background-color: #FFFFFF;
-    color: #fa7a50 !important;
+    color: #fa7a50;
     box-shadow: none; }
   .btn-neutral:hover, .btn-neutral:focus {
     color: #fa7a50; }

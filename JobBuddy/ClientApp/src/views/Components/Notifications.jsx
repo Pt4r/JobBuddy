@@ -86,7 +86,7 @@ class Notifications extends React.Component {
       ),
       type: type,
       icon: "now-ui-icons ui-1_bell-53",
-      autoDismiss: 7
+      autoDismiss: 2
     };
     this.refs.notificationAlert.notificationAlert(options);
   }
