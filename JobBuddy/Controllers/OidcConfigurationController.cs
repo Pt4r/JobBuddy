@@ -21,6 +21,8 @@ namespace JobBuddy.Controllers
         {
             var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
             return Ok(parameters);
+
+           //a
         }
     }
 }
