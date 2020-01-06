@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JobBuddy.Models;
 //using System.Web.Http;
 using JobBuddy.Services;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ namespace JobBuddy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HrUserDeatailsController : ControllerBase
+    public class HrUserDeatailsController : Controller
     {
         private readonly IHrDetailsRepository _hrDetails;
 
@@ -21,14 +22,26 @@ namespace JobBuddy.Controllers
         }
 
         //api/hrs
-        [HttpGet]
-        public IActionResult GetHrs(string id)
+        [HttpGet("{hrId}")]
+        public IActionResult GetHrs(string hrId)
         {
-            var hrs = _hrDetails.GetHrs(id).ToList();
+            var hrs = _hrDetails.GetHrs(hrId).ToList();
             return Ok(hrs);
         }
 
+        //api/hrs
+        [HttpPost]
+        public IActionResult CreateHr([FromBody]HrUserDetails hrUserDetails)
+        {
+            if (hrUserDetails == null)
+            {
+                return BadRequest(ModelState);
+            }
 
+
+            return CreatedAtRoute("GetHr", new { id = hrUserDetails.Id}, hrUserDetails);
+
+        }
 
 
         

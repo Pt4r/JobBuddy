@@ -17,6 +17,8 @@ namespace JobBuddy.Repositories
         {
             this.db = db;
         }
+
+
         //prostheto parametro to id tou Aspnetuser
         public IEnumerable<HrUserDetails> GetHrs(string Id)
         {
@@ -28,43 +30,45 @@ namespace JobBuddy.Repositories
             return hrDetails;
         }
 
-        public HrUserDetails AddHr(HrUserDetails hrDetail)
+        public bool AddHr(HrUserDetails hrDetail)
         {
             if (hrDetail == null)
             {
                 throw new ArgumentNullException();
             }
             hrDetail.Id = Guid.NewGuid();
-            db.HRs.Add(hrDetail);
-            db.SaveChanges();
-            return hrDetail;
+            db.HRs.AddAsync(hrDetail);
+            return Save();
 
         }
 
-        public HrUserDetails UpdateHr(HrUserDetails hrDetail)
+        public bool UpdateHr(HrUserDetails hrDetail)
         {
             if (hrDetail == null)
             {
                 throw new ArgumentNullException();
             }
 
-            db.HRs.Attach(hrDetail);
-            db.Entry(hrDetail).State = EntityState.Modified;
-            db.SaveChanges();
-            return hrDetail;
+            //db.HRs.Attach(hrDetail);
+            //db.Entry(hrDetail).State = EntityState.Modified;
+            //db.SaveChanges();
+
+            db.Update(hrDetail);
+            return Save();
 
         }
 
-        public HrUserDetails DeleteHr(Guid id)
+        public bool DeleteHr(HrUserDetails hrDetail)
         {
-            var hrDetail = db.HRs.Find(id);
-            db.HRs.Remove(hrDetail);
-            db.SaveChanges();
-            return hrDetail;
+            //var hrId = db.HRs.Find(hrDetail.Id);
+            //db.HRs.Remove(hrID);
+            //db.SaveChanges();
 
+            db.Remove(hrDetail);
+            return Save();
         }
 
-        public HrUserDetails FindHrById(Guid id)
+        public HrUserDetails GetHr(Guid id)
         {
             HrUserDetails hrDetail;
 
@@ -82,6 +86,12 @@ namespace JobBuddy.Repositories
         {
             HrUserDetails h1 = db.HRs.Where(m => m.ApplicationUserId == id).FirstOrDefault();
             return db.JobListings.Where(h => h.HrUserId == h1.Id).ToList();
+        }
+
+        public bool Save()
+        {
+            var saved = db.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 
