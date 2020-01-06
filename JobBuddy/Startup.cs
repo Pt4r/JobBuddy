@@ -11,6 +11,8 @@ using JobBuddy.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using JobBuddy.Services;
+using JobBuddy.Repositories;
 
 namespace JobBuddy
 {
@@ -30,6 +32,8 @@ namespace JobBuddy
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddMvc();
+
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -41,6 +45,8 @@ namespace JobBuddy
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

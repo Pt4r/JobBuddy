@@ -1,27 +1,14 @@
-﻿using JobBuddy.Models;
-using IdentityServer4.EntityFramework.Options;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 using JobBuddy.Models.ManyToMany;
-//using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
-namespace JobBuddy.Data
+namespace JobBuddy.Models
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class AppDbContext : DbContext
     {
-
-        public ApplicationDbContext(
-            DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
-        {
-        }
-
-
         public DbSet<ClientUserDetails> Clients { get; set; }
         public DbSet<HrUserDetails> HRs { get; set; }
         public DbSet<MentorUserDetails> Mentors { get; set; }
@@ -32,6 +19,15 @@ namespace JobBuddy.Data
         public DbSet<JobListing> JobListings { get; set; }
         public DbSet<ClientJobListing> ClientJobListings { get; set; }
 
+        public AppDbContext(DbContextOptions<AppDbContext> options) 
+            : base(options)
+        {
+        }
+        
+        //public static AppDbContext Create()
+        //{
+        //    return new AppDbContext();
+        //}
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -96,6 +92,8 @@ namespace JobBuddy.Data
 
             modelBuilder.Entity<ClientJobListing>().HasKey(sc => new { sc.ClientId, sc.JobListingId });
 
+
+
             // 1. Does not work, just for referanec
             //modelBuilder.Entity<JobListing>().HasMany<ClientUserDetails>(c => c.SubmittedClients).WithMany(j => j.JobListings)
             //    .Map(
@@ -113,6 +111,8 @@ namespace JobBuddy.Data
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }
+
+
+    
