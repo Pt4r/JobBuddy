@@ -13,36 +13,40 @@ namespace JobBuddy.Repositories
     {
         private readonly ApplicationDbContext db;
 
-        public IEnumerable<JobListing> GetJobListings()
+        public JobListingsRepository(ApplicationDbContext db)
         {
-            IEnumerable<JobListing> jobListings;
+            this.db = db;
+        }
+
+        public ICollection<JobListing> GetJobListings()
+        {
+            ICollection<JobListing> jobListings;
             jobListings = db.JobListings.ToList();
             return jobListings;
         }
 
-        public void AddJobListing(JobListing jobListing)
+        public bool AddJobListing(JobListing jobListing)
         {
             if (jobListing == null)
             {
                 throw new ArgumentNullException();
             }
             jobListing.Id = Guid.NewGuid();
-            db.JobListings.Add(jobListing);
-            db.SaveChanges();
+            db.JobListings.AddAsync(jobListing);
+            return Save();
         }
 
-        public void UpdateJobListing(JobListing jobListing)
+        public bool UpdateJobListing(JobListing jobListing)
         {
             db.JobListings.Attach(jobListing);
-            db.Entry(jobListing).State = EntityState.Modified;
-            db.SaveChanges();
+            db.Update(jobListing);
+            return Save();
         }
 
-        public void DeleteJobListing(Guid id)
+        public bool DeleteJobListing(JobListing jobListing)
         {
-            var jobListing = db.JobListings.Find(id);
             db.JobListings.Remove(jobListing);
-            db.SaveChanges();
+            return Save();
         }
 
         public JobListing GetJobListing(Guid id)
@@ -52,14 +56,20 @@ namespace JobBuddy.Repositories
             return jobListing;
         }
 
-        public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId)
-        {
-            return db.ClientJobListings.Where(c => c.ClientId == clientId).Select(i => i.Client).ToList();
-        }
+        //public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId)
+        //{
+        //    return db.ClientJobListings.Where(c => c.ClientId == clientId).Select(i => i.Client).ToList();
+        //}
 
-        public HrUserDetails GetHrUserFromJobListing(Guid id)
+        //public HrUserDetails GetHrUserFromJobListing(Guid id)
+        //{
+        //    return db.JobListings.Where(j => j.Id == id).Select(h => h.HrUser).SingleOrDefault();
+        //}
+
+        public bool Save()
         {
-            return db.JobListings.Where(j => j.Id == id).Select(h => h.HrUser).SingleOrDefault();
+            var saved = db.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

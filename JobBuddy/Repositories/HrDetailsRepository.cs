@@ -20,9 +20,9 @@ namespace JobBuddy.Repositories
 
 
         //prostheto parametro to id tou Aspnetuser
-        public IEnumerable<HrUserDetails> GetHrs(string Id)
+        public ICollection<HrUserDetails> GetHrs(string Id)
         {
-            IEnumerable<HrUserDetails> hrDetails;
+            ICollection<HrUserDetails> hrDetails;
 
             //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
             hrDetails = db.HRs.Where(m => m.ApplicationUserId == Id).ToList();
@@ -53,7 +53,7 @@ namespace JobBuddy.Repositories
             //db.Entry(hrDetail).State = EntityState.Modified;
             //db.SaveChanges();
 
-            db.Update(hrDetail);
+            db.HRs.Update(hrDetail);
             return Save();
 
         }
@@ -63,8 +63,7 @@ namespace JobBuddy.Repositories
             //var hrId = db.HRs.Find(hrDetail.Id);
             //db.HRs.Remove(hrID);
             //db.SaveChanges();
-
-            db.Remove(hrDetail);
+            db.HRs.Remove(hrDetail);
             return Save();
         }
 
@@ -82,11 +81,11 @@ namespace JobBuddy.Repositories
             return db.JobListings.Where(h => h.HrUserId == id).ToList();
         }
 
-        public ICollection<JobListing> GetJobListingsFromLoggedInHr(string id)
-        {
-            HrUserDetails h1 = db.HRs.Where(m => m.ApplicationUserId == id).FirstOrDefault();
-            return db.JobListings.Where(h => h.HrUserId == h1.Id).ToList();
-        }
+        //public ICollection<JobListing> GetJobListingsFromLoggedInHr(string id)
+        //{
+        //    HrUserDetails h1 = db.HRs.Where(m => m.ApplicationUserId == id).FirstOrDefault();
+        //    return db.JobListings.Where(h => h.HrUserId == h1.Id).ToList();
+        //}
 
         public bool Save()
         {

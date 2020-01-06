@@ -22,15 +22,18 @@ namespace JobBuddy.Controllers
         }
 
         //api/hrs
-        [HttpGet("{hrId}")]
+        [HttpGet("{Id}", Name = "GetHrs")]
         public IActionResult GetHrs(string hrId)
         {
             var hrs = _hrDetails.GetHrs(hrId).ToList();
             return Ok(hrs);
         }
 
-        //api/hrs
+        //api/hrUserDetails
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(HrUserDetails))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public IActionResult CreateHr([FromBody]HrUserDetails hrUserDetails)
         {
             if (hrUserDetails == null)
@@ -38,13 +41,74 @@ namespace JobBuddy.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return CreatedAtRoute("GetHr", new { id = hrUserDetails.Id}, hrUserDetails);
+            if (!_hrDetails.AddHr(hrUserDetails))
+            {
+                ModelState.AddModelError("", $"Something went wrong with saving {hrUserDetails.ApplicationUser.FirstName} {hrUserDetails.ApplicationUser.LastName}");
+                return StatusCode(500, ModelState);
+            }
+
+            return CreatedAtRoute("GetHr", new { id = hrUserDetails.Id }, hrUserDetails);
 
         }
 
+        //api/hrUserDetails/Id
+        [HttpPut("{Id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateHr(Guid hrId, [FromBody]HrUserDetails updatedHrUserDetails)
+        {
+            if (updatedHrUserDetails == null)
+                return BadRequest(ModelState);
 
-        
+            if (hrId != updatedHrUserDetails.Id)
+                return BadRequest(ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_hrDetails.UpdateHr(updatedHrUserDetails))
+            {
+                ModelState.AddModelError("", $"Something went wrong updating {updatedHrUserDetails.ApplicationUser.FirstName} {updatedHrUserDetails.ApplicationUser.LastName}");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+
+        //api/hrUserDetails/Id
+        [HttpDelete("{Id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult DeleteHr(Guid hrId)
+        {
+            var hrToDelete = _hrDetails.GetHr(hrId);
+
+            if(_hrDetails.GetJobListingsFromHr(hrId).Count()>0 )
+            {
+                ModelState.AddModelError("", $"There are open Job Listing binded to this account. Delete them first if you want to proceed.");
+                return StatusCode(409);
+            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_hrDetails.DeleteHr(hrToDelete))
+            {
+                ModelState.AddModelError("", $"Something went wrong deleting {hrToDelete.ApplicationUser.FirstName} {hrToDelete.ApplicationUser.LastName}");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+
+
+
+
 
 
 

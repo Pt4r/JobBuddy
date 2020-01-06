@@ -47,6 +47,7 @@ namespace JobBuddy
             services.AddRazorPages();
 
             services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();
+            services.AddScoped<IJobListingsRepository, JobListingsRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

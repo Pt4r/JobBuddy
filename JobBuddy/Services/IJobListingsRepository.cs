@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Services
 {
-    interface IJobListingsRepository
+    public interface IJobListingsRepository
     {
-        public IEnumerable<JobListing> GetJobListings();
-        public void AddJobListing(JobListing jobListing);
-        public void UpdateJobListing(JobListing jobListing);        
-        public void DeleteJobListing(Guid id);
+        public ICollection<JobListing> GetJobListings();
+        public bool AddJobListing(JobListing jobListing);
+        public bool UpdateJobListing(JobListing jobListing);        
+        public bool DeleteJobListing(JobListing jobListing);
         public JobListing GetJobListing(Guid id);
-        public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId);
-        public HrUserDetails GetHrUserFromJobListing(Guid id);
+        //public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId);
+        //public HrUserDetails GetHrUserFromJobListing(Guid id);
     }
 }
