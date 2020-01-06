@@ -11,7 +11,7 @@ namespace JobBuddy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HrUserDeatailsController : Controller
+    public class HrUserDeatailsController : ControllerBase
     {
         private readonly IHrDetailsRepository _hrDetails;
 
@@ -31,7 +31,7 @@ namespace JobBuddy.Controllers
 
 
 
-
+        
 
 
 
