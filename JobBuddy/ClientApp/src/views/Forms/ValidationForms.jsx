@@ -382,12 +382,14 @@ class ValidationForms extends React.Component {
                         onChange={e => this.loginFullName(e)}
                       />
                     </FormGroup>
+
                     <FormGroup
                       className={"has-label " + this.state.login.emailState}
                     >
                       <Label>Email Address *</Label>
                       <Input type="email" onChange={e => this.loginEmail(e)} />
                     </FormGroup>
+
                     <FormGroup
                       className={"has-label " + this.state.login.passwordState}
                     >
@@ -397,6 +399,7 @@ class ValidationForms extends React.Component {
                         onChange={e => this.loginPassword(e)}
                       />
                     </FormGroup>
+                    
                     <div className="category form-category">
                       * Required fields
                     </div>
