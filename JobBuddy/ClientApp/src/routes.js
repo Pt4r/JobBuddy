@@ -17,11 +17,11 @@
 */
 import Dashboard from "views/Dashboard.jsx";
 import Notifications from "views/Notifications.jsx";
-import Icons from "views/Icons.jsx";
 import Typography from "views/Typography.jsx";
 import TableList from "views/TableList.jsx";
-import Maps from "views/Maps.jsx";
 import UserPage from "views/UserPage.jsx";
+import LoginPage from "views/Pages/LoginPage";
+import RegisterPage from "views/Pages/RegisterPage";
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 
@@ -34,18 +34,20 @@ var dashRoutes = [
     layout: "/admin"
   },
   {
-    path: "/Register",
+    path: "/register",
     name: "Register",
-    icon: "design_image",
-    component: Icons,
-    layout: "/authentication"
+    short: "Register",
+    mini: "RP",
+    icon: "tech_mobile",
+    component: RegisterPage
   },
   {
-    path: "/Login",
+    path: "/login",
     name: "Login",
-    icon: "location_map-big",
-    component: Maps,
-    layout: "/authentication"
+    short: "Login",
+    mini: "LP",
+    icon: "users_circle-08",
+    component: LoginPage
   },
   {
     path: "/notifications",

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import { Layout } from './components/Layout';
-import Login from "./views/Pages/LoginPage";
-import Logout from "./views/Pages/LoginPage";
-import RegisterPage from "./views/Pages/RegisterPage";
 import PageNotFound from "./views/Pages/PageNotFound";
+import Pages from "layouts/Pages/Pages.jsx";
+
 // import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -19,19 +18,17 @@ export default class App extends Component {
   render () {
     return (
       <Switch>
+      <Layout>
         {/* This is how we define ANY route */}
-        <Route exact path='/' component={Login} />
+        <Route exact path='/' component={Pages} />
         <Route path="/admin" render={props => <AdminLayout {...props} />} />
         
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/logout" component={Logout} />
-
         {/* This is how we define any SECURE route */}
         {/* <AuthorizeRoute path='/fetch-data' component={FetchData} /> */}
 
         {/* These are the login/register routes */}
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+        </Layout>
         
         {/*404 page */}
         <Route component={PageNotFound} />

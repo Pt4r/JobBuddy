@@ -53,7 +53,7 @@ class LoginPage extends React.Component {
                         </InputGroupAddon>
                         <Input
                           type="text"
-                          placeholder="First Name..."
+                          placeholder="Email"
                           onFocus={e => this.setState({ firstnameFocus: true })}
                           onBlur={e => this.setState({ firstnameFocus: false })}
                         />
@@ -66,12 +66,12 @@ class LoginPage extends React.Component {
                       >
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="now-ui-icons text_caps-small" />
+                            <i className="now-ui-icons objects_key-25" />
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
                           type="text"
-                          placeholder="Last Name..."
+                          placeholder="Password"
                           onFocus={e => this.setState({ lastnameFocus: true })}
                           onBlur={e => this.setState({ lastnameFocus: false })}
                         />
