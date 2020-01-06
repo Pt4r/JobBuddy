@@ -123,6 +123,6 @@ export class Logout extends Component {
     }
 
     navigateToReturnUrl(returnUrl) {
-        return window.location.replace(returnUrl);
+        return window.location.replace('/');
     }
 }

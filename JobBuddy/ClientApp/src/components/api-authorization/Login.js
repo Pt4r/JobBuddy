@@ -128,6 +128,6 @@ export class Login extends Component {
     navigateToReturnUrl(returnUrl) {
         // It's important that we do a replace here so that we remove the callback uri with the
         // fragment containing the tokens from the browser history.
-        window.location.replace(returnUrl);
+        window.location.replace('/admin/dashboard');
     }
 }
