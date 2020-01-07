@@ -32,6 +32,7 @@ namespace JobBuddy
                     Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddMvc();
+            services.AddScoped<IJobCategoriesRepository, JobCategoryRepository>();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
