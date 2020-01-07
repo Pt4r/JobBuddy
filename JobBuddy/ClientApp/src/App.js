@@ -10,6 +10,7 @@ import { ApplicationPaths } from './components/api-authorization/ApiAuthorizatio
 
 import './custom.css'
 import AdminLayout from "layouts/Dashboard/Admin";
+import Login from './views/Pages/LoginPage';
 
 
 export default class App extends Component {
@@ -18,20 +19,25 @@ export default class App extends Component {
   render () {
     return (
       <Switch>
+
       <Layout>
+
         {/* This is how we define ANY route */}
         <Route exact path='/' component={Pages} />
         <Route path="/admin" render={props => <AdminLayout {...props} />} />
-        
+        <Route path="/login" component={Login} />
+
         {/* This is how we define any SECURE route */}
         {/* <AuthorizeRoute path='/fetch-data' component={FetchData} /> */}
 
         {/* These are the login/register routes */}
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+
         </Layout>
         
         {/*404 page */}
         <Route component={PageNotFound} />
+
       </Switch>
     );
   }

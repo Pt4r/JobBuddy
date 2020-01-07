@@ -22,7 +22,45 @@ import bgImage from "assets/img/bg14.jpg";
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      login: {
+        email: "",
+        confirm: "",
+        emailState: "",
+        confirmState: ""
+      }
+    };
+  }
+  loginEmail(e) {
+    var login = this.state.login;
+    login["email"] = e.target.value;
+    var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailRex.test(e.target.value)) {
+      login["emailState"] = "has-success";
+    } else {
+      login["emailState"] = "has-danger";
+    }
+    this.setState({ login });
+  }
+  loginPassword(e) {
+    var login = this.state.login;
+    login["password"] = e.target.value;
+    if (e.target.value.length > 0) {
+      login["passwordState"] = "has-success";
+    } else {
+      login["passwordState"] = "has-danger";
+    }
+    this.setState({ login });
+  }
+  loginSubmit(e) {
+    var login = this.state.login;
+    if (login["emailState"] !== "has-success")
+      login["emailState"] = "has-danger";
+    if (login["passwordState"] !== "has-success")
+      login["passwordState"] = "has-danger";
+    if (login["fullNameState"] !== "has-success")
+      login["fullNameState"] = "has-danger";
+    this.setState({ login });
   }
   render() {
     return (
@@ -32,7 +70,7 @@ class LoginPage extends React.Component {
           <div className="login-page">
             <Container>
               <Col xs={12} md={8} lg={4} className="ml-auto mr-auto">
-                <Form>
+                <Form id="account" method="post">
                   <Card className="card-login card-plain">
                     <CardHeader>
                       <div className="logo-container">
@@ -40,10 +78,12 @@ class LoginPage extends React.Component {
                       </div>
                     </CardHeader>
                     <CardBody>
+
                       <InputGroup
                         className={
-                          "no-border form-control-lg " +
-                          (this.state.firstnameFocus ? "input-group-focus" : "")
+                          "no-border form-control-lg has-label " +
+                          (this.state.emailFocus ? "input-group-focus " : "") 
+                          + this.state.login.emailState
                         }
                       >
                         <InputGroupAddon addonType="prepend">
@@ -52,16 +92,19 @@ class LoginPage extends React.Component {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          type="text"
+                          type="email"
                           placeholder="Email"
-                          onFocus={e => this.setState({ firstnameFocus: true })}
-                          onBlur={e => this.setState({ firstnameFocus: false })}
+                          onFocus={e => this.setState({ emailFocus: true })}
+                          onBlur={e => this.setState({ emailFocus: false })}
+                          onChange={e => this.loginEmail(e)}
                         />
                       </InputGroup>
+
                       <InputGroup
                         className={
-                          "no-border form-control-lg " +
-                          (this.state.lastnameFocus ? "input-group-focus" : "")
+                          "no-border form-control-lg has-label " +
+                          (this.state.passwordFocus ? "input-group-focus " : "")
+                          + this.state.login.passwordState
                         }
                       >
                         <InputGroupAddon addonType="prepend">
@@ -70,10 +113,11 @@ class LoginPage extends React.Component {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          type="text"
+                          type="password"
                           placeholder="Password"
-                          onFocus={e => this.setState({ lastnameFocus: true })}
-                          onBlur={e => this.setState({ lastnameFocus: false })}
+                          onFocus={e => this.setState({ passwordFocus: true })}
+                          onBlur={e => this.setState({ passwordFocus: false })}
+                          onChange={e => this.loginPassword(e)}
                         />
                       </InputGroup>
                     </CardBody>
@@ -83,10 +127,11 @@ class LoginPage extends React.Component {
                         round
                         color="primary"
                         size="lg"
-                        href="#pablo"
                         className="mb-3"
+                        type="submit"
+                        onClick={e => this.loginSubmit(e)}
                       >
-                        Get Started
+                        Log in
                       </Button>
                       <div className="pull-left">
                         <h6>

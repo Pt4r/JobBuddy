@@ -34,6 +34,7 @@ import {
 } from "reactstrap";
 
 import routes from "routes.js";
+import { LoginMenu } from "components/api-authorization/LoginMenu";
 
 class Header extends React.Component {
   state = {
@@ -203,10 +204,8 @@ class Header extends React.Component {
                   </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="/admin/user-page">Profile</DropdownItem>
-                  <DropdownItem href="/admin/settings">Settings</DropdownItem>
-                  <hr/>
-                  <DropdownItem href="/authentication/logout">Log out</DropdownItem>
+                  <LoginMenu color="dark"/>
+                  
                 </DropdownMenu>
               </Dropdown>
 

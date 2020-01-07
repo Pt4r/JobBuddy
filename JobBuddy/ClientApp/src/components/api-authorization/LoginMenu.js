@@ -13,7 +13,7 @@ export class LoginMenu extends Component {
             userName: null
         };
     }
-
+    
     componentDidMount() {
         this._subscription = authService.subscribe(() => this.populateState());
         this.populateState();
@@ -33,6 +33,8 @@ export class LoginMenu extends Component {
 
     render() {
         const { isAuthenticated, userName } = this.state;
+        const color = this.props.color;
+
         if (!isAuthenticated) {
             const registerPath = `${ApplicationPaths.Register}`;
             const loginPath = `${ApplicationPaths.Login}`;
@@ -47,10 +49,10 @@ export class LoginMenu extends Component {
     authenticatedView(userName, profilePath, logoutPath) {
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} to={profilePath}>Hello {userName}</NavLink>
+                <NavLink tag={Link} className={`text-${this.props.color}`} to={profilePath}>{userName}</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink tag={Link} to={logoutPath}>Logout</NavLink>
+                <NavLink tag={Link} className={`text-${this.props.color}`} to={logoutPath}>Logout</NavLink>
             </NavItem>
         </Fragment>);
 
@@ -59,10 +61,10 @@ export class LoginMenu extends Component {
     anonymousView(registerPath, loginPath) {
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} to={registerPath}>Register</NavLink>
+                <NavLink tag={Link} className={`text-${this.props.color}`} to={registerPath}>Register</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink tag={Link} to={loginPath}>Login</NavLink>
+                <NavLink tag={Link} className={`text-${this.props.color}`} to={loginPath}>Login</NavLink>
             </NavItem>
         </Fragment>);
     }

@@ -87,7 +87,7 @@
 .has-danger.input-group-focus .input-group-prepend .input-group-text,
 .has-danger.input-group-focus .input-group-append .input-group-text{
   border-color: lighten($danger-color, 30%);
-  color: $danger-color;
+  color: $danger-color !important;
   background-color: rgba(222,222,222, .1);
 
   &:focus{
@@ -117,7 +117,8 @@
 
   &.has-label{
     &:after{
-      top: 35px;
+      // Doesnt work in login page
+      // top: 35px;
     }
   }
 

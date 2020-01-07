@@ -120,7 +120,7 @@ function PagesNavbar() {
           >
             <Nav navbar>
             
-                <LoginMenu />
+                <LoginMenu color="white"/>
 
               <NavItem>
                 <NavLink
