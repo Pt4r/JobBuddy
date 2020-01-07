@@ -1,88 +1,99 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web;
-//using JobBuddy.Models;
-//using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using JobBuddy.Models;
+using JobBuddy.Services;
+using JobBuddy.Data;
+using Microsoft.EntityFrameworkCore;
 
-//namespace JobBuddy.Repositories
-//{
-//    public class MentorRepository
-//    {
-//        //prostheto parametro to id tou Aspnetuser
-//        public IEnumerable<MentorUserDetails> GetMentors(string Id)
-//        {
-//            IEnumerable<MentorUserDetails> mentors;
+namespace JobBuddy.Repositories
+{
 
-//            using (var db=new AppDbContext())
-//            {
-//                //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
-//                mentors = db.Mentors.Include(m=>m.ApplicationUser).Where(m => m.ApplicationUserId == Id).ToList();
-//            }
+    public class MentorRepository : IMentorRepository
+    {
+        private readonly ApplicationDbContext _db;
+        public MentorRepository(ApplicationDbContext db)
+        {
+            _db = db;
+        }
 
-//            return mentors;
-//        }
+        public MentorRepository()
+        {
+        }
 
-//        public void AddMentor(MentorUserDetails mentorUser)
-//        {
-//            if (mentorUser == null)
-//            {
-//                throw new ArgumentNullException();
-//            }
-//            using (var db = new AppDbContext())
-//            {
-//                mentorUser.MentorId = Guid.NewGuid();
-//                db.Mentors.Add(mentorUser);
-//                db.SaveChanges();
-//            }
-//        }
+        //prostheto parametro to id tou Aspnetuser
+
+        public IEnumerable<MentorUserDetails> GetMentors(/*string Id*/)
+        {
+            IEnumerable<MentorUserDetails> mentors;
 
 
-//        public void UpdateMentor(MentorUserDetails mentorUser)
-//        {
-//            if (mentorUser == null)
-//            {
-//                throw new ArgumentNullException();
-//            }
-//            using (var db = new AppDbContext())
-//            {
-//                db.Mentors.Attach(mentorUser);
-//                db.Entry(mentorUser).State = EntityState.Modified;
-//                db.SaveChanges();
-//            }
-//        }
+            //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
+            mentors = _db.Mentors.Include(m => m.ApplicationUser)/*.Where(m => m.ApplicationUserId == Id)*/.ToList();
 
-//        public void DeleteMentor(Guid id)
-//        {
-//            using (var db = new AppDbContext())
-//            {
-//                var deletedMentor=db.Mentors.SingleOrDefault(m => m.MentorId == id);
-//                if(deletedMentor==null)
-//                {
-//                    throw new ArgumentNullException();
-//                }
-//                else
-//                {
-//                    db.Mentors.Remove(deletedMentor);
-//                    db.SaveChanges();
-//                }
-               
-//            }
 
-//        }
+            return mentors;
+        }
 
-//        public MentorUserDetails FindMentorbyId(Guid id)
-//        {
-//            MentorUserDetails mentorUserFound;
+        public void AddMentor(MentorUserDetails mentorUser)
+        {
+            if (mentorUser == null)
+            {
+                throw new ArgumentNullException();
+            }
 
-//            using (var db = new AppDbContext())
-//            {
-//                mentorUserFound = db.Mentors.SingleOrDefault(m => m.MentorId == id);
-              
-//            }
+            mentorUser.MentorId = Guid.NewGuid();
+            _db.Mentors.Add(mentorUser);
+            _db.SaveChanges();
 
-//            return mentorUserFound;
-//        }
+        }
 
-//    }
-//}
+
+        public bool UpdateMentor(MentorUserDetails mentorUser)
+        {
+            if (mentorUser == null)
+            {
+                return false;
+            }
+
+            _db.Mentors.Attach(mentorUser);
+            _db.Entry(mentorUser).State = EntityState.Modified;
+            _db.SaveChanges();
+            return true;
+
+        }
+
+        public bool DeleteMentor(Guid id)
+        {
+            var deletedMentor = _db.Mentors.SingleOrDefault(m => m.MentorId == id);
+            if (deletedMentor == null)
+            {
+
+                return false;
+            }
+            else
+            {
+                _db.Mentors.Remove(deletedMentor);
+                _db.SaveChanges();
+                return true;
+            }
+
+
+
+        }
+
+        public MentorUserDetails FindMentorbyId(Guid id)
+        {
+            MentorUserDetails mentorUserFound;
+
+
+            mentorUserFound = _db.Mentors.SingleOrDefault(m => m.MentorId == id);
+
+
+
+            return mentorUserFound;
+        }
+
+    }
+}

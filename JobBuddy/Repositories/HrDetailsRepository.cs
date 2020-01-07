@@ -71,7 +71,7 @@ namespace JobBuddy.Repositories
         {
             HrUserDetails hrDetail;
 
-            hrDetail = db.HRs.Find(id);
+            hrDetail = db.HRs.SingleOrDefault(i => i.Id == id);
 
             return hrDetail;
         }

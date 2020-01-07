@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -27,6 +28,11 @@ namespace JobBuddy.Models
 
         //enas mentorUser mporei na douleuei se company optional 1-many rel.
         public Company Company { get; set; }
+
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
+
+        public string ApplicationUserId { get; set; }
 
         public MentorUserDetails()
         {

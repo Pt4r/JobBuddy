@@ -56,10 +56,7 @@ namespace JobBuddy.Repositories
             return jobListing;
         }
 
-        //public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId)
-        //{
-        //    return db.ClientJobListings.Where(c => c.ClientId == clientId).Select(i => i.Client).ToList();
-        //}
+
 
         //public HrUserDetails GetHrUserFromJobListing(Guid id)
         //{

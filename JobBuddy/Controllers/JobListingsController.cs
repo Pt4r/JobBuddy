@@ -110,22 +110,6 @@ namespace JobBuddy.Controllers
             var jls = _jobListings.GetJobListings().Where(h=>h.HrUserId == hrId).ToList();
             return Ok(jls);
         }
-
-
-
-        // 1. Get Clients From Job Listing - Pros Strato
-        //[HttpGet("{Id}", Name = "GetClientsFromJobListing")]
-        //public IActionResult GetClientsFromJobListing(Guid jlId)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-        //    var clients = _clients.GetClients().Where(j => j.jobListingId == jlId).ToList();
-        //    return Ok(clients);
-        //}
-
-
-
-
-
+              
     }
 }

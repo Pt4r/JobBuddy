@@ -13,7 +13,7 @@ namespace JobBuddy.Services
         public bool UpdateJobListing(JobListing jobListing);        
         public bool DeleteJobListing(JobListing jobListing);
         public JobListing GetJobListing(Guid id);
-        //public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId);
+
         //public HrUserDetails GetHrUserFromJobListing(Guid id);
     }
 }
