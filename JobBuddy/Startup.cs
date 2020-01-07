@@ -11,6 +11,7 @@ using JobBuddy.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using JobBuddy.Repositories;
 
 namespace JobBuddy
 {
@@ -26,6 +27,7 @@ namespace JobBuddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -47,6 +49,11 @@ namespace JobBuddy
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddScoped<IMentorRepository, MentorRepository>();
+          
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,6 +97,8 @@ namespace JobBuddy
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            
         }
     }
 }
