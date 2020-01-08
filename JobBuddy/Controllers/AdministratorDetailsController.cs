@@ -41,7 +41,7 @@ namespace JobBuddy.Controllers
 
         [HttpPut, HttpPatch]
         [ValidateAntiForgeryToken]
-        [Route("api/Mentors/Update")]
+        [Route("api/Administrators/Update")]
         public IActionResult UpdateAdmin([FromBody]AdministratorDetails administratorcreated)
         {
             if (!ModelState.IsValid)

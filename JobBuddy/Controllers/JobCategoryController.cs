@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobBuddy.Controllers
 {
-    [Route("api/[jobcategory]")]
+    
     [ApiController]
     public class JobCategoryController : ControllerBase
     {
@@ -17,34 +17,62 @@ namespace JobBuddy.Controllers
         {
             _jobCategoryRepository = jobCategoryRepository;
         }
-
         [HttpGet]
-        public IActionResult GetJobCat()
+        [Route("api/JobCategories")]
+        public IActionResult GetJobCategory(string id)
         {
-            var jobcategories = _jobCategoryRepository.GetJobCategories().ToList();
+            var jobcategories = _jobCategoryRepository.GetJobCategories.ToList();
             return Ok(jobcategories);
         }
-        
+
         [HttpPost]
         public IActionResult CreateJobCat([FromBody]JobCategory jobcategorycreated)
         {
-             _jobCategoryRepository.CreateJobCategory(jobcategorycreated);
+             _jobCategoryRepository.AddJobCategory(jobcategorycreated);
             return Ok();
         }
 
         [HttpPost]
-        public IActionResult UpdateJobCat([FromBody]JobCategory jobcategorycreated)
+        [Route("api/JobCategories/Create")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateJobCategory([FromBody]JobCategory jobcategorycreated)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _jobCategoryRepository.AddJobCategory(jobcategorycreated);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        [Route("api/JobCategories/Delete/{id}")]
+        public IActionResult DeleteJobCategory(Guid id)
+        {
+            bool removed = _jobCategoryRepository.DeleteJobCategory(id);
+            if (!removed)
+            {
+                return NotFound();
+                
+            }
+
+            return Ok();
+
+        }
+
+        [HttpPut, HttpPatch]
+        [ValidateAntiForgeryToken]
+        [Route("api/JobCategories/Update")]
+        public IActionResult UpdateJobCategory([FromBody]JobCategory jobcategorycreated)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             _jobCategoryRepository.UpdateJobCategory(jobcategorycreated);
             return Ok();
         }
-
-        [HttpPost]
-        public IActionResult DeleteJobCat([FromBody]JobCategory jobcategorycreated)
-        {
-            _jobCategoryRepository.DeleteJobCategory(jobcategorycreated);
-            return Ok();
-        }
-
     }
 }

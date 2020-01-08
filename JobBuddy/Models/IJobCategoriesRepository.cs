@@ -8,15 +8,11 @@ namespace JobBuddy.Models
 {
     public interface IJobCategoriesRepository
     {
-        ICollection<JobCategory> GetJobCategories();
-        JobCategory GetJobCategory(Guid jobcategoryId);
-        //JobCategory GetJobCategoryFromJobListing(int joblistingId);
-        //ICollection<JobListing> GetJobListingFromJobCategory(int jobcategoryId);
-
-        void CreateJobCategory(JobCategory jobcategory);
-        bool UpdateJobCategory(JobCategory jobcategory);
-        bool DeleteJobCategory(JobCategory jobcategory);
-        bool SaveJobCategory();
+        IEnumerable<JobCategory> GetJobCategories();
+        public void AddJobCategory(JobCategory jobcategory);
+        public bool UpdateJobCategory(JobCategory jobcategory);
+        public bool DeleteJobCategory(Guid Id);
+        public JobCategory FindJobCategoryId(Guid id);
 
     }
 }

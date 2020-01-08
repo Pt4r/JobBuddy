@@ -1,4 +1,5 @@
 ﻿using JobBuddy.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,48 +15,65 @@ namespace JobBuddy.Models
             _jobCategoryContext = jobCategoryContext;
         }
 
-        public ICollection<JobCategory> GetJobCategories()
+        public void AddJobCategory(JobCategory jobcategory)
         {
-            return _jobCategoryContext.JobCategories.OrderBy(j => j.JobCategoryTitle).ToList();
+
+            if (jobcategory == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            jobcategory.Id = Guid.NewGuid();
+            _jobCategoryContext.JobCategories.Add(jobcategory);
+            _jobCategoryContext.SaveChanges();
         }
 
-        public JobCategory GetJobCategory(Guid jobcategoryId)
+        public bool DeleteJobCategory(Guid id)
         {
-            return _jobCategoryContext.JobCategories.Where(j => j.Id == jobcategoryId).FirstOrDefault();
-        }
-        
-        public void CreateJobCategory(JobCategory jobcategory)
-        {
-            _jobCategoryContext.AddAsync(jobcategory);
-            
+            var deletedJobCategory = _jobCategoryContext.JobCategories.SingleOrDefault(m => m.Id == id);
+            if (deletedJobCategory == null)
+            {
+
+                return false;
+            }
+            else
+            {
+                _jobCategoryContext.JobCategories.Remove(deletedJobCategory);
+                _jobCategoryContext.SaveChanges();
+                return true;
+            }
         }
 
-        public bool DeleteJobCategory(JobCategory jobcategory)
+        public JobCategory FindJobCategoryId(Guid id)
         {
-            _jobCategoryContext.Remove(jobcategory);
-            return SaveJobCategory();
+            JobCategory jobcategoryFound;
+
+
+            jobcategoryFound = _jobCategoryContext.JobCategories.SingleOrDefault(m => m.Id == id);
+
+
+
+            return jobcategoryFound;
         }
 
-        public bool SaveJobCategory()
+        public IEnumerable<JobCategory> GetJobCategories()
         {
-            var saved = _jobCategoryContext.SaveChanges();
-            return saved >= 0 ? true : false;
+            IEnumerable<JobCategory> jobcategories;
+            return jobcategories = _jobCategoryContext.JobCategories.ToList();
         }
 
         public bool UpdateJobCategory(JobCategory jobcategory)
         {
-            _jobCategoryContext.Update(jobcategory);
-            return SaveJobCategory();
+            if (jobcategory == null)
+            {
+                return false;
+            }
+
+            _jobCategoryContext.JobCategories.Attach(jobcategory);
+            _jobCategoryContext.Entry(jobcategory).State = EntityState.Modified;
+            _jobCategoryContext.SaveChanges();
+            return true;
         }
-
-        //public JobCategory GetJobCategoryFromJobListing(int joblistingId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public ICollection<JobListing> GetJobListingFromJobCategory(int jobcategoryId)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
+
 }
