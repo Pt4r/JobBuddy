@@ -12,7 +12,7 @@ namespace JobBuddy.Models
         public enumJobCategoryTitle JobCategoryTitle { get;  }
         public string Subcategory_1 { get; set; }
         public string Subcategory_2 { get; set; }
-        public List<JobListing> JobListings { get; set; } 
+        public virtual ICollection<JobListing> JobListings { get; set; } 
 
     }
 }

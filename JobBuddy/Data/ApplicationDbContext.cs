@@ -103,7 +103,7 @@ namespace JobBuddy.Data
             modelBuilder.Entity<HrUserDetails>().HasKey(i => i.Id);
             modelBuilder.Entity<HrUserDetails>().Property(m => m.Gender);
             modelBuilder.Entity<HrUserDetails>().Property(i => i.PhoneNumber);
-            modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUser).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUsers).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
             //modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<JobListing>().ToTable("JobListing");
@@ -113,6 +113,10 @@ namespace JobBuddy.Data
             modelBuilder.Entity<JobListing>().HasOne(i => i.HrUser).WithMany(j => j.JobListings).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ClientJobListing>().HasKey(sc => new { sc.ClientId, sc.JobListingId });
+            modelBuilder.Entity<ClientJobListing>().HasOne(j => j.JobListing).WithMany(i => i.Clients).HasForeignKey(j => j.JobListingId);
+            modelBuilder.Entity<ClientJobListing>().HasOne(c => c.Client).WithMany(j => j.JobListings).HasForeignKey(c => c.ClientId);
+
+
 
             modelBuilder.Entity<JobListing>().HasOne(i => i.JobCategory).WithMany(c => c.JobListings).HasForeignKey(i => i.JobCategoryId).OnDelete(DeleteBehavior.NoAction);
 

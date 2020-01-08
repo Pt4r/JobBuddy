@@ -23,7 +23,7 @@ namespace JobBuddy.Models
         public Company Company { get; set; }
         public Guid CompanyId { get; set; }
 
-        public ICollection<ClientJobListing> Clients { get; set; }
+        public virtual ICollection<ClientJobListing> Clients { get; set; }
 
     }
 }

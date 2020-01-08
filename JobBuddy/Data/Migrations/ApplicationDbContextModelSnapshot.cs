@@ -243,7 +243,7 @@ namespace JobBuddy.Data.Migrations
                     b.Property<Guid?>("ClientUserDetailsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanyId")
+                    b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Gender")
@@ -569,10 +569,9 @@ namespace JobBuddy.Data.Migrations
                         .HasForeignKey("ClientUserDetailsId");
 
                     b.HasOne("JobBuddy.Models.Company", "Company")
-                        .WithMany("HrUser")
+                        .WithMany("HrUsers")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("JobBuddy.Models.JobListing", b =>

@@ -26,11 +26,11 @@ namespace JobBuddy.Models
         public string Email { get; set; }
 
         ///anamoni apo spyroMisichtoni
-        public List<HrUserDetails> HrUser { get; set; }
-        public List<JobListing> JobListings { get; set; }
+        public virtual ICollection<HrUserDetails> HrUsers { get; set; }
+        public virtual ICollection<JobListing> JobListings { get; set; }
 
         //Lista me mentors 
-        public List<MentorUserDetails> Mentors { get; set; }
+        public virtual ICollection<MentorUserDetails> Mentors { get; set; }
         // Hr List
         //FK List Job Categories
 
