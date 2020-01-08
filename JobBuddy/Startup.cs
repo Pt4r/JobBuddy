@@ -51,7 +51,11 @@ namespace JobBuddy
             });
 
             services.AddScoped<IMentorRepository, MentorRepository>();
-          
+            services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IJobListingsRepository, JobListingsRepository>();
+            services.AddScoped<IMentorOfferRepository, MentorOfferRepository>();
+
 
 
         }

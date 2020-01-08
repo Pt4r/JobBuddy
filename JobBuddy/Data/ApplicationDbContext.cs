@@ -101,15 +101,16 @@ namespace JobBuddy.Data
 
             modelBuilder.Entity<HrUserDetails>().ToTable("HrUser");
             modelBuilder.Entity<HrUserDetails>().HasKey(i => i.Id);
-            modelBuilder.Entity<HrUserDetails>().Property(m => m.Gender).IsRequired();
-            modelBuilder.Entity<HrUserDetails>().Property(i => i.PhoneNumber).IsRequired();
-            modelBuilder.Entity<HrUserDetails>().HasOne(i => i.Company).WithMany(c => c.HrUser).HasForeignKey(i => i.CompanyId).OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<HrUserDetails>().Property(m => m.Gender);
+            modelBuilder.Entity<HrUserDetails>().Property(i => i.PhoneNumber);
+            modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUser).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<JobListing>().ToTable("JobListing");
             modelBuilder.Entity<JobListing>().HasKey(i => i.Id);
             modelBuilder.Entity<JobListing>().Property(i => i.Title).IsRequired().HasMaxLength(250);
-            modelBuilder.Entity<JobListing>().Property(i => i.Info).IsRequired().HasMaxLength(1000);
+            modelBuilder.Entity<JobListing>().Property(i => i.Info).HasMaxLength(1000);
+            modelBuilder.Entity<JobListing>().HasOne(i => i.HrUser).WithMany(j => j.JobListings).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ClientJobListing>().HasKey(sc => new { sc.ClientId, sc.JobListingId });
 

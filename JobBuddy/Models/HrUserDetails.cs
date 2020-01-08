@@ -13,9 +13,12 @@ namespace JobBuddy.Models
         public enumGender Gender { get; set; }
         public int PhoneNumber { get; set; }
         public byte ProfilePic { get; set; }
+
+        public Guid? CompanyId { get; set; }
         public Company Company { get; set; }
-        public Guid CompanyId { get; set; }
+
         public ICollection<JobListing> JobListings { get; set; }
+
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
 
