@@ -11,17 +11,42 @@ namespace JobBuddy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HrUserDeatailsController : Controller
+    public class HrUserController : Controller
     {
         private readonly IHrDetailsRepository _hrDetails;
 
-        public HrUserDeatailsController(IHrDetailsRepository hr)
+        public HrUserController(IHrDetailsRepository hr)
         {
             _hrDetails = hr;
         }
 
+
+
+        //api/HrUser
+        [HttpGet]
+        [Route("api/HrUser/{id}")]
+        public IActionResult GetHr(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var hr = _hrDetails.GetHr(id);
+
+            if (hr == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(hr);
+
+
+        }
+
         //api/hrs
         [HttpGet("{Id}", Name = "GetHrs")]
+        [Route("api/HrUser")]
         public IActionResult GetHrs(string hrId)
         {
             var hrs = _hrDetails.GetHrs(hrId).ToList();
@@ -33,6 +58,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(201, Type = typeof(HrUserDetails))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+        [Route("api/HrUser/Create")]
         public IActionResult CreateHr([FromBody]HrUserDetails hrUserDetails)
         {
             if (hrUserDetails == null)
@@ -58,6 +84,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+        [Route("api/HrUser/Update")]
         public IActionResult UpdateHr(Guid hrId, [FromBody]HrUserDetails updatedHrUserDetails)
         {
             if (updatedHrUserDetails == null)
@@ -83,6 +110,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
+        [Route("api/HrUser/Delete/{id}")]
         public IActionResult DeleteHr(Guid hrId)
         {
             var hrToDelete = _hrDetails.GetHr(hrId);

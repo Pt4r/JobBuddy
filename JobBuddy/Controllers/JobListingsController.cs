@@ -19,8 +19,32 @@ namespace JobBuddy.Controllers
             _jobListings = jl;
         }
 
+
+
+
+        [HttpGet]
+        [Route("api/JobListings/{id}")]
+        public IActionResult GetJobListing(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var jobListing = _jobListings.GetJobListing(id);
+
+            if (jobListing == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(jobListing);
+        }
+
+
         //api/JobListings
         [HttpGet("{Id}", Name = "GetJobListings")]
+        [Route("api/JobListings")]
         public IActionResult GetJobListings()
         {
             if (!ModelState.IsValid)
@@ -32,6 +56,7 @@ namespace JobBuddy.Controllers
 
         //api/JobListings
         [HttpPost]
+        [Route("api/JobListings/Create")]
         [ProducesResponseType(201, Type = typeof(JobListing))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -57,6 +82,7 @@ namespace JobBuddy.Controllers
 
         //api/JobListings/Id
         [HttpPut("{Id}")]
+        [Route("api/JobListings/Update")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -81,6 +107,7 @@ namespace JobBuddy.Controllers
 
         //api/JobListings/Id
         [HttpDelete("{Id}")]
+        [Route("api/JobListings/Delete/{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -99,6 +126,23 @@ namespace JobBuddy.Controllers
             }
             return NoContent();
         }
+
+
+ 
+
+        //api/JobListings/JobListingId/ClientUsers
+        [HttpGet("{Id}", Name = "GetClientsFromJobListing")]
+        [Route("api/JobListings/{id}/ClientUsers")]
+        public IActionResult GetClientsFromJobListing(Guid jlId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var clients = _jobListings.GetClientsFromJobListing(jlId).ToList();
+            return Ok(clients);
+        }
+
+
 
 
         [HttpGet("{Id}", Name = "GetJobListingsFromHr")]

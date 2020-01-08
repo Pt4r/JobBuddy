@@ -20,8 +20,30 @@ namespace JobBuddy.Controllers
             _client = client;
         }
 
+
+
+        [HttpGet]
+        [Route("api/ClientUser/{id}")]
+        public IActionResult GetClient(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var client = _client.GetClient(id);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(client);
+        }
+
         //api/clientuser
         [HttpGet("{Id}", Name = "GetClients")]
+        [Route("api/ClientUser")]
         public IActionResult GetClients(string clientId)
         {
             var clients = _client.GetClients(clientId).ToList();
@@ -33,6 +55,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(201, Type = typeof(ClientUserDetails))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+        [Route("api/ClientUser/Create")]
         public IActionResult CreateClient([FromBody]ClientUserDetails ClientUserDetails)
         {
             if (ClientUserDetails == null)
@@ -53,11 +76,12 @@ namespace JobBuddy.Controllers
 
         }
 
-        //api/ClientUser/Id
+        //api/ClientUser
         [HttpPut("{Id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+        [Route("api/ClientUser/Update")]
         public IActionResult UpdateClient(Guid clientId, [FromBody]ClientUserDetails updatedClientUserDetails)
         {
             if (updatedClientUserDetails == null)
@@ -82,6 +106,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+        [Route("api/ClientUser/Delete/{id}")]
         public IActionResult DeleteClient(Guid clientId)
         {
             var clientToDelete = _client.GetClient(clientId);
@@ -98,16 +123,19 @@ namespace JobBuddy.Controllers
             return NoContent();
         }
 
-        //api/ClientUser
+        //api/ClientUser/ClientUserId/JobListings
         [HttpGet("{Id}", Name = "GetClientsFromJobListing")]
-        public IActionResult GetClientsFromJobListing(Guid jlId)
+        [Route("api/ClientUser/{id}/JobListings")]
+        public IActionResult GetJobListingsFromClient(Guid clId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var clients = _client.GetClientsFromJobListing(jlId).ToList();
-            return Ok(clients);
+            var jobListing = _client.GetJobListingsFromClient(clId).ToList();
+            return Ok(jobListing);
         }
+
+
 
         //{updatedClientUserDetails.ApplicationUser.FirstName} {updatedClientUserDetails.ApplicationUser.LastName}
     }

@@ -13,7 +13,8 @@ namespace JobBuddy.Repositories
         public bool AddClient(ClientUserDetails ClientDetail);
         public bool UpdateClient(ClientUserDetails ClientDetail);
         public bool DeleteClient(ClientUserDetails ClientDetail);
+        public ICollection<JobListing> GetJobListingsFromClient(Guid id);
         public bool Save();
-        public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid clientId);
+        
     }
 }

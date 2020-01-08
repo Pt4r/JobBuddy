@@ -89,9 +89,10 @@ namespace JobBuddy.Repositories
             return saved > 0 ? true : false;
         }
 
-        public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid jlId)
+
+        public ICollection<JobListing> GetJobListingsFromClient(Guid clId)
         {
-            return db.ClientJobListings.Where(c => c.JobListing.Id == jlId).Select(i => i.Client).ToList();
+            return db.ClientJobListings.Where(c => c.ClientId == clId).Select(i => i.JobListing).ToList();
         }
     }
 }
