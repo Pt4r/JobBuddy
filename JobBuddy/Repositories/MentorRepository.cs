@@ -25,19 +25,19 @@ namespace JobBuddy.Repositories
 
         //prostheto parametro to id tou Aspnetuser
 
-        public IEnumerable<MentorUserDetails> GetMentors(/*string Id*/)
+        public IEnumerable<MentorUserDetails> GetMentors(string Id)
         {
             IEnumerable<MentorUserDetails> mentors;
 
             
                 //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
-                mentors = _db.Mentors.Include(m => m.ApplicationUser)/*.Where(m => m.ApplicationUserId == Id)*/.ToList();
+                mentors = _db.Mentors.Include(m => m.ApplicationUser).Where(m => m.ApplicationUserId == Id).ToList();
             
 
             return mentors;
         }
 
-        public void AddMentor(MentorUserDetails mentorUser)
+        public bool AddMentor(MentorUserDetails mentorUser)
         {
             if (mentorUser == null)
             {
@@ -46,7 +46,7 @@ namespace JobBuddy.Repositories
            
                 mentorUser.MentorId = Guid.NewGuid();
                 _db.Mentors.Add(mentorUser);
-                _db.SaveChanges();
+            return Save();
             
         }
 
@@ -55,13 +55,15 @@ namespace JobBuddy.Repositories
         {
             if (mentorUser == null)
             {
-                return false;
+                throw new ArgumentNullException();
             }
-           
-                _db.Mentors.Attach(mentorUser);
-                _db.Entry(mentorUser).State = EntityState.Modified;
-                _db.SaveChanges();
-            return true;
+
+            //_db.Mentors.Attach(mentorUser);
+            //_db.Entry(mentorUser).State = EntityState.Modified;
+
+            _db.Mentors.Update(mentorUser);
+               
+            return Save();
             
         }
 
@@ -70,14 +72,13 @@ namespace JobBuddy.Repositories
               var deletedMentor = _db.Mentors.SingleOrDefault(m => m.MentorId == id);
                 if (deletedMentor == null)
                 {
-                    
-                    return false;
+
+                     return false;
                 }
                 else
                 {
                     _db.Mentors.Remove(deletedMentor);
-                    _db.SaveChanges();
-                    return true;
+                     return Save();
                 }
 
             
@@ -94,6 +95,20 @@ namespace JobBuddy.Repositories
             
 
             return mentorUserFound;
+        }
+
+
+        ////Gia na m fernei se kathe mentor user ta mentor Offers
+        //public IEnumerable<MentorOffer> GetMentorOffersFromMentor(Guid id)
+        //{
+            
+        //}
+
+
+        public bool Save()
+        {
+            var saved = _db.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
     }

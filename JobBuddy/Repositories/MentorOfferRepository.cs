@@ -8,26 +8,34 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Repositories
 {
-    public class MentorOfferRepository
+    public class MentorOfferRepository:IMentorOfferRepository
     {
         private ApplicationDbContext _db;
         public MentorOfferRepository (ApplicationDbContext db)
         {
             _db = db;
         }
-        public IEnumerable<MentorOffer> GetMentorOffers()
+        
+
+        // Otan o mentor pataei to offers tha ton pigainei se pinakaki..ekei me anonymous object tha pernaei to id tou mentor kai etsi ta antistoixa offers
+
+        public IEnumerable<MentorOffer> GetMentorOffers(Guid id)
         {
             IEnumerable<MentorOffer> mentorOffers;
 
            
-                mentorOffers = _db.MentorOffers.ToList();
-            
+                mentorOffers =_db.MentorOffers.Where(mo => mo.MentorId == id).ToList();
+
+
 
             return mentorOffers;
         }
 
-        public void AddMentorOffer(MentorOffer mentorOffer)
+        public bool AddMentorOffer(MentorOffer mentorOffer)
         {
+            ////tha prepei na bazoyme
+
+            //mentorOffer.MentorId==id tou mentor pou tha einai logged in
             if (mentorOffer == null)
             {
                 throw new ArgumentNullException();
@@ -35,52 +43,63 @@ namespace JobBuddy.Repositories
             
                 mentorOffer.MentorOfferId = Guid.NewGuid();
                 _db.MentorOffers.Add(mentorOffer);
-                _db.SaveChanges();
+            return Save();
             
         }
 
 
-        public void UpdateMentorOffer(MentorOffer mentorOffer)
+        public bool UpdateMentorOffer(MentorOffer mentorOffer)
         {
             if (mentorOffer == null)
             {
                 throw new ArgumentNullException();
             }
-            
-                _db.MentorOffers.Attach(mentorOffer);
-                _db.Entry(mentorOffer).State = EntityState.Modified;
-                _db.SaveChanges();
+
+            //_db.MentorOffers.Attach(mentorOffer);
+            //_db.Entry(mentorOffer).State = EntityState.Modified;
+
+            _db.MentorOffers.Update(mentorOffer);
+            return Save();
             
         }
 
-        public void DeleteMentorOffer(Guid id)
+        public bool DeleteMentorOffer(Guid id)
         {
             
                 var deletedMentorOffer = _db.MentorOffers.SingleOrDefault(m => m.MentorOfferId == id);
                 if (deletedMentorOffer == null)
                 {
-                    throw new ArgumentNullException();
+                    return false;
                 }
                 else
                 {
                     _db.MentorOffers.Remove(deletedMentorOffer);
-                    _db.SaveChanges();
+                    return Save();
                 }
 
             
 
         }
 
-        public MentorOffer FindMentorbyId(Guid id)
-        {
-            MentorOffer mentorOfferFound;
+        //Xreiazetai??
+
+        //public MentorOffer FindMentorOfferbyId(Guid id)
+        //{
+        //    MentorOffer mentorOfferFound;
 
            
-                mentorOfferFound = _db.MentorOffers.SingleOrDefault(m => m.MentorId == id);
+        //        mentorOfferFound = _db.MentorOffers.SingleOrDefault(m => m.MentorOfferId == id);
 
             
 
-            return mentorOfferFound;
+        //    return mentorOfferFound;
+        //}
+
+
+        public bool Save()
+        {
+            var saved = _db.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
 

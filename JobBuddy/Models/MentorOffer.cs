@@ -30,6 +30,7 @@ namespace JobBuddy.Models
         public MentorOffer()
         {
             PostDate = DateTime.Today;
+            ExpirationDate = PostDate.AddDays(3);
         }
     }
 
