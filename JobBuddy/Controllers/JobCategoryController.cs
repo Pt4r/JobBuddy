@@ -17,21 +17,25 @@ namespace JobBuddy.Controllers
         {
             _jobCategoryRepository = jobCategoryRepository;
         }
+
+        //api/JobCategory
         [HttpGet]
         [Route("api/JobCategories")]
         public IActionResult GetJobCategory(string id)
         {
-            var jobcategories = _jobCategoryRepository.GetJobCategories.ToList();
+            var jobcategories = _jobCategoryRepository.GetJobCategories().ToList();
             return Ok(jobcategories);
         }
 
-        [HttpPost]
-        public IActionResult CreateJobCat([FromBody]JobCategory jobcategorycreated)
-        {
-             _jobCategoryRepository.AddJobCategory(jobcategorycreated);
-            return Ok();
-        }
+        ////api/JobCategory/id
+        //[HttpPost]
+        //public IActionResult CreateJobCat([FromBody]JobCategory jobcategorycreated)
+        //{
+        //     _jobCategoryRepository.AddJobCategory(jobcategorycreated);
+        //    return Ok();
+        //}
 
+        //api/JobCategory
         [HttpPost]
         [Route("api/JobCategories/Create")]
         [ValidateAntiForgeryToken]
@@ -45,6 +49,7 @@ namespace JobBuddy.Controllers
             return Ok();
         }
 
+        //api/JobCategory/id
         [HttpDelete]
         [ValidateAntiForgeryToken]
         [Route("api/JobCategories/Delete/{id}")]
@@ -60,7 +65,7 @@ namespace JobBuddy.Controllers
             return Ok();
 
         }
-
+        //api/JobCategory/id
         [HttpPut, HttpPatch]
         [ValidateAntiForgeryToken]
         [Route("api/JobCategories/Update")]

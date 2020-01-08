@@ -18,14 +18,16 @@ namespace JobBuddy.Controllers
             _administratorDetailsRepository = administratorDetailsRepository;
         }
 
+        //api/AdministratorDetails
         [HttpGet]
         [Route("api/Administrators")]
         public IActionResult GetAdmin(string id)
         {
-            var admins = _administratorDetailsRepository.GetAdministrator.ToList();
+            var admins = _administratorDetailsRepository.GetAdministrator().ToList();
             return Ok(admins);
         }
 
+        //api/AdministratorDetails
         [HttpPost]
         [Route("api/Administrators/Create")]
         [ValidateAntiForgeryToken]
@@ -39,6 +41,7 @@ namespace JobBuddy.Controllers
             return Ok();
         }
 
+        //api/AdministratorDetails/id
         [HttpPut, HttpPatch]
         [ValidateAntiForgeryToken]
         [Route("api/Administrators/Update")]
@@ -53,6 +56,7 @@ namespace JobBuddy.Controllers
             return Ok();
         }
 
+        //api/AdministratorDetails/id
         [HttpDelete]
         [ValidateAntiForgeryToken]
         [Route("api/Administrators/Delete/{id}")]
