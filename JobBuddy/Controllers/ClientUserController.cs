@@ -123,17 +123,6 @@ namespace JobBuddy.Controllers
             return NoContent();
         }
 
-        //api/ClientUser/ClientUserId/JobListings
-        [HttpGet("{Id}", Name = "GetClientsFromJobListing")]
-        [Route("api/ClientUser/{id}/JobListings")]
-        public IActionResult GetJobListingsFromClient(Guid clId)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var jobListing = _client.GetJobListingsFromClient(clId).ToList();
-            return Ok(jobListing);
-        }
 
 
 
