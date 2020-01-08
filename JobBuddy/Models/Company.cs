@@ -26,8 +26,8 @@ namespace JobBuddy.Models
         public string Email { get; set; }
 
         ///anamoni apo spyroMisichtoni
-        //public List<HrUserDetails> HrUser { get; set; }
-        //public List<JobListing> JobListings { get; set; }
+        public List<HrUserDetails> HrUser { get; set; }
+        public List<JobListing> JobListings { get; set; }
 
         //Lista me mentors 
         public List<MentorUserDetails> Mentors { get; set; }
