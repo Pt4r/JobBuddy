@@ -1,4 +1,5 @@
 ﻿using JobBuddy.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,41 +14,72 @@ namespace JobBuddy.Models
         {
             _administratorDetailsContext = administratorDetailsContext;
         }
-        public ICollection<AdministratorDetails> GetAdministrators()
+
+        public void AddAdministrator(AdministratorDetails administratorUser)
         {
-            return _administratorDetailsContext.Administrators.OrderBy(j => j.ApplicationUser1.LastName).ToList();
+            if (administratorUser == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            administratorUser.AdminId = Guid.NewGuid();
+            _administratorDetailsContext.Administrators.Add(administratorUser);
+            _administratorDetailsContext.SaveChanges();
+
         }
 
-        public AdministratorDetails GetOneAdministrator(Guid adminId)
+        public bool DeleteAdministrator(Guid id)
         {
-            return _administratorDetailsContext.Administrators.Where(j => j.AdminId==adminId).FirstOrDefault();
+            var deletedAdministrator = _administratorDetailsContext.Administrators.SingleOrDefault(m => m.AdminId == id);
+            if (deletedAdministrator == null)
+            {
+
+                return false;
+            }
+            else
+            {
+                _administratorDetailsContext.Administrators.Remove(deletedAdministrator);
+                _administratorDetailsContext.SaveChanges();
+                return true;
+            }
         }
 
-        public void CreateAdmin(AdministratorDetails administratorDetails)
+        public AdministratorDetails FindMentorbyId(Guid id)
         {
-            _administratorDetailsContext.AddAsync(administratorDetails);
+            AdministratorDetails administratorFound;
+
+
+            administratorFound = _administratorDetailsContext.Administrators.SingleOrDefault(m => m.AdminId == id);
+
+
+
+            return administratorFound;
         }
 
-        public bool DeleteAdmin(AdministratorDetails administratorDetails)
+        public IEnumerable<AdministratorDetails> GetAdministrator()
         {
-            _administratorDetailsContext.Remove(administratorDetails);
-            return SaveAdmin();
+            IEnumerable<AdministratorDetails> administrators;
+
+
+            //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
+            administrators = _administratorDetailsContext.Administrators.Include(m => m.ApplicationUser1)/*.Where(m => m.ApplicationUserId == Id)*/.ToList();
+
+
+            return administrators;
         }
 
-
-
-        public bool UpdateAdmin(AdministratorDetails administratorDetails)
+        public bool UpdateAdministrator(AdministratorDetails administratorUser)
         {
-            _administratorDetailsContext.Update(administratorDetails);
-            return SaveAdmin();
-        }
+            if (administratorUser == null)
+            {
+                return false;
+            }
 
-       
-        public bool SaveAdmin()
-        {
-            var saved = _administratorDetailsContext.SaveChanges();
-            return saved >= 0 ? true : false;
+            _administratorDetailsContext.Administrators.Attach(administratorUser);
+            _administratorDetailsContext.Entry(administratorUser).State = EntityState.Modified;
+            _administratorDetailsContext.SaveChanges();
+            return true;
         }
-
     }
+
 }

@@ -7,15 +7,15 @@ namespace JobBuddy.Models
 {
     public interface IAdministratorDetailsRepository
     {
-        ICollection<AdministratorDetails> GetAdministrators();
-        AdministratorDetails GetOneAdministrator(Guid adminId);
-        //JobCategory GetJobCategoryFromJobListing(int joblistingId);
-        //ICollection<JobListing> GetJobListingFromJobCategory(int jobcategoryId);
+        public IEnumerable<AdministratorDetails> GetAdministrator(/*string Id*/);
 
-        void CreateAdmin(AdministratorDetails administratorDetails);
-        bool UpdateAdmin(AdministratorDetails administratorDetails);
+        public void AddAdministrator(AdministratorDetails administratorUser);
 
-        bool DeleteAdmin(AdministratorDetails administratorDetails);
-        bool SaveAdmin();
+        public bool UpdateAdministrator(AdministratorDetails administratorUser);
+
+        public bool DeleteAdministrator(Guid id);
+
+        public AdministratorDetails FindMentorbyId(Guid id);
+
     }
 }

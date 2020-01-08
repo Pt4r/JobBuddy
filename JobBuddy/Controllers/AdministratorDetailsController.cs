@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobBuddy.Controllers
 {
-    [Route("api/[administratorDetails]")]
+
     [ApiController]
     public class AdministratorDetailsController : ControllerBase
     {
@@ -19,31 +19,55 @@ namespace JobBuddy.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAdmin()
+        [Route("api/Administrators")]
+        public IActionResult GetAdmin(string id)
         {
-            var admins = _administratorDetailsRepository.GetAdministrators().ToList();
+            var admins = _administratorDetailsRepository.GetAdministrator.ToList();
             return Ok(admins);
         }
 
         [HttpPost]
+        [Route("api/Administrators/Create")]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateAdmin([FromBody]AdministratorDetails administratorcreated)
         {
-            _administratorDetailsRepository.CreateAdmin(administratorcreated);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _administratorDetailsRepository.AddAdministrator(administratorcreated);
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPut, HttpPatch]
+        [ValidateAntiForgeryToken]
+        [Route("api/Mentors/Update")]
         public IActionResult UpdateAdmin([FromBody]AdministratorDetails administratorcreated)
         {
-            _administratorDetailsRepository.UpdateAdmin(administratorcreated);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _administratorDetailsRepository.UpdateAdministrator(administratorcreated);
             return Ok();
         }
 
-        [HttpPost]
-        public IActionResult DeleteAdmin([FromBody]AdministratorDetails administratorcreated)
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        [Route("api/Administrators/Delete/{id}")]
+        public IActionResult DeleteAdmin(Guid id)
         {
-            _administratorDetailsRepository.DeleteAdmin(administratorcreated);
+            bool removed = _administratorDetailsRepository.DeleteAdministrator(id);
+            if (!removed)
+            {
+                return NotFound();
+                //return BadRequest
+            }
+
             return Ok();
+
         }
     }
+
 }
