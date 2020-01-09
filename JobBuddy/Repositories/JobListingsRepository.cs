@@ -56,9 +56,9 @@ namespace JobBuddy.Repositories
             return jobListing;
         }
 
-        public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid jlId)
+        public ICollection<JobListing> GetJobListingsFromClient(Guid clId)
         {
-            return db.ClientJobListings.Where(j => j.JobListingId == jlId).Select(c => c.Client).ToList();
+            return db.ClientJobListings.Where(j => j.ClientId == clId).Select(c => c.JobListing).ToList();
         }
 
 

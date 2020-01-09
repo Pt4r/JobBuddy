@@ -126,6 +126,28 @@ namespace JobBuddy.Controllers
             }
             return NoContent();
         }
-              
+
+        //api/JobListings/Hr/Id
+        [HttpGet("{Id}", Name = "GetJobListingsFromHr")]
+        [Route("api/JobListings/Hr/{id}")]
+        public IActionResult GetJobListingsFromHr(Guid hrId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var jls = _jobListings.GetJobListings().Where(h => h.HrUserId == hrId).ToList();
+            return Ok(jls);
+        }
+
+        //api/JobListings/Client/Id
+        [HttpGet("{Id}", Name = "GetJobListingsFromClient")]
+        [Route("api/JobListings/Client/{id}")]
+        public IActionResult GetJobListingsFromClient(Guid clId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var jobListing = _jobListings.GetJobListingsFromClient(clId).ToList();
+            return Ok(jobListing);
+        }
     }
 }
