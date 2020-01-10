@@ -7,7 +7,7 @@ namespace JobBuddy.Models
 {
     public enum enumJobCategoryTitle
     {
-         IT, 
+        IT, 
         Economics,
         Marketing, 
         Sales, 
