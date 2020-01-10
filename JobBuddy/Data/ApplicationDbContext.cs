@@ -46,6 +46,7 @@ namespace JobBuddy.Data
             modelBuilder.Entity<JobCategory>().Property(i => i.JobCategoryTitle).IsRequired();
             modelBuilder.Entity<JobCategory>().Property(i => i.Subcategory_1).IsRequired();
             modelBuilder.Entity<JobCategory>().Property(i => i.Subcategory_2).IsRequired();
+            
 
             modelBuilder.Entity<AdministratorDetails>().HasKey(a => a.AdminId);
             modelBuilder.Entity<AdministratorDetails>().HasOne(a => a.ApplicationUser1).WithMany(a => a.Admins);

@@ -20,8 +20,9 @@ namespace JobBuddy.Models
         
         [Display(Name = "SubCategory")]
         public string Subcategory_2 { get; set; }
-
-        // edw na mpei to JobListing List 
+        public List<JobListing> JobListings {get; set;}
+         
+         
             
     }
 }
