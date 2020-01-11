@@ -66,7 +66,7 @@ const dataTable = [
   ["Shou Itou", "Regional Marketing", "Tokyo", "20"],
   ["Michelle House", "Integration Specialist", "Sidney", "37"],
   ["Suki Burks", "Developer", "London", "53"],
-  ["Prescott Bartlett", "Technical Author", "London", "27"],
+  ["Prescott Baett", "Technical Author", "London", "27"],
   ["Gavin Cortez", "Team Leader", "San Francisco", "22"],
   ["Martena Mccray", "Post-Sales support", "Edinburgh", "46"],
   ["Unity Butler", "Marketing Designer", "San Francisco", "47"],

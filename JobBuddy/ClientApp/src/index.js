@@ -23,16 +23,23 @@ import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/now-ui-dashboard.scss?v=1.3.0";
 import "assets/css/demo.css";
 
+import AdminLayout from "layouts/Admin.jsx";
+import ClientLayout from "layouts/Client.jsx";
 import MentorLayout from "layouts/Mentor.jsx"
 import HrLayout from "layouts/Hr.jsx";
-import AdminLayout from "layouts/Admin.jsx";
+
+import Index from "views/Pages/LandingPage.jsx";
 import AuthLayout from "layouts/Auth.jsx";
+import PageNotFound from "views/Pages/PageNotFound.jsx";
+
 
 const hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+    <Route exact path='/' component={Index} />
+
     <Route
         path="/admin"
         render={props => {
@@ -40,7 +47,13 @@ ReactDOM.render(
         }}
       />
       <Route
-        path="/Hr"
+        path="/client"
+        render={props => {
+          return <ClientLayout {...props} />;
+        }}
+      />
+      <Route
+        path="/hr"
         render={props => {
           return <HrLayout {...props} />;
         }}

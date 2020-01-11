@@ -43,6 +43,11 @@
       padding: 0 !important;
     }
 
+    &.btn-fa{
+      font-size: $btn-icon-font-size-fa;
+      line-height: inherit;
+    }
+
     &.btn-sm {
       height: $btn-icon-size-small;
       min-width: $btn-icon-size-small;
