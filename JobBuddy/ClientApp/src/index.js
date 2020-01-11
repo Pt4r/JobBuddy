@@ -23,6 +23,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/now-ui-dashboard.scss?v=1.3.0";
 import "assets/css/demo.css";
 
+import MentorLayout from "layouts/Mentor.jsx"
 import HrLayout from "layouts/Hr.jsx";
 import AdminLayout from "layouts/Admin.jsx";
 import AuthLayout from "layouts/Auth.jsx";
@@ -44,13 +45,19 @@ ReactDOM.render(
           return <HrLayout {...props} />;
         }}
       />
+        <Route
+        path="/Mentor"
+        render={props => {
+          return <MentorLayout {...props} />;
+        }}
+      />
       <Route
         path="/auth"
         render={props => {
           return <AuthLayout {...props} />;
         }}
       />
-      <Redirect to="/hr/dashboard" />
+      <Redirect to="/Mentor/dashboard" />
     </Switch>
   </Router>,
   document.getElementById("root")

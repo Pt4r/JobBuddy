@@ -14,6 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import MentorDashboard from "views/Dashboard/MentorDashboard.jsx";
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
 import Dashboard from "views/Dashboard/Dashboard.jsx";
 import Buttons from "views/Components/Buttons.jsx";
@@ -45,6 +46,13 @@ import RegisterPage from "views/Pages/RegisterPage.jsx";
 import LockScreenPage from "views/Pages/LockScreenPage.jsx";
 
 let routes = [
+  {
+    path: "/Mentordashboard",
+    name: "MentorDashboard",
+    icon: "now-ui-icons design_app",
+    component: MentorDashboard,
+    layout: "/Mentor"
+  },
   {
     path: "/Hrdashboard",
     name: "HrDashboard",

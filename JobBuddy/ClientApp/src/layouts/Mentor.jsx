@@ -13,7 +13,7 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-Spyros
+
 
 */
 import React from "react";
@@ -33,7 +33,7 @@ import routes from "routes.js";
 
 var ps;
 
-class Hr extends React.Component {
+class Mentor extends React.Component {
   state = {
     sidebarMini: true,
     backgroundColor: "blue"
@@ -89,7 +89,7 @@ class Hr extends React.Component {
       if (prop.collapse) {
         return this.getRoutes(prop.views);
       }
-      if (prop.layout === "/hr") {
+      if (prop.layout === "/Mentor") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -139,7 +139,7 @@ class Hr extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/hr" to="/hr/hrdashboard" />
+            <Redirect from="/Mentor" to="/Mentor/Mentordashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (
@@ -157,4 +157,4 @@ class Hr extends React.Component {
   }
 }
 
-export default Hr;
+export default Mentor;
