@@ -31,6 +31,10 @@ import Index from "views/Pages/LandingPage.jsx";
 import AuthLayout from "layouts/Auth.jsx";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
 
+import AuthorizeRoute from 'components/api-authorization/AuthorizeRoute';
+import ApiAuthorizationRoutes from 'components/api-authorization/ApiAuthorizationRoutes';
+import { ApplicationPaths } from 'components/api-authorization/ApiAuthorizationConstants';
+
 
 const hist = createBrowserHistory();
 
@@ -63,12 +67,13 @@ ReactDOM.render(
           return <AuthLayout {...props} />;
         }}
       />
+      <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       {/*404 page */}
-      <Route component={PageNotFound} />
+      {/* <Route component={PageNotFound} /> */}
 
       {/* Delete this after DEVELOPMENT */}
-      <Redirect to="/client/dashboard" />
+      {/* <Redirect to="/client/dashboard" /> */}
       
     </Switch>
   </Router>,

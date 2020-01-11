@@ -16,6 +16,8 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
+import { LoginMenu } from "components/api-authorization/LoginMenu";
+
 function PagesNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -89,7 +91,7 @@ function PagesNavbar() {
           </UncontrolledDropdown>
           <div className="navbar-translate">
             <NavbarBrand
-              href="https://demos.creative-tim.com/now-ui-kit-react/index?ref=nukr-examples-navbar"
+              href="#"
               target="_blank"
               id="navbar-brand"
             >
@@ -119,23 +121,7 @@ function PagesNavbar() {
           >
             <Nav navbar>
            
-              <NavItem>
-                  <NavLink
-                    href="/auth/register"
-                    id="register"
-                  >
-                  Register
-                </NavLink>
-              </NavItem>
-
-              <NavItem>
-                  <NavLink
-                    href="/auth/login"
-                    id="login"
-                  >
-                  Login
-                </NavLink>
-              </NavItem>
+            <LoginMenu color="white"/>
              
               <NavItem>
                 <NavLink

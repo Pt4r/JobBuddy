@@ -79,9 +79,9 @@ namespace JobBuddy.Data
 
             //Company-Mentor relationship
             modelBuilder.Entity<MentorUserDetails>()
-                        .HasOne(m => m.Company)
-                        .WithMany(c => c.Mentors)
-                        .HasForeignKey(m => m.CompanyId);
+                .HasOne(m => m.Company);
+//  /////                      .WithMany(c => c.Mentors)
+//  /////                      .HasForeignKey(m => m.CompanyId);
                         //.OnDelete(DeleteBehavior.SetNull);
 
             //Mentor-MentorOffer Relationship
@@ -116,7 +116,7 @@ namespace JobBuddy.Data
             modelBuilder.Entity<HrUserDetails>().HasKey(i => i.Id);
             modelBuilder.Entity<HrUserDetails>().Property(m => m.Gender);
             modelBuilder.Entity<HrUserDetails>().Property(i => i.PhoneNumber);
-            modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUsers).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
+// //////           modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUsers).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
             //modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<JobListing>().ToTable("JobListing");
@@ -131,7 +131,7 @@ namespace JobBuddy.Data
 
 
 
-            modelBuilder.Entity<JobListing>().HasOne(i => i.JobCategory).WithMany(c => c.JobListings).HasForeignKey(i => i.JobCategoryId).OnDelete(DeleteBehavior.NoAction);
+// //////           modelBuilder.Entity<JobListing>().HasOne(i => i.JobCategory).WithMany(c => c.JobListings).HasForeignKey(i => i.JobCategoryId).OnDelete(DeleteBehavior.NoAction);
 
         }
     }
