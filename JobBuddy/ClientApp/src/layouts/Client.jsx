@@ -22,7 +22,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
+import ClientNavbar from "components/Navbars/ClientNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
@@ -30,7 +30,7 @@ import routes from "routes.js";
 
 var ps;
 
-class Hr extends React.Component {
+class Client extends React.Component {
   state = {
     sidebarMini: true,
     backgroundColor: "blue"
@@ -86,7 +86,7 @@ class Hr extends React.Component {
       if (prop.collapse) {
         return this.getRoutes(prop.views);
       }
-      if (prop.layout === "/hr") {
+      if (prop.layout === "/client") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -130,13 +130,13 @@ class Hr extends React.Component {
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <AdminNavbar
+          <ClientNavbar
             {...this.props}
             brandText={this.getActiveRoute(routes)}
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/hr" to="/hr/hrdashboard" />
+            <Redirect from="/client" to="/client/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (
@@ -148,4 +148,4 @@ class Hr extends React.Component {
   }
 }
 
-export default Hr;
+export default Client;

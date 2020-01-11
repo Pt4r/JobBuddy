@@ -30,44 +30,29 @@ class Footer extends React.Component {
           <nav>
             <ul>
               <li>
-                <a
-                  href="https://www.creative-tim.com?ref=nudr-footer"
-                  className="mr-4-px"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>
+                <a href="/contact" target="_blank">About Us</a>
               </li>
               <li>
-                <a
-                  href="https://presentation.creative-tim.com?ref=nudr-footer"
-                  className="mr-4-px"
-                  target="_blank"
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://blog.creative-tim.com?ref=nudr-footer"
-                  target="_blank"
-                >
-                  Blog
-                </a>
+                <a href="/blog" target="_blank">Blog</a>
               </li>
             </ul>
           </nav>
           <div className="copyright">
             &copy; {1900 + new Date().getYear()}, Designed by{" "}
-            <a href="https://www.invisionapp.com" target="_blank">
-              Invision
-            </a>
-            . Coded by{" "}
             <a
-              href="https://www.creative-tim.com?ref=nudr-footer"
+              href="#"
               target="_blank"
+              rel="noopener noreferrer"
             >
-              Creative Tim
+              The Curly Brackets Team
+            </a>
+            . For{" "}
+            <a
+              href="https://www.afdemp.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              AFDEmp
             </a>
             .
           </div>

@@ -22,7 +22,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes.js";
 
@@ -79,10 +78,6 @@ class Auth extends React.Component {
             <Footer fluid />
           </div>
         </div>
-        <FixedPlugin
-          bgColor={this.state.filterColor}
-          handleColorClick={this.handleColorClick}
-        />
       </>
     );
   }

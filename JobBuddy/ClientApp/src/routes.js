@@ -14,8 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import ClientDashboard from "views/Dashboard/ClientDashboard.jsx";
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
-import Dashboard from "views/Dashboard/Dashboard.jsx";
+import AdminDashboard from "views/Dashboard/Dashboard.jsx";
 import Buttons from "views/Components/Buttons.jsx";
 import GridSystem from "views/Components/GridSystem.jsx";
 import Panels from "views/Components/Panels.jsx";
@@ -38,25 +39,32 @@ import Calendar from "views/Calendar/Calendar.jsx";
 import Widgets from "views/Widgets/Widgets.jsx";
 import UserPage from "views/Pages/UserPage.jsx";
 import TimelinePage from "views/Pages/TimelinePage.jsx";
-import RTL from "views/Pages/RTL.jsx";
 import PricingPage from "views/Pages/PricingPage.jsx";
 import LoginPage from "views/Pages/LoginPage.jsx";
 import RegisterPage from "views/Pages/RegisterPage.jsx";
 import LockScreenPage from "views/Pages/LockScreenPage.jsx";
+import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 let routes = [
   {
-    path: "/Hrdashboard",
-    name: "HrDashboard",
+    path: "/dashboard",
+    name: "Client Dashboard",
+    icon: "now-ui-icons design_app",
+    component: ClientDashboard,
+    layout: "/client"
+  },
+  {
+    path: "/dashboard",
+    name: "Hr Dashboard",
     icon: "now-ui-icons design_app",
     component: HrDashboard,
     layout: "/hr"
   },
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Admin Dashboard",
     icon: "now-ui-icons design_app",
-    component: Dashboard,
+    component: AdminDashboard,
     layout: "/admin"
   },
   {
@@ -66,6 +74,13 @@ let routes = [
     state: "openPages",
     icon: "now-ui-icons design_image",
     views: [
+      {
+        path: "/404",
+        name: "Page Not Found",
+        mini: "404",
+        component: PageNotFound,
+        layout: "/admin"
+      },
       {
         path: "/timeline-page",
         name: "Timeline Page",
@@ -81,14 +96,7 @@ let routes = [
         layout: "/admin"
       },
       {
-        path: "/rtl-support",
-        name: "RTL Support",
-        mini: "RS",
-        component: RTL,
-        layout: "/admin"
-      },
-      {
-        path: "/register-page",
+        path: "/register",
         name: "Register Page",
         short: "Register",
         mini: "RP",
@@ -96,7 +104,7 @@ let routes = [
         layout: "/auth"
       },
       {
-        path: "/login-page",
+        path: "/login",
         name: "Login Page",
         short: "Login",
         mini: "LP",
