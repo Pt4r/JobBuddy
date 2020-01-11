@@ -1,4 +1,22 @@
+/*!
+
+=========================================================
+* Now UI Dashboard PRO React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 import React from "react";
+
+// reactstrap components
 import {
   Card,
   CardBody,
@@ -10,67 +28,34 @@ import {
   Input,
   InputGroup,
   InputGroupAddon,
-  InputGroupText
+  InputGroupText,
+  Button
 } from "reactstrap";
 
-import { Button } from "components";
-
-import nowLogo from "assets/img/AFDempLogo.png";
+// core components
+import nowLogo from "assets/img/now-logo.png";
 
 import bgImage from "assets/img/bg14.jpg";
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      login: {
-        email: "",
-        confirm: "",
-        emailState: "",
-        confirmState: ""
-      }
-    };
+    this.state = {};
   }
-  loginEmail(e) {
-    var login = this.state.login;
-    login["email"] = e.target.value;
-    var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRex.test(e.target.value)) {
-      login["emailState"] = "has-success";
-    } else {
-      login["emailState"] = "has-danger";
-    }
-    this.setState({ login });
+  componentDidMount() {
+    document.body.classList.add("login-page");
   }
-  loginPassword(e) {
-    var login = this.state.login;
-    login["password"] = e.target.value;
-    if (e.target.value.length > 0) {
-      login["passwordState"] = "has-success";
-    } else {
-      login["passwordState"] = "has-danger";
-    }
-    this.setState({ login });
-  }
-  loginSubmit(e) {
-    var login = this.state.login;
-    if (login["emailState"] !== "has-success")
-      login["emailState"] = "has-danger";
-    if (login["passwordState"] !== "has-success")
-      login["passwordState"] = "has-danger";
-    if (login["fullNameState"] !== "has-success")
-      login["fullNameState"] = "has-danger";
-    this.setState({ login });
+  componentWillUnmount() {
+    document.body.classList.remove("login-page");
   }
   render() {
     return (
-      <div className="wrapper wrapper-full-page ps">
-        <div className="full-page section-image">
+      <>
         <div className="content">
           <div className="login-page">
             <Container>
               <Col xs={12} md={8} lg={4} className="ml-auto mr-auto">
-                <Form id="account" method="post">
+                <Form>
                   <Card className="card-login card-plain">
                     <CardHeader>
                       <div className="logo-container">
@@ -78,12 +63,10 @@ class LoginPage extends React.Component {
                       </div>
                     </CardHeader>
                     <CardBody>
-
                       <InputGroup
                         className={
-                          "no-border form-control-lg has-label " +
-                          (this.state.emailFocus ? "input-group-focus " : "") 
-                          + this.state.login.emailState
+                          "no-border form-control-lg " +
+                          (this.state.firstnameFocus ? "input-group-focus" : "")
                         }
                       >
                         <InputGroupAddon addonType="prepend">
@@ -92,57 +75,51 @@ class LoginPage extends React.Component {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          type="email"
-                          placeholder="Email"
-                          onFocus={e => this.setState({ emailFocus: true })}
-                          onBlur={e => this.setState({ emailFocus: false })}
-                          onChange={e => this.loginEmail(e)}
+                          type="text"
+                          placeholder="First Name..."
+                          onFocus={e => this.setState({ firstnameFocus: true })}
+                          onBlur={e => this.setState({ firstnameFocus: false })}
                         />
                       </InputGroup>
-
                       <InputGroup
                         className={
-                          "no-border form-control-lg has-label " +
-                          (this.state.passwordFocus ? "input-group-focus " : "")
-                          + this.state.login.passwordState
+                          "no-border form-control-lg " +
+                          (this.state.lastnameFocus ? "input-group-focus" : "")
                         }
                       >
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="now-ui-icons objects_key-25" />
+                            <i className="now-ui-icons text_caps-small" />
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          type="password"
-                          placeholder="Password"
-                          onFocus={e => this.setState({ passwordFocus: true })}
-                          onBlur={e => this.setState({ passwordFocus: false })}
-                          onChange={e => this.loginPassword(e)}
+                          type="text"
+                          placeholder="Last Name..."
+                          onFocus={e => this.setState({ lastnameFocus: true })}
+                          onBlur={e => this.setState({ lastnameFocus: false })}
                         />
                       </InputGroup>
                     </CardBody>
                     <CardFooter>
                       <Button
                         block
-                        round
                         color="primary"
                         size="lg"
-                        className="mb-3"
-                        type="submit"
-                        onClick={e => this.loginSubmit(e)}
+                        href="#pablo"
+                        className="mb-3 btn-round"
                       >
-                        Log in
+                        Get Started
                       </Button>
                       <div className="pull-left">
                         <h6>
-                          <a href="/authentication/Register" className="link footer-link">
-                            Create Account 
+                          <a href="#pablo" className="link footer-link">
+                            Create Account
                           </a>
                         </h6>
                       </div>
                       <div className="pull-right">
                         <h6>
-                          <a href="/contact" className="link footer-link">
+                          <a href="#pablo" className="link footer-link">
                             Need Help?
                           </a>
                         </h6>
@@ -153,13 +130,12 @@ class LoginPage extends React.Component {
               </Col>
             </Container>
           </div>
-          </div>
+        </div>
         <div
           className="full-page-background"
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         />
-      </div>
-      </div>
+      </>
     );
   }
 }

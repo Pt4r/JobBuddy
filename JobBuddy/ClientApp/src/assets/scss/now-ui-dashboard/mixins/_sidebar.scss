@@ -1,20 +1,20 @@
 @mixin sidebar() {
   .sidebar,
   .bootstrap-navbar {
-      position: fixed;
-      display: block;
-      top: 0;
-      height: 100%;
-      width: 260px;
-      right: auto;
-      left: 0;
-      z-index: 1032;
-      visibility: visible;
-      overflow-y: visible;
-      padding: 0;
-      @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+    position: fixed;
+    display: block;
+    top: 0;
+    height: 100%;
+    width: 260px;
+    right: auto;
+    left: 0;
+    z-index: 1032;
+    visibility: visible;
+    overflow-y: visible;
+    padding: 0;
+    @include transition(0.5s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-      @include transform-translate-x(-260px);
+    @include transform-translate-x(-260px);
   }
 
   .bar1,
@@ -51,102 +51,113 @@
   @include bottombar-back-rotation();
 
   @-webkit-keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
   @-moz-keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
   @keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
-  .navbar-toggler-bar{
-      display: block;
-      position: relative;
-      width: 22px;
-      height: 1px;
-      border-radius: 1px;
-      background: $white-bg;
+  .navbar-toggler-bar {
+    display: block;
+    position: relative;
+    width: 22px;
+    height: 1px;
+    border-radius: 1px;
+    background: $white-bg;
 
-      & + .navbar-toggler-bar{
-          margin-top: 7px;
-      }
+    & + .navbar-toggler-bar {
+      margin-top: 7px;
+    }
 
-      & + .navbar-toggler-bar.navbar-kebab{
-          margin-top: 3px !important;
-      }
+    & + .navbar-toggler-bar.navbar-kebab {
+      margin-top: 3px !important;
+    }
 
-      &.bar2{
-          width: 17px;
-          transition: width .2s linear;
-      }
+    &.bar2 {
+      width: 17px;
+      transition: width 0.2s linear;
+    }
   }
 
-  .main-panel{
+  .main-panel {
     width: 100%;
   }
 
   .navbar-toggle .navbar-toggler,
-  .navbar-toggle{
+  .navbar-toggle {
     display: block !important;
   }
 
-  .navbar{
-    & .toggled .navbar-toggler-bar{
-        width: 24px;
+  .navbar {
+    & .toggled .navbar-toggler-bar {
+      width: 24px;
 
-        & + .navbar-toggler-bar{
-            margin-top: 5px;
-        }
+      & + .navbar-toggler-bar {
+        margin-top: 5px;
+      }
     }
   }
 
-  .nav-open{
-      .main-panel{
-          right: 0;
-          @include transform-translate-x(260px);
+  .nav-open {
+    .main-panel {
+      right: 0;
+      @include transform-translate-x(260px);
+    }
+
+    .sidebar {
+      @include transform-translate-x(0px);
+      box-shadow: $sidebar-box-shadow;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .menu-on-right {
+      .main-panel {
+        @include transform-translate-x(-260px);
       }
 
-      .sidebar{
-          @include transform-translate-x(0px);
-          box-shadow: $sidebar-box-shadow;
+      .navbar-collapse,
+      .sidebar {
+        @include transform-translate-x(0px);
       }
 
-      body{
-          position: relative;
-          overflow-x: hidden;
+      .navbar-translate {
+        @include transform-translate-x(-300px);
       }
 
-      .menu-on-right{
-          .main-panel{
-              @include transform-translate-x(-260px);
-          }
-
-          .navbar-collapse,
-          .sidebar{
-              @include transform-translate-x(0px);
-          }
-
-          .navbar-translate{
-              @include transform-translate-x(-300px);
-          }
-
-          #bodyClick{
-              right: 260px;
-              left: auto;
-          }
+      #bodyClick {
+        right: 260px;
+        left: auto;
       }
+    }
   }
 
-  .menu-on-right{
-      .sidebar{
-          left: auto;
-          right:0;
-          @include transform-translate-x(260px);
-      }
+  .menu-on-right {
+    .sidebar {
+      left: auto;
+      right: 0;
+      @include transform-translate-x(260px);
+    }
   }
-
 }
