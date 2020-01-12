@@ -22,10 +22,10 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
+import HrNavbar from "components/Navbars/HrNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import Sidebar from "components/Sidebar/Sidebar.jsx";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
+import SidebarHr from "components/Sidebar/SidebarHr.jsx";
+// import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes.js";
 
@@ -101,7 +101,7 @@ class Hr extends React.Component {
     });
   };
   getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+    let activeRoute = "Job Buddy";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = this.getActiveRoute(routes[i].views);
@@ -124,14 +124,14 @@ class Hr extends React.Component {
     return (
       <div className="wrapper">
         <NotificationAlert ref={this.notificationAlert} />
-        <Sidebar
+        <SidebarHr
           {...this.props}
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <AdminNavbar
+          <HrNavbar
             {...this.props}
             brandText={this.getActiveRoute(routes)}
           />
@@ -144,12 +144,12 @@ class Hr extends React.Component {
             <Footer fluid />
           )}
         </div>
-        <FixedPlugin
+        {/* <FixedPlugin
           handleMiniClick={this.minimizeSidebar}
           sidebarMini={this.state.sidebarMini}
           bgColor={this.state.backgroundColor}
           handleColorClick={this.handleColorClick}
-        />
+        /> */}
       </div>
     );
   }

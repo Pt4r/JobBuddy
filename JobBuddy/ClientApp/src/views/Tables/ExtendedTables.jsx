@@ -34,13 +34,13 @@ import {
 } from "reactstrap";
 
 // core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+// import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 class ExtendedTables extends React.Component {
   render() {
     return (
       <>
-        <PanelHeader size="sm" />
+        {/* <PanelHeader size="sm" /> */}
         <div className="content">
           <Row>
             <Col md="12">
