@@ -79,6 +79,9 @@ var mapData = {
 
 
 class Dashboard extends React.Component {
+  
+  
+  
   createTableData() {
     var tableRows = [];
     for (var i = 0; i < table_data.length; i++) {
@@ -106,12 +109,13 @@ class Dashboard extends React.Component {
             <div className="header text-center">
               <h2 className="title">Welcome Spyros</h2>
               </div>
-          //   <Line
-          //     data={dashboardPanelChart.data}
-          //     options={dashboardPanelChart.options}
-          //   />
+            //    <Line
+            //   data={dashboardPanelChart.data}
+            //   options={dashboardPanelChart.options}
+            // />
           }
         />
+     
         <div className="content">
             <Row>
             <Col xs={12} md={12}>

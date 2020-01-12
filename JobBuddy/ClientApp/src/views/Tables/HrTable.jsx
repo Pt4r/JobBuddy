@@ -34,48 +34,38 @@ import {
 // import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 const  dataTable = [
-  ["Tiger Nixon", "System Architect", "Edinburgh", "61"],
-  ["Garrett Winters", "Accountant", "Tokyo", "63"],
-  ["Ashton Cox", "Junior Technical Author", "San Francisco", "66"],
-  ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "22"],
-  ["Airi Satou", "Accountant", "Tokyo", "33"],
-  ["Brielle Williamson", "Integration Specialist", "New York", "61"],
-  ["Herrod Chandler", "Sales Assistant", "San Francisco", "59"],
-  ["Rhona Davidson", "Integration Specialist", "Tokyo", "55"],
-  ["Colleen Hurst", "Javascript Developer", "San Francisco", "39"],
-  ["Sonya Frost", "Software Engineer", "Edinburgh", "23"],
-  ["Jena Gaines", "Office Manager", "London", "30"],
-  ["Quinn Flynn", "Support Lead", "Edinburgh", "22"],
-  ["Charde Marshall", "Regional Director", "San Francisco", "36"],
-  ["Haley Kennedy", "Senior Marketing Designer", "London", "43"],
-  ["Tatyana Fitzpatrick", "Regional Director", "London", "19"],
-  ["Michael Silva", "Marketing Designer", "London", "66"],
-  ["Paul Byrd", "Chief Financial Officer (CFO)", "New York", "64"],
-  ["Gloria Little", "Systems Administrator", "New York", "59"],
-  ["Bradley Greer", "Software Engineer", "London", "41"],
-  ["Dai Rios", "Personnel Lead", "Edinburgh", "35"],
-  ["Jenette Caldwell", "Development Lead", "New York", "30"],
-  ["Yuri Berry", "Chief Marketing Officer (CMO)", "New York", "40"],
-  ["Caesar Vance", "Pre-Sales Support", "New York", "21"],
-  ["Doris Wilder", "Sales Assistant", "Sidney", "23"],
-  ["Angelica Ramos", "Chief Executive Officer (CEO)", "London", "47"],
-  ["Gavin Joyce", "Developer", "Edinburgh", "42"],
-  ["Jennifer Chang", "Regional Director", "Singapore", "28"],
-  ["Brenden Wagner", "Software Engineer", "San Francisco", "28"],
-  ["Fiona Green", "Chief Operating Officer (COO)", "San Francisco", "48"],
-  ["Shou Itou", "Regional Marketing", "Tokyo", "20"],
-  ["Michelle House", "Integration Specialist", "Sidney", "37"],
-  ["Suki Burks", "Developer", "London", "53"],
-  ["Prescott Bartlett", "Technical Author", "London", "27"],
-  ["Gavin Cortez", "Team Leader", "San Francisco", "22"],
-  ["Martena Mccray", "Post-Sales support", "Edinburgh", "46"],
-  ["Unity Butler", "Marketing Designer", "San Francisco", "47"],
-  ["Howard Hatfield", "Office Manager", "San Francisco", "51"],
-  ["Hope Fuentes", "Secretary", "San Francisco", "41"],
-  ["Vivian Harrell", "Financial Controller", "San Francisco", "62"],
-  ["Timothy Mooney", "Office Manager", "London", "37"],
-  ["Jackson Bradshaw", "Director", "New York", "65"],
-  ["Olivia Liang", "Support Engineer", "Singapore", "64"]
+
+  
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
+        items: [],
+        isLoaded: false
+    }
+
+}
+
+/**
+ * componentDidMount
+ *
+ * Fetch json array of objects from given url and update state.
+ */
+componentDidMount() {
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then(json => {
+            this.setState({
+                items: json,
+                isLoaded: true
+            })
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
 ];
 
 import ApiDataHr from "variables/ApiDataHr.jsx";
@@ -161,15 +151,31 @@ class ReactTables extends Component {
                 <i className="fa fa-times" />
               </Button>{" "}
             </div>
-          )          
+          )
         };
       })
     };
   }
-  render() {  
 
-    if(!dataTable.length)
-    return null;
+
+  // componentDidMount() {
+
+  //   fetch('https://jsonplaceholder.typicode.com/users')
+  //       .then(res => res.json())
+  //       .then(json => {
+  //         this.setState({
+  //           dataTable: json,
+  //           isLoaded: true
+  //       })
+  //   }).catch((err) => {
+  //       console.log(err);
+  //   });
+  // }
+
+
+  render() {  
+    // if(!dataTable.length)
+    // return null;
     return (
       <>
 {/* 
@@ -186,6 +192,10 @@ class ReactTables extends Component {
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Job Listings</CardTitle>
+                  <Button
+                  color="primary" size="lg">
+                      Create New Job Listing
+                    </Button>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
@@ -193,12 +203,12 @@ class ReactTables extends Component {
                     filterable
                     columns={[
                       {
-                        Header: "Title",
+                        Header: "Name",
                         accessor: "name"
                       },
                       {
-                        Header: "Category",
-                        accessor: "position"
+                        Header: "Email",
+                        accessor: "email"
                       },
                       {
                         Header: "Company",
@@ -230,3 +240,85 @@ class ReactTables extends Component {
 }
 
 export default ReactTables;
+
+
+
+
+// data: items.map((prop, key) => {
+//   return {
+//     id: key,
+//     name: prop[0],
+//     email: prop[1],
+//     actions: (
+//       // we've added some custom button actions
+//       <div className="actions-right">
+//         {/* use this button to add a like kind of action */}
+//         <Button
+//           onClick={() => {
+//             let obj = this.state.items.find(o => o.id === key);
+//             alert(
+//               "You've clicked LIKE button on \n{ \nName: " +
+//                 obj.name +
+//                 ", \nposition: " +
+//                 obj.position +
+//                 ", \noffice: " +
+//                 obj.office +
+//                 ", \nage: " +
+//                 obj.age +
+//                 "\n}."
+//             );
+//           }}
+//           className="btn-icon btn-round"
+//           color="info"
+//           size="sm"
+//         >
+//           <i className="fa fa-heart" />
+//         </Button>{" "}
+//         {/* use this button to add a edit kind of action */}
+//         <Button
+//           onClick={() => {
+//             let obj = this.state.items.find(o => o.id === key);
+//             alert(
+//               "You've clicked EDIT button on \n{ \nName: " +
+//                 obj.name +
+//                 ", \nposition: " +
+//                 obj.position +
+//                 ", \noffice: " +
+//                 obj.office +
+//                 ", \nage: " +
+//                 obj.age +
+//                 "\n}."
+//             );
+//           }}
+//           className="btn-icon btn-round"
+//           color="warning"
+//           size="sm"
+//         >
+//           <i className="fa fa-edit" />
+//         </Button>{" "}
+//         {/* use this button to remove the data row */}
+//         <Button
+//           onClick={() => {
+//             var data = this.state.data;
+//             data.find((o, i) => {
+//               if (o.id === key) {
+//                 // here you should add some custom code so you can delete the data
+//                 // from this component and from your server as well
+//                 data.splice(i, 1);
+//                 console.log(data);
+//                 return true;
+//               }
+//               return false;
+//             });
+//             this.setState({ data: data });
+//           }}
+//           className="btn-icon btn-round"
+//           color="danger"
+//           size="sm"
+//         >
+//           <i className="fa fa-times" />
+//         </Button>{" "}
+//       </div>
+//     )          
+//   };
+// })
