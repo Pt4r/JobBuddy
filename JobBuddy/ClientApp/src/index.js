@@ -29,6 +29,7 @@ import HrLayout from "layouts/Hr.jsx";
 
 import Index from "views/Pages/LandingPage.jsx";
 import AuthLayout from "layouts/Auth.jsx";
+import Register from "views/Pages/RegisterPage";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 import AuthorizeRoute from 'components/api-authorization/AuthorizeRoute';
@@ -65,6 +66,12 @@ ReactDOM.render(
         path="/auth"
         render={props => {
           return <AuthLayout {...props} />;
+        }}
+      />
+      <Route
+        path="/register"
+        render={props => {
+          return <Register {...props} />;
         }}
       />
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />

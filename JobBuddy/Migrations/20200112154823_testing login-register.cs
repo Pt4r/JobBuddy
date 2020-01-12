@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobBuddy.Migrations
 {
-    public partial class mig : Migration
+    public partial class testingloginregister : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,26 +39,14 @@ namespace JobBuddy.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    ProfilePicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Companies",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    PhoneNumber = table.Column<int>(nullable: false),
-                    Email = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Companies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,19 +64,6 @@ namespace JobBuddy.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DeviceCodes", x => x.UserCode);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "JobCategory",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Subcategory_1 = table.Column<string>(nullable: true),
-                    Subcategory_2 = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobCategory", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,6 +102,24 @@ namespace JobBuddy.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Administrators",
+                columns: table => new
+                {
+                    AdminId = table.Column<Guid>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administrators", x => x.AdminId);
+                    table.ForeignKey(
+                        name: "FK_Administrators_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -267,11 +260,6 @@ namespace JobBuddy.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_HrUser_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -303,45 +291,6 @@ namespace JobBuddy.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Mentors_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "JobListing",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Title = table.Column<string>(maxLength: 250, nullable: false),
-                    Info = table.Column<string>(maxLength: 1000, nullable: true),
-                    PostDate = table.Column<DateTime>(nullable: false),
-                    HrUserId = table.Column<Guid>(nullable: false),
-                    JobCategoryId = table.Column<Guid>(nullable: false),
-                    CompanyId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobListing", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_JobListing_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_JobListing_HrUser_HrUserId",
-                        column: x => x.HrUserId,
-                        principalTable: "HrUser",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_JobListing_JobCategory_JobCategoryId",
-                        column: x => x.JobCategoryId,
-                        principalTable: "JobCategory",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -389,13 +338,84 @@ namespace JobBuddy.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobCategories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    JobCategoryTitle = table.Column<int>(nullable: false),
+                    Subcategory_1 = table.Column<string>(nullable: false),
+                    Subcategory_2 = table.Column<string>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<Guid>(nullable: true),
+                    JobCategoryId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientJobListings_JobListing_JobListingId",
-                        column: x => x.JobListingId,
-                        principalTable: "JobListing",
+                        name: "FK_Companies_JobCategories_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "JobCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobListing",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(maxLength: 250, nullable: false),
+                    Info = table.Column<string>(maxLength: 1000, nullable: true),
+                    PostDate = table.Column<DateTime>(nullable: false),
+                    HrUserId = table.Column<Guid>(nullable: false),
+                    JobCategoryId = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobListing", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobListing_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JobListing_HrUser_HrUserId",
+                        column: x => x.HrUserId,
+                        principalTable: "HrUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_JobListing_JobCategories_JobCategoryId",
+                        column: x => x.JobCategoryId,
+                        principalTable: "JobCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Administrators_ApplicationUserId",
+                table: "Administrators",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -447,6 +467,11 @@ namespace JobBuddy.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Companies_ApplicationUserId",
+                table: "Companies",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -470,6 +495,11 @@ namespace JobBuddy.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_HrUser_CompanyId",
                 table: "HrUser",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobCategories_CompanyId",
+                table: "JobCategories",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
@@ -521,10 +551,49 @@ namespace JobBuddy.Migrations
                 name: "IX_PersistedGrants_SubjectId_ClientId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "ClientId", "Type" });
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_HrUser_Companies_CompanyId",
+                table: "HrUser",
+                column: "CompanyId",
+                principalTable: "Companies",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Mentors_Companies_CompanyId",
+                table: "Mentors",
+                column: "CompanyId",
+                principalTable: "Companies",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ClientJobListings_JobListing_JobListingId",
+                table: "ClientJobListings",
+                column: "JobListingId",
+                principalTable: "JobListing",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_JobCategories_Companies_CompanyId",
+                table: "JobCategories",
+                column: "CompanyId",
+                principalTable: "Companies",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Companies_JobCategories_ApplicationUserId",
+                table: "Companies");
+
+            migrationBuilder.DropTable(
+                name: "Administrators");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -565,16 +634,16 @@ namespace JobBuddy.Migrations
                 name: "HrUser");
 
             migrationBuilder.DropTable(
-                name: "JobCategory");
-
-            migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Companies");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "JobCategories");
+
+            migrationBuilder.DropTable(
+                name: "Companies");
         }
     }
 }

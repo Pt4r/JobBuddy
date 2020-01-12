@@ -1,3 +1,4 @@
+using JobBuddy.Areas.Identity.Pages.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using JobBuddy.Repositories;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 namespace JobBuddy
@@ -53,6 +55,11 @@ namespace JobBuddy
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            //SendGrid Confirmation Email Sender
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
 
             services.AddScoped<IMentorRepository, MentorRepository>();
             services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();

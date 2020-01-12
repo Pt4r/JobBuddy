@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200111201245_Init")]
-    partial class Init
+    [Migration("20200112154823_testing login-register")]
+    partial class testingloginregister
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
