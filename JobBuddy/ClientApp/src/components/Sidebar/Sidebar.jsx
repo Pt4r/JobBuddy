@@ -205,31 +205,8 @@ class Sidebar extends React.Component {
                 >
                   <span>
                     Ryan Gosling
-                    <b className="caret" />
                   </span>
                 </a>
-                <Collapse isOpen={this.state.openAvatar}>
-                  <ul className="nav">
-                    <li>
-                      <a href="#pablo" onClick={e => e.preventDefault}>
-                        <span className="sidebar-mini-icon">MP</span>
-                        <span className="sidebar-normal">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#pablo" onClick={e => e.preventDefault}>
-                        <span className="sidebar-mini-icon">EP</span>
-                        <span className="sidebar-normal">Edit Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#pablo" onClick={e => e.preventDefault}>
-                        <span className="sidebar-mini-icon">S</span>
-                        <span className="sidebar-normal">Settings</span>
-                      </a>
-                    </li>
-                  </ul>
-                </Collapse>
               </div>
             </div>
             <Nav>{this.createLinks(this.props.routes)}</Nav>

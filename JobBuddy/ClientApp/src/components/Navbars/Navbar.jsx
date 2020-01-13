@@ -15,7 +15,6 @@
 
 */
 import React from "react";
-import { Link } from "react-router-dom";
 // used for making the prop types of this component
 import PropTypes from "prop-types";
 
@@ -26,7 +25,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
@@ -62,6 +60,11 @@ class AdminNavbar extends React.Component {
   dropdownToggle = e => {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
+    });
+  };
+  dropdownAccountToggle = e => {
+    this.setState({
+      dropdownAccountOpen: !this.state.dropdownAccountOpen
     });
   };
   openSidebar = () => {
@@ -138,7 +141,7 @@ class AdminNavbar extends React.Component {
           >
             <form>
               <InputGroup className="no-border">
-                <Input placeholder="Search..." />
+                <Input placeholder="Search" />
 
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
@@ -148,14 +151,6 @@ class AdminNavbar extends React.Component {
               </InputGroup>
             </form>
             <Nav navbar>
-              <NavItem>
-                <Link to="#pablo" className="nav-link">
-                  <i className="now-ui-icons media-2_sound-wave" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </Link>
-              </NavItem>
               <Dropdown
                 nav
                 isOpen={this.state.dropdownOpen}
@@ -164,23 +159,32 @@ class AdminNavbar extends React.Component {
                 <DropdownToggle caret nav>
                   <i className="now-ui-icons location_world" />
                   <p>
-                    <span className="d-lg-none d-md-block">Some Actions</span>
+                    <span className="d-lg-none d-md-block">Language</span>
                   </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a">Action</DropdownItem>
-                  <DropdownItem tag="a">Another Action</DropdownItem>
-                  <DropdownItem tag="a">Something else here</DropdownItem>
+                  <DropdownItem tag="a">English</DropdownItem>
+                  <DropdownItem tag="a">Greek</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-              <NavItem>
-                <Link to="#pablo" className="nav-link">
+              <Dropdown
+                nav
+                isOpen={this.state.dropdownAccountOpen}
+                toggle={e => this.dropdownAccountToggle(e)}
+              >
+                <DropdownToggle caret nav>
                   <i className="now-ui-icons users_single-02" />
                   <p>
                     <span className="d-lg-none d-md-block">Account</span>
                   </p>
-                </Link>
-              </NavItem>
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem href="/admin/user-page">My Profile</DropdownItem>
+                  <DropdownItem href="/Identity/Account/Manage">Manage Account</DropdownItem>
+                  <hr/>
+                  <DropdownItem href="/authentication/logout">Log out</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </Nav>
           </Collapse>
         </Container>

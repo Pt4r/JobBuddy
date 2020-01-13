@@ -63,6 +63,12 @@ ReactDOM.render(
         }}
       />
       <Route
+        path="/mentor"
+        render={props => {
+          return <AuthLayout {...props} />;
+        }}
+      />
+      <Route
         path="/auth"
         render={props => {
           return <AuthLayout {...props} />;
