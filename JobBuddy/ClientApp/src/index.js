@@ -69,7 +69,11 @@ ReactDOM.render(
         render={props => {
           return <AuthLayout {...props} />;
         }}
-      />
+            />
+
+          {/*404 page */}
+            <Route component={PageNotFound} />
+
       <Redirect to="/Mentor/dashboard" />
     </Switch>
   </Router>,

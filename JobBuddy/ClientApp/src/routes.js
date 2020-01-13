@@ -47,9 +47,16 @@ import LockScreenPage from "views/Pages/LockScreenPage.jsx";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 let routes = [
+    {
+        path: "/dashboard",
+        name: "Client Dashboard",
+        icon: "now-ui-icons design_app",
+        component: ClientDashboard,
+        layout: "/Client"
+    },
+
+ 
   {
-    path: "/dashboard",
-    name: "Client Dashboard",
     path: "/Mentordashboard",
     name: "MentorDashboard",
     icon: "now-ui-icons design_app",

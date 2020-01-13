@@ -21,6 +21,8 @@ namespace JobBuddy.Models
         [Display(Name = "SubCategory")]
         public string Subcategory_2 { get; set; }
 
+        public virtual ICollection<JobListing> JobListings { get; set; }
+
         // edw na mpei to JobListing List 
             
     }

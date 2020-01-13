@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Models
 {
-    interface ICompanyRepository
+   public interface ICompanyRepository
     {
         IEnumerable<Company> GetCompanies();
         public void AddCompany(Company company);

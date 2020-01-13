@@ -23,11 +23,12 @@ import PerfectScrollbar from "perfect-scrollbar";
 // react plugin for creating notifications
 import NotificationAlert from "react-notification-alert";
 
+
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
+
 
 import routes from "routes.js";
 
@@ -135,7 +136,7 @@ class Mentor extends React.Component {
         <div className="main-panel" ref={this.mainPanel}>
           <AdminNavbar
             {...this.props}
-            brandText={this.getActiveRoute(routes)}
+            brandText={"Job Buddy"}
           />
           <Switch>
             {this.getRoutes(routes)}
@@ -146,12 +147,7 @@ class Mentor extends React.Component {
             <Footer fluid />
           )}
         </div>
-        <FixedPlugin
-          handleMiniClick={this.minimizeSidebar}
-          sidebarMini={this.state.sidebarMini}
-          bgColor={this.state.backgroundColor}
-          handleColorClick={this.handleColorClick}
-        />
+        
       </div>
     );
   }
