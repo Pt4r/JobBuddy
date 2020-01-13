@@ -77,10 +77,10 @@ ReactDOM.render(
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       {/*404 page */}
-      {/* <Route component={PageNotFound} /> */}
+      <Route component={PageNotFound} />
 
       {/* Delete this after DEVELOPMENT */}
-      {/* <Redirect to="/client/dashboard" /> */}
+      <Redirect to="/client/dashboard" />
       
     </Switch>
   </Router>,
