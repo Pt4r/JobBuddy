@@ -15,8 +15,10 @@
 
 */
 import ClientDashboard from "views/Dashboard/ClientDashboard.jsx";
+import ClientJobListings from "views/JobListings/clientJobListings.jsx"
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
 import AdminDashboard from "views/Dashboard/Dashboard.jsx";
+
 import Buttons from "views/Components/Buttons.jsx";
 import GridSystem from "views/Components/GridSystem.jsx";
 import Panels from "views/Components/Panels.jsx";
@@ -66,6 +68,13 @@ let routes = [
     icon: "now-ui-icons design_app",
     component: AdminDashboard,
     layout: "/admin"
+  },
+  {
+    path: "/job-listings",
+    name: "Lob Listings",
+    icon: "now-ui-icons files_single-copy-04",
+    component: ClientJobListings,
+    layout: "/client"
   },
   {
     collapse: true,

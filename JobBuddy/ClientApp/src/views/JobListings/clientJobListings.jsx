@@ -1,30 +1,16 @@
-/*!
 
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
-import React, { Component } from "react";
-// react component for creating dynamic tables
-import ReactTable from "react-table";
+import React from "react";
+// react plugin used to create charts
+import { Line } from "react-chartjs-2";
 
 // reactstrap components
 import {
   Card,
-  CardBody,
   CardHeader,
+  CardBody,
   CardTitle,
+  Table,
+  Progress,
   Row,
   Col,
   Button
@@ -32,6 +18,15 @@ import {
 
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+
+import {
+  dashboardSummerChart,
+  dashboardActiveCountriesCard
+} from "variables/charts.jsx";
+
+import { table_data } from "variables/general.jsx";
+
+import ReactTable from "views/Tables/ReactTable";
 
 const dataTable = [
   ["Tiger Nixon", "System Architect", "Edinburgh", "61"],
@@ -54,7 +49,7 @@ const dataTable = [
   
 ];
 
-class ReactTables extends Component {
+class clientJobListings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -140,82 +135,45 @@ class ReactTables extends Component {
       })
     };
   }
-  render() {
-    return (
-      <>
-        <PanelHeader
-          content={
-            <div className="header text-center">
-              <h2 className="title">React Table</h2>
-              <p className="category">
-                A powerful react plugin handcrafted by our friends from{" "}
-                <a
-                  href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
-                >
-                  react-table
-                </a>
-                . It is a highly flexible tool, based upon the foundations of
-                progressive enhancement on which you can add advanced
-                interaction controls. Please check out their{" "}
-                <a
-                  href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
-                >
-                  full documentation.
-                </a>
-              </p>
-            </div>
+    render() {
+      return (
+        <>
+        <PanelHeader size="sm" />
+        <ReactTable
+        data={this.state.data}
+        filterable
+        columns={[
+          {
+            Header: "Name",
+            accessor: "name"
+          },
+          {
+            Header: "Position",
+            accessor: "position"
+          },
+          {
+            Header: "Office",
+            accessor: "office"
+          },
+          {
+            Header: "Age",
+            accessor: "age"
+          },
+          {
+            Header: "Actions",
+            accessor: "actions",
+            sortable: false,
+            filterable: false
           }
-        />
-        <div className="content">
-          <Row>
-            <Col xs={12} md={12}>
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">React Table</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <ReactTable
-                    data={this.state.data}
-                    filterable
-                    columns={[
-                      {
-                        Header: "Name",
-                        accessor: "name"
-                      },
-                      {
-                        Header: "Position",
-                        accessor: "position"
-                      },
-                      {
-                        Header: "Office",
-                        accessor: "office"
-                      },
-                      {
-                        Header: "Age",
-                        accessor: "age"
-                      },
-                      {
-                        Header: "Actions",
-                        accessor: "actions",
-                        sortable: false,
-                        filterable: false
-                      }
-                    ]}
-                    defaultPageSize={10}
-                    showPaginationTop
-                    showPaginationBottom={false}
-                    className="-striped -highlight"
-                  />
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
+        ]}
+        defaultPageSize={10}
+        showPaginationTop
+        showPaginationBottom={false}
+        className="-striped -highlight"
+      />
       </>
-    );
-  }
+      );
+  };
 }
 
-export default ReactTables;
+export default clientJobListings;
