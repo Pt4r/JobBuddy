@@ -20,9 +20,10 @@ namespace JobBuddy.Models
 
         public virtual ICollection<JobListing> JobListings { get; set; }
 
+        //Προσθέτω Foreign key se ola ta details APP USER
+
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
-
         public string ApplicationUserId { get; set; }
 
 

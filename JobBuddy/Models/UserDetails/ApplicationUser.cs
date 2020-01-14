@@ -24,8 +24,25 @@ namespace JobBuddy.Models
                 return FirstName + " " + LastName;
             }
         }
+
+        
+
+
         public string ProfilePicture { get; set; }
+
+        /// Πρόσθεσα λίστες μαζί με Details και UserRole ===> από αυτό θα πάρει το ViewModel....Spyros
+        public string UserRole { get; set; }
         public List<AdministratorDetails> Admins {get; set;}
+
+        public List<ClientUserDetails> ClientDetails { get; set; }
+
+        public List<HrUserDetails> HrDetails { get; set; }
+
+        public List<MentorUserDetails> MentorDetails { get; set; }
+
+
+
+
         //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         //{
         //    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

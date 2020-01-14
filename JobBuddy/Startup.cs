@@ -173,7 +173,9 @@ namespace JobBuddy
 
                 FirstName="PowerAdmin",
 
-                LastName="Admin"
+                LastName="Admin",
+
+                UserRole="Admin"
 
             };
 
