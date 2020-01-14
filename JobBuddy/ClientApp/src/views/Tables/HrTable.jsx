@@ -18,6 +18,9 @@
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import JobListingModal from "../../components/Form/JobListingModal.jsx"
+import { USERS_API_URL } from '../../Constants';
+
 
 // reactstrap components
 import {
@@ -27,298 +30,181 @@ import {
   CardTitle,
   Row,
   Col,
-  Button
+  Button,
+  ButtonToolBar
 } from "reactstrap";
 
 // core components
-// import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+ var data
 
-const  dataTable = [
-
-  
-  constructor(props) {
-
-    super(props);
-
-    this.state = {
-        items: [],
-        isLoaded: false
-    }
-
-}
-
-/**
- * componentDidMount
- *
- * Fetch json array of objects from given url and update state.
- */
-componentDidMount() {
-
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then(json => {
-            this.setState({
-                items: json,
-                isLoaded: true
-            })
-        }).catch((err) => {
-            console.log(err);
-        });
-}
-
-];
-
-import ApiDataHr from "variables/ApiDataHr.jsx";
-
-class ReactTables extends Component {
+class ReactTables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: dataTable.map((prop, key) => {
-        return {
-          id: key,
-          name: prop[0],
-          position: prop[1],
-          office: prop[2],
-          age: prop[3],
-          actions: (
-            // we've added some custom button actions
-            <div className="actions-right">
-              {/* use this button to add a like kind of action */}
-              <Button
-                onClick={() => {
-                  let obj = this.state.data.find(o => o.id === key);
-                  alert(
-                    "You've clicked LIKE button on \n{ \nName: " +
-                      obj.name +
-                      ", \nposition: " +
-                      obj.position +
-                      ", \noffice: " +
-                      obj.office +
-                      ", \nage: " +
-                      obj.age +
-                      "\n}."
-                  );
-                }}
-                className="btn-icon btn-round"
-                color="info"
-                size="sm"
-              >
-                <i className="fa fa-heart" />
-              </Button>{" "}
-              {/* use this button to add a edit kind of action */}
-              <Button
-                onClick={() => {
-                  let obj = this.state.data.find(o => o.id === key);
-                  alert(
-                    "You've clicked EDIT button on \n{ \nName: " +
-                      obj.name +
-                      ", \nposition: " +
-                      obj.position +
-                      ", \noffice: " +
-                      obj.office +
-                      ", \nage: " +
-                      obj.age +
-                      "\n}."
-                  );
-                }}
-                className="btn-icon btn-round"
-                color="warning"
-                size="sm"
-              >
-                <i className="fa fa-edit" />
-              </Button>{" "}
-              {/* use this button to remove the data row */}
-              <Button
-                onClick={() => {
-                  var data = this.state.data;
-                  data.find((o, i) => {
-                    if (o.id === key) {
-                      // here you should add some custom code so you can delete the data
-                      // from this component and from your server as well
-                      data.splice(i, 1);
-                      console.log(data);
-                      return true;
-                    }
-                    return false;
-                  });
-                  this.setState({ data: data });
-                }}
-                className="btn-icon btn-round"
-                color="danger"
-                size="sm"
-              >
-                <i className="fa fa-times" />
-              </Button>{" "}
-            </div>
-          )
-        };
-      })
+      posts:[],
     };
   }
 
+  toggle = () => {
+    this.setState(previous => ({
+        modal: !previous.modal
+    }));
+}
 
-  // componentDidMount() {
-
-  //   fetch('https://jsonplaceholder.typicode.com/users')
-  //       .then(res => res.json())
-  //       .then(json => {
-  //         this.setState({
-  //           dataTable: json,
-  //           isLoaded: true
-  //       })
-  //   }).catch((err) => {
-  //       console.log(err);
-  //   });
-  // }
+showModal() {
+  this.setState({
+    isModalOpen: true
+  });
+}
 
 
-  render() {  
-    // if(!dataTable.length)
-    // return null;
+componentDidMount(){
+  const url = "https://jsonplaceholder.typicode.com/users";
+  fetch(url, {
+    method: "GET"
+  }).then(res => res.json()).then(posts => {
+    this.setState({posts: posts})
+  })
+}
+
+
+
+deleteItem = id => {
+  let confirmDeletion = window.confirm('Do you really wish to delete it?');
+  if (confirmDeletion) {
+    fetch(`${USERS_API_URL}/${id}`, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        this.props.deleteItemFromState(id);
+      })
+      .catch(err => console.log(err));
+  }
+}
+
+  render() {
+    const posts = this.props.posts;
+
+    const columns =[
+      {
+        Header: "Name",
+        accessor: "name"
+      },
+      {
+        Header: "Email",
+        accessor: "email"
+      },
+      {
+        Header: "Actions",
+        Cell: props =>{
+          return (  // <JobListingModal 
+          //   initialModalState={false} />
+            <div className="actions-right">
+            {/* use this button to add a like kind of action */}
+            <JobListingModal />
+              <Button 
+              onClick={() =>{this.toggle}
+                // let obj = this.state.posts.find(o => o.id === key);
+                // alert(
+                //   "You've clicked LIKE button on \n{ \nName: " +
+                //     obj.name +
+                //     ", \nposition: " +
+                //     obj.position +
+                //     ", \noffice: " +
+                //     obj.office +
+                //     ", \nage: " +
+                //     obj.age +
+                //     "\n}."
+                // );
+              }
+              className="btn-icon btn-round"
+              color="info"
+              size="sm"
+            >
+              <i className="fa fa-heart" />
+            </Button>{" "}
+         
+               
+            {/* use this button to add a edit kind of action */}
+            <Button
+              onClick={() => {
+                let obj = this.state.posts.find(o => o.id === key);
+                alert(
+                  "You've clicked EDIT button on \n{ \nName: " +
+                    obj.name +
+                    ", \nposition: " +
+                    obj.position +
+                    ", \noffice: " +
+                    obj.office +
+                    ", \nage: " +
+                    obj.age +
+                    "\n}."
+                );
+              }}
+              className="btn-icon btn-round"
+              color="warning"
+              size="sm"
+            >
+              <i className="fa fa-edit" />
+            </Button>{" "}
+            {/* use this button to remove the data row */}
+            <Button
+              onClick={() => {
+                this.deleteItem(props.original.id);
+              }}
+              className="btn-icon btn-round"
+              color="danger"
+              size="sm"
+            >
+              <i className="fa fa-times" />
+            </Button>{" "}
+          </div>
+          
+          )
+        },
+        sortable: false,
+        filterable: false
+       }
+    ]
     return (
       <>
-{/* 
-            <PanelHeader
-          size="sm"
-          content={
-            <div className="header text-center">
-              <h2 className="title">Welcome Spyros</h2>
-              </div>
-          }
-        />  */}
+      
           <Row>
-            <Col xs={12} md={12} >
+            <Col xs={12} md={12}>
+            <JobListingModal  
+          initialModalState={false} />
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Job Listings</CardTitle>
-                  <Button
-                  color="primary" size="lg">
-                      Create New Job Listing
-                    </Button>
+                  <CardTitle tag="h4">React Table</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
-                    data={this.state.data}
+                    data={this.state.posts}
                     filterable
-                    columns={[
-                      {
-                        Header: "Name",
-                        accessor: "name"
-                      },
-                      {
-                        Header: "Email",
-                        accessor: "email"
-                      },
-                      {
-                        Header: "Company",
-                        accessor: "office"
-                      },
-                      {
-                        Header: "Info",
-                        accessor: "age"
-                      },
-                      {
-                        Header: "Actions",
-                        accessor: "actions",
-                        sortable: false,
-                        filterable: false
-                      }
-                    ]}
+                    columns = {columns}
                     defaultPageSize={10}
                     showPaginationTop
                     showPaginationBottom={false}
                     className="-striped -highlight"
-                  />
+                    />
+{/* 
+                      {(state, filteredData, instance) => {
+                        this.ReactTable = state.pageRows.map(post => {return post.original});
+                      }}
+                    </ReactTable> */}
+                  
                 </CardBody>
               </Card>
             </Col>
           </Row>
+
+          
       </>
     );
   }
 }
 
 export default ReactTables;
-
-
-
-
-// data: items.map((prop, key) => {
-//   return {
-//     id: key,
-//     name: prop[0],
-//     email: prop[1],
-//     actions: (
-//       // we've added some custom button actions
-//       <div className="actions-right">
-//         {/* use this button to add a like kind of action */}
-//         <Button
-//           onClick={() => {
-//             let obj = this.state.items.find(o => o.id === key);
-//             alert(
-//               "You've clicked LIKE button on \n{ \nName: " +
-//                 obj.name +
-//                 ", \nposition: " +
-//                 obj.position +
-//                 ", \noffice: " +
-//                 obj.office +
-//                 ", \nage: " +
-//                 obj.age +
-//                 "\n}."
-//             );
-//           }}
-//           className="btn-icon btn-round"
-//           color="info"
-//           size="sm"
-//         >
-//           <i className="fa fa-heart" />
-//         </Button>{" "}
-//         {/* use this button to add a edit kind of action */}
-//         <Button
-//           onClick={() => {
-//             let obj = this.state.items.find(o => o.id === key);
-//             alert(
-//               "You've clicked EDIT button on \n{ \nName: " +
-//                 obj.name +
-//                 ", \nposition: " +
-//                 obj.position +
-//                 ", \noffice: " +
-//                 obj.office +
-//                 ", \nage: " +
-//                 obj.age +
-//                 "\n}."
-//             );
-//           }}
-//           className="btn-icon btn-round"
-//           color="warning"
-//           size="sm"
-//         >
-//           <i className="fa fa-edit" />
-//         </Button>{" "}
-//         {/* use this button to remove the data row */}
-//         <Button
-//           onClick={() => {
-//             var data = this.state.data;
-//             data.find((o, i) => {
-//               if (o.id === key) {
-//                 // here you should add some custom code so you can delete the data
-//                 // from this component and from your server as well
-//                 data.splice(i, 1);
-//                 console.log(data);
-//                 return true;
-//               }
-//               return false;
-//             });
-//             this.setState({ data: data });
-//           }}
-//           className="btn-icon btn-round"
-//           color="danger"
-//           size="sm"
-//         >
-//           <i className="fa fa-times" />
-//         </Button>{" "}
-//       </div>
-//     )          
-//   };
-// })

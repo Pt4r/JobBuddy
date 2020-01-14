@@ -19,6 +19,7 @@ import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 
+
 // reactstrap components
 import {
   Card,
@@ -77,6 +78,12 @@ const dataTable = [
   ["Jackson Bradshaw", "Director", "New York", "65"],
   ["Olivia Liang", "Support Engineer", "Singapore", "64"]
 ];
+
+
+
+
+
+
 
 class ReactTables extends Component {
   constructor(props) {
@@ -164,6 +171,9 @@ class ReactTables extends Component {
       })
     };
   }
+
+
+
   render() {
     return (
       <>

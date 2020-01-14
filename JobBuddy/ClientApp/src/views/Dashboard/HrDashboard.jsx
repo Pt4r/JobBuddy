@@ -19,6 +19,9 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 // react plugin for creating vector maps
 import { VectorMap } from "react-jvectormap";
+import JobListingTable from "../../components/JobListingTable.jsx"
+import JobListingModal from "../../components/Form/JobListingModal.js"
+import { USERS_API_URL } from '../../Constants';
 
 // reactstrap components
 import {
@@ -80,7 +83,30 @@ var mapData = {
 
 class Dashboard extends React.Component {
   
-  
+    state = {
+      items: []
+    }
+    componentDidMount() {
+      this.getItens();
+    }
+    getItens = () => {
+      fetch(USERS_API_URL)
+        .then(res => res.json())
+        .then(res => this.setState({ items: res }))
+        .catch(err => console.log(err));
+    }
+    addUserToState = user => {
+      this.setState(previous => ({
+        items: [...previous.items, user]
+      }));
+    }
+    updateState = (id) => {
+      this.getItens();
+    }
+    deleteItemFromState = id => {
+      const updated = this.state.items.filter(item => item.id !== id);
+      this.setState({ items: updated })
+    }
   
   createTableData() {
     var tableRows = [];

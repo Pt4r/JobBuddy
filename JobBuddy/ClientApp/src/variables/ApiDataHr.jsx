@@ -1,46 +1,44 @@
-import React from "react";
+// import React from "react";
 
-class ApiDataHr extends React.Component {
+// var dataTable = [];
 
-    /**
-     * constructor
-     *
-     * @object  @props  parent props
-     * @object  @state  component state
-     */
-    constructor(props) {
 
-        super(props);
+// class ApiDataHr extends React.Component {
 
-        this.state = {
-            items: [],
-            isLoaded: false
-        }
+//     /**
+//      * constructor
+//      *
+//      * @object  @props  parent props
+//      * @object  @state  component state
+//      */
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             items: [],
+//             isLoaded: false
+//         }
+//     }
+//     /**
+//      * componentDidMount
+//      *
+//      * Fetch json array of objects from given url and update state.
+//      */
+//     componentDidMount() {
 
-    }
+//         fetch('https://jsonplaceholder.typicode.com/users')
+//             .then(res => res.json())
+//             .then(json => {
+//                 this.setState({
+//                     dataTable: json,
+//                     isLoaded: true
+//                 })
+//             }).catch((err) => {
+//                 console.log(err);
+//             });
+//     }
+// }
 
-    /**
-     * componentDidMount
-     *
-     * Fetch json array of objects from given url and update state.
-     */
-    componentDidMount() {
-
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    items: json,
-                    isLoaded: true, 
-                })
-            }).catch((err) => {
-                console.log(err);
-            });
-
-    }
-}
-
-export default ApiDataHr;
+// export default ApiDataHr;
 
 //     /**
 //      * render
