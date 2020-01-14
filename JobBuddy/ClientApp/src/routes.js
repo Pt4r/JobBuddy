@@ -34,7 +34,7 @@ import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 let routes = [
   {
-    path: "/dashboard",
+    path: "/dashboard", 
     name: "Client Dashboard",
     icon: "now-ui-icons design_app",
     component: ClientDashboard,
