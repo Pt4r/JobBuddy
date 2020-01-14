@@ -1,4 +1,3 @@
-// eslint-disable
 import React from "react";
 // react plugin used to create charts
 import { Line } from "react-chartjs-2";

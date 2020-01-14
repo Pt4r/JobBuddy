@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
@@ -30,35 +13,21 @@ import {
   Button
 } from "reactstrap";
 
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
-
-const dataTable = [
-  ["Tiger Nixon", "System Architect", "Edinburgh", "61"],
-  ["Garrett Winters", "Accountant", "Tokyo", "63"],
-  ["Ashton Cox", "Junior Technical Author", "San Francisco", "66"],
-  ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "22"],
-  ["Airi Satou", "Accountant", "Tokyo", "33"],
-  ["Brielle Williamson", "Integration Specialist", "New York", "61"],
-  ["Herrod Chandler", "Sales Assistant", "San Francisco", "59"],
-  ["Rhona Davidson", "Integration Specialist", "Tokyo", "55"],
-  ["Colleen Hurst", "Javascript Developer", "San Francisco", "39"],
-  ["Sonya Frost", "Software Engineer", "Edinburgh", "23"],
-  ["Jena Gaines", "Office Manager", "London", "30"],
-  ["Quinn Flynn", "Support Lead", "Edinburgh", "22"],
-  ["Charde Marshall", "Regional Director", "San Francisco", "36"],
-  ["Haley Kennedy", "Senior Marketing Designer", "London", "43"],
-  ["Tatyana Fitzpatrick", "Regional Director", "London", "19"],
-  ["Michael Silva", "Marketing Designer", "London", "66"],
-  ["Paul Byrd", "Chief Financial Officer (CFO)", "New York", "64"],
-  
-];
-
 class ReactTables extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: dataTable.map((prop, key) => {
+      title: props.title,
+      columns: props.columns.map((prop,key) => {
+        return {
+          Header: prop[0],
+          accessor: prop[1],
+          sortable: prop[2],
+          filterable: prop[3]
+          };
+        }
+      ),
+      data: props.data.map((prop, key) => {
         return {
           id: key,
           name: prop[0],
@@ -143,66 +112,18 @@ class ReactTables extends Component {
   render() {
     return (
       <>
-        <PanelHeader
-          content={
-            <div className="header text-center">
-              <h2 className="title">React Table</h2>
-              <p className="category">
-                A powerful react plugin handcrafted by our friends from{" "}
-                <a
-                  href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
-                >
-                  react-table
-                </a>
-                . It is a highly flexible tool, based upon the foundations of
-                progressive enhancement on which you can add advanced
-                interaction controls. Please check out their{" "}
-                <a
-                  href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
-                >
-                  full documentation.
-                </a>
-              </p>
-            </div>
-          }
-        />
         <div className="content">
           <Row>
             <Col xs={12} md={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">React Table</CardTitle>
+                  <CardTitle tag="h4">{this.state.title}</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
+                    columns={this.state.columns}
                     data={this.state.data}
                     filterable
-                    columns={[
-                      {
-                        Header: "Name",
-                        accessor: "name"
-                      },
-                      {
-                        Header: "Position",
-                        accessor: "position"
-                      },
-                      {
-                        Header: "Office",
-                        accessor: "office"
-                      },
-                      {
-                        Header: "Age",
-                        accessor: "age"
-                      },
-                      {
-                        Header: "Actions",
-                        accessor: "actions",
-                        sortable: false,
-                        filterable: false
-                      }
-                    ]}
                     defaultPageSize={10}
                     showPaginationTop
                     showPaginationBottom={false}
