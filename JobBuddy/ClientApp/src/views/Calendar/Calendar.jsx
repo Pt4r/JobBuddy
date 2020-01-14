@@ -17,7 +17,7 @@
 /*eslint-disable*/
 import React from "react";
 // react component used to create a calendar with events on it
-import BigCalendar from "react-big-calendar";
+import Calendar from "react-big-calendar";
 // dependency plugin for react-big-calendar
 import moment from "moment";
 // react component used to create alerts
@@ -31,9 +31,9 @@ import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 import { events } from "variables/general.jsx";
 
-const localizer = BigCalendar.momentLocalizer(moment);
+const localizer = Calendar.momentLocalizer(moment);
 
-class Calendar extends React.Component {
+class MyCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,7 +116,7 @@ class Calendar extends React.Component {
             <Col xs={12} md={10} className="ml-auto mr-auto">
               <Card className="card-calendar">
                 <CardBody>
-                  <BigCalendar
+                  <Calendar
                     selectable
                     localizer={localizer}
                     events={this.state.events}
@@ -137,4 +137,4 @@ class Calendar extends React.Component {
   }
 }
 
-export default Calendar;
+export default MyCalendar;

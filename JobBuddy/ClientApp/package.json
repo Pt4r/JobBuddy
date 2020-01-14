@@ -14,7 +14,7 @@
     "oidc-client": "^1.10.1",
     "perfect-scrollbar": "1.4.0",
     "react": "16.8.6",
-    "react-big-calendar": "0.21.0",
+    "react-big-calendar": "^0.21.0",
     "react-bootstrap-sweetalert": "4.4.1",
     "react-bootstrap-switch": "15.5.3",
     "react-bootstrap-wizard": "0.0.7",
@@ -27,7 +27,7 @@
     "react-router-dom": "5.0.0",
     "react-scripts": "^3.3.0",
     "react-select": "3.0.4",
-    "react-table": "6.10.0",
+    "react-table": "^6.10.0",
     "react-tagsinput": "3.19.0",
     "reactstrap": "8.0.0"
   },
