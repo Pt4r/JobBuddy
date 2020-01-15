@@ -86,7 +86,7 @@ ReactDOM.render(
       <Route component={PageNotFound} />
 
       {/* Delete this after DEVELOPMENT */}
-      <Redirect to="/client/dashboard" />
+      {/* <Redirect to="/client/dashboard" /> */}
       
     </Switch>
   </Router>,

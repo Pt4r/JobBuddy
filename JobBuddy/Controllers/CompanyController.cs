@@ -21,7 +21,7 @@ namespace JobBuddy.Controllers
         //api/JobCategory
         [HttpGet]
         [Route("api/Companies")]
-        public IActionResult GetCompany(string id)
+        public IActionResult GetCompanies(string id)
         {
             var companies = _companyRepository.GetCompanies().ToList();
             return Ok(companies);
@@ -46,7 +46,7 @@ namespace JobBuddy.Controllers
         [HttpDelete]
         [ValidateAntiForgeryToken]
         [Route("api/Companies/Delete/{id}")]
-        public IActionResult DeleteJobCategory(Guid id)
+        public IActionResult DeleteCompany(Guid id)
         {
             bool removed = _companyRepository.DeleteCompany(id);
             if (!removed)
@@ -61,8 +61,8 @@ namespace JobBuddy.Controllers
         //api/Company/id
         [HttpPut, HttpPatch]
         [ValidateAntiForgeryToken]
-        [Route("api/JobCategories/Update")]
-        public IActionResult UpdateJobCategory([FromBody]Company companycreated)
+        [Route("api/Companies/Update")]
+        public IActionResult UpdateCompany([FromBody]Company companycreated)
         {
             if (!ModelState.IsValid)
             {
