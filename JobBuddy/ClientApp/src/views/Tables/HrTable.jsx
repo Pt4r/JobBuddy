@@ -18,7 +18,7 @@
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import JobListingModal from "../../components/Form/JobListingModal.jsx"
+import JobListingModal from "../../components/Form/JobListingModal.js"
 import { USERS_API_URL } from '../../Constants';
 
 
@@ -41,21 +41,9 @@ class ReactTables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts:[],
+      posts:[]
     };
   }
-
-  toggle = () => {
-    this.setState(previous => ({
-        modal: !previous.modal
-    }));
-}
-
-showModal() {
-  this.setState({
-    isModalOpen: true
-  });
-}
 
 
 componentDidMount(){
@@ -66,8 +54,6 @@ componentDidMount(){
     this.setState({posts: posts})
   })
 }
-
-
 
 deleteItem = id => {
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
@@ -86,8 +72,7 @@ deleteItem = id => {
 }
 
   render() {
-    const posts = this.props.posts;
-
+    //const posts = this.props.posts;
     const columns =[
       {
         Header: "Name",
@@ -100,11 +85,9 @@ deleteItem = id => {
       {
         Header: "Actions",
         Cell: props =>{
-          return (  // <JobListingModal 
-          //   initialModalState={false} />
+          return ( 
             <div className="actions-right">
-            {/* use this button to add a like kind of action */}
-            <JobListingModal />
+            <JobListingModal   />
               <Button 
               onClick={() =>{this.toggle}
                 // let obj = this.state.posts.find(o => o.id === key);
@@ -125,31 +108,7 @@ deleteItem = id => {
               size="sm"
             >
               <i className="fa fa-heart" />
-            </Button>{" "}
-         
-               
-            {/* use this button to add a edit kind of action */}
-            <Button
-              onClick={() => {
-                let obj = this.state.posts.find(o => o.id === key);
-                alert(
-                  "You've clicked EDIT button on \n{ \nName: " +
-                    obj.name +
-                    ", \nposition: " +
-                    obj.position +
-                    ", \noffice: " +
-                    obj.office +
-                    ", \nage: " +
-                    obj.age +
-                    "\n}."
-                );
-              }}
-              className="btn-icon btn-round"
-              color="warning"
-              size="sm"
-            >
-              <i className="fa fa-edit" />
-            </Button>{" "}
+            </Button>{" "}               
             {/* use this button to remove the data row */}
             <Button
               onClick={() => {
@@ -170,15 +129,12 @@ deleteItem = id => {
        }
     ]
     return (
-      <>
-      
+      <>      
           <Row>
             <Col xs={12} md={12}>
-            <JobListingModal  
-          initialModalState={false} />
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">React Table</CardTitle>
+                  <CardTitle tag="h4">Job Listings</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
@@ -189,22 +145,32 @@ deleteItem = id => {
                     showPaginationTop
                     showPaginationBottom={false}
                     className="-striped -highlight"
-                    />
-{/* 
-                      {(state, filteredData, instance) => {
-                        this.ReactTable = state.pageRows.map(post => {return post.original});
-                      }}
-                    </ReactTable> */}
-                  
+                    />                 
                 </CardBody>
               </Card>
             </Col>
-          </Row>
-
-          
+          </Row>          
       </>
     );
   }
 }
 
 export default ReactTables;
+
+
+
+
+
+// Might be usefull in the future 
+
+  // toggle = () => {
+  //     this.setState(previous => ({
+  //         modal: !previous.modal
+  //     }));
+  // }
+  
+  // showModal() {
+  //   this.setState({
+  //     isModalOpen: true
+  //   });
+  // }

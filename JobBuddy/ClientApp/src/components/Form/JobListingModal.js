@@ -31,8 +31,11 @@ class JobListingModal extends Component {
                 style={{ minWidth: "200px" }}>Add</Button>;
         } else {
             button = <Button
+                className="btn-icon btn-round"
+                size="sm"
                 color="warning"
-                onClick={this.toggle}>Edit</Button>;
+                onClick={this.toggle}><i className="fa fa-edit" />
+                </Button>;
         }
 
         return <Fragment>

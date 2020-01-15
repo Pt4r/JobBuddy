@@ -64,7 +64,7 @@ class JobListingForm extends React.Component {
                 <Label for="email">Email:</Label>
                 <Input type="email" name="email" onChange={this.onChange} value={this.state.email === null ? '' : this.state.email} />
             </FormGroup>
-            <Button>Send</Button>
+            <Button type="submit">Send</Button>
         </Form>;
     }
 }

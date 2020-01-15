@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 
 const Modal = ({ isShowing, hide }) => isShowing ? ReactDOM.createPortal(
   <React.Fragment>
+    <button type="button" className="modal-open-button"></button>
     <div className="modal-overlay"/>
     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
       <div className="modal">
