@@ -31,6 +31,7 @@ import Index from "views/Pages/LandingPage.jsx";
 import AuthLayout from "layouts/Auth.jsx";
 import Register from "views/Pages/RegisterPage";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
+import Chat from "components/Chat/Chat.jsx";
 
 import AuthorizeRoute from 'components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from 'components/api-authorization/ApiAuthorizationRoutes';
@@ -80,13 +81,18 @@ ReactDOM.render(
           return <Register {...props} />;
         }}
       />
+      <Route
+        path="/chat"
+        render ={props => {
+          return <Chat {...props} />;
+        }} />
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       {/*404 page */}
-      <Route component={PageNotFound} />
+      {/* <Route component={PageNotFound} /> */}
 
       {/* Delete this after DEVELOPMENT */}
-      <Redirect to="/client/dashboard" />
+      {/* <Redirect to="/client/dashboard" /> */}
       
     </Switch>
   </Router>,

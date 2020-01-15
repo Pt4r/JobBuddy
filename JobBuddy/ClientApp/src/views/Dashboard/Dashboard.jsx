@@ -52,6 +52,7 @@ import shirt from "assets/img/balmain.jpg";
 import swim from "assets/img/prada.jpg";
 
 import { table_data } from "variables/general.jsx";
+import Chat from "components/Chat/Chat";
 
 var mapData = {
   AU: 760,
@@ -417,6 +418,12 @@ class Dashboard extends React.Component {
               </Card>
             </Col>
           </Row>
+
+          <Row>
+            <Col>
+                    <Chat> </Chat>
+            </Col>
+            </Row>
         </div>
       </>
     );

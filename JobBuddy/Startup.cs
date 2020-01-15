@@ -30,6 +30,7 @@ namespace JobBuddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -65,6 +66,17 @@ namespace JobBuddy
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IJobListingsRepository, JobListingsRepository>();
             services.AddScoped<IMentorOfferRepository, MentorOfferRepository>();
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                //builder.AllowAnyMethod().AllowAnyHeader()
+                //       .WithOrigins("https://localhost:3000")
+                //       .AllowCredentials();
+                builder.AllowAnyMethod().AllowAnyHeader()
+                       .WithOrigins("https://localhost:5001")
+                       .AllowCredentials();
+            }));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +93,14 @@ namespace JobBuddy
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("CorsPolicy");
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatter");
+            });
+
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

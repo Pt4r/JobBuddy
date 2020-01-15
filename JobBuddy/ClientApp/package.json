@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://jobbuddy.com/",
   "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
+    "@microsoft/signalr": "^3.1.0",
     "bootstrap": "4.3.1",
     "chart.js": "2.8.0",
     "classnames": "2.2.6",
@@ -29,7 +31,8 @@
     "react-select": "3.0.4",
     "react-table": "6.10.0",
     "react-tagsinput": "3.19.0",
-    "reactstrap": "8.0.0"
+    "reactstrap": "8.0.0",
+    "tslib": "^1.10.0"
   },
   "scripts": {
     "start": "react-scripts start",
