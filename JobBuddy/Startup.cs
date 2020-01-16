@@ -84,7 +84,9 @@ namespace JobBuddy
             }
 
             app.UseCors(
-                options => options.WithOrigins("https://localhost:5001/").AllowAnyMethod()
+                options => options.WithOrigins("https://localhost:5001/")
+                                  .AllowAnyHeader()
+                                  .AllowAnyMethod()
             );
 
             app.UseHttpsRedirection();

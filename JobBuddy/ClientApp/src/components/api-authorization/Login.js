@@ -86,7 +86,7 @@ export class Login extends Component {
                                 <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
                                 </div>
                                 <div class="col-sm text-nowrap">
-                                <p class="m-0">Redirecting to your Dashboard...</p>
+                                <p class="m-0">Redirecting...</p>
                                 </div>
                             </div>
                         </div>

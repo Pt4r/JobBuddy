@@ -22,9 +22,9 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import HrNavbar from "components/Navbars/HrNavbar.jsx";
+import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import SidebarHr from "components/Sidebar/SidebarHr.jsx";
+import Sidebar from "components/Sidebar/Sidebar.jsx";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes.js";
@@ -124,14 +124,14 @@ class Hr extends React.Component {
     return (
       <div className="wrapper">
         <NotificationAlert ref={this.notificationAlert} />
-        <SidebarHr
+        <Sidebar
           {...this.props}
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <HrNavbar
+          <Navbar
             {...this.props}
             brandText={this.getActiveRoute(routes)}
           />
