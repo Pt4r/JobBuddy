@@ -7,6 +7,7 @@
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+    <UserSecretsId>850602c4-6fee-46cb-a377-94142aa4c393</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="SendGrid" Version="9.12.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
@@ -32,21 +34,48 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Compile Remove="ClientApp.or\**" />
+    <Compile Remove="Data\Migrations\**" />
     <Content Remove="$(SpaRoot)**" />
     <Content Remove="ClientApp.or\**" />
+    <Content Remove="Data\Migrations\**" />
     <EmbeddedResource Remove="ClientApp.or\**" />
+    <EmbeddedResource Remove="Data\Migrations\**" />
     <None Remove="$(SpaRoot)**" />
     <None Remove="ClientApp.or\**" />
+    <None Remove="Data\Migrations\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200106014231_CreatingMentorsandTheirTables.cs" />
-    <Compile Remove="Data\Migrations\20200106014231_CreatingMentorsandTheirTables.Designer.cs" />
+    <Content Remove="wwwroot\css\demo.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\demo.css" />
+    <None Include="wwwroot\js\core\bootstrap.min.js" />
+    <None Include="wwwroot\js\core\jquery.min.js" />
+    <None Include="wwwroot\js\core\popper.min.js" />
+    <None Include="wwwroot\js\now-ui-dashboard.js" />
+    <None Include="wwwroot\js\now-ui-dashboard.js.map" />
+    <None Include="wwwroot\js\now-ui-dashboard.min.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-datetimepicker.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-notify.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-selectpicker.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-switch.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-tagsinput.js" />
+    <None Include="wwwroot\js\plugins\chartjs.min.js" />
+    <None Include="wwwroot\js\plugins\fullcalendar.min.js" />
+    <None Include="wwwroot\js\plugins\jasny-bootstrap.min.js" />
+    <None Include="wwwroot\js\plugins\jquery-jvectormap.js" />
+    <None Include="wwwroot\js\plugins\jquery.bootstrap-wizard.js" />
+    <None Include="wwwroot\js\plugins\jquery.dataTables.min.js" />
+    <None Include="wwwroot\js\plugins\jquery.validate.min.js" />
+    <None Include="wwwroot\js\plugins\moment.min.js" />
+    <None Include="wwwroot\js\plugins\nouislider.min.js" />
+    <None Include="wwwroot\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\js\plugins\sweetalert2.min.js" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

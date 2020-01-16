@@ -118,9 +118,9 @@ now-ui-dashboad-pro-react
     │   │   └── FixedPlugin.jsx
     │   ├── Footer
     │   │   └── Footer.jsx
-    │   ├── Navbars
-    │   │   ├── AdminNavbar.jsx
-    │   │   └── AuthNavbar.jsx
+    │   ├── s
+    │   │   ├── Admin.jsx
+    │   │   └── Auth.jsx
     │   ├── PanelHeader
     │   │   └── PanelHeader.jsx
     │   └── Sidebar

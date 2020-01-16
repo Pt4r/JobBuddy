@@ -24,7 +24,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
+import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
@@ -132,7 +132,7 @@ class Hr extends React.Component {
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <AdminNavbar
+          <Navbar
             {...this.props}
             brandText={this.getActiveRoute(routes)}
           />

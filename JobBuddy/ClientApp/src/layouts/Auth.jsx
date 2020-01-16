@@ -20,7 +20,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar.jsx";
+import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 
 import routes from "routes.js";
@@ -65,7 +65,7 @@ class Auth extends React.Component {
   render() {
     return (
       <>
-        <AuthNavbar {...this.props} />
+        <Navbar {...this.props} />
         <div className="wrapper wrapper-full-page" ref="fullPages">
           <div
             className="full-page section-image"
