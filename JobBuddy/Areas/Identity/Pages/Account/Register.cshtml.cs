@@ -110,6 +110,26 @@ namespace JobBuddy.Areas.Identity.Pages.Account
 
                     await _userManager.AddToRoleAsync(user, Input.UserRole);
 
+                    //Δοκιμή..............
+
+                    //if (user.userrole == "client")
+                    //{
+
+                    //    return redirect("client/dashboard");
+                    //}
+
+                    //if (user.userrole == "hr")
+                    //{
+                    //    return redirect("client/dashboard");
+                    //}
+
+                    //if (user.userrole == "mentor")
+                    //{
+
+                    //    return redirect("client/dashboard");
+                    //}
+
+
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });

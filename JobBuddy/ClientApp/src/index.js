@@ -44,13 +44,15 @@ ReactDOM.render(
     <Switch>
     <Route exact path='/' component={Index} />
 
-    <Route
+    
+    <AuthorizeRoute  
         path="/admin"
         render={props => {
           return <AdminLayout {...props} />;
         }}
-      />
-      <Route
+            />
+      
+            <AuthorizeRoute 
         path="/client"
         render={props => {
           return <ClientLayout {...props} />;

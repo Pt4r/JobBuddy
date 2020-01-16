@@ -3,6 +3,8 @@ import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { LoginActions, QueryParameterNames, ApplicationPaths } from './ApiAuthorizationConstants';
+import User from '../../views/Pages/UserPage';
+import ApiAuthorizationRoutes from './ApiAuthorizationRoutes';
 
 // The main responsibility of this component is to handle the user's login process.
 // This is the starting point for the login process. Any component that needs to authenticate
@@ -128,6 +130,16 @@ export class Login extends Component {
     navigateToReturnUrl(returnUrl) {
         // It's important that we do a replace here so that we remove the callback uri with the
         // fragment containing the tokens from the browser history.
-        window.location.replace('/admin/dashboard');
+
+
+
+      
+
+        window.location.replace(returnUrl);
+        
+
+      
+
+       
     }
 }
