@@ -59,7 +59,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
+                ModelState.AddModelError("Error", ErrorMessage);
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -112,7 +112,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError("Error", "Invalid login attempt.");
                     return Page();
                 }
             }

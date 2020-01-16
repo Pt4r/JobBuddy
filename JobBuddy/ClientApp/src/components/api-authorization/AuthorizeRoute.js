@@ -3,7 +3,6 @@ import { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { ApplicationPaths, QueryParameterNames } from './ApiAuthorizationConstants'
 import authService from './AuthorizeService'
-import { UserManager } from 'oidc-client'
 
 export default class AuthorizeRoute extends Component {
     constructor(props) {
@@ -50,10 +49,5 @@ export default class AuthorizeRoute extends Component {
     async authenticationChanged() {
         this.setState({ ready: false, authenticated: false });
         await this.populateAuthenticationState();
-
-       
     }
-
-    
-    
 }

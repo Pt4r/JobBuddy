@@ -30,14 +30,14 @@ ReactDOM.render(
     <Route exact path='/' component={Index} />
 
     
-    <AuthorizeRoute  
+      <Route  
         path="/admin"
         render={props => {
           return <AdminLayout {...props} />;
         }}
             />
       
-            <AuthorizeRoute 
+      <Route 
         path="/client"
         render={props => {
           return <ClientLayout {...props} />;
