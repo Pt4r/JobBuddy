@@ -8,11 +8,10 @@ namespace JobBuddy.Models
 {
     public class MentorUserDetails
     {
-        //prosthetw application user Foreign key
+        //Προσθέτω Foreign key se ola ta details APP USER
 
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
-
         public string ApplicationUserId { get; set; }
         public Guid MentorId { get; set; }
 
