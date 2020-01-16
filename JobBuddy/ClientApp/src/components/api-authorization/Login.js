@@ -3,6 +3,7 @@ import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { LoginActions, QueryParameterNames, ApplicationPaths } from './ApiAuthorizationConstants';
+import { Spinner } from 'reactstrap';
 
 // The main responsibility of this component is to handle the user's login process.
 // This is the starting point for the login process. Any component that needs to authenticate
@@ -51,12 +52,45 @@ export class Login extends Component {
         } else {
             switch (action) {
                 case LoginActions.Login:
-                    return (<div>Processing login</div>);
+                    return (
+                        <div class="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
+                            <div class="row align-items-center">
+                                <div class="col-sm">
+                                <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
+                                </div>
+                                <div class="col-sm text-nowrap">
+                                <p class="m-0">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                        );
                 case LoginActions.LoginCallback:
-                    return (<div>Processing login callback</div>);
+                    return (
+                        <div class="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
+                            <div class="row align-items-center">
+                                <div class="col-sm">
+                                <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
+                                </div>
+                                <div class="col-sm text-nowrap">
+                                <p class="m-0">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                );
                 case LoginActions.Profile:
                 case LoginActions.Register:
-                    return (<div></div>);
+                    return (
+                        <div class="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
+                            <div class="row align-items-center">
+                                <div class="col-sm">
+                                <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
+                                </div>
+                                <div class="col-sm text-nowrap">
+                                <p class="m-0">Redirecting...</p>
+                                </div>
+                            </div>
+                        </div>
+                );
                 default:
                     throw new Error(`Invalid action '${action}'`);
             }

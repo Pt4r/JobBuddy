@@ -12573,7 +12573,7 @@ be a descendant of the grid when it is being dragged.
   position: relative;
   background: #2c2c2c;
   /* fallback for old browsers */
-  background: linear-gradient(160deg, #2c2c2c 0%, #1f1f1f 100%);
+  background:  linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
   background-size: 105%;
   overflow: hidden; }
   .panel-header .header .title {

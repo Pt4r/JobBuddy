@@ -27,6 +27,7 @@ import NotificationAlert from "react-notification-alert";
 import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
+// import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes.js";
 
@@ -102,7 +103,7 @@ class Hr extends React.Component {
     });
   };
   getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+    let activeRoute = "Job Buddy";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = this.getActiveRoute(routes[i].views);

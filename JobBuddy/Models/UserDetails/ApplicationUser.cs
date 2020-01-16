@@ -17,7 +17,7 @@ namespace JobBuddy.Models
         [MaxLength(50)]
         public string LastName { get; set; }
         [NotMapped]
-        public string FullName
+        public string Name
         {
             get
             {

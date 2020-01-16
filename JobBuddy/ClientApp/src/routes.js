@@ -1,23 +1,10 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import ClientDashboard from "views/Dashboard/ClientDashboard.jsx";
+import ClientJobListings from "views/Client/clientJobListings.jsx"
+import ClientCompanies from "views/Client/clientCompanies.jsx"
 import MentorDashboard from "views/Dashboard/MentorDashboard.jsx";
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
 import AdminDashboard from "views/Dashboard/Dashboard.jsx";
+
 import Buttons from "views/Components/Buttons.jsx";
 import GridSystem from "views/Components/GridSystem.jsx";
 import Panels from "views/Components/Panels.jsx";
@@ -64,8 +51,8 @@ let routes = [
     layout: "/Mentor"
   },
   {
-    path: "/dashboard",
-    name: "HrDashboard",
+    path: "/dashboard", 
+    name: "Client Dashboard",
     icon: "now-ui-icons design_app",
     component: ClientDashboard,
     layout: "/client"
@@ -83,6 +70,20 @@ let routes = [
     icon: "now-ui-icons design_app",
     component: AdminDashboard,
     layout: "/admin"
+  },
+  {
+    path: "/job-listings",
+    name: "Job Listings",
+    icon: "now-ui-icons files_single-copy-04",
+    component: ClientJobListings,
+    layout: "/client"
+  },
+  {
+    path: "/companies",
+    name: "Companies",
+    icon: "now-ui-icons business_briefcase-24",
+    component: ClientCompanies,
+    layout: "/client"
   },
   {
     collapse: true,
