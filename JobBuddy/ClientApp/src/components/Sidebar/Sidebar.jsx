@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 /*eslint-disable*/
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -99,7 +83,7 @@ class Sidebar extends React.Component {
             key={key}
           >
             <a
-              href="#pablo"
+              href="#"
               data-toggle="collapse"
               aria-expanded={this.state[prop.state]}
               onClick={e => {
@@ -160,7 +144,7 @@ class Sidebar extends React.Component {
         <div className="sidebar" data-color={this.props.backgroundColor}>
           <div className="logo">
             <a
-              href="https://www.creative-tim.com?ref=nudr-sidebar"
+              href="#"
               className="simple-text logo-mini"
               target="_blank"
             >
@@ -169,11 +153,11 @@ class Sidebar extends React.Component {
               </div>
             </a>
             <a
-              href="https://www.creative-tim.com?ref=nudr-sidebar"
+              href="#"
               className="simple-text logo-normal"
               target="_blank"
             >
-              Creative Tim
+              Job Buddy
             </a>
             <div className="navbar-minimize">
               <Button
@@ -196,7 +180,7 @@ class Sidebar extends React.Component {
               </div>
               <div className="info">
                 <a
-                  href="#pablo"
+                  href="#"
                   data-toggle="collapse"
                   aria-expanded={this.state.openAvatar}
                   onClick={() =>
@@ -205,31 +189,8 @@ class Sidebar extends React.Component {
                 >
                   <span>
                     Ryan Gosling
-                    <b className="caret" />
                   </span>
                 </a>
-                <Collapse isOpen={this.state.openAvatar}>
-                  <ul className="nav">
-                    <li>
-                      <a href="#pablo" onClick={e => e.preventDefault}>
-                        <span className="sidebar-mini-icon">MP</span>
-                        <span className="sidebar-normal">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#pablo" onClick={e => e.preventDefault}>
-                        <span className="sidebar-mini-icon">EP</span>
-                        <span className="sidebar-normal">Edit Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#pablo" onClick={e => e.preventDefault}>
-                        <span className="sidebar-mini-icon">S</span>
-                        <span className="sidebar-normal">Settings</span>
-                      </a>
-                    </li>
-                  </ul>
-                </Collapse>
               </div>
             </div>
             <Nav>{this.createLinks(this.props.routes)}</Nav>

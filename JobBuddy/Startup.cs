@@ -33,6 +33,7 @@ namespace JobBuddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -85,6 +86,12 @@ namespace JobBuddy
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(
+                options => options.WithOrigins("https://localhost:5001/")
+                                  .AllowAnyHeader()
+                                  .AllowAnyMethod()
+            );
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

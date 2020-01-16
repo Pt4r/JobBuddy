@@ -308,7 +308,7 @@ const dashboardSummerChart = {
     gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     gradientFill.addColorStop(1, hexToRGB("#18ce0f", 0.4));
     return {
-      labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
+      labels: ["8am,", "10am", "12pm", "2pm", "4pm", "6pm", "8pm", "9pm"],
       datasets: [
         {
           label: "Email Stats",
@@ -322,7 +322,7 @@ const dashboardSummerChart = {
           fill: true,
           backgroundColor: gradientFill,
           borderWidth: 2,
-          data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
+          data: [12, 10, 17, 20, 25, 20, 13, 15]
         }
       ]
     };
@@ -345,20 +345,20 @@ const dashboardActiveCountriesCard = {
     gradientFill.addColorStop(1, hexToRGB("#2CA8FF", 0.4));
     return {
       labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October"
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
       ],
       datasets: [
         {
-          label: "Active Countries",
+          label: "Total Jobs Listings",
           backgroundColor: gradientFill,
           borderColor: "#2CA8FF",
           pointBorderColor: "#FFF",
@@ -369,7 +369,7 @@ const dashboardActiveCountriesCard = {
           pointRadius: 4,
           fill: true,
           borderWidth: 2,
-          data: [80, 78, 86, 96, 83, 85, 76, 75, 88, 90]
+          data: [2, 10, 18, 16, 20, 23, 18, 15, 16, 10]
         }
       ]
     };

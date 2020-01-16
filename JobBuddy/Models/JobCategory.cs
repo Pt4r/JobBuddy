@@ -21,10 +21,7 @@ namespace JobBuddy.Models
         [Display(Name = "SubCategory")]
         public string Subcategory_2 { get; set; }
 
-
-
-            //Debug prosthesa lista me joblistings --Spyros
-        public ICollection<JobListing> JobListings {get;set;}
-            
+        public virtual ICollection<JobListing> JobListings { get; set; }
+           
     }
 }
