@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Threading.Tasks;
 using System;
 using Microsoft.Extensions.Logging;
-
+using JobBuddy.Models.ChatSignalR;
 
 namespace JobBuddy
 {
@@ -33,6 +33,9 @@ namespace JobBuddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //add signalR
+            services.AddSignalR();
+
             services.AddCors();
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -75,6 +78,7 @@ namespace JobBuddy
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -93,6 +97,7 @@ namespace JobBuddy
                                   .AllowAnyMethod()
             );
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -108,6 +113,8 @@ namespace JobBuddy
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                //Chat using ChatHub
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
 
             app.UseSpa(spa =>
@@ -124,6 +131,10 @@ namespace JobBuddy
             app.UseStaticFiles();
 
             app.UseIdentityServer();
+
+            //use signalR
+
+      
 
             CreateRoles(serviceProvider).Wait();
         }

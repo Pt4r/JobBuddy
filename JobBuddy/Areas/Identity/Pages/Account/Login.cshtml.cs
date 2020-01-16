@@ -98,8 +98,23 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                     {
                         return LocalRedirect("/Admin/Dashboard");
                     }
+
+
+                    //prostheto tous allous duo rolous
+
+                    else if (role == "Mentor")
+                    {
+                        return LocalRedirect("/Mentor/Dashboard");
+                    }
+
+
+                    else if (role == "HR")
+                    {
+                        return LocalRedirect("/HR/Dashboard");
+                    }
+
                     return NotFound();
-                    
+
                 }
                 if (result.RequiresTwoFactor)
                 {

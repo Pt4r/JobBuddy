@@ -140,7 +140,7 @@ class Mentor extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/Mentor" to="/Mentor/dashboard" />
+            <Redirect from="/mentor" to="/mentor/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (
