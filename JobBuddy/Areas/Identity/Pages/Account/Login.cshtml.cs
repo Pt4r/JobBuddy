@@ -84,7 +84,22 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var role = user.UserRole;
+
+                    //na doume gia multiple roles
+
+                    if(role=="Client")
+                    {
+                        return LocalRedirect("/Client/Dashboard");
+                    }
+
+                    else if(role=="Admin")
+                    {
+                        return LocalRedirect("/Admin/Dashboard");
+                    }
+                    return NotFound();
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {

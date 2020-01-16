@@ -3,6 +3,7 @@ import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { LoginActions, QueryParameterNames, ApplicationPaths } from './ApiAuthorizationConstants';
+
 import { Spinner } from 'reactstrap';
 
 // The main responsibility of this component is to handle the user's login process.
@@ -162,6 +163,16 @@ export class Login extends Component {
     navigateToReturnUrl(returnUrl) {
         // It's important that we do a replace here so that we remove the callback uri with the
         // fragment containing the tokens from the browser history.
-        window.location.replace('/admin/dashboard');
+
+
+
+      
+
+        window.location.replace(returnUrl);
+        
+
+      
+
+       
     }
 }
