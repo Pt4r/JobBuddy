@@ -135,6 +135,12 @@ class Buttons extends React.Component {
                     <Button color="primary" className="btn-round btn-icon">
                       <i className="now-ui-icons ui-2_favourite-28" />
                     </Button>
+                    
+                    {/* Προσθεσα Button /Σπυροσ Θεοφ./ Confirm Button*/}
+                    <Button color="success" className="btn-round btn-icon">
+                      <i className="now-ui-icons ui-1_check" />
+                    </Button>
+                    
                     <Button color="primary" outline>
                       Simple
                     </Button>

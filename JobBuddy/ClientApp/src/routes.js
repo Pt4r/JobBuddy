@@ -1,6 +1,7 @@
 import ClientDashboard from "views/Dashboard/ClientDashboard.jsx";
 import ClientJobListings from "views/Client/clientJobListings.jsx"
 import ClientCompanies from "views/Client/clientCompanies.jsx"
+import MentorDashboard from "views/Dashboard/MentorDashboard.jsx";
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
 import AdminDashboard from "views/Dashboard/Dashboard.jsx";
 
@@ -33,6 +34,22 @@ import LockScreenPage from "views/Pages/LockScreenPage.jsx";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 let routes = [
+    {
+        path: "/dashboard",
+        name: "Client Dashboard",
+        icon: "now-ui-icons design_app",
+        component: ClientDashboard,
+        layout: "/Client"
+    },
+
+ 
+  {
+    path: "/dashboard",
+    name: "MentorDashboard",
+    icon: "now-ui-icons design_app",
+    component: MentorDashboard,
+    layout: "/Mentor"
+  },
   {
     path: "/dashboard", 
     name: "Client Dashboard",
