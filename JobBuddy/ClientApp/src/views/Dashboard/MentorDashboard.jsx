@@ -15,14 +15,8 @@
 
 */
 import React from "react";
-// react plugin used to create charts
-import { Line } from "react-chartjs-2";
-// react plugin for creating vector maps
-import { VectorMap } from "react-jvectormap";
 
 import ReactTableMentor from "views/Tables/ReactTableMentor";
-
-import Button from "views/Components/Buttons";
 
 import PanelMentor from "views/Components/PanelsMentor"
 
@@ -30,20 +24,7 @@ import PanelMentor from "views/Components/PanelsMentor"
 // reactstrap components
 import {
   Card,
-  CardHeader,
   CardBody,
-  Nav,
-  NavLink,
-  NavItem,
-  Navbar,
-  CardFooter,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Table,
-  Progress,
   Row,
   Col
 } from "reactstrap";
@@ -51,34 +32,8 @@ import {
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
-import {
-  dashboardPanelChart,
-  dashboardActiveUsersChart,
-  dashboardSummerChart,
-  dashboardActiveCountriesCard
-} from "variables/charts.jsx";
-
-import jacket from "assets/img/saint-laurent.jpg";
-import shirt from "assets/img/balmain.jpg";
-import swim from "assets/img/prada.jpg";
-
 import { table_data } from "variables/general.jsx";
 
-
-
-var mapData = {
-  AU: 760,
-  BR: 550,
-  CA: 120,
-  DE: 1300,
-  FR: 540,
-  GB: 690,
-  GE: 200,
-  IN: 200,
-  RO: 600,
-  RU: 300,
-  US: 2920
-};
 
 class Dashboard extends React.Component {
   createTableData() {
