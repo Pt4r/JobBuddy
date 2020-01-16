@@ -138,7 +138,7 @@ class Hr extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/hr" to="/hr/hrdashboard" />
+            <Redirect from="/hr" to="/hr/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (

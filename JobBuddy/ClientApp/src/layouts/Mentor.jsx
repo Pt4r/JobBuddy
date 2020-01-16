@@ -25,7 +25,7 @@ import NotificationAlert from "react-notification-alert";
 
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
+import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
@@ -134,13 +134,13 @@ class Mentor extends React.Component {
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <AdminNavbar
+          <Navbar
             {...this.props}
             brandText={"Job Buddy"}
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/Mentor" to="/Mentor/Mentordashboard" />
+            <Redirect from="/Mentor" to="/Mentor/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (

@@ -57,14 +57,14 @@ let routes = [
 
  
   {
-    path: "/Mentordashboard",
+    path: "/dashboard",
     name: "MentorDashboard",
     icon: "now-ui-icons design_app",
     component: MentorDashboard,
     layout: "/Mentor"
   },
   {
-    path: "/Hrdashboard",
+    path: "/dashboard",
     name: "HrDashboard",
     icon: "now-ui-icons design_app",
     component: ClientDashboard,
