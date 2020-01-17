@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="card-body ">
-                @Html.ValidationMessage("Error")
+                <div class="text-center">@Html.ValidationMessage("Error")</div>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                 <div class="input-group no-border form-control-lg">
                     <span class="input-group-prepend">

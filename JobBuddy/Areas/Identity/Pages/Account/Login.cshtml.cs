@@ -94,7 +94,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                         return LocalRedirect("/Client/Dashboard");
                     }
 
-                    else if(role=="Admin")
+                    if(role=="Admin")
                     {
                         return LocalRedirect("/Admin/Dashboard");
                     }

@@ -64,6 +64,8 @@ namespace JobBuddy.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$", 
+                ErrorMessage = "Password must have at least one Upper case, Lower case, Number and Special Character.")]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
@@ -144,7 +146,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError("Error", error.Description);
                 }
             }
 

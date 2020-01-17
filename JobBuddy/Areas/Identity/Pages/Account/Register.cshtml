@@ -62,6 +62,7 @@
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post" id="RegisterValidation">
 
                 <div class="card-body ">
+                    @Html.ValidationMessage("Error")
                     <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -91,6 +92,7 @@
                         <input asp-for="Input.Email" class="form-control" placeholder="Email" required="required">
                     </div>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <p class="text-muted"><small>The password must be at least 6 character long, one Upper case, Lower case, Number and Special Character.</small></p>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
@@ -122,7 +124,7 @@
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="termsAndCond" required="required">
                             <span class="form-check-sign"></span>
-                            I agree to the <a href="/terms-and-conditions">terms and conditions</a>.
+                            I agree to the terms and conditions.
                         </label>
                     </div>
                 </div>

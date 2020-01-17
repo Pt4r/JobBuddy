@@ -27,38 +27,32 @@ const hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-    <Route exact path='/' component={Index} />
 
-    
-      <Route  
+      <Route exact path='/' component={Index} />
+
+      <AuthorizeRoute  
         path="/admin"
         render={props => {
           return <AdminLayout {...props} />;
         }}
             />
       
-      <Route 
+      <AuthorizeRoute 
         path="/client"
         render={props => {
           return <ClientLayout {...props} />;
         }}
       />
-      <Route
+      <AuthorizeRoute
         path="/hr"
         render={props => {
           return <HrLayout {...props} />;
         }}
       />
-        <Route
-        path="/Mentor"
-        render={props => {
-          return <MentorLayout {...props} />;
-        }}
-      />
-      <Route
+        <AuthorizeRoute
         path="/mentor"
         render={props => {
-          return <AuthLayout {...props} />;
+          return <MentorLayout {...props} />;
         }}
       />
       <Route
@@ -75,11 +69,11 @@ ReactDOM.render(
       />
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
-          {/*404 page */}
-            <Route component={PageNotFound} />
+        {/*404 page */}
+      <Route component={PageNotFound} />
 
-      {/* Delete this after DEVELOPMENT */}
-            <Redirect to="/client/dashboard" />
+        {/* Delete this after DEVELOPMENT */}
+      {/* <Redirect to="/client/dashboard" /> */} 
       
     </Switch>
   </Router>,
