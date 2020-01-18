@@ -89,16 +89,19 @@ namespace JobBuddy.Areas.Identity.Pages.Account
 
                     //na doume gia multiple roles
 
-                    if(role=="Client")
+                    switch (role)
                     {
-                        return LocalRedirect("/Client/Dashboard");
+                        case "Admin":
+                            return LocalRedirect("/Admin/Dashboard");
+                        case "Client":
+                            return LocalRedirect("/Client/Dashboard");
+                        case "Mentor":
+                            return LocalRedirect("/Mentor/Dashboard");
+                        case "HR":
+                            return LocalRedirect("/HR/Dashboard");
+                        default:
+                            return NotFound();
                     }
-
-                    if(role=="Admin")
-                    {
-                        return LocalRedirect("/Admin/Dashboard");
-                    }
-                    return NotFound();
                     
                 }
                 if (result.RequiresTwoFactor)
