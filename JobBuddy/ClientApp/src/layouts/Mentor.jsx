@@ -90,7 +90,7 @@ class Mentor extends React.Component {
       if (prop.collapse) {
         return this.getRoutes(prop.views);
       }
-      if (prop.layout === "/Mentor") {
+      if (prop.layout === "/mentor") {
         return (
           <Route
             path={prop.layout + prop.path}
