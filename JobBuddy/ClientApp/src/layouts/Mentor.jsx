@@ -13,6 +13,8 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
+
+
 */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -21,16 +23,18 @@ import PerfectScrollbar from "perfect-scrollbar";
 // react plugin for creating notifications
 import NotificationAlert from "react-notification-alert";
 
+
 // core components
 import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
+
 import routes from "routes.js";
 
 var ps;
 
-class Client extends React.Component {
+class Mentor extends React.Component {
   state = {
     sidebarMini: true,
     backgroundColor: "blue"
@@ -86,7 +90,7 @@ class Client extends React.Component {
       if (prop.collapse) {
         return this.getRoutes(prop.views);
       }
-      if (prop.layout === "/client") {
+      if (prop.layout === "/Mentor") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -125,7 +129,7 @@ class Client extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
-          layout = "/client"
+          layout = "/mentor"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
@@ -133,20 +137,21 @@ class Client extends React.Component {
         <div className="main-panel" ref={this.mainPanel}>
           <Navbar
             {...this.props}
-            brandText={this.getActiveRoute(routes)}
+            brandText={"Job Buddy"}
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/client" to="/client/Dashboard" />
+            <Redirect from="/Mentor" to="/Mentor/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (
             <Footer fluid />
           )}
         </div>
+        
       </div>
     );
   }
 }
 
-export default Client;
+export default Mentor;

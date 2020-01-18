@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
@@ -25,11 +9,10 @@ import "assets/css/demo.css";
 
 import AdminLayout from "layouts/Admin.jsx";
 import ClientLayout from "layouts/Client.jsx";
+import MentorLayout from "layouts/Mentor.jsx"
 import HrLayout from "layouts/Hr.jsx";
 
 import Index from "views/Pages/LandingPage.jsx";
-import AuthLayout from "layouts/Auth.jsx";
-import Register from "views/Pages/RegisterPage";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 import AuthorizeRoute from 'components/api-authorization/AuthorizeRoute';
@@ -42,51 +25,46 @@ const hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-    <Route exact path='/' component={Index} />
 
-    <Route
+      <Route exact path='/' component={Index} />
+
+      <AuthorizeRoute  
         path="/admin"
+        allowedRoles = {["Admin"]}
         render={props => {
           return <AdminLayout {...props} />;
         }}
-      />
-      <Route
+            />
+      
+      <AuthorizeRoute 
         path="/client"
+        allowedRoles = {["Admin","Client"]}
         render={props => {
           return <ClientLayout {...props} />;
         }}
       />
-      <Route
+      <AuthorizeRoute
         path="/hr"
+        allowedRoles = {["Admin","HR"]}
         render={props => {
           return <HrLayout {...props} />;
         }}
       />
-      <Route
+        <AuthorizeRoute
         path="/mentor"
+        allowedRoles = {["Admin","Mentor"]}
         render={props => {
-          return <AuthLayout {...props} />;
+          return <MentorLayout {...props} />;
         }}
       />
-      <Route
-        path="/auth"
-        render={props => {
-          return <AuthLayout {...props} />;
-        }}
-      />
-      <Route
-        path="/register"
-        render={props => {
-          return <Register {...props} />;
-        }}
-      />
+
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
-      {/*404 page */}
+        {/*404 page */}
       <Route component={PageNotFound} />
 
-      {/* Delete this after DEVELOPMENT */}
-      {/* <Redirect to="/client/dashboard" /> */}
+        {/* Delete this after DEVELOPMENT */}
+      {/* <Redirect to="/client/dashboard" /> */} 
       
     </Switch>
   </Router>,

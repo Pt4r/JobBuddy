@@ -9,19 +9,19 @@ namespace JobBuddy.Models
 {
 
     public class JobCategory
-    {   
+    {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        
+
         public enumJobCategoryTitle JobCategoryTitle { get; set; }
-        
+
         [Display(Name = "Category")]
         public string Subcategory_1 { get; set; }
-        
+
         [Display(Name = "SubCategory")]
         public string Subcategory_2 { get; set; }
 
-        // edw na mpei to JobListing List 
-            
+        public virtual ICollection<JobListing> JobListings { get; set; }
+           
     }
 }

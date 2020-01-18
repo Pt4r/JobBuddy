@@ -13,6 +13,8 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
+Spyros
+
 */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -22,7 +24,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import HrNavbar from "components/Navbars/HrNavbar.jsx";
+import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
@@ -126,18 +128,19 @@ class Hr extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
+          layout = "/hr"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <HrNavbar
+          <Navbar
             {...this.props}
             brandText={this.getActiveRoute(routes)}
           />
           <Switch>
             {this.getRoutes(routes)}
-            {/* <Redirect from="/hr" to="/hr/hrdashboard" /> */}
+            <Redirect from="/hr" to="/hr/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (

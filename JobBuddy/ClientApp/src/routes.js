@@ -1,6 +1,7 @@
 import ClientDashboard from "views/Dashboard/ClientDashboard.jsx";
 import ClientJobListings from "views/Client/clientJobListings.jsx"
 import ClientCompanies from "views/Client/clientCompanies.jsx"
+import MentorDashboard from "views/Dashboard/MentorDashboard.jsx";
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
 import AdminDashboard from "views/Dashboard/Dashboard.jsx";
 
@@ -34,25 +35,11 @@ import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 let routes = [
   {
-    path: "/dashboard", 
+    path: "/dashboard",
     name: "Client Dashboard",
     icon: "now-ui-icons design_app",
     component: ClientDashboard,
     layout: "/client"
-  },
-  {
-    path: "/dashboard",
-    name: "Hr Dashboard",
-    icon: "now-ui-icons design_app",
-    component: HrDashboard,
-    layout: "/hr"
-  },
-  {
-    path: "/dashboard",
-    name: "Admin Dashboard",
-    icon: "now-ui-icons design_app",
-    component: AdminDashboard,
-    layout: "/admin"
   },
   {
     path: "/job-listings",
@@ -68,12 +55,37 @@ let routes = [
     component: ClientCompanies,
     layout: "/client"
   },
+
+  {
+    path: "/dashboard",
+    name: "Hr Dashboard",
+    icon: "now-ui-icons design_app",
+    component: HrDashboard,
+    layout: "/hr"
+  },
+  {
+    path: "/dashboard",
+    name: "Mentor Dashboard",
+    icon: "now-ui-icons design_app",
+    component: MentorDashboard,
+    layout: "/mentor"
+  },
+  
+  {
+    path: "/dashboard",
+    name: "Admin Dashboard",
+    icon: "now-ui-icons design_app",
+    component: AdminDashboard,
+    layout: "/admin"
+  },
+  
   {
     collapse: true,
     path: "/pages",
     name: "Pages",
     state: "openPages",
     icon: "now-ui-icons design_image",
+    layout: "/admin",
     views: [
       {
         path: "/404",
@@ -136,6 +148,7 @@ let routes = [
     name: "Components",
     state: "openComponents",
     icon: "now-ui-icons education_atom",
+    layout: "/admin",
     views: [
       {
         path: "/buttons",
@@ -194,6 +207,7 @@ let routes = [
     name: "Forms",
     state: "openForms",
     icon: "now-ui-icons design_bullet-list-67",
+    layout: "/admin",
     views: [
       {
         path: "/regular-forms",
@@ -231,6 +245,7 @@ let routes = [
     name: "Tables",
     state: "openTables",
     icon: "now-ui-icons files_single-copy-04",
+    layout: "/admin",
     views: [
       {
         path: "/regular-tables",
@@ -261,6 +276,7 @@ let routes = [
     name: "Maps",
     state: "openMaps",
     icon: "now-ui-icons location_pin",
+    layout: "/admin",
     views: [
       {
         path: "/google-maps",

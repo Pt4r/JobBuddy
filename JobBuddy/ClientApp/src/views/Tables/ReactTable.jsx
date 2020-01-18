@@ -168,7 +168,7 @@ class ReactTables extends Component {
                 A powerful react plugin handcrafted by our friends from{" "}
                 <a
                   href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   react-table
                 </a>
@@ -177,7 +177,7 @@ class ReactTables extends Component {
                 interaction controls. Please check out their{" "}
                 <a
                   href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   full documentation.
                 </a>
