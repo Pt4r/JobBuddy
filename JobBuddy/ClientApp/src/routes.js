@@ -42,27 +42,6 @@ let routes = [
     layout: "/client"
   },
   {
-    path: "/dashboard",
-    name: "Mentor Dashboard",
-    icon: "now-ui-icons design_app",
-    component: MentorDashboard,
-    layout: "/mentor"
-  },
-  {
-    path: "/dashboard",
-    name: "Hr Dashboard",
-    icon: "now-ui-icons design_app",
-    component: HrDashboard,
-    layout: "/hr"
-  },
-  {
-    path: "/dashboard",
-    name: "Admin Dashboard",
-    icon: "now-ui-icons design_app",
-    component: AdminDashboard,
-    layout: "/admin"
-  },
-  {
     path: "/job-listings",
     name: "Job Listings",
     icon: "now-ui-icons files_single-copy-04",
@@ -76,6 +55,30 @@ let routes = [
     component: ClientCompanies,
     layout: "/client"
   },
+
+  {
+    path: "/dashboard",
+    name: "Hr Dashboard",
+    icon: "now-ui-icons design_app",
+    component: HrDashboard,
+    layout: "/hr"
+  },
+  {
+    path: "/dashboard",
+    name: "Mentor Dashboard",
+    icon: "now-ui-icons design_app",
+    component: MentorDashboard,
+    layout: "/mentor"
+  },
+  
+  {
+    path: "/dashboard",
+    name: "Admin Dashboard",
+    icon: "now-ui-icons design_app",
+    component: AdminDashboard,
+    layout: "/admin"
+  },
+  
   {
     collapse: true,
     path: "/pages",
@@ -145,6 +148,7 @@ let routes = [
     name: "Components",
     state: "openComponents",
     icon: "now-ui-icons education_atom",
+    layout: "/admin",
     views: [
       {
         path: "/buttons",
@@ -203,6 +207,7 @@ let routes = [
     name: "Forms",
     state: "openForms",
     icon: "now-ui-icons design_bullet-list-67",
+    layout: "/admin",
     views: [
       {
         path: "/regular-forms",
@@ -240,6 +245,7 @@ let routes = [
     name: "Tables",
     state: "openTables",
     icon: "now-ui-icons files_single-copy-04",
+    layout: "/admin",
     views: [
       {
         path: "/regular-tables",
@@ -270,6 +276,7 @@ let routes = [
     name: "Maps",
     state: "openMaps",
     icon: "now-ui-icons location_pin",
+    layout: "/admin",
     views: [
       {
         path: "/google-maps",
