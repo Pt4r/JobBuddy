@@ -14,8 +14,8 @@ import {
 
 // core components
 import PagesNavbar from "components/Navbars/PagesNavbar";
-import LandingPageHeader from "components/Header/LandingPageHeader";
-import {PagesFooter} from "components";
+import LandingPageHeader from "components/PanelHeader/LandingPageHeader";
+import PagesFooter from "components/Footer/PagesFooter";
 
 function LandingPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -166,7 +166,7 @@ function LandingPage() {
                       href="#pablo"
                       onClick={e => e.preventDefault()}
                     >
-                      <i className="fab fa-facebook-square"></i>
+                      <i className="fab fa-facebook"></i>
                     </Button>
                   </div>
                 </Col>

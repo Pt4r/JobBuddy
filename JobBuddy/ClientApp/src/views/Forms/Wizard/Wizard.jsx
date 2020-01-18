@@ -1,9 +1,28 @@
+/*!
+
+=========================================================
+* Now UI Dashboard PRO React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 import React, { Component } from "react";
-import { Col } from "reactstrap";
 // react plugin used to create a form with multiple steps
 import ReactWizard from "react-bootstrap-wizard";
 
-import { PanelHeader } from "components";
+// reactstrap components
+import { Col } from "reactstrap";
+
+// core components
+import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 import Step1 from "./Step1.jsx";
 import Step2 from "./Step2.jsx";
@@ -30,7 +49,7 @@ var steps = [
 class Wizard extends Component {
   render() {
     return (
-      <div>
+      <>
         <PanelHeader size="sm" />
         <div className="content">
           <Col xs={12} md={10} className="mr-auto ml-auto">
@@ -48,7 +67,7 @@ class Wizard extends Component {
             />
           </Col>
         </div>
-      </div>
+      </>
     );
   }
 }

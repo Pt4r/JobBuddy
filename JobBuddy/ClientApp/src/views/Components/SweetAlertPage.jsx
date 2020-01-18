@@ -1,9 +1,29 @@
+/*!
+
+=========================================================
+* Now UI Dashboard PRO React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+/*eslint-disable*/
 import React from "react";
-import { Card, CardBody, CardText, Row, Col } from "reactstrap";
 // react component used to create sweet alerts
 import SweetAlert from "react-bootstrap-sweetalert";
 
-import { PanelHeader, Button } from "components";
+// reactstrap components
+import { Card, CardBody, CardText, Row, Col, Button } from "reactstrap";
+
+// core components
+import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 class SweetAlertPage extends React.Component {
   constructor(props) {
@@ -80,7 +100,13 @@ class SweetAlertPage extends React.Component {
           confirmBtnBsStyle="info"
         >
           You can use <b>bold</b> text,{" "}
-          <a href="https://www.creative-tim.com/">links</a> and other HTML tags
+          <a
+            href="https://www.creative-tim.com/?ref=nudr-sweetalert-page"
+            target="_blank"
+          >
+            links
+          </a>{" "}
+          and other HTML tags
         </SweetAlert>
       )
     });
@@ -217,7 +243,7 @@ class SweetAlertPage extends React.Component {
   }
   render() {
     return (
-      <div>
+      <>
         <PanelHeader
           content={
             <div className="header text-center">
@@ -225,20 +251,17 @@ class SweetAlertPage extends React.Component {
               <p className="category">
                 A beautiful plugin, that replace the classic alert, Handcrafted
                 by our friend{" "}
-                <a
-                  target="_blank"
-                  href="https://github.com/djorg83"
-                  rel="noopener noreferrer"
-                >
+                <a target="_blank" href="https://github.com/djorg83">
                   Daniel Jorgensen
-                </a>. Please check out the{" "}
+                </a>
+                . Please check out the{" "}
                 <a
                   href="https://github.com/djorg83/react-bootstrap-sweetalert"
                   target="_blank"
-                  rel="noopener noreferrer"
                 >
                   full documentation.
-                </a>.
+                </a>
+                .
               </p>
             </div>
           }
@@ -367,7 +390,7 @@ class SweetAlertPage extends React.Component {
             </Row>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -1,12 +1,11 @@
 /*!
 
 =========================================================
-* Now UI Dashboard React - v1.2.0
+* Now UI Dashboard PRO React - v1.3.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
 * Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -27,7 +26,7 @@ class Footer extends React.Component {
       <footer
         className={"footer" + (this.props.default ? " footer-default" : "")}
       >
-        <Container fluid={this.props.fluid ? true : false}>
+        <Container fluid={this.props.fluid}>
           <nav>
             <ul>
               <li>
@@ -62,6 +61,11 @@ class Footer extends React.Component {
     );
   }
 }
+
+Footer.defaultProps = {
+  default: false,
+  fluid: false
+};
 
 Footer.propTypes = {
   default: PropTypes.bool,

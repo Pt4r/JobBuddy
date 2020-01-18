@@ -1,46 +1,45 @@
-.alert{
+.alert {
   border: 0;
   border-radius: $border-radius-small;
   color: $white-color;
-  padding: .75rem 1.25rem;
-  padding-top: .9rem;
-  padding-bottom: .9rem;
+  padding: 0.75rem 1.25rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
   position: relative;
   margin-bottom: 1rem;
 
-  &.alert-success{
+  &.alert-success {
     background-color: lighten($success-color, 5%);
   }
 
-  &.alert-danger{
+  &.alert-danger {
     background-color: lighten($danger-color, 5%);
   }
 
-  &.alert-warning{
+  &.alert-warning {
     background-color: lighten($warning-color, 5%);
   }
 
-  &.alert-info{
+  &.alert-info {
     background-color: lighten($info-color, 5%);
   }
 
-  &.alert-primary{
+  &.alert-primary {
     background-color: lighten($primary-color, 5%);
   }
 
-
   i.fa,
-  i.now-ui-icons{
+  i.now-ui-icons {
     font-size: 20px;
   }
 
-  .close{
+  .close {
     &,
     &:not(:disabled):not(.disabled):hover,
-    &:not(:disabled):not(.disabled):focus{
+    &:not(:disabled):not(.disabled):focus {
       color: $white-color;
     }
-    opacity: .9;
+    opacity: 0.9;
     text-shadow: none;
     line-height: 0;
     outline: 0;
@@ -52,10 +51,9 @@
       left: 0;
       position: absolute;
     }
-
   }
 
-  span[data-notify="icon"]{
+  span[data-notify="icon"] {
     font-size: 22px;
     display: block;
     left: 19px;
@@ -64,7 +62,7 @@
     margin-top: -11px;
   }
 
-  button.close{
+  button.close {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -74,12 +72,12 @@
     padding: 3px;
   }
 
-  .close ~ span{
+  .close ~ span {
     display: block;
     max-width: 89%;
   }
 
-  &.alert-with-icon{
+  &.alert-with-icon {
     padding-left: 65px;
   }
 }

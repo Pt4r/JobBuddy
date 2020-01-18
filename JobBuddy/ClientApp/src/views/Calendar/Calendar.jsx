@@ -1,17 +1,37 @@
+/*!
+
+=========================================================
+* Now UI Dashboard PRO React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+/*eslint-disable*/
 import React from "react";
-import { Card, CardBody, Row, Col } from "reactstrap";
 // react component used to create a calendar with events on it
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import Calendar from "react-big-calendar";
 // dependency plugin for react-big-calendar
 import moment from "moment";
 // react component used to create alerts
 import SweetAlert from "react-bootstrap-sweetalert";
 
-import { PanelHeader } from "components";
+// reactstrap components
+import { Card, CardBody, Row, Col } from "reactstrap";
+
+// core components
+import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 import { events } from "variables/general.jsx";
 
-const localizer = momentLocalizer(moment)
+const localizer = Calendar.momentLocalizer(moment);
 
 class MyCalendar extends React.Component {
   constructor(props) {
@@ -69,24 +89,20 @@ class MyCalendar extends React.Component {
   }
   render() {
     return (
-      <div>
+      <>
         <PanelHeader
           content={
             <div className="header text-center">
               <h2 className="title">React Big Calendar</h2>
               <p className="category">
                 A beautiful react component made by{" "}
-                <a
-                  href="https://github.com/intljusticemission"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://github.com/intljusticemission" target="_blank">
                   International Justice Mission
-                </a>. Please checkout their{" "}
+                </a>
+                . Please checkout their{" "}
                 <a
                   href="https://github.com/intljusticemission/react-big-calendar"
                   target="_blank"
-                  rel="noopener noreferrer"
                 >
                   full documentation.
                 </a>
@@ -101,8 +117,8 @@ class MyCalendar extends React.Component {
               <Card className="card-calendar">
                 <CardBody>
                   <Calendar
-                    localizer={localizer}
                     selectable
+                    localizer={localizer}
                     events={this.state.events}
                     defaultView="month"
                     scrollToTime={new Date(1970, 1, 1, 6)}
@@ -116,7 +132,7 @@ class MyCalendar extends React.Component {
             </Col>
           </Row>
         </div>
-      </div>
+      </>
     );
   }
 }

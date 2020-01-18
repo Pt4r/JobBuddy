@@ -1,4 +1,22 @@
+/*!
+
+=========================================================
+* Now UI Dashboard PRO React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 import React from "react";
+
+// reactstrap components
 import {
   Card,
   CardHeader,
@@ -14,11 +32,11 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input,
-  Label
+  Label,
+  Button
 } from "reactstrap";
 
-import { CardSocial, InfoArea, Button } from "components";
-
+// core components
 import bgImage from "assets/img/bg16.jpg";
 
 class RegisterPage extends React.Component {
@@ -26,49 +44,73 @@ class RegisterPage extends React.Component {
     super(props);
     this.state = {};
   }
+  componentDidMount() {
+    document.body.classList.add("register-page");
+  }
+  componentWillUnmount() {
+    document.body.classList.remove("register-page");
+  }
   render() {
     return (
-      <div className="wrapper wrapper-full-page ps">
-        <div className="full-page section-image">
+      <>
         <div className="content">
           <div className="register-page">
             <Container>
               <Row className="justify-content-center">
                 <Col lg={5} md={8} xs={12}>
-                  <InfoArea
-                    icon="now-ui-icons media-2_sound-wave"
-                    iconColor="primary"
-                    title="Job Hunting"
-                    titleColor="info"
-                    description="We've created a single hub to house all your needs when looking for a new job. Track which companies you have allready sent your CV, the HR people you have met with or find new jobs and apply to them on the spot!"
-                  />
-                  <InfoArea
-                    icon="now-ui-icons users_single-02"
-                    iconColor="primary"
-                    title="One to One Mentorship"
-                    titleColor="info"
-                    description="We've developed this website to help you promote your self in the best way possible with a mentoring system by some of the best HR people in the industry."
-                  />
-                  <InfoArea
-                    icon="now-ui-icons ui-1_send"
-                    iconColor="info"
-                    title="Built Audience"
-                    titleColor="info"
-                    description="Connect with your email provider to automatically send and never miss a reply!"
-                  />
+                  <div className="info-area info-horizontal mt-5">
+                    <div className="icon icon-primary">
+                      <i className="now-ui-icons media-2_sound-wave" />
+                    </div>
+                    <div className="description">
+                      <h5 className="info-title">Marketing</h5>
+                      <p className="description">
+                        We've created the marketing campaign of the website. It
+                        was a very interesting collaboration.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="info-area info-horizontal">
+                    <div className="icon icon-primary">
+                      <i className="now-ui-icons media-1_button-pause" />
+                    </div>
+                    <div className="description">
+                      <h5 className="info-title">Fully Coded in React 16</h5>
+                      <p className="description">
+                        We've developed the website with React 16, HTML5 and
+                        CSS3. The client has access to the code using GitHub.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="info-area info-horizontal">
+                    <div className="icon icon-info">
+                      <i className="now-ui-icons users_single-02" />
+                    </div>
+                    <div className="description">
+                      <h5 className="info-title">Built Audience</h5>
+                      <p className="description">
+                        There is also a Fully Customizable CMS Admin Dashboard
+                        for this product.
+                      </p>
+                    </div>
+                  </div>
                 </Col>
                 <Col lg={4} md={8} xs={12}>
                   <Card className="card-signup">
                     <CardHeader className="text-center">
-                      <CardTitle tag="h4">Register with:</CardTitle>
-                      <CardSocial
-                        description=" or with an email bellow "
-                        socials={[
-                          { name: "github", link:"#" },
-                          { name: "facebook", link:"#" },
-                          { name: "linkedin", link:"#"}
-                        ]}
-                      />
+                      <CardTitle tag="h4">Register</CardTitle>
+                      <div className="social btns-mr-5">
+                        <Button className="btn-icon btn-round" color="twitter">
+                          <i className="fab fa-twitter" />
+                        </Button>
+                        <Button className="btn-icon btn-round" color="dribbble">
+                          <i className="fab fa-dribbble" />
+                        </Button>
+                        <Button className="btn-icon btn-round" color="facebook">
+                          <i className="fab fa-facebook-f" />
+                        </Button>
+                        <h5 className="card-description">or be classical</h5>
+                      </div>
                     </CardHeader>
                     <CardBody>
                       <Form>
@@ -133,7 +175,7 @@ class RegisterPage extends React.Component {
                         </InputGroup>
                         <FormGroup check>
                           <Label check>
-                            <Input type="checkbox" {...this.props.inputProps} />
+                            <Input type="checkbox" />
                             <span className="form-check-sign" />
                             <div>
                               I agree to the{" "}
@@ -144,7 +186,12 @@ class RegisterPage extends React.Component {
                       </Form>
                     </CardBody>
                     <CardFooter className="text-center">
-                      <Button color="primary" size="lg" round href="#pablo">
+                      <Button
+                        color="primary"
+                        size="lg"
+                        className="btn-round"
+                        href="#pablo"
+                      >
                         Get Started
                       </Button>
                     </CardFooter>
@@ -153,13 +200,12 @@ class RegisterPage extends React.Component {
               </Row>
             </Container>
           </div>
-          </div>
+        </div>
         <div
           className="full-page-background"
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         />
-      </div>
-      </div>
+      </>
     );
   }
 }
