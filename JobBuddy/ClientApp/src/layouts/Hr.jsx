@@ -128,6 +128,7 @@ class Hr extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
+          layout = "/hr"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}

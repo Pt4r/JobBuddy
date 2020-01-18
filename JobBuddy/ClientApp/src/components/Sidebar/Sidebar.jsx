@@ -20,6 +20,7 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       openAvatar: false,
+      layout: props.layout,
       ...this.getCollapseStates(props.routes)
     };
     this.sidebar = React.createRef();
@@ -74,6 +75,7 @@ class Sidebar extends React.Component {
   // this function creates the links and collapses that appear in the sidebar (left menu)
   createLinks = routes => {
     return routes.map((prop, key) => {
+      if(prop.layout === this.state.layout){
       if (prop.collapse) {
         var st = {};
         st[prop["state"]] = !this.state[prop.state];
@@ -115,6 +117,7 @@ class Sidebar extends React.Component {
           </li>
         );
       }
+      
       return (
         <li className={this.activeRoute(prop.layout + prop.path)} key={key}>
           <NavLink to={prop.layout + prop.path} activeClassName="">
@@ -132,7 +135,8 @@ class Sidebar extends React.Component {
           </NavLink>
         </li>
       );
-    });
+    }
+  });
   };
   // verifies if routeName is the one active (in browser input)
   activeRoute = routeName => {

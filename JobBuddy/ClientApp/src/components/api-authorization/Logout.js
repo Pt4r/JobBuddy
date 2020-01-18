@@ -57,39 +57,39 @@ export class Logout extends Component {
             switch (action) {
                 case LogoutActions.Logout:
                     return (
-                        <div class="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
-                            <div class="row align-items-center">
-                                <div class="col-sm">
+                        <div className="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
+                            <div className="row align-items-center">
+                                <div className="col-sm">
                                 <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
                                 </div>
-                                <div class="col-sm text-nowrap">
-                                <p class="m-0">Logging you out...</p>
+                                <div className="col-sm text-nowrap">
+                                <p className="m-0">Logging you out...</p>
                                 </div>
                             </div>
                         </div>
                     );
                 case LogoutActions.LogoutCallback:
                     return (
-                        <div class="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
-                            <div class="row align-items-center">
-                                <div class="col-sm">
+                        <div className="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
+                            <div className="row align-items-center">
+                                <div className="col-sm">
                                 <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
                                 </div>
-                                <div class="col-sm text-nowrap">
-                                <p class="m-0">Logging you out...</p>
+                                <div className="col-sm text-nowrap">
+                                <p className="m-0">Logging you out...</p>
                                 </div>
                             </div>
                         </div>
                         );
                 case LogoutActions.LoggedOut:
                     return (
-                        <div class="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
-                            <div class="row align-items-center">
-                                <div class="col-sm">
+                        <div className="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
+                            <div className="row align-items-center">
+                                <div className="col-sm">
                                 <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
                                 </div>
-                                <div class="col-sm text-nowrap">
-                                <p class="m-0">{message}</p>
+                                <div className="col-sm text-nowrap">
+                                <p className="m-0">{message}</p>
                                 </div>
                             </div>
                         </div>

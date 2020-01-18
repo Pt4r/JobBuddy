@@ -129,6 +129,7 @@ class Mentor extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
+          layout = "/mentor"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}

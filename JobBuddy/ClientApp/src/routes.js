@@ -82,6 +82,7 @@ let routes = [
     name: "Pages",
     state: "openPages",
     icon: "now-ui-icons design_image",
+    layout: "/admin",
     views: [
       {
         path: "/404",
