@@ -80,7 +80,7 @@ var mapData = {
 
 
 
-class Dashboard extends React.Component {
+class HrDashboard extends React.Component {
   
     state = {
       items: []
@@ -1141,4 +1141,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default HrDashboard;

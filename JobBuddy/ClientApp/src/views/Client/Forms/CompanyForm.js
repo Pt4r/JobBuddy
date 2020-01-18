@@ -1,14 +1,18 @@
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import Axios from 'axios';
 
 class CompanyForm extends React.Component {
-    state = {
-        id: 0,
+    constructor(props){
+        super(props)
+   
+    this.state = {
+        id: '',
         title: '',
         address: '',
         phoneNumber : '',
         email: ''
-
+        }
     }
     componentDidMount() {
         if (this.props.company) {
@@ -17,55 +21,81 @@ class CompanyForm extends React.Component {
         }
     }
     onChange = e => {
-        this.setState({ [e.target.title]: e.target.value })
+        this.setState({ [e.target.name]: e.target.value })
     }
+    // submitNew = e => {
+    //     e.preventDefault();
+    //     const url = "localhost:3000/api/companies/Create";
+    //     fetch(url , {
+    //         method: 'post',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             name: this.state.title,
+    //             address: this.state.address,
+    //             phoneNumber: this.state.phoneNumber,
+    //             email: this.state.email
+    //         })
+    //     })
+    //         .then(res => res.json())
+    //         .then(company => {
+    //             this.setState({company : company})
+    //         })
+    //         .catch(err => console.log(err));
+    // }
+
     submitNew = e => {
-        e.preventDefault();
-        const url = "localhost:3000/api/companies/Create";
-        fetch(url , {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: this.state.title,
-                address: this.state.address,
-                phoneNumber: this.state.phoneNumber,
-                email: this.state.email
-            })
+        e.preventDefault()
+        Axios.post('localhost:3000/api/companies/Create', this.state)
+        .then(res => {
+        console.log(res)})
+        .catch(error => {
+            console.log(error)
         })
-            .then(res => res.json())
-            .then(company => {
-                this.setState({company : company})
-            })
-            .catch(err => console.log(err));
+
     }
-    submitEdit = e => {
-        e.preventDefault();
-        const url="localhost:3000/api/companies/update";
-        fetch(url, {
-            method: 'put',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: this.state.title,
-                address: this.state.address,
-                phoneNumber: this.state.phoneNumber,
-                email: this.state.email
-            })
-        })
-            .then(() => {
+
+    // submitEdit = e => {
+    //     e.preventDefault();
+    //     const url="localhost:3000/api/companies/update";
+    //     fetch(url, {
+    //         method: 'put',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             id: this.state.id,
+    //             name: this.state.title,
+    //             address: this.state.address,
+    //             phoneNumber: this.state.phoneNumber,
+    //             email: this.state.email
+    //         })
+    //     })
+    //         .then(() => {
                 
-                this.props.updateUserIntoState(this.state.id);
-            })
-            .catch(err => console.log(err));
+    //             this.props.updateUserIntoState(this.state.id);
+    //         })
+    //         .catch(err => console.log(err));
+    // }
+
+    submitEdit = e =>{
+        e.preventDefault()
+        Axios.put(`localhost:3000/api/companies/${this.state.id}`, this.state)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
+
     render() {
+        const {id, title, address, phoneNumber,  email} = this.state
         return <Form onSubmit={this.props.user ? this.submitEdit : this.submitNew}>
             <FormGroup>
                 <Label for="name">Name:</Label>
-                <Input type="text" name="name" onChange={this.onChange} value={this.state.name === '' ? '' : this.state.name} />
+                <Input type="text" name="title" onChange={this.onChange} value={this.state.Title === '' ? '' : this.state.Title} />
             </FormGroup>
             <FormGroup>
                 <Label for="address">Address:</Label>
@@ -79,7 +109,7 @@ class CompanyForm extends React.Component {
                 <Label for="email">Email:</Label>
                 <Input type="email" name="email" onChange={this.onChange} value={this.state.email === null ? '' : this.state.email} />
             </FormGroup>
-            <Button type="submit">Send</Button>
+            <Button type="submit">Submit</Button>
         </Form>;
     }
 }
