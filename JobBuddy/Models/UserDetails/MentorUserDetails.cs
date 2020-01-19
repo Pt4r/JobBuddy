@@ -9,19 +9,14 @@ namespace JobBuddy.Models.UserDetails
     public class MentorUserDetails : ApplicationUser
     {
         [Key]
-        [ForeignKey("ApplicationUser")]
         public Guid Id { get; set; }
-
-        public string PhoneNumber { get; set; }
 
         //fk user
         //fk job categories
 
 
         public byte? Rating { get; set; }
-
-        public string ProfilePicture { get; set; }
-
+        
         public enumGender Gender { get; set; }
 
         public string Description { get; set; }
@@ -29,7 +24,9 @@ namespace JobBuddy.Models.UserDetails
         public ICollection<MentorOffer> OffersReceived { get; set; }
 
         //Προσθέτω Foreign key se ola ta details APP USER
+        [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
 
         //enas mentorUser mporei na douleuei se company optional 1-many rel.
         public Company Company { get; set; }

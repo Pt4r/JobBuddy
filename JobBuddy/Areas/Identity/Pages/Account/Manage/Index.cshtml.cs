@@ -34,9 +34,22 @@ namespace JobBuddy.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Required]
+            [MaxLength(50)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [MaxLength(50)]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            [DataType(DataType.PhoneNumber)]
+            public string? PhoneNumber { get; set; }
+
+            [Display(Name = "Profile Picture")]
+            [DataType(DataType.Upload)]
+            public string? ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -48,6 +61,9 @@ namespace JobBuddy.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ProfilePicture = user.ProfilePicture,
                 PhoneNumber = phoneNumber
             };
         }
@@ -88,6 +104,24 @@ namespace JobBuddy.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+            }
+
+            
+            if (Input.ProfilePicture != user.ProfilePicture)
+            {
+                user.ProfilePicture = Input.ProfilePicture;
+            }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

@@ -11,17 +11,7 @@ namespace JobBuddy.Models.UserDetails
     public class ClientUserDetails : ApplicationUser
     {
         [Key]
-        [ForeignKey("ApplicationUser")]
         public Guid Id { get; set; }
-
-        [Display(Name = "Profile Picture")]
-        [DataType(DataType.Upload)]
-        public string ProfilePicture { get; set; }
-
-        [Required]
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        public int PhoneNumber { get; set; }
 
         [Required]
         [Display(Name = "Date of Birth")]
@@ -57,7 +47,9 @@ namespace JobBuddy.Models.UserDetails
 
         //Προσθέτω Foreign key se ola ta details APP USER
 
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
 
         public ClientUserDetails()
         {

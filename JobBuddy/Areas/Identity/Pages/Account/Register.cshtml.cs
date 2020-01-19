@@ -92,7 +92,43 @@ namespace JobBuddy.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { FirstName = Input.FirstName, LastName = Input.LastName, UserName = Input.Email, Email = Input.Email,UserRole=Input.UserRole };
+                var role = Input.UserRole;
+                var user = new ApplicationUser();
+
+                switch (role)
+                {
+                    case "Client":
+                        user = new ClientUserDetails
+                        {
+                            FirstName = Input.FirstName, 
+                            LastName = Input.LastName, 
+                            UserName = Input.Email, 
+                            Email = Input.Email,
+                            UserRole = Input.UserRole
+                        };
+                        break;
+                    case "Mentor":
+                        user = new MentorUserDetails
+                        {
+                            FirstName = Input.FirstName, 
+                            LastName = Input.LastName, 
+                            UserName = Input.Email, 
+                            Email = Input.Email,
+                            UserRole = Input.UserRole
+                        };
+                        break;
+                    case "HR":
+                        user = new HrUserDetails
+                        {
+                            FirstName = Input.FirstName, 
+                            LastName = Input.LastName, 
+                            UserName = Input.Email, 
+                            Email = Input.Email,
+                            UserRole = Input.UserRole
+                        };
+                        break;
+                }
+               
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -112,25 +148,6 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                     //Προσθέτω μετά το Register το User στο Role εγγραφή στον ενδιάμεσο πίνακα Σπυροσσ
 
                     await _userManager.AddToRoleAsync(user, Input.UserRole);
-
-                    //Δοκιμή..............
-
-                    //if (user.userrole == "client")
-                    //{
-
-                    //    return redirect("client/dashboard");
-                    //}
-
-                    //if (user.userrole == "hr")
-                    //{
-                    //    return redirect("client/dashboard");
-                    //}
-
-                    //if (user.userrole == "mentor")
-                    //{
-
-                    //    return redirect("client/dashboard");
-                    //}
 
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)

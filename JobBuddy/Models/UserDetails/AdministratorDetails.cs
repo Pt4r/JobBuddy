@@ -6,13 +6,15 @@ namespace JobBuddy.Models.UserDetails
 {
     public class AdministratorDetails : ApplicationUser
     {
+        
         [Key]
-        [ForeignKey("ApplicationUser")]
         public Guid Id { get; set; }
 
         //Προσθέτω Foreign key se ola ta details APP USER
 
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
 
 
     }

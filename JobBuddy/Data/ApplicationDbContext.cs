@@ -24,16 +24,13 @@ namespace JobBuddy.Data
         
         public virtual DbSet<JobCategory> JobCategories { get; set; }
         public virtual DbSet<AdministratorDetails> Administrators { get; set; }
-
-        
-
-        public DbSet<ClientUserDetails> Clients { get; set; }
-        public DbSet<HrUserDetails> HRs { get; set; }
-        public DbSet<MentorUserDetails> Mentors { get; set; }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<MentorOffer> MentorOffers { get; set; }
-        public DbSet<JobListing> JobListings { get; set; }
-        public DbSet<ClientJobListing> ClientJobListings { get; set; }
+        public virtual DbSet<ClientUserDetails> Clients { get; set; }
+        public virtual DbSet<HrUserDetails> HRs { get; set; }
+        public virtual DbSet<MentorUserDetails> Mentors { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<MentorOffer> MentorOffers { get; set; }
+        public virtual DbSet<JobListing> JobListings { get; set; }
+        public virtual DbSet<ClientJobListing> ClientJobListings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,11 +45,11 @@ namespace JobBuddy.Data
             modelBuilder.Entity<JobCategory>().Property(i => i.Subcategory_2).IsRequired();
             
 
-            modelBuilder.Entity<AdministratorDetails>().HasKey(a => a.AdminId);
+            modelBuilder.Entity<AdministratorDetails>().HasKey(a => a.Id);
             modelBuilder.Entity<AdministratorDetails>().HasOne(a => a.ApplicationUser).WithMany(a => a.Admins);
 
             modelBuilder.Entity<MentorUserDetails>()
-                      .HasKey(m => m.MentorId);
+                      .HasKey(m => m.Id);
 
             modelBuilder.Entity<MentorUserDetails>()
                      .Property(m => m.PhoneNumber)

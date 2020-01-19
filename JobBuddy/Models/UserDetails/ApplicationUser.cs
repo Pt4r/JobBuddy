@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using IdentityServer4.EntityFramework.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace JobBuddy.Models.UserDetails
@@ -24,7 +26,14 @@ namespace JobBuddy.Models.UserDetails
             }
         }
 
-        public string ProfilePicture { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string? PhoneNumber { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        [DataType(DataType.Upload)]
+        public string? ProfilePicture { get; set; }
 
         /// Πρόσθεσα λίστες μαζί με Details και UserRole ===> από αυτό θα πάρει το ViewModel....Spyros
         public string UserRole { get; set; }

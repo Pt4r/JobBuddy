@@ -58,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\css\bootstrap.min.css" />
     <None Include="wwwroot\css\bootstrap.min.css.map" />
     <None Include="wwwroot\css\demo.css" />

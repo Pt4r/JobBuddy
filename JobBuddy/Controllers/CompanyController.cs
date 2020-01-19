@@ -26,7 +26,7 @@ namespace JobBuddy.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var companies = _companyRepository.GetCompanies();
+            var companies = _companyRepository.GetAll();
 
             if (companies == null)
             {

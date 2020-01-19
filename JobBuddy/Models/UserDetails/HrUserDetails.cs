@@ -10,11 +10,9 @@ namespace JobBuddy.Models.UserDetails
     public class HrUserDetails : ApplicationUser
     {
         [Key]
-        [ForeignKey("ApplicationUser")]
         public Guid Id { get; set; }
+
         public enumGender Gender { get; set; }
-        public int PhoneNumber { get; set; }
-        public byte ProfilePic { get; set; }
 
         [ForeignKey("CompanyId")]
         public Guid? CompanyId { get; set; }
@@ -23,8 +21,9 @@ namespace JobBuddy.Models.UserDetails
         public virtual ICollection<JobListing> JobListings { get; set; }
 
         //Προσθέτω Foreign key se ola ta details APP USER
-
+        [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
 
 
     }
