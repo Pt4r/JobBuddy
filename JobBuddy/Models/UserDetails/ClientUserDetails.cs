@@ -1,16 +1,17 @@
-﻿using JobBuddy.Models.ManyToMany;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using JobBuddy.Models.enums;
 
-namespace JobBuddy.Models
+namespace JobBuddy.Models.UserDetails
 {
-    public class ClientUserDetails
+    public class ClientUserDetails : ApplicationUser
     {
         [Key]
+        [ForeignKey("ApplicationUser")]
         public Guid Id { get; set; }
 
         [Display(Name = "Profile Picture")]
@@ -49,20 +50,18 @@ namespace JobBuddy.Models
         public ICollection<ClientJobListing> JobListings { get; set; }
 
         public IEnumerable<MentorOffer> OffersReceived { get; set; }
-        
+
         public IEnumerable<MentorUserDetails> Mentors { get; set; }
 
         public IEnumerable<HrUserDetails> HRs { get; set; }
 
         //Προσθέτω Foreign key se ola ta details APP USER
 
-        [ForeignKey("ApplicationUserId")]
-        public ApplicationUser ApplicationUser { get; set; }
-        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public ClientUserDetails()
         {
-//            ProfilePicture = default pic path
+            //            ProfilePicture = default pic path
             CurrentStatus = CurrentStatus.Unemployed;
             LookingForStatus = enumLookingForStatus.Full_Time;
             JobListings = new HashSet<ClientJobListing>();
@@ -71,6 +70,6 @@ namespace JobBuddy.Models
         }
 
         //FK List Job Interest
-        
+
     }
 }

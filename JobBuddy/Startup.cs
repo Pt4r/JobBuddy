@@ -12,7 +12,6 @@ using JobBuddy.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using JobBuddy.Repositories;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Threading.Tasks;
 using System;
@@ -23,8 +22,12 @@ using IdentityServer4;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.IdentityModel.Tokens;
+using JobBuddy.Data.Repositories;
+using JobBuddy.Data.Repositories.IRepositories;
+using JobBuddy.Models.UserDetails;
 
 namespace JobBuddy
 {
@@ -41,22 +44,27 @@ namespace JobBuddy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IJobCategoriesRepository, JobCategoryRepository>();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>() //Πρόσθεσα Identity role
+                .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddAuthentication()
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+                })
                 .AddIdentityServerJwt();
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -72,7 +80,7 @@ namespace JobBuddy
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
-
+            services.AddScoped<IJobCategoriesRepository, JobCategoryRepository>();
             services.AddScoped<IMentorRepository, MentorRepository>();
             services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
@@ -95,6 +103,7 @@ namespace JobBuddy
                 app.UseHsts();
             }
 
+
             app.UseCors(
                 options => options.WithOrigins("https://localhost:5001/")
                                   .AllowAnyHeader()
@@ -107,9 +116,10 @@ namespace JobBuddy
 
             app.UseRouting();
 
-            app.UseAuthentication();
             app.UseIdentityServer();
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

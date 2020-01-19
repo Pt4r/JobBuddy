@@ -337,17 +337,17 @@ namespace JobBuddy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanyId")
+                    b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("HrUserId")
+                    b.Property<Guid?>("HrUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Info")
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
-                    b.Property<Guid>("JobCategoryId")
+                    b.Property<Guid?>("JobCategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("PostDate")
@@ -644,21 +644,17 @@ namespace JobBuddy.Migrations
                 {
                     b.HasOne("JobBuddy.Models.Company", "Company")
                         .WithMany("JobListings")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyId");
 
                     b.HasOne("JobBuddy.Models.HrUserDetails", "HrUser")
                         .WithMany("JobListings")
                         .HasForeignKey("HrUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("JobBuddy.Models.JobCategory", "JobCategory")
                         .WithMany("JobListings")
                         .HasForeignKey("JobCategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("JobBuddy.Models.ManyToMany.ClientJobListing", b =>

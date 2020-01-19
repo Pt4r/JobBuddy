@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JobBuddy.Data.Repositories.IRepositories;
 using JobBuddy.Models;
+using JobBuddy.Models.UserDetails;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBuddy.Controllers
 {
 
+    [Authorize(Roles = "Admin")]
+    [Route("api/[controller]")]
     [ApiController]
-    [Authorize("Admin")]
     public class AdministratorDetailsController : ControllerBase
     {
         private IAdministratorDetailsRepository _administratorDetailsRepository;
@@ -20,59 +23,98 @@ namespace JobBuddy.Controllers
             _administratorDetailsRepository = administratorDetailsRepository;
         }
 
-        //api/AdministratorDetails
         [HttpGet]
-        [Route("api/Administrators")]
-        public IActionResult GetAdmin(string id)
+        public IActionResult GetAll()
         {
-            var admins = _administratorDetailsRepository.GetAdministrator().ToList();
+            var admins = _administratorDetailsRepository.GetAll();
+
+            if (admins == null)
+            {
+                return NotFound();
+            }
+
             return Ok(admins);
         }
 
-        //api/AdministratorDetails
-        [HttpPost]
-        [Route("api/Administrators/Create")]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateAdmin([FromBody]AdministratorDetails administratorcreated)
+
+        [HttpGet("{id}", Name = "Admin")]
+        public IActionResult GetAdmin(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            _administratorDetailsRepository.AddAdministrator(administratorcreated);
-            return Ok();
+            var admin = _administratorDetailsRepository.GetAdministrator(id);
+            if (admin == null)
+                return NotFound();
+
+            return Ok(admin);
         }
 
-        //api/AdministratorDetails/id
-        [HttpPut, HttpPatch]
-        [ValidateAntiForgeryToken]
-        [Route("api/Administrators/Update")]
-        public IActionResult UpdateAdmin([FromBody]AdministratorDetails administratorcreated)
+
+        [HttpPost("Create")]
+        [ProducesResponseType(201, Type = typeof(AdministratorDetails))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult Create([FromBody]AdministratorDetails adminCreated)
         {
+            if (adminCreated == null)
+                return BadRequest(ModelState);
+
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
+
+            if (!_administratorDetailsRepository.AddAdministrator(adminCreated))
+            {
+                ModelState.AddModelError("", "Something went wrong.");
+                return StatusCode(500, ModelState);
             }
 
-            _administratorDetailsRepository.UpdateAdministrator(administratorcreated);
-            return Ok();
+            return CreatedAtRoute("Admin", new { id = adminCreated.Id }, adminCreated);
         }
 
-        //api/AdministratorDetails/id
-        [HttpDelete]
-        [ValidateAntiForgeryToken]
-        [Route("api/Administrators/Delete/{id}")]
+
+        [HttpDelete("Delete/{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public IActionResult DeleteAdmin(Guid id)
         {
-            bool removed = _administratorDetailsRepository.DeleteAdministrator(id);
-            if (!removed)
+            var adminToDelete = _administratorDetailsRepository.GetAdministrator(id);
+            
+            if (adminToDelete == null)
             {
-                return NotFound();
-                //return BadRequest
+                ModelState.AddModelError("", "Can't find admin.");
+                return StatusCode(500, ModelState);
             }
 
-            return Ok();
+            if (!_administratorDetailsRepository.DeleteAdministrator(adminToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting client.");
+                return StatusCode(500, ModelState);
+            }
 
+            return NoContent();
+        }
+
+
+        [HttpPut("Update/{Id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateAdmin(Guid id, [FromBody]AdministratorDetails adminCreated)
+        {
+            if (adminCreated == null)
+                return BadRequest(ModelState);
+
+            if (id != adminCreated.Id)
+                return BadRequest(ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_administratorDetailsRepository.UpdateAdministrator(adminCreated))
+            {
+                ModelState.AddModelError("", "Something went wrong updating Admin.");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
         }
     }
 

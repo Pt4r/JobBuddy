@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
-namespace JobBuddy.Models
+namespace JobBuddy.Models.UserDetails
 {
     public class ApplicationUser : IdentityUser
     {
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+
         [NotMapped]
         public string Name
         {
@@ -25,13 +24,11 @@ namespace JobBuddy.Models
             }
         }
 
-        
-
-
         public string ProfilePicture { get; set; }
 
         /// Πρόσθεσα λίστες μαζί με Details και UserRole ===> από αυτό θα πάρει το ViewModel....Spyros
         public string UserRole { get; set; }
+
         public List<AdministratorDetails> Admins {get; set;}
 
         public List<ClientUserDetails> ClientDetails { get; set; }

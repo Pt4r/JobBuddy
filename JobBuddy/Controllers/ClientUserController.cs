@@ -1,5 +1,5 @@
-﻿using JobBuddy.Models;
-using JobBuddy.Repositories;
+﻿using JobBuddy.Data.Repositories.IRepositories;
+using JobBuddy.Models.UserDetails;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Controllers
 {
+    [Authorize(Roles = "Admin, Client, Mentor, HR")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize("Admin,Client")]
     public class ClientUserController : Controller
     {
-
         private readonly IClientRepository _client;
 
         public ClientUserController(IClientRepository client)
@@ -23,73 +22,87 @@ namespace JobBuddy.Controllers
         }
 
 
-
         [HttpGet]
-        [Route("api/ClientUser/{id}")]
-        public IActionResult GetClient(Guid id)
+        public IActionResult GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            var clients = _client.GetAll();
 
+            if (clients == null)
+                return NotFound();
+
+            return Ok(clients);
+        }
+
+        
+        [HttpGet("{id}", Name = "Client")]
+        public IActionResult Get(Guid id)
+        {
             var client = _client.GetClient(id);
 
             if (client == null)
-            {
                 return NotFound();
-            }
 
             return Ok(client);
         }
 
-        //api/clientuser
-        [HttpGet("{Id}", Name = "GetClients")]
-        [Route("api/ClientUser")]
-        public IActionResult GetClients(string clientId)
-        {
-            var clients = _client.GetClients(clientId).ToList();
-            return Ok(clients);
-        }
-
-        //api/ClientUser
-        [HttpPost]
+        
+        [HttpPost("Create")]
         [ProducesResponseType(201, Type = typeof(ClientUserDetails))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        [Route("api/ClientUser/Create")]
-        public IActionResult CreateClient([FromBody]ClientUserDetails ClientUserDetails)
+        public IActionResult Create([FromBody]ClientUserDetails ClientUserDetails)
         {
             if (ClientUserDetails == null)
-            {
                 return BadRequest(ModelState);
-            }
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             if (!_client.AddClient(ClientUserDetails))
             {
-                ModelState.AddModelError("", $"Something went wrong with saving ");
+                ModelState.AddModelError("", "Something went wrong.");
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetClient", new { id = ClientUserDetails.Id }, ClientUserDetails);
+            return CreatedAtRoute("Client", new { id = ClientUserDetails.Id }, ClientUserDetails);
 
         }
 
-        //api/ClientUser
-        [HttpPut("{Id}")]
+
+        [HttpDelete("Delete/{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        [Route("api/ClientUser/Update")]
-        public IActionResult UpdateClient(Guid clientId, [FromBody]ClientUserDetails updatedClientUserDetails)
+        public IActionResult DeleteClient(Guid id)
+        {
+            var clientToDelete = _client.GetClient(id);
+
+            if (clientToDelete == null)
+            {
+                ModelState.AddModelError("", "Can't find client.");
+                return StatusCode(500, ModelState);
+            }
+
+            if (!_client.DeleteClient(clientToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting client.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+
+        [HttpPut("Update/{Id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateClient(Guid id, [FromBody]ClientUserDetails updatedClientUserDetails)
         {
             if (updatedClientUserDetails == null)
                 return BadRequest(ModelState);
 
-            if (clientId != updatedClientUserDetails.Id)
+            if (id != updatedClientUserDetails.Id)
                 return BadRequest(ModelState);
 
             if (!ModelState.IsValid)
@@ -97,48 +110,10 @@ namespace JobBuddy.Controllers
 
             if (!_client.UpdateClient(updatedClientUserDetails))
             {
-                ModelState.AddModelError("", $"Something went wrong updating ");
+                ModelState.AddModelError("", "Something went wrong updating client.");
                 return StatusCode(500, ModelState);
             }
             return NoContent();
         }
-
-        //api/ClientUser/Id
-        [HttpDelete("{Id}")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
-        [Route("api/ClientUser/Delete/{id}")]
-        public IActionResult DeleteClient(Guid clientId)
-        {
-            var clientToDelete = _client.GetClient(clientId);
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (!_client.DeleteClient(clientToDelete))
-            {
-                ModelState.AddModelError("", $"Something went wrong deleting ");
-                return StatusCode(500, ModelState);
-            }
-
-            return NoContent();
-        }
-
-        //api/ClientUser/JobListing/Id
-        [HttpGet("{Id}", Name = "GetClientsFromJobListing")]
-        [Route("api/ClientUser/JobListing/{id}")]
-        public IActionResult GetClientsFromJobListing(Guid jlId)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var clients = _client.GetClientsFromJobListing(jlId).ToList();
-            return Ok(clients);
-        }
-
-
-
-        //{updatedClientUserDetails.ApplicationUser.FirstName} {updatedClientUserDetails.ApplicationUser.LastName}
     }
 }
