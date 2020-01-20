@@ -1,37 +1,19 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router} from "react-router-dom";
+import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "assets/scss/now-ui-dashboard.scss?v=1.3.0";
+import "assets/scss/now-ui-dashboard.scss?v1.2.0";
 import "assets/css/demo.css";
 
-import AdminLayout from "layouts/Admin.jsx";
-import ClientLayout from "layouts/Client.jsx";
-import HrLayout from "layouts/Hr.jsx";
 
 import Index from "views/Pages/LandingPage.jsx";
 import AuthLayout from "layouts/Auth.jsx";
 import Register from "views/Pages/RegisterPage";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
-import Chat from "components/Chat/Chat.jsx";
+
 
 import AuthorizeRoute from 'components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from 'components/api-authorization/ApiAuthorizationRoutes';
@@ -39,6 +21,7 @@ import { ApplicationPaths } from 'components/api-authorization/ApiAuthorizationC
 
 
 const hist = createBrowserHistory();
+
 
 ReactDOM.render(
   <Router history={hist}>
@@ -81,11 +64,7 @@ ReactDOM.render(
           return <Register {...props} />;
         }}
       />
-      <Route
-        path="/chat"
-        render ={props => {
-          return <Chat {...props} />;
-        }} />
+      
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       {/*404 page */}
@@ -98,3 +77,4 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
+
