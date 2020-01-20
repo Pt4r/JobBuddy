@@ -4951,14 +4951,14 @@ Created using IcoMoon - icomoon.io
   .sidebar-mini .visible-on-sidebar-mini {
     display: inline-block !important; }
   .sidebar-mini .navbar.fixed-top {
-    width: calc(100% - 80px); }
+    width: calc(100%); }
   .sidebar-mini .navbar-minimize {
     opacity: 0; }
   .sidebar-mini .sidebar,
   .sidebar-mini .sidebar .sidebar-wrapper {
     width: 80px; }
   .sidebar-mini .main-panel {
-    width: calc(100% - 80px); }
+    width: calc(100%); }
   .sidebar-mini .sidebar {
     display: block;
     z-index: 1030; }
@@ -12514,14 +12514,14 @@ be a descendant of the grid when it is being dragged.
   .sidebar-mini .visible-on-sidebar-mini {
     display: inline-block !important; }
   .sidebar-mini .navbar.fixed-top {
-    width: calc(100% - 80px); }
+    width: calc(100%); }
   .sidebar-mini .navbar-minimize {
     opacity: 0; }
   .sidebar-mini .sidebar,
   .sidebar-mini .sidebar .sidebar-wrapper {
     width: 80px; }
   .sidebar-mini .main-panel {
-    width: calc(100% - 80px); }
+    width: calc(100%); }
   .sidebar-mini .sidebar {
     display: block;
     z-index: 1030; }
