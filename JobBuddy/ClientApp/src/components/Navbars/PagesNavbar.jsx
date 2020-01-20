@@ -114,7 +114,18 @@ function PagesNavbar() {
             navbar
           >
             <Nav navbar>
-           
+            
+            <NavItem>
+                <NavLink
+                  href="/authentication/login"
+                  target="_blank"
+                  id="dashboard"
+                  style={{borderRight: "1px solid silver", marginRight: "10px", paddingRight: "15px" }}
+                >
+                  <p className="d-lg d-xl">Dashboard</p>
+                </NavLink>
+              </NavItem>
+              
             <LoginMenu color="white"/>
              
               <NavItem>
@@ -122,6 +133,7 @@ function PagesNavbar() {
                   href="#"
                   target="_blank"
                   id="twitter-tooltip"
+                  style={{borderLeft: "1px solid silver", marginLeft: "10px", paddingLeft: "20px" }}
                 >
                   <i className="fab fa-twitter"></i>
                   <p className="d-lg-none d-xl-none">Twitter</p>
