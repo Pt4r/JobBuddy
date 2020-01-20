@@ -1,5 +1,5 @@
 import React from "react";
-
+import ScrollableAnchor from 'react-scrollable-anchor'
 // reactstrap components
 import {
   Button,
@@ -34,104 +34,100 @@ function LandingPage() {
       <PagesNavbar />
       <div className="wrapper" style={{overflow: "inherit"}}>
         <LandingPageHeader />
+        <ScrollableAnchor id={'about_us'}>
         <div className="section section-about-us">
           <Container>
-                      <Col className="ml-auto mr-auto text-center" md="8">
-                          <h2 className="title">Who we are?</h2>
-                          <p className="blockquote blockquote-info">
-                              "Never do something today while you can do it tommorow" <br></br>
-                              <br></br>
-                              <small>-Production Team </small>
-                          </p>
-                      </Col>
+          <Row>
+              <Col className="ml-auto mr-auto text-center" md="8">
+                <h2 className="title">Who we are?</h2>
+                <h5 className="description">
+                  The Curly Brackets is developing this website to help job seekers organize their job finding process with a structured all-in-one solution where they can list all the companies and Human Resourses people that they have sent their CV and never loose track on which company replied and which didn't.
+                </h5>
+              </Col>
+            </Row>
+            <div className="separator separator-primary"></div>
           </Container>
         </div>
+        </ScrollableAnchor>
+        <ScrollableAnchor id={'team'}>
         <div className="section section-team text-center">
           <Container>
             <h2 className="title">Here is our team</h2>
             <div className="team">
               <Row>
-                              <Col md="3">
-                                  <div className="team-player">
-                                      <img
-                                          alt="..."
-                                          className="rounded-circle img-fluid img-raised"
-                                          src={require("assets/img/misichronis.jpg")}
-                                      ></img>
-                                      <h4 className="title">Spyros<br />Misichronis</h4>
-                                      <p className="category text-info">Frontend Developer</p>
-                                      <p className="description">
-                                          Responsible for CRUD method in React and expert in APIs{" "}
-                                          <a href="#pablo" onClick={e => e.preventDefault()}>
+                <Col md="3">
+                <div className="team-player">
+                    <img
+                        alt="..."
+                        className="rounded-circle img-fluid img-raised"
+                        src={require("assets/img/stratos.jpg")}
+                    ></img>
+                    <h4 className="title">Stratos<br />Palaiologos</h4>
+                    <p className="category text-info">Project Manager</p>
+                    <p className="description">
+                        The Great Coordinator. The Knower of Coding.  {" "}
+                        <a href="#pablo" onClick={e => e.preventDefault()}>
+                        </a>{" "}
+                    </p>
+                </div>
+            </Col>
+            <Col md="3">
+              <div className="team-player">
+                  <img
+                      alt="..."
+                      className="rounded-circle img-fluid img-raised"
+                      src={require("assets/img/misichronis.jpg")}
+                  ></img>
+                  <h4 className="title">Spyros<br />Misichronis</h4>
+                  <p className="category text-info">Frontend Developer</p>
+                  <p className="description">
+                      Responsible for CRUD method in React and expert in APIs{" "}
+                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      </a>{" "}
+                  </p>  
+              </div>
+            </Col>
+            <Col md="3">
+              <div className="team-player">
+                  <img
+                      alt="..."
+                      className="rounded-circle img-fluid img-raised"
+                      src={require("assets/img/theofilatos.jpg")}
+                  ></img>
+                  <h4 className="title">Spyros<br />Theofilatos</h4>
+                  <p className="category text-info">Backend Developer</p>
+                  <p className="description">
+                      Entity Framework ace and Controler adept{" "}
+                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      </a>{" "}
+                  </p>
+              </div>
+            </Col>
+            <Col md="3">
+                <div className="team-player">
+                    <img
+                        alt="..."
+                        className="rounded-circle img-fluid img-raised"
+                        src={require("assets/img/delos.jpg")}
+                    ></img>
+                    <h4 className="title">Pantelis<br />Bakogeorgos</h4>
+                    <p className="category text-info">HTML5/CSS Developer</p>
+                    <p className="description">
+                        An artist at heart and a skilled designer{" "}
+                        <a href="#pablo" onClick={e => e.preventDefault()}>
 
-                                          </a>{" "}
+                        </a>{" "}
 
-                                      </p>
-                  
-                  </div>
-                </Col>
-                              
-                              <Col md="3">
-                                  <div className="team-player">
-                                      <img
-                                          alt="..."
-                                          className="rounded-circle img-fluid img-raised"
-                                          src={require("assets/img/stratos.jpg")}
-                                      ></img>
-                                      <h4 className="title">Stratos<br />Palaiologos</h4>
-                                      <p className="category text-info">Project Manager</p>
-                                      <p className="description">
-                                          The Great Coordinator. The Knower of Coding.  {" "}
-                                          <a href="#pablo" onClick={e => e.preventDefault()}>
+                    </p>
 
-                                          </a>{" "}
-
-                                      </p>
-
-                                  </div>
-                              </Col>
-                              <Col md="3">
-                                  <div className="team-player">
-                                      <img
-                                          alt="..."
-                                          className="rounded-circle img-fluid img-raised"
-                                          src={require("assets/img/theofilatos.jpg")}
-                                      ></img>
-                                      <h4 className="title">Spyros<br />Theofilatos</h4>
-                                      <p className="category text-info">Backend Developer</p>
-                                      <p className="description">
-                                          Entity Framework ace and Controler adept{" "}
-                                          <a href="#pablo" onClick={e => e.preventDefault()}>
-
-                                          </a>{" "}
-
-                                      </p>
-
-                                  </div>
-                              </Col>
-                              <Col md="3">
-                                  <div className="team-player">
-                                      <img
-                                          alt="..."
-                                          className="rounded-circle img-fluid img-raised"
-                                          src={require("assets/img/delos.jpg")}
-                                      ></img>
-                                      <h4 className="title">Pantelis<br />Bakogeorgos</h4>
-                                      <p className="category text-info">HTML5/CSS Developer</p>
-                                      <p className="description">
-                                          An artist at heart and a skilled designer{" "}
-                                          <a href="#pablo" onClick={e => e.preventDefault()}>
-
-                                          </a>{" "}
-
-                                      </p>
-
-                                  </div>
-                              </Col>
-              </Row>
-            </div>
-          </Container>
+                </div>
+            </Col>
+          </Row>
         </div>
+      </Container>
+        </div>
+        </ScrollableAnchor>
+        <ScrollableAnchor id={'contact'}>
         <div className="section section-contact-us text-center">
           <Container>
             <h2 className="title">Contact</h2>
@@ -197,9 +193,10 @@ function LandingPage() {
             </Row>
           </Container>
         </div>
+        </ScrollableAnchor>
         <PagesFooter />
       </div>
-    </>
+  </>
   );
 }
 

@@ -57,7 +57,7 @@ function PagesNavbar() {
             <DropdownToggle
               caret
               data-toggle="dropdown"
-              href="#pablo"
+              href="#"
               id="navbarDropdown"
               tag="a"
               onClick={e => e.preventDefault()}
@@ -67,25 +67,19 @@ function PagesNavbar() {
               <span className="button-bar"></span>
             </DropdownToggle>
             <DropdownMenu aria-labelledby="navbarDropdown">
-              <DropdownItem header tag="a">
-                Dropdown header
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Action
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Another action
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Something else here
+
+              <DropdownItem href="/authentication/login">
+                Go to Dashboard
               </DropdownItem>
               <DropdownItem divider></DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Separated link
+              <DropdownItem href="#about_us">
+                Who we are
               </DropdownItem>
-              <DropdownItem divider></DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                One more separated link
+              <DropdownItem href="#team">
+                Meet the team
+              </DropdownItem>
+              <DropdownItem href="#contact">
+                Contact us
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

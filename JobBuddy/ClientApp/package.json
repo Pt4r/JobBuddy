@@ -29,6 +29,7 @@
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "5.0.0",
     "react-scripts": "^3.3.0",
+    "react-scrollable-anchor": "^0.6.1",
     "react-select": "3.0.4",
     "react-table": "^6.10.0",
     "react-tagsinput": "3.19.0",
