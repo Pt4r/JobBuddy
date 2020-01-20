@@ -1,79 +1,68 @@
-.rtl-active {
-  #bodyClick {
+.rtl-active{
+  #bodyClick{
     right: 260px;
     left: auto;
   }
   .sidebar,
-  .bootstrap-navbar {
+  .bootstrap-navbar{
     right: 0;
     left: auto;
 
-    .nav-mobile-menu .notification {
+    .nav-mobile-menu .notification{
       float: right;
       margin-right: 0;
       margin-left: 8px;
     }
 
-    .nav {
+    .nav{
       padding: 0;
-      i {
+      i{
         float: right !important;
         margin-left: 15px;
         margin-right: 0;
       }
 
-      p {
+      p, .sidebar-normal{
         margin: 0;
         text-align: right;
       }
 
-      .caret {
+      .caret{
         left: 11px;
         right: auto;
       }
     }
 
-    .logo {
-      a.logo-mini {
+    .logo{
+      a.logo-normal{
+        text-align: right;
+      }
+      a.logo-mini{
         float: right;
       }
     }
 
-    .user {
-      .user-info > a > span {
+    .user{
+      .info > a > span,
+      .user-info > a > span{
         text-align: right;
         display: block;
       }
 
-      .photo {
+      .photo{
         float: right;
         margin-left: 12px;
         margin-right: 23px;
       }
     }
 
-    .user .info .caret {
+    .user .info .caret{
       left: 22px;
       right: auto;
     }
 
-    .sidebar-wrapper
-      > .nav
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-mini-icon,
-    .sidebar-wrapper
-      .user
-      .info
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-mini-icon {
+    .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-mini-icon,
+    .sidebar-wrapper .user .info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-mini-icon{
       float: right;
       margin-left: 15px;
       margin-right: 0;
@@ -86,38 +75,38 @@
     left: 0;
   }
 
-  .navbar-header .navbar-toggle {
+  .navbar-header .navbar-toggle{
     margin: 10px 0 10px 15px;
   }
 
   .btn:not(.btn-just-icon):not(.btn-fab) .fa,
-  .navbar .navbar-nav > li > a.btn:not(.btn-just-icon):not(.btn-fab) .fa {
+  .navbar .navbar-nav > li > a.btn:not(.btn-just-icon):not(.btn-fab) .fa{
     left: 5px;
   }
 
-  .card .card-header.card-header-icon {
+  .card .card-header.card-header-icon{
     float: right;
   }
 
-  .main-panel {
+  .main-panel{
     float: left;
   }
 
-  .navbar > .container-fluid .navbar-brand {
-    margin-right: 10px;
+  .navbar > .container-fluid .navbar-brand{
+    margin-right: 10px;;
   }
 
-  .dropdown-menu {
+  .dropdown-menu{
     right: 0;
     left: auto;
   }
 
-  .card .card-header.card-header-tabs .nav-tabs-title {
+  .card .card-header.card-header-tabs .nav-tabs-title{
     float: right;
     padding: 10px 0 10px 10px;
   }
 
-  .card.card-product .card-footer {
+  .card.card-product .card-footer{
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
@@ -125,17 +114,17 @@
   }
 
   .navbar-nav.navbar-right > li > .dropdown-menu:before,
-  .navbar-nav.navbar-right > li > .dropdown-menu:after {
+  .navbar-nav.navbar-right > li > .dropdown-menu:after{
     right: auto;
     left: 12px;
   }
 
-  .card .form-horizontal .label-on-left {
+  .card .form-horizontal .label-on-left{
     padding-top: 16px;
     text-align: left;
   }
 
-  .form-horizontal .radio label span {
+  .form-horizontal .radio label span{
     right: 2px;
   }
 
@@ -147,175 +136,104 @@
     }
   }
 
-  .card .checkbox .checkbox-material:before {
+  .card .checkbox .checkbox-material:before{
     left: 0;
   }
 
-  .nav-pills > li + li {
+  .nav-pills > li + li{
     margin-right: 0;
   }
 
-  .radio-inline,
-  .checkbox-inline {
+  .radio-inline, .checkbox-inline{
     padding-right: 0;
     margin-top: 5px;
   }
 
-  .form-horizontal .checkbox-radios .checkbox:first-child,
-  .form-horizontal .checkbox-radios .radio:first-child {
+  .form-horizontal .checkbox-radios .checkbox:first-child, .form-horizontal .checkbox-radios .radio:first-child{
     margin-top: 5px;
   }
 
   .checkbox label,
-  .radio label {
+  .radio label{
     padding: 0;
   }
 
-  .radio label {
+  .radio label{
     padding-right: 28px;
   }
 
-  .card .form-horizontal .label-on-right {
+  .card .form-horizontal .label-on-right{
     text-align: right;
     padding-top: 17px;
   }
 
-  .alert {
-    button.close {
+  .alert{
+    button.close{
       left: 10px !important;
       right: auto !important;
     }
 
-    span[data-notify="icon"] {
+    span[data-notify="icon"]{
       right: 15px;
       left: auto;
     }
 
-    &.alert-with-icon {
+    &.alert-with-icon{
       padding-left: 65px;
       padding-right: 15px;
       left: 20px;
       right: auto !important;
     }
 
-    &.alert-with-icon i[data-notify="icon"] {
+    &.alert-with-icon i[data-notify="icon"]{
       right: 15px;
       left: auto;
     }
   }
 
-  @media (max-width: 991px) {
-    .sidebar
-      .sidebar-wrapper
-      > .nav
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > .sidebar-normal,
-    .sidebar
-      .sidebar-wrapper
-      .user
-      .user-info
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > .sidebar-normal {
+  @media (max-width: 991px){
+    .sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > .sidebar-normal,
+    .sidebar .sidebar-wrapper .user .user-info [data-toggle="collapse"] ~ div > ul > li > .sidebar-normal{
       text-align: right;
     }
 
-    .nav-open & .main-panel {
+    .nav-open & .main-panel{
       @include transform-translate-x(-260px);
     }
 
-    .sidebar {
+    .sidebar{
       @include transform-translate-x(260px);
     }
   }
 
-  @media (max-width: 768px) {
-    .navbar > .container-fluid .navbar-brand {
+  @media (max-width: 768px){
+    .navbar > .container-fluid .navbar-brand{
       margin-right: 15px;
     }
 
-    .navbar-header .navbar-toggle {
+    .navbar-header .navbar-toggle{
       margin-left: 30px;
     }
   }
 
-  @media (min-width: 991px) {
-    &.sidebar-mini
-      .sidebar
-      .sidebar-wrapper
-      > .nav
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > .sidebar-normal,
-    &.sidebar-mini
-      .sidebar
-      .sidebar-wrapper
-      .user
-      .info
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > .sidebar-normal,
+  @media (min-width: 991px){
+    &.sidebar-mini .sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > .sidebar-normal,
+    &.sidebar-mini .sidebar .sidebar-wrapper .user .info [data-toggle="collapse"] ~ div > ul > li > .sidebar-normal,
     &.sidebar-mini .sidebar .sidebar-wrapper .user .info > a > span,
-    &.sidebar-mini .sidebar .sidebar-wrapper > .nav li > a p {
+    &.sidebar-mini .sidebar .sidebar-wrapper > .nav li > a p{
       position: relative;
     }
 
     &.sidebar-mini .sidebar:hover .sidebar-wrapper > .nav li > a p,
-    &.sidebar-mini
-      .sidebar:hover
-      .sidebar-wrapper
-      > .nav
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-normal,
-    &.sidebar-mini
-      .sidebar:hover
-      .sidebar-wrapper
-      .user
-      .user-info
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > .sidebar-normal,
+    &.sidebar-mini .sidebar:hover .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+    &.sidebar-mini .sidebar:hover .sidebar-wrapper .user .user-info [data-toggle="collapse"] ~ div > ul > li > .sidebar-normal,
     &.sidebar-mini .sidebar:hover .sidebar-wrapper .user .user-info > a > span,
-    &.sidebar-mini
-      .sidebar
-      .sidebar-wrapper
-      > .nav
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-normal,
-    &.sidebar-mini
-      .sidebar
-      .sidebar-wrapper
-      .user
-      .info
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-normal,
+    &.sidebar-mini .sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+    &.sidebar-mini .sidebar .sidebar-wrapper .user .info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
     &.sidebar-mini .sidebar .sidebar-wrapper .user .info > a > span,
     &.sidebar-mini .sidebar .sidebar-wrapper > .nav li > a p,
-    &.sidebar-mini .sidebar .logo a.logo-normal {
-      -webkit-transform: translatX(25px);
+    &.sidebar-mini .sidebar .logo a.logo-normal{
+      -webkit-transform:  translatX(25px);
       -moz-transform: translateX(25px);
       -o-transform: translateX(25px);
       -ms-transform: translateX(25px);
@@ -323,34 +241,15 @@
     }
 
     &.sidebar-mini .sidebar:hover .sidebar-wrapper > .nav li > a p,
-    &.sidebar-mini
-      .sidebar:hover
-      .sidebar-wrapper
-      > .nav
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-normal,
-    &.sidebar-mini
-      .sidebar:hover
-      .sidebar-wrapper
-      .user
-      .user-info
-      [data-toggle="collapse"]
-      ~ div
-      > ul
-      > li
-      > a
-      .sidebar-normal,
+    &.sidebar-mini .sidebar:hover .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+    &.sidebar-mini .sidebar:hover .sidebar-wrapper .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
     &.sidebar-mini .sidebar:hover .sidebar-wrapper .user .user-info > a > span,
-    &.sidebar-mini .sidebar:hover .logo a.logo-normal {
-      -webkit-transform: translat3d(0, 0, 0);
-      -moz-transform: translate3d(0, 0, 0);
-      -o-transform: translate3d(0, 0, 0);
-      -ms-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+    &.sidebar-mini .sidebar:hover .logo a.logo-normal{
+      -webkit-transform:  translat3d(0,0,0);
+      -moz-transform: translate3d(0,0,0);
+      -o-transform: translate3d(0,0,0);
+      -ms-transform: translate3d(0,0,0);
+      transform: translate3d(0,0,0);
     }
   }
 
@@ -408,7 +307,7 @@
   }
 
   .sidebar {
-    .nav .nav-item .nav-link i {
+    .nav .nav-item .nav-link i{
       margin-right: 0;
     }
     .nav .nav-item .nav,
@@ -430,46 +329,39 @@
     }
   }
 
-  .info-horizontal .icon {
+  .info-horizontal .icon{
     float: right;
   }
 
-  .input-group > .custom-select:not(:last-child),
-  .input-group > .form-control:not(:last-child),
-  .input-group
-    > .input-group-append:last-child
-    > .btn:not(:last-child):not(.dropdown-toggle),
-  .input-group
-    > .input-group-append:last-child
-    > .input-group-text:not(:last-child),
-  .input-group > .input-group-append:not(:last-child) > .btn,
-  .input-group > .input-group-append:not(:last-child) > .input-group-text,
-  .input-group > .input-group-prepend > .btn,
-  .input-group > .input-group-prepend > .input-group-text {
+  .input-group>.custom-select:not(:last-child),
+  .input-group>.form-control:not(:last-child),
+  .input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group>.input-group-append:last-child>.input-group-text:not(:last-child), .input-group>.input-group-append:not(:last-child)>.btn, .input-group>.input-group-append:not(:last-child)>.input-group-text, .input-group>.input-group-prepend>.btn, .input-group>.input-group-prepend>.input-group-text{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
   }
 
-  .input-group > .input-group-append > .btn,
-  .input-group > .input-group-append > .input-group-text,
-  .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
-  .input-group
-    > .input-group-prepend:first-child
-    > .input-group-text:not(:first-child),
-  .input-group > .input-group-prepend:not(:first-child) > .btn,
-  .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
-  .input-group > .custom-select:not(:first-child),
-  .input-group > .form-control:not(:first-child) {
+  .input-group>.input-group-append>.btn,
+  .input-group>.input-group-append>.input-group-text,
+  .input-group>.input-group-prepend:first-child>.btn:not(:first-child), .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child), .input-group>.input-group-prepend:not(:first-child)>.btn,
+  .input-group>.input-group-prepend:not(:first-child)>.input-group-text,
+  .input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child){
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
   }
 
-  .form-control {
+  .form-control{
     text-align: right;
     direction: rtl;
   }
+
+  .timeline-rtl {
+    .timeline-panel{
+      text-align: right;
+    }
+  }
+
 }

@@ -1,32 +1,4 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-// react plugin used to create datetimepicker
-import Datetime from "react-datetime";
-// react plugin used to create switch buttons
-import Switch from "react-bootstrap-switch";
-// react plugin used to create DropdownMenu for selecting items
-import Select from "react-select";
-// react plugin that creates an input with badges
-import TagsInput from "react-tagsinput";
-// plugin that creates slider
-import Slider from "nouislider";
-
-// reactstrap components
 import {
   UncontrolledDropdown,
   DropdownToggle,
@@ -39,13 +11,20 @@ import {
   CardHeader,
   CardTitle,
   Row,
-  Col,
-  Progress
+  Col
 } from "reactstrap";
+// react plugin used to create datetimepicker
+import Datetime from "react-datetime";
+// react plugin used to create switch buttons
+import Switch from "react-bootstrap-switch";
+// react plugin used to create DropdownMenu for selecting items
+import Select from "react-select";
+// react plugin that creates an input with badges
+import TagsInput from "react-tagsinput";
+// plugin that creates slider
+import Slider from "nouislider";
 
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
-import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
+import { PanelHeader, ImageUpload, Progress } from "components";
 
 var selectOptions = [
   { value: "one", label: "One" },
@@ -57,22 +36,23 @@ var selectOptions = [
 ];
 
 class ExtendedForms extends React.Component {
-  state = {
-    singleSelect: null,
-    multipleSelect: null,
-    singleFileName: "",
-    multipleFileName: "",
-    singleFile: null,
-    multipleFile: null,
-    regularTags: ["pizza", "pasta", "parmesan"]
-  };
-  slider1 = React.createRef();
-  slider2 = React.createRef();
-  singleFile = React.createRef();
-  multipleFile = React.createRef();
+  constructor(props) {
+    super(props);
+    this.state = {
+      singleSelect: null,
+      multipleSelect: null,
+      singleFileName: "",
+      multipleFileName: "",
+      singleFile: null,
+      multipleFile: null,
+      regularTags: ["pizza", "pasta", "parmesan"]
+    };
+    this.handleRegularTags = this.handleRegularTags.bind(this);
+    this.handleFileInput = this.handleFileInput.bind(this);
+  }
   componentDidMount() {
-    var slider1 = this.slider1.current;
-    var slider2 = this.slider2.current;
+    var slider1 = this.refs.slider1;
+    var slider2 = this.refs.slider2;
     Slider.create(slider1, {
       start: [40],
       connect: [true, false],
@@ -86,20 +66,20 @@ class ExtendedForms extends React.Component {
       range: { min: 0, max: 100 }
     });
   }
-  handleRegularTags = regularTags => {
+  handleRegularTags(regularTags) {
     this.setState({ regularTags });
-  };
+  }
   // // // to understand the bellow functions please take a look at the end of the document as well
   // this handles the onFocus event over the normal / visible Inputs (reactstrap components)
   // that will trigger the on click of the non-visible inputs (normal html component)
-  handleFileInput = (e, type) => {
-    this[type].current.click(e);
-  };
+  handleFileInput(e, type) {
+    this.refs[type].click(e);
+  }
   // this is the function triggered for the file type input
   // it will store inside the components state the names of the files and the files
   // after that, if you want to save the files you need to add a special on submit function for that
   // we haven't since we do not need to save the files - everything in our product is only front-end
-  addFile = (e, type) => {
+  addFile(e, type) {
     let fileNames = "";
     let files = e.target.files;
     for (let i = 0; i < e.target.files.length; i++) {
@@ -112,10 +92,10 @@ class ExtendedForms extends React.Component {
       [type + "Name"]: fileNames,
       [type]: files
     });
-  };
+  }
   render() {
     return (
-      <>
+      <div>
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
@@ -291,27 +271,14 @@ class ExtendedForms extends React.Component {
                   <Row>
                     <Col xs={12} md={6}>
                       <CardTitle tag="h4">Progress Bars</CardTitle>
-                      <div className="progress-container">
-                        <span className="progress-badge">Default</span>
-                        <Progress max="100" value="25">
-                          <span className="progress-value">25%</span>
-                        </Progress>
-                      </div>
-                      <div className="progress-container progress-primary">
-                        <span className="progress-badge">Primary</span>
-                        <Progress max="100" value="60">
-                          <span className="progress-value">60%</span>
-                        </Progress>
-                      </div>
+                      <Progress badge="Default" value="25" />
+                      <Progress color="primary" badge="primary" value="60" />
                     </Col>
                     <Col xs={12} md={6}>
                       <CardTitle tag="h4">Sliders</CardTitle>
-                      <div className="slider" ref={this.slider1} />
+                      <div className="slider" ref="slider1" />
                       <br />
-                      <div
-                        className="slider slider-primary"
-                        ref={this.slider2}
-                      />
+                      <div className="slider slider-primary" ref="slider2" />
                     </Col>
                   </Row>
                   <Row>
@@ -334,14 +301,14 @@ class ExtendedForms extends React.Component {
                           type="text"
                           className="inputFileVisible"
                           placeholder="Simple chooser..."
-                          onClick={e => this.handleFileInput(e, "singleFile")}
-                          defaultValue={this.state.singleFileName}
+                          onFocus={e => this.handleFileInput(e, "singleFile")}
+                          value={this.state.singleFileName}
                         />
                         <input
                           type="file"
                           className="inputFileHidden"
                           style={{ zIndex: -1 }}
-                          ref={this.singleFile}
+                          ref="singleFile"
                           onChange={e => this.addFile(e, "singleFile")}
                         />
                       </FormGroup>
@@ -351,15 +318,15 @@ class ExtendedForms extends React.Component {
                           type="text"
                           className="inputFileVisible"
                           placeholder="Multiple chooser..."
-                          onClick={e => this.handleFileInput(e, "multipleFile")}
-                          defaultValue={this.state.multipleFileName}
+                          onFocus={e => this.handleFileInput(e, "multipleFile")}
+                          value={this.state.multipleFileName}
                         />
                         <input
                           multiple
                           type="file"
                           className="inputFileHidden"
                           style={{ zIndex: -1 }}
-                          ref={this.multipleFile}
+                          ref="multipleFile"
                           onChange={e => this.addFile(e, "multipleFile")}
                         />
                       </FormGroup>
@@ -370,7 +337,7 @@ class ExtendedForms extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </div>
     );
   }
 }

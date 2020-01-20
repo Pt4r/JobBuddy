@@ -1,13 +1,13 @@
 .card-stats-mini {
   &.card-background::after {
     background-image: linear-gradient(to right, #434343 0%, black 100%);
-    opacity: 0.94;
+    opacity: .94;
   }
 
   .card-body {
     &::after {
       clear: both;
-      content: "";
+      content: '';
       display: block;
     }
   }

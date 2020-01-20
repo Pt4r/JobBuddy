@@ -3,8 +3,6 @@ import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { QueryParameterNames, LogoutActions, ApplicationPaths } from './ApiAuthorizationConstants';
-import { Spinner } from 'reactstrap';
-
 
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
@@ -24,13 +22,12 @@ export class Logout extends Component {
         const action = this.props.action;
         switch (action) {
             case LogoutActions.Logout:
-                this.logout(this.getReturnUrl());
-                // if (!!window.history.state.local) {
-                //     this.logout(this.getReturnUrl());
-                // } else {
-                //     // This prevents regular links to <app>/authentication/logout from triggering a logout
-                //     this.setState({ isReady: true, message: "The logout was not initiated from within the page." });
-                // }
+                if (!!window.history.state.state.local) {
+                    this.logout(this.getReturnUrl());
+                } else {
+                    // This prevents regular links to <app>/authentication/logout from triggering a logout
+                    this.setState({ isReady: true, message: "The logout was not initiated from within the page." });
+                }
                 break;
             case LogoutActions.LogoutCallback:
                 this.processLogoutCallback();
@@ -56,44 +53,11 @@ export class Logout extends Component {
             const action = this.props.action;
             switch (action) {
                 case LogoutActions.Logout:
-                    return (
-                        <div className="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
-                            <div className="row align-items-center">
-                                <div className="col-sm">
-                                <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
-                                </div>
-                                <div className="col-sm text-nowrap">
-                                <p className="m-0">Logging you out...</p>
-                                </div>
-                            </div>
-                        </div>
-                    );
+                    return (<div>Processing logout</div>);
                 case LogoutActions.LogoutCallback:
-                    return (
-                        <div className="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
-                            <div className="row align-items-center">
-                                <div className="col-sm">
-                                <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
-                                </div>
-                                <div className="col-sm text-nowrap">
-                                <p className="m-0">Logging you out...</p>
-                                </div>
-                            </div>
-                        </div>
-                        );
+                    return (<div>Processing logout callback</div>);
                 case LogoutActions.LoggedOut:
-                    return (
-                        <div className="container d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
-                            <div className="row align-items-center">
-                                <div className="col-sm">
-                                <Spinner color="info" style={{ width: '3rem', height: '3rem' }} type="grow" />
-                                </div>
-                                <div className="col-sm text-nowrap">
-                                <p className="m-0">{message}</p>
-                                </div>
-                            </div>
-                        </div>
-                        );
+                    return (<div>{message}</div>);
                 default:
                     throw new Error(`Invalid action '${action}'`);
             }

@@ -1,22 +1,4 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import {
   Row,
   Col,
@@ -26,8 +8,7 @@ import {
   Input
 } from "reactstrap";
 
-// core components
-import PictureUpload from "components/CustomUpload/PictureUpload.jsx";
+import { PictureUpload } from "components";
 
 class Step1 extends React.Component {
   constructor(props) {
@@ -102,7 +83,7 @@ class Step1 extends React.Component {
   }
   render() {
     return (
-      <>
+      <div>
         <h5 className="info-text">
           {" "}
           Let's start with the basic information (with validation)
@@ -182,7 +163,7 @@ class Step1 extends React.Component {
             </InputGroup>
           </Col>
         </Row>
-      </>
+      </div>
     );
   }
 }

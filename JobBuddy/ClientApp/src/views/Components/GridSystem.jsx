@@ -1,31 +1,12 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import { Card, CardBody, CardHeader, Row, Col, CardTitle } from "reactstrap";
 
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import { PanelHeader } from "components";
 
 class GridSystem extends React.Component {
   render() {
     return (
-      <>
+      <div>
         <PanelHeader size="sm" />
         <div className="content">
           <Card>
@@ -217,14 +198,16 @@ class GridSystem extends React.Component {
                 <Col xs={12} md={4} className="ml-auto mr-auto">
                   <Card>
                     <CardBody className="text-center">
-                      <code>{`xs={12} md={4} className="ml-auto mr-auto"`}</code>
+                      <code
+                      >{`xs={12} md={4} className="ml-auto mr-auto"`}</code>
                     </CardBody>
                   </Card>
                 </Col>
                 <Col xs={12} md={4} className="ml-auto mr-auto">
                   <Card>
                     <CardBody className="text-center">
-                      <code>{`xs={12} md={4} className="ml-auto mr-auto"`}</code>
+                      <code
+                      >{`xs={12} md={4} className="ml-auto mr-auto"`}</code>
                     </CardBody>
                   </Card>
                 </Col>
@@ -233,7 +216,8 @@ class GridSystem extends React.Component {
                 <Col xs={12} md={6} className="ml-auto mr-auto">
                   <Card>
                     <CardBody className="text-center">
-                      <code>{`xs={12} md={6} className="ml-auto mr-auto"`}</code>
+                      <code
+                      >{`xs={12} md={6} className="ml-auto mr-auto"`}</code>
                     </CardBody>
                   </Card>
                 </Col>
@@ -349,7 +333,7 @@ class GridSystem extends React.Component {
             </CardBody>
           </Card>
         </div>
-      </>
+      </div>
     );
   }
 }
