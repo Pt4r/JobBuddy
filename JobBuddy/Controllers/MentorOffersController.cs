@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
 
     public class MentorOffersController:Controller

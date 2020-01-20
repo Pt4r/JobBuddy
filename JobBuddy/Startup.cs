@@ -46,8 +46,6 @@ namespace JobBuddy
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IJobCategoriesRepository, JobCategoryRepository>();
-
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>() //Πρόσθεσα Identity role
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -73,11 +71,14 @@ namespace JobBuddy
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
 
+
+            services.AddScoped<IJobCategoriesRepository, JobCategoryRepository>();
             services.AddScoped<IMentorRepository, MentorRepository>();
             services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IJobListingsRepository, JobListingsRepository>();
             services.AddScoped<IMentorOfferRepository, MentorOfferRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

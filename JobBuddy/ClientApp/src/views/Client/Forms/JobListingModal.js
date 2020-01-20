@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import JobListingForm from './JobListingForm';
-import { USERS_API_URL } from '../../Constants';
+
 
 class JobListingModal extends Component {
     constructor(props) {
@@ -20,10 +20,10 @@ class JobListingModal extends Component {
     render() {
         const isNew = this.props.isNew;
 
-        let title = 'Edit User';
+        let title = 'Edit Job Listing';
         let button = '';
         if (isNew) {
-            title = 'Add User';
+            title = 'Add Job Listing';
 
             button = <Button
                 color="success"
@@ -43,11 +43,7 @@ class JobListingModal extends Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
                 <ModalBody>
-                    <JobListingForm
-                        addUserToState={this.props.addUserToState}
-                        updateUserIntoState={this.props.updateUserIntoState}
-                        toggle={this.toggle}
-                        user={this.props.user} />
+                    <JobListingForm  jl={this.props.jl} />
                 </ModalBody>
             </Modal>
         </Fragment>;

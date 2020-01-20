@@ -1,5 +1,6 @@
 ﻿using JobBuddy.Models;
 using JobBuddy.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class JobListingsController : Controller
+    //[Authorize(Roles = "Admin")]
+    public class JobListingsController : ControllerBase
     {
         private readonly IJobListingsRepository _jobListings;
 
@@ -43,8 +46,8 @@ namespace JobBuddy.Controllers
 
 
         //api/JobListings
-        [HttpGet("{Id}", Name = "GetJobListings")]
-        [Route("api/JobListings")]
+        [HttpGet]
+        [Route("all")]
         public IActionResult GetJobListings()
         {
             if (!ModelState.IsValid)
@@ -54,9 +57,9 @@ namespace JobBuddy.Controllers
             return Ok(jls);
         }
 
-        //api/JobListings
+        //api/JobListings/Create
         [HttpPost]
-        [Route("api/JobListings/Create")]
+        [Route("Create")]
         [ProducesResponseType(201, Type = typeof(JobListing))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -76,7 +79,7 @@ namespace JobBuddy.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetJobListing", new { id = jobListing.Id }, jobListing);
+            return Ok(); //CreatedAtRoute("GetJobListing", new { id = jobListing.Id }, jobListing);
 
         }
 

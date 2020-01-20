@@ -13,7 +13,7 @@ namespace JobBuddy.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public enumJobCategoryTitle JobCategoryTitle { get; set; }
+        public string JobCategoryTitle { get; set; }
 
         [Display(Name = "Category")]
         public string Subcategory_1 { get; set; }

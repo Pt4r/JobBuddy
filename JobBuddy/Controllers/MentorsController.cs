@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace JobBuddy.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
-    [Authorize("Admin,Mentor")]
+    //[Authorize("Admin,Mentor")]
     public class MentorsController : Controller
     {
         private IMentorRepository _mentorRepository;

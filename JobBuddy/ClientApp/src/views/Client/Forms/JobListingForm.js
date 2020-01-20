@@ -5,13 +5,18 @@ import { USERS_API_URL } from '../../Constants';
 class JobListingForm extends React.Component {
     state = {
         id: 0,
-        name: '',
-        email: ''
+        title: '',
+        info: '',
+        postDate: '',
+        hrUser: '',
+        jobCategory: '',
+        company: '',
+        client: '',
     }
     componentDidMount() {
         if (this.props.user) {
-            const { id, name, email } = this.props.user
-            this.setState({ id, name, email});
+            const { id, title, info, postDate, hrUser, jobCategory, company, client } = this.props.jl
+            this.setState({  id, title, info, postDate, hrUser, jobCategory, company, client });
         }
     }
     onChange = e => {
@@ -45,7 +50,7 @@ class JobListingForm extends React.Component {
             },
             body: JSON.stringify({
                 name: this.state.name,
-                email: this.state.email,
+                email: this.state.info,
             })
         })
             .then(() => {
@@ -57,12 +62,32 @@ class JobListingForm extends React.Component {
     render() {
         return <Form onSubmit={this.props.user ? this.submitEdit : this.submitNew}>
             <FormGroup>
-                <Label for="name">Name:</Label>
-                <Input type="text" name="name" onChange={this.onChange} value={this.state.name === '' ? '' : this.state.name} />
+                <Label for="name">Title:</Label>
+                <Input type="text" name="title" onChange={this.onChange} value={this.state.title === '' ? '' : this.state.title} />
             </FormGroup>
             <FormGroup>
-                <Label for="email">Email:</Label>
-                <Input type="email" name="email" onChange={this.onChange} value={this.state.email === null ? '' : this.state.email} />
+                <Label for="info">info:</Label>
+                <Input type="text" name="info" onChange={this.onChange} value={this.state.info === null ? '' : this.state.info} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="postDate">postDate:</Label>
+                <Input type="text" name="postDate" onChange={this.onChange} value={this.state.postDate === null ? '' : this.state.postDate} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="hrUser">hrUser:</Label>
+                <Input type="text" name="hrUser" onChange={this.onChange} value={this.state.hrUser === null ? '' : this.state.hrUser} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="jobCategory">jobCategory:</Label>
+                <Input type="text" name="jobCategory" onChange={this.onChange} value={this.state.jobCategory === null ? '' : this.state.jobCategory} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="company">company:</Label>
+                <Input type="text" name="company" onChange={this.onChange} value={this.state.company === null ? '' : this.state.company} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="client">client:</Label>
+                <Input type="text" name="client" onChange={this.onChange} value={this.state.client === null ? '' : this.state.client} />
             </FormGroup>
             <Button type="submit">Send</Button>
         </Form>;

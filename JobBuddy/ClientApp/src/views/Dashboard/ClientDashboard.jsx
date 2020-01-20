@@ -231,6 +231,7 @@ class Dashboard extends React.Component {
               </Card>
             </Col>
           </Row>
+          
           </div>
       </>
     );
