@@ -1,4 +1,5 @@
 ﻿using JobBuddy.Data;
+using JobBuddy.Data.Repositories.IRepositories;
 using JobBuddy.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,27 +7,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JobBuddy.Repositories
+namespace JobBuddy.Data.Repositories
 {
-    public class MentorOfferRepository:IMentorOfferRepository
+    //TODO
+    public class MentorOfferRepository : IMentorOfferRepository
     {
-        private ApplicationDbContext _db;
-        public MentorOfferRepository (ApplicationDbContext db)
+        private readonly ApplicationDbContext _db;
+        public MentorOfferRepository(ApplicationDbContext db)
         {
             _db = db;
         }
-        
+
 
         // Otan o mentor pataei to offers tha ton pigainei se pinakaki..ekei me anonymous object tha pernaei to id tou mentor kai etsi ta antistoixa offers
 
-        public IEnumerable<MentorOffer> GetMentorOffers(Guid id)
+        public IEnumerable<MentorOffer> GetAll(Guid id)
         {
-            IEnumerable<MentorOffer> mentorOffers;
 
-           
-                mentorOffers =_db.MentorOffers.Where(mo => mo.MentorId == id).ToList();
-
-
+            IEnumerable<MentorOffer> mentorOffers = _db.MentorOffers.Where(mo => mo.MentorId == id).ToList();
 
             return mentorOffers;
         }
@@ -40,11 +38,11 @@ namespace JobBuddy.Repositories
             {
                 throw new ArgumentNullException();
             }
-            
-                mentorOffer.MentorOfferId = Guid.NewGuid();
-                _db.MentorOffers.Add(mentorOffer);
+
+            mentorOffer.MentorOfferId = Guid.NewGuid();
+            _db.MentorOffers.Add(mentorOffer);
             return Save();
-            
+
         }
 
 
@@ -60,24 +58,24 @@ namespace JobBuddy.Repositories
 
             _db.MentorOffers.Update(mentorOffer);
             return Save();
-            
+
         }
 
         public bool DeleteMentorOffer(Guid id)
         {
-            
-                var deletedMentorOffer = _db.MentorOffers.SingleOrDefault(m => m.MentorOfferId == id);
-                if (deletedMentorOffer == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    _db.MentorOffers.Remove(deletedMentorOffer);
-                    return Save();
-                }
 
-            
+            var deletedMentorOffer = _db.MentorOffers.SingleOrDefault(m => m.MentorOfferId == id);
+            if (deletedMentorOffer == null)
+            {
+                return false;
+            }
+            else
+            {
+                _db.MentorOffers.Remove(deletedMentorOffer);
+                return Save();
+            }
+
+
 
         }
 
@@ -87,10 +85,10 @@ namespace JobBuddy.Repositories
         //{
         //    MentorOffer mentorOfferFound;
 
-           
+
         //        mentorOfferFound = _db.MentorOffers.SingleOrDefault(m => m.MentorOfferId == id);
 
-            
+
 
         //    return mentorOfferFound;
         //}

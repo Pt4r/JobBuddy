@@ -101,7 +101,164 @@ namespace JobBuddy.Migrations
                     b.ToTable("PersistedGrants");
                 });
 
-            modelBuilder.Entity("JobBuddy.Models.ApplicationUser", b =>
+            modelBuilder.Entity("JobBuddy.Models.ClientJobListing", b =>
+                {
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("JobListingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ClientId", "JobListingId");
+
+                    b.HasIndex("JobListingId");
+
+                    b.ToTable("ClientJobListings");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.Company", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobCategoryId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.JobCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("JobCategoryTitle")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subcategory_1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subcategory_2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("JobCategories");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.JobListing", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("HrUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<Guid?>("JobCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("HrUserId");
+
+                    b.HasIndex("JobCategoryId");
+
+                    b.ToTable("JobListing");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.MentorOffer", b =>
+                {
+                    b.Property<Guid>("MentorOfferId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("MentorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("OfferStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MentorOfferId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("MentorId");
+
+                    b.ToTable("MentorOffers");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.AdministratorDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Administrators");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -119,6 +276,16 @@ namespace JobBuddy.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -143,6 +310,9 @@ namespace JobBuddy.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -152,6 +322,9 @@ namespace JobBuddy.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
+
+                    b.Property<string>("UserRole")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -166,7 +339,7 @@ namespace JobBuddy.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("JobBuddy.Models.ClientUserDetails", b =>
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.ClientUserDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,12 +366,6 @@ namespace JobBuddy.Migrations
                     b.Property<int>("LookingForStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -206,32 +373,7 @@ namespace JobBuddy.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("JobBuddy.Models.Company", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.HrUserDetails", b =>
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.HrUserDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -249,12 +391,6 @@ namespace JobBuddy.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("ProfilePic")
-                        .HasColumnType("tinyint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -266,112 +402,9 @@ namespace JobBuddy.Migrations
                     b.ToTable("HrUser");
                 });
 
-            modelBuilder.Entity("JobBuddy.Models.JobCategory", b =>
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.MentorUserDetails", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Subcategory_1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subcategory_2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("JobCategory");
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.JobListing", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("HrUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
-
-                    b.Property<Guid>("JobCategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("HrUserId");
-
-                    b.HasIndex("JobCategoryId");
-
-                    b.ToTable("JobListing");
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.ManyToMany.ClientJobListing", b =>
-                {
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("JobListingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ClientId", "JobListingId");
-
-                    b.HasIndex("JobListingId");
-
-                    b.ToTable("ClientJobListings");
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.MentorOffer", b =>
-                {
-                    b.Property<Guid>("MentorOfferId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ClientUserDetailsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("MentorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("OfferStatus")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("MentorOfferId");
-
-                    b.HasIndex("ClientUserDetailsId");
-
-                    b.HasIndex("MentorId");
-
-                    b.ToTable("MentorOffers");
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.MentorUserDetails", b =>
-                {
-                    b.Property<Guid>("MentorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -392,20 +425,11 @@ namespace JobBuddy.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnName("[Profile Picture]")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte?>("Rating")
                         .IsRequired()
                         .HasColumnType("tinyint");
 
-                    b.HasKey("MentorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -551,53 +575,9 @@ namespace JobBuddy.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("JobBuddy.Models.ClientUserDetails", b =>
+            modelBuilder.Entity("JobBuddy.Models.ClientJobListing", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.HrUserDetails", b =>
-                {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("JobBuddy.Models.ClientUserDetails", null)
-                        .WithMany("HRs")
-                        .HasForeignKey("ClientUserDetailsId");
-
-                    b.HasOne("JobBuddy.Models.Company", "Company")
-                        .WithMany("HrUsers")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.NoAction);
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.JobListing", b =>
-                {
-                    b.HasOne("JobBuddy.Models.Company", "Company")
-                        .WithMany("JobListings")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JobBuddy.Models.HrUserDetails", "HrUser")
-                        .WithMany("JobListings")
-                        .HasForeignKey("HrUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("JobBuddy.Models.JobCategory", "JobCategory")
-                        .WithMany("JobListings")
-                        .HasForeignKey("JobCategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("JobBuddy.Models.ManyToMany.ClientJobListing", b =>
-                {
-                    b.HasOne("JobBuddy.Models.ClientUserDetails", "Client")
+                    b.HasOne("JobBuddy.Models.UserDetails.ClientUserDetails", "Client")
                         .WithMany("JobListings")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -610,26 +590,89 @@ namespace JobBuddy.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("JobBuddy.Models.Company", b =>
+                {
+                    b.HasOne("JobBuddy.Models.JobCategory", "JobCategory1")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.JobCategory", b =>
+                {
+                    b.HasOne("JobBuddy.Models.Company", null)
+                        .WithMany("JobCategories1")
+                        .HasForeignKey("CompanyId");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.JobListing", b =>
+                {
+                    b.HasOne("JobBuddy.Models.Company", "Company")
+                        .WithMany("JobListings")
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("JobBuddy.Models.UserDetails.HrUserDetails", "HrUser")
+                        .WithMany("JobListings")
+                        .HasForeignKey("HrUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("JobBuddy.Models.JobCategory", "JobCategory")
+                        .WithMany("JobListings")
+                        .HasForeignKey("JobCategoryId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
             modelBuilder.Entity("JobBuddy.Models.MentorOffer", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ClientUserDetails", null)
+                    b.HasOne("JobBuddy.Models.UserDetails.ClientUserDetails", "Client")
                         .WithMany("OffersReceived")
-                        .HasForeignKey("ClientUserDetailsId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("JobBuddy.Models.MentorUserDetails", "Mentor")
+                    b.HasOne("JobBuddy.Models.UserDetails.MentorUserDetails", "Mentor")
                         .WithMany("OffersReceived")
                         .HasForeignKey("MentorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("JobBuddy.Models.MentorUserDetails", b =>
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.AdministratorDetails", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.ClientUserDetails", b =>
+                {
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.HrUserDetails", b =>
+                {
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("JobBuddy.Models.ClientUserDetails", null)
+                    b.HasOne("JobBuddy.Models.UserDetails.ClientUserDetails", null)
+                        .WithMany("HRs")
+                        .HasForeignKey("ClientUserDetailsId");
+
+                    b.HasOne("JobBuddy.Models.Company", "Company")
+                        .WithMany("HrUsers")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("JobBuddy.Models.UserDetails.MentorUserDetails", b =>
+                {
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("JobBuddy.Models.UserDetails.ClientUserDetails", null)
                         .WithMany("Mentors")
                         .HasForeignKey("ClientUserDetailsId");
 
@@ -649,7 +692,7 @@ namespace JobBuddy.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", null)
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -658,7 +701,7 @@ namespace JobBuddy.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", null)
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -673,7 +716,7 @@ namespace JobBuddy.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JobBuddy.Models.ApplicationUser", null)
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -682,7 +725,7 @@ namespace JobBuddy.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", null)
+                    b.HasOne("JobBuddy.Models.UserDetails.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

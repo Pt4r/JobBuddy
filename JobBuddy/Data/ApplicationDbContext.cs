@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JobBuddy.Models.ManyToMany;
+using JobBuddy.Models.UserDetails;
 
 namespace JobBuddy.Data
 {
@@ -24,16 +24,13 @@ namespace JobBuddy.Data
         
         public virtual DbSet<JobCategory> JobCategories { get; set; }
         public virtual DbSet<AdministratorDetails> Administrators { get; set; }
-
-        
-
-        public DbSet<ClientUserDetails> Clients { get; set; }
-        public DbSet<HrUserDetails> HRs { get; set; }
-        public DbSet<MentorUserDetails> Mentors { get; set; }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<MentorOffer> MentorOffers { get; set; }
-        public DbSet<JobListing> JobListings { get; set; }
-        public DbSet<ClientJobListing> ClientJobListings { get; set; }
+        public virtual DbSet<ClientUserDetails> Clients { get; set; }
+        public virtual DbSet<HrUserDetails> HRs { get; set; }
+        public virtual DbSet<MentorUserDetails> Mentors { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<MentorOffer> MentorOffers { get; set; }
+        public virtual DbSet<JobListing> JobListings { get; set; }
+        public virtual DbSet<ClientJobListing> ClientJobListings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,26 +45,17 @@ namespace JobBuddy.Data
             modelBuilder.Entity<JobCategory>().Property(i => i.Subcategory_2).IsRequired();
             
 
-            modelBuilder.Entity<AdministratorDetails>().HasKey(a => a.AdminId);
-            modelBuilder.Entity<AdministratorDetails>().HasOne(a => a.ApplicationUser1).WithMany(a => a.Admins);
+            modelBuilder.Entity<AdministratorDetails>().HasKey(a => a.Id);
+         
 
             modelBuilder.Entity<MentorUserDetails>()
-                      .HasKey(m => m.MentorId);
-
-            modelBuilder.Entity<MentorUserDetails>()
-                     .Property(m => m.PhoneNumber)
-                     .HasMaxLength(25)
-                     .IsRequired();
+                      .HasKey(m => m.Id);
 
             //Πρέπει να δω πώς θα μπει το Rating ..Προς το παρόν μόνο Required
             modelBuilder.Entity<MentorUserDetails>()
                       .Property(m => m.Rating)
                       .IsRequired();
-            //episis na doume pws mpainei kai ti length...
-            modelBuilder.Entity<MentorUserDetails>()
-                      .Property(m => m.ProfilePicture)
-                      .HasColumnName("[Profile Picture]");
-
+           
 
             modelBuilder.Entity<MentorUserDetails>()
                       .Property(m => m.Gender)
@@ -80,9 +68,9 @@ namespace JobBuddy.Data
 
             //Company-Mentor relationship
             modelBuilder.Entity<MentorUserDetails>()
-                        .HasOne(m => m.Company)
-                        .WithMany(c => c.Mentors)
-                        .HasForeignKey(m => m.CompanyId);
+                .HasOne(m => m.Company);
+//  /////                      .WithMany(c => c.Mentors)
+//  /////                      .HasForeignKey(m => m.CompanyId);
                         //.OnDelete(DeleteBehavior.SetNull);
 
             //Mentor-MentorOffer Relationship
@@ -116,9 +104,8 @@ namespace JobBuddy.Data
             modelBuilder.Entity<HrUserDetails>().ToTable("HrUser");
             modelBuilder.Entity<HrUserDetails>().HasKey(i => i.Id);
             modelBuilder.Entity<HrUserDetails>().Property(m => m.Gender);
-            modelBuilder.Entity<HrUserDetails>().Property(i => i.PhoneNumber);
             modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUsers).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
-            //modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<JobListing>().ToTable("JobListing");
             modelBuilder.Entity<JobListing>().HasKey(i => i.Id);
@@ -132,7 +119,7 @@ namespace JobBuddy.Data
 
 
 
-            modelBuilder.Entity<JobListing>().HasOne(i => i.JobCategory).WithMany(c => c.JobListings).HasForeignKey(i => i.JobCategoryId).OnDelete(DeleteBehavior.NoAction);
+             modelBuilder.Entity<JobListing>().HasOne(i => i.JobCategory).WithMany(c => c.JobListings).HasForeignKey(i => i.JobCategoryId).OnDelete(DeleteBehavior.NoAction);
 
         }
     }

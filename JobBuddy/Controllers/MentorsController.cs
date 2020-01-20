@@ -1,19 +1,21 @@
-﻿using JobBuddy.Models;
-using JobBuddy.Repositories;
+﻿using JobBuddy.Data.Repositories.IRepositories;
+using JobBuddy.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JobBuddy.Models.UserDetails;
 
 namespace JobBuddy.Controllers
 {
+    [Authorize(Roles = "Admin, Client, Mentor")]
     [Route("api/[controller]")]
     [ApiController]
     public class MentorsController : Controller
     {
-        private IMentorRepository _mentorRepository;
-
+        private readonly IMentorRepository _mentorRepository;
 
         public MentorsController(IMentorRepository mentorRepository)
         {
@@ -22,105 +24,97 @@ namespace JobBuddy.Controllers
 
 
         [HttpGet]
-        [Route("api/Mentors")]
-        public IActionResult GetMentors(string id)
+        public IActionResult GetAll()
         {
-            var mentors = _mentorRepository.GetMentors(id).ToList();
+            var mentors = _mentorRepository.GetAll();
 
+            if (mentors == null)
+                return NotFound();
 
-              return Ok(mentors);
+            return Ok(mentors);
         }
 
-       
-        [HttpGet]
-        [Route("api/Mentors/{id}")]
-        public IActionResult GetMentorsById(Guid id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
 
-            var mentor = _mentorRepository.FindMentorbyId(id);
+        [HttpGet("{id}", Name = "Mentor")]
+        public IActionResult Get(Guid id)
+        {
+            var mentor = _mentorRepository.GetMentor(id);
 
             if (mentor == null)
-            {
                 return NotFound();
-            }
 
             return Ok(mentor);
-
-
         }
 
 
-        [HttpPost]
-        
-        [Route("api/Mentors/Create")]
+        [HttpPost("Create")]
+        [ProducesResponseType(201, Type = typeof(MentorUserDetails))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
 
         public IActionResult Create([FromBody]MentorUserDetails mentor)
         {
             if (mentor == null)
-            {
                 return BadRequest(ModelState);
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            _mentorRepository.AddMentor(mentor);
 
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_mentorRepository.AddMentor(mentor))
+            {
+                ModelState.AddModelError("", "Something went wrong.");
+                return StatusCode(500, ModelState);
+            }
+
+            return CreatedAtRoute("Mentor", new { id = mentor.Id }, mentor);
         }
 
-        [HttpDelete]
 
-
-        [Route("api/Mentors/Delete/{id}")]
-
-
-
+        [HttpDelete("Delete/{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public IActionResult Delete(Guid id)
-
         {
+            var mentorToDelete = _mentorRepository.GetMentor(id);
 
-            bool removed = _mentorRepository.DeleteMentor(id);
-
-            if (!removed)
+            if (mentorToDelete == null)
             {
-                return NotFound();
-                //return BadRequest
+                ModelState.AddModelError("", "Can't find client.");
+                return StatusCode(500, ModelState);
             }
 
-            return Ok();
+            if (!_mentorRepository.DeleteMentor(mentorToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting client.");
+                return StatusCode(500, ModelState);
+            }
 
-
+            return NoContent();
         }
 
 
-        [HttpPut,HttpPatch]
-
-        [Route("api/Mentors/Update")]
-
-        public IActionResult Update([FromBody]MentorUserDetails mentor)
+        [HttpPut("Update/{Id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult Update(Guid id, [FromBody]MentorUserDetails mentor)
         {
+            if (mentor == null)
+                return BadRequest(ModelState);
+
+            if (id != mentor.Id)
+                return BadRequest(ModelState);
+
             if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_mentorRepository.UpdateMentor(mentor))
             {
-                return BadRequest();
+                ModelState.AddModelError("", "Something went wrong updating client.");
+                return StatusCode(500, ModelState);
             }
-
-            var updated = _mentorRepository.UpdateMentor(mentor);
-
-            if (!updated)
-            {
-                return BadRequest();
-            }
-
-            return Ok();
+            return NoContent();
         }
-
-
-
-
     }
 }

@@ -1,16 +1,19 @@
-﻿using JobBuddy.Models;
-using JobBuddy.Repositories;
+﻿using JobBuddy.Data.Repositories.IRepositories;
+using JobBuddy.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobBuddy.Controllers
 {
+    //** TODO **
+
+    [Authorize(Roles = "Admin, Client, Mentor, HR")]
     [Route("api/[controller]")]
     [ApiController]
-
     public class MentorOffersController:Controller
     {
 
@@ -28,7 +31,7 @@ namespace JobBuddy.Controllers
             [Route("api/MentorOffers")]
             public IActionResult GetMentorOffers(Guid id)
             {
-                var mentors = _mentorOfferRepository.GetMentorOffers(id).ToList();
+                var mentors = _mentorOfferRepository.GetAll(id).ToList();
 
 
                 return Ok(mentors);
