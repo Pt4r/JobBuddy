@@ -85,6 +85,10 @@
     <None Include="wwwroot\js\plugins\sweetalert2.min.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Chat\" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

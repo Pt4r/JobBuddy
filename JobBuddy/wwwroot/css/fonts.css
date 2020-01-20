@@ -1,0 +1,96 @@
+﻿/* ^a ------ @font-face rules | code is a slightly modified version of font squirrel generated code (http://www.fontsquirrel.com)   -------------------------*/
+@font-face {
+    font-family: 'DejaVuSans';
+    src: url('../fonts/DejaVuSans-webfont.eot');
+    src: url('../fonts/DejaVuSans-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSans-webfont.woff') format('woff'), url('../fonts/DejaVuSans-webfont.ttf') format('truetype'), url('../fonts/DejaVuSans-webfont.svg#webfontLXhJZR1n') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DejaVuSans';
+    src: url('../fonts/DejaVuSans-Oblique-webfont.eot');
+    src: url('../fonts/DejaVuSans-Oblique-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSans-Oblique-webfont.woff') format('woff'), url('../fonts/DejaVuSans-Oblique-webfont.ttf') format('truetype'), url('../fonts/DejaVuSans-Oblique-webfont.svg#webfontnxuyxjHo') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DejaVuSans';
+    src: url('../fonts/DejaVuSans-Bold-webfont.eot');
+    src: url('../fonts/DejaVuSans-Bold-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSans-Bold-webfont.woff') format('woff'), url('../fonts/DejaVuSans-Bold-webfont.ttf') format('truetype'), url('../fonts/DejaVuSans-Bold-webfont.svg#webfontjdVpuBVN') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DejaVuSans';
+    src: url('../fonts/DejaVuSans-BoldOblique-webfont.eot');
+    src: url('../fonts/DejaVuSans-BoldOblique-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSans-BoldOblique-webfont.woff') format('woff'), url('../fonts/DejaVuSans-BoldOblique-webfont.ttf') format('truetype'), url('../fonts/DejaVuSans-BoldOblique-webfont.svg#webfont9HRrbJtd') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DejaVuSansCond';
+    src: url('../fonts/DejaVuSansCondensed-webfont.eot');
+    src: url('../fonts/DejaVuSansCondensed-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSansCondensed-webfont.woff') format('woff'), url('../fonts/DejaVuSansCondensed-webfont.ttf') format('truetype'), url('../fonts/DejaVuSansCondensed-webfont.svg#webfontxsYM2XhJ') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DejaVuSansCond';
+    src: url('../fonts/DejaVuSansCondensed-Oblique-webfont.eot');
+    src: url('../fonts/DejaVuSansCondensed-Oblique-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSansCondensed-Oblique-webfont.woff') format('woff'), url('../fonts/DejaVuSansCondensed-Oblique-webfont.ttf') format('truetype'), url('../fonts/DejaVuSansCondensed-Oblique-webfont.svg#webfontHtmaWBj3') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DejaVuSansCond';
+    src: url('../fonts/DejaVuSansCondensed-Bold-webfont.eot');
+    src: url('../fonts/DejaVuSansCondensed-Bold-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSansCondensed-Bold-webfont.woff') format('woff'), url('../fonts/DejaVuSansCondensed-Bold-webfont.ttf') format('truetype'), url('../fonts/DejaVuSansCondensed-Bold-webfont.svg#webfontkge96hEp') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DejaVuSansCond';
+    src: url('../fonts/DejaVuSansCondensed-BoldOblique-webfont.eot');
+    src: url('../fonts/DejaVuSansCondensed-BoldOblique-webfont.eot?iefix') format('eot'), url('../fonts/DejaVuSansCondensed-BoldOblique-webfont.woff') format('woff'), url('../fonts/DejaVuSansCondensed-BoldOblique-webfont.ttf') format('truetype'), url('../fonts/DejaVuSansCondensed-BoldOblique-webfont.svg#webfonth7bn007r') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DroidSerif';
+    src: url('../fonts/DroidSerif-Regular-webfont.eot');
+    src: url('../fonts/DroidSerif-Regular-webfont.eot?iefix') format('eot'), url('../fonts/DroidSerif-Regular-webfont.woff') format('woff'), url('../fonts/DroidSerif-Regular-webfont.ttf') format('truetype'), url('../fonts/DroidSerif-Regular-webfont.svg#webfont5XtKyzGt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DroidSerif';
+    src: url('../fonts/DroidSerif-Italic-webfont.eot');
+    src: url('../fonts/DroidSerif-Italic-webfont.eot?iefix') format('eot'), url('../fonts/DroidSerif-Italic-webfont.woff') format('woff'), url('../fonts/DroidSerif-Italic-webfont.ttf') format('truetype'), url('../fonts/DroidSerif-Italic-webfont.svg#webfontK4uAlNrc') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DroidSerif';
+    src: url('../fonts/DroidSerif-Bold-webfont.eot');
+    src: url('../fonts/DroidSerif-Bold-webfont.eot?iefix') format('eot'), url('../fonts/DroidSerif-Bold-webfont.woff') format('woff'), url('../fonts/DroidSerif-Bold-webfont.ttf') format('truetype'), url('../fonts/DroidSerif-Bold-webfont.svg#webfontg2CzGQfw') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DroidSerif';
+    src: url('../fonts/DroidSerif-BoldItalic-webfont.eot');
+    src: url('../fonts/DroidSerif-BoldItalic-webfont.eot?iefix') format('eot'), url('../fonts/DroidSerif-BoldItalic-webfont.woff') format('woff'), url('../fonts/DroidSerif-BoldItalic-webfont.ttf') format('truetype'), url('../fonts/DroidSerif-BoldItalic-webfont.svg#webfontma7TYoAP') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
