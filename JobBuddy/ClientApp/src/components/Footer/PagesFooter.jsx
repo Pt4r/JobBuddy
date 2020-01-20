@@ -11,48 +11,32 @@ function PagesFooter() {
     <>
       <footer className="footer footer-default">
         <Container>
-          <nav>
-            <ul>
-              <li>
-                <a
-                  href="https://www.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://presentation.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://blog.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
+        <nav>
+        <ul>
+          <li>
+            <a href="/contact" target="_blank">About Us</a>
+          </li>
+          <li>
+            <a href="/blog" target="_blank">Blog</a>
+          </li>
+        </ul>
+      </nav>
+        <div className="copyright">
+            &copy; {1900 + new Date().getYear()}, Designed by{" "}
             <a
-              href="https://www.invisionapp.com?ref=nukr-default-footer"
+              href="#"
               target="_blank"
+              rel="noopener noreferrer"
             >
-              Invision
+              The Curly Brackets Team
             </a>
-            . Coded by{" "}
+            . For{" "}
             <a
-              href="https://www.creative-tim.com?ref=nukr-default-footer"
+              href="https://www.afdemp.org"
               target="_blank"
+              rel="noopener noreferrer"
             >
-              Creative Tim
+              AFDEmp
             </a>
             .
           </div>

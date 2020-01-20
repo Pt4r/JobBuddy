@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 // reactstrap components
 import {
   Collapse,
@@ -15,6 +15,7 @@ import {
   Container,
   UncontrolledTooltip
 } from "reactstrap";
+
 import { LoginMenu } from "components/api-authorization/LoginMenu";
 
 function PagesNavbar() {
@@ -90,7 +91,7 @@ function PagesNavbar() {
           </UncontrolledDropdown>
           <div className="navbar-translate">
             <NavbarBrand
-              href="https://demos.creative-tim.com/now-ui-kit-react/index?ref=nukr-examples-navbar"
+              href="#"
               target="_blank"
               id="navbar-brand"
             >
@@ -119,9 +120,9 @@ function PagesNavbar() {
             navbar
           >
             <Nav navbar>
-            
-                <LoginMenu color="white"/>
-
+           
+            <LoginMenu color="white"/>
+             
               <NavItem>
                 <NavLink
                   href="#"

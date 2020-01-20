@@ -2,65 +2,140 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    ViewData["Bg_Image"] = "../../img/bg16.jpg";
 }
 
-<h1>@ViewData["Title"]</h1>
 
 <div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+    <div class="col-md-5 ml-auto">
+        <div class="info-area info-horizontal mt-1">
+            <div class="icon icon-primary">
+                <i class="now-ui-icons media-2_sound-wave"></i>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="description">
+                <h5 class="info-title">Job Hunting</h5>
+                <p class="description">
+                    "We've created a single hub to house all your needs when looking for a new job. Track which companies you have allready sent your CV, the HR people you have met with or find new jobs and apply to them on the spot!
+                </p>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="info-area info-horizontal">
+            <div class="icon icon-primary">
+                <i class="now-ui-icons media-1_button-pause"></i>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+            <div class="description">
+                <h5 class="info-title">One to One Mentorship</h5>
+                <p class="description">
+                    We've developed this website to help you promote your self in the best way possible with a mentoring system by some of the best HR people in the industry.
+                </p>
+            </div>
+        </div>
+        <div class="info-area info-horizontal">
+            <div class="icon icon-info">
+                <i class="now-ui-icons users_single-02"></i>
+            </div>
+            <div class="description">
+                <h5 class="info-title">Email Sync</h5>
+                <p class="description">
+                    Connect with your email provider to automatically send and never miss a reply!
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+    <div class="col-md-4 mr-auto">
+        <div class="card card-signup text-center">
+            <div class="card-header ">
+                <h4 class="card-title">Register with:</h4>
+                <div class="social">
+                    <button class="btn btn-icon btn-round btn-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button class="btn btn-icon btn-round btn-dribbble">
+                        <i class="fab fa-dribbble"></i>
+                    </button>
+                    <button class="btn btn-icon btn-round btn-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <h5 class="card-description"> or with an email bellow </h5>
+                </div>
+            </div>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" id="RegisterValidation">
+
+                <div class="card-body ">
+                    @Html.ValidationMessage("Error")
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="now-ui-icons users_circle-08"></i>
+                            </div>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="First Name" required="required">
+                    </div>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="now-ui-icons users_circle-08"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" required="required">
+                    </div>
+
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="now-ui-icons ui-1_email-85"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Email" required="required">
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <p class="text-muted"><small>The password must be at least 6 character long, one Upper case, Lower case, Number and Special Character.</small></p>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="now-ui-icons objects_key-25"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Input.Password" placeholder="Password" class="form-control" required="required">
+                    </div>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="now-ui-icons objects_key-25"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" required="required">
+                    </div>
+
+                    <span asp-validation-for="Input.UserRole" class="text-danger"></span>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="now-ui-icons users_circle-08"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Input.UserRole" class="form-control" placeholder="UserRole" required="required">
+                    </div>
+                    <div class="form-check text-left">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="termsAndCond" required="required">
+                            <span class="form-check-sign"></span>
+                            I agree to the terms and conditions.
+                        </label>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <button type="submit" class="btn btn-primary btn-round btn-lg">Register</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -5,9 +5,9 @@ import {
   CardFooter,
   CardTitle,
   Container,
-  Col
+  Col,
+  Button
 } from "reactstrap";
-import { Button } from "components";
 
 import { Link } from "react-router-dom";
 
@@ -29,7 +29,7 @@ class LockScreenPage extends React.Component {
                   </CardBody>
                   <CardFooter>
                     <Link to="/" style={{color:"white"}}>
-                    <Button round className="btn-info">
+                    <Button className="btn-round" color="info">
                     Go back home
                     </Button>
                     </Link>

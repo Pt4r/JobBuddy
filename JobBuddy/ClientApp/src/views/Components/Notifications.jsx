@@ -1,4 +1,25 @@
+/*!
+
+=========================================================
+* Now UI Dashboard PRO React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+/*eslint-disable*/
 import React from "react";
+// react plugin for creating notifications over the dashboard
+import NotificationAlert from "react-notification-alert";
+
+// reactstrap components
 import {
   Alert,
   Modal,
@@ -10,48 +31,37 @@ import {
   CardBody,
   CardHeader,
   Row,
-  Col
+  Col,
+  Button
 } from "reactstrap";
-// react plugin for creating notifications over the dashboard
-import NotificationAlert from "react-notification-alert";
 
-import { PanelHeader, Button, Instructions } from "components";
-
-import img1 from "assets/img/bg1.jpg";
-import img2 from "assets/img/bg3.jpg";
+// core components
+import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 class Notifications extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: true,
-      modalMini: false,
-      modalClassic: false,
-      modalNotice: false
-    };
-    this.onDismiss = this.onDismiss.bind(this);
-    this.toggleModalClassic = this.toggleModalClassic.bind(this);
-    this.toggleModalNotice = this.toggleModalNotice.bind(this);
-    this.toggleModalMini = this.toggleModalMini.bind(this);
-    this.notify = this.notify.bind(this);
-  }
-  onDismiss() {}
-  toggleModalClassic() {
+  state = {
+    visible: true,
+    modalMini: false,
+    modalClassic: false,
+    modalNotice: false
+  };
+  onDismiss = () => {};
+  toggleModalClassic = () => {
     this.setState({
       modalClassic: !this.state.modalClassic
     });
-  }
-  toggleModalNotice() {
+  };
+  toggleModalNotice = () => {
     this.setState({
       modalNotice: !this.state.modalNotice
     });
-  }
-  toggleModalMini() {
+  };
+  toggleModalMini = () => {
     this.setState({
       modalMini: !this.state.modalMini
     });
-  }
-  notify(place) {
+  };
+  notify = place => {
     var color = Math.floor(Math.random() * 5 + 1);
     var type;
     switch (color) {
@@ -79,20 +89,20 @@ class Notifications extends React.Component {
       message: (
         <div>
           <div>
-            Welcome to <b>Now UI Dashboard React</b> - a beautiful premium admin for
-            every web developer.
+            Welcome to <b>Now UI Dashboard React</b> - a beautiful premium admin
+            for every web developer.
           </div>
         </div>
       ),
       type: type,
       icon: "now-ui-icons ui-1_bell-53",
-      autoDismiss: 2
+      autoDismiss: 7
     };
     this.refs.notificationAlert.notificationAlert(options);
-  }
+  };
   render() {
     return (
-      <div>
+      <>
         <PanelHeader
           content={
             <div className="header text-center">
@@ -102,10 +112,10 @@ class Notifications extends React.Component {
                 <a
                   href="https://github.com/creativetimofficial/react-notification-alert"
                   target="_blank"
-                  rel="noopener noreferrer"
                 >
                   The Full Documentation
-                </a>.
+                </a>
+                .
               </p>
             </div>
           }
@@ -358,44 +368,72 @@ class Notifications extends React.Component {
                           How Do You Become an Affiliate?
                         </ModalHeader>
                         <ModalBody>
-                          <Instructions
-                            title="1. Register"
-                            description={
-                              <span>
-                                The first step is to create an account at{" "}
-                                <a href="https://www.creative-tim.com/">
-                                  Creative Tim
-                                </a>. You can choose a social network or go for
-                                the classic version, whatever works best for
-                                you.
-                              </span>
-                            }
-                            img={img1}
-                          />
-                          <Instructions
-                            title="2. Apply"
-                            description={
-                              <span>
-                                The first step is to create an account at{" "}
-                                <a href="https://www.creative-tim.com/">
-                                  Creative Tim
-                                </a>. You can choose a social network or go for
-                                the classic version, whatever works best for
-                                you.
-                              </span>
-                            }
-                            img={img2}
-                          />
+                          <div className="instruction">
+                            <Row>
+                              <Col md="8">
+                                <strong>1. Register</strong>
+                                <p className="description">
+                                  The first step is to create an account at{" "}
+                                  <a
+                                    href="http://www.creative-tim.com/?ref=nudr-notification-page"
+                                    target="_blank"
+                                  >
+                                    Creative Tim
+                                  </a>
+                                  . You can choose a social network or go for
+                                  the classic version, whatever works best for
+                                  you.
+                                </p>
+                              </Col>
+                              <Col md="4">
+                                <div>
+                                  <img
+                                    alt="..."
+                                    className="rounded img-raised"
+                                    src={require("assets/img/bg1.jpg")}
+                                  />
+                                </div>
+                              </Col>
+                            </Row>
+                          </div>
+                          <div className="instruction">
+                            <Row>
+                              <Col md="8">
+                                <strong>2. Apply</strong>
+                                <p className="description">
+                                  The first step is to create an account at{" "}
+                                  <a
+                                    href="http://www.creative-tim.com/?ref=nudr-notification-page"
+                                    target="_blank"
+                                  >
+                                    Creative Tim
+                                  </a>
+                                  . You can choose a social network or go for
+                                  the classic version, whatever works best for
+                                  you.
+                                </p>
+                              </Col>
+                              <Col md="4">
+                                <div>
+                                  <img
+                                    alt="..."
+                                    className="rounded img-raised"
+                                    src={require("assets/img/bg3.jpg")}
+                                  />
+                                </div>
+                              </Col>
+                            </Row>
+                          </div>
                           <p>
                             If you have more questions, don't hesitate to
-                            contact us or send us a tweet @creativetim. We're
-                            here to help!
+                            contact us or send us a tweet @creativetim. We{"'"}
+                            re here to help!
                           </p>
                         </ModalBody>
                         <ModalFooter className="justify-content-center">
                           <Button
                             color="info"
-                            round
+                            className="btn-round"
                             onClick={this.toggleModalNotice}
                           >
                             Sounds good!
@@ -420,12 +458,12 @@ class Notifications extends React.Component {
                           <p>Always have an access to your profile</p>
                         </ModalBody>
                         <ModalFooter>
-                          <Button color="link" disabled neutral>
+                          <Button color="link" disabled className="btn-neutral">
                             Back
                           </Button>{" "}
                           <Button
                             color="link"
-                            neutral
+                            className="btn-neutral"
                             onClick={this.toggleModalMini}
                           >
                             Close
@@ -439,7 +477,7 @@ class Notifications extends React.Component {
             </Col>
           </Row>
         </div>
-      </div>
+      </>
     );
   }
 }
