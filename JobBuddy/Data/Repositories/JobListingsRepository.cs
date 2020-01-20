@@ -1,13 +1,10 @@
-﻿using JobBuddy.Data;
-using JobBuddy.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+using JobBuddy.Data.Repositories.IRepositories;
+using JobBuddy.Models;
 
-namespace JobBuddy.Repositories
+namespace JobBuddy.Data.Repositories
 {
     public class JobListingsRepository : IJobListingsRepository
     {
@@ -20,9 +17,16 @@ namespace JobBuddy.Repositories
 
         public ICollection<JobListing> GetJobListings()
         {
-            ICollection<JobListing> jobListings;
-            jobListings = db.JobListings.ToList();
+            ICollection<JobListing> jobListings = db.JobListings.ToList();
             return jobListings;
+        }
+
+
+        public JobListing GetJobListing(Guid id)
+        {
+            JobListing jobListing;
+            jobListing = db.JobListings.Find(id);
+            return jobListing;
         }
 
         public bool AddJobListing(JobListing jobListing)
@@ -49,23 +53,16 @@ namespace JobBuddy.Repositories
             return Save();
         }
 
-        public JobListing GetJobListing(Guid id)
+        public ICollection<JobListing> GetJobListingsFromClient(Guid Id)
         {
-            JobListing jobListing;
-            jobListing = db.JobListings.Find(id);
-            return jobListing;
+            return db.ClientJobListings.Where(j => j.ClientId == Id).Select(c => c.JobListing).ToList();
         }
 
-        public ICollection<JobListing> GetJobListingsFromClient(Guid clId)
+        public ICollection<JobListing> GetJobListingsFromHr(Guid Id)
         {
-            return db.ClientJobListings.Where(j => j.ClientId == clId).Select(c => c.JobListing).ToList();
+            return db.JobListings.Where(h => h.HrUserId == Id).ToList();
         }
 
-
-        //public HrUserDetails GetHrUserFromJobListing(Guid id)
-        //{
-        //    return db.JobListings.Where(j => j.Id == id).Select(h => h.HrUser).SingleOrDefault();
-        //}
 
         public bool Save()
         {
