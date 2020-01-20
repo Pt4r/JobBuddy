@@ -27,6 +27,7 @@ namespace JobBuddy.Data.Repositories
 //            IEnumerable<MentorUserDetails> mentors = _db.Mentors.Include(m => m.ApplicationUser).Where(m => m.ApplicationUserId == Id).ToList();
 
             MentorUserDetails mentors = _db.Mentors
+                .Include("ApplicationUser")
                 //                    .Include("Artist")
                 //                    .Include("Genre")
                 .SingleOrDefault(i => i.Id == id);
@@ -36,7 +37,7 @@ namespace JobBuddy.Data.Repositories
 
         public ICollection<MentorUserDetails> GetAll()
         {
-            ICollection<MentorUserDetails> mentors = _db.Mentors.ToList();
+            ICollection<MentorUserDetails> mentors = _db.Mentors.Include("ApplicationUser").ToList();
             return mentors;
         }
 
@@ -78,7 +79,7 @@ namespace JobBuddy.Data.Repositories
             MentorUserDetails mentorUserFound;
 
 
-            mentorUserFound = _db.Mentors.SingleOrDefault(m => m.Id == id);
+            mentorUserFound = _db.Mentors.Include("ApplicationUser").SingleOrDefault(m => m.Id == id);
 
 
 

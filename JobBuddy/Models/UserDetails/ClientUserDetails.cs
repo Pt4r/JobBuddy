@@ -8,7 +8,7 @@ using JobBuddy.Models.enums;
 
 namespace JobBuddy.Models.UserDetails
 {
-    public class ClientUserDetails : ApplicationUser
+    public class ClientUserDetails
     {
         [Key]
         public Guid Id { get; set; }

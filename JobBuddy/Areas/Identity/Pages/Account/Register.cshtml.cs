@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using JobBuddy.Data.Repositories;
+using JobBuddy.Data.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using JobBuddy.Models;
@@ -25,10 +27,16 @@ namespace JobBuddy.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IClientRepository _clientRepository;
+        private readonly IHrDetailsRepository _hrRepository;
+        private readonly IMentorRepository _mentorRepository;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            IClientRepository clientRepository,
+            IHrDetailsRepository HrRepository,
+            IMentorRepository mentorRepository,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -36,6 +44,9 @@ namespace JobBuddy.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _clientRepository = clientRepository;
+            _hrRepository = HrRepository;
+            _mentorRepository = mentorRepository;
         }
 
         [BindProperty]
@@ -65,7 +76,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$", 
+            [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$",
                 ErrorMessage = "Password must have at least one Upper case, Lower case, Number and Special Character.")]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -92,47 +103,61 @@ namespace JobBuddy.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var role = Input.UserRole;
-                var user = new ApplicationUser();
-
-                switch (role)
+                var user = new ApplicationUser
                 {
-                    case "Client":
-                        user = new ClientUserDetails
-                        {
-                            FirstName = Input.FirstName, 
-                            LastName = Input.LastName, 
-                            UserName = Input.Email, 
-                            Email = Input.Email,
-                            UserRole = Input.UserRole
-                        };
-                        break;
-                    case "Mentor":
-                        user = new MentorUserDetails
-                        {
-                            FirstName = Input.FirstName, 
-                            LastName = Input.LastName, 
-                            UserName = Input.Email, 
-                            Email = Input.Email,
-                            UserRole = Input.UserRole
-                        };
-                        break;
-                    case "HR":
-                        user = new HrUserDetails
-                        {
-                            FirstName = Input.FirstName, 
-                            LastName = Input.LastName, 
-                            UserName = Input.Email, 
-                            Email = Input.Email,
-                            UserRole = Input.UserRole
-                        };
-                        break;
-                }
-               
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    UserRole = Input.UserRole
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    var userId = _userManager.Users.SingleOrDefault(i => i.Email == user.Email).Id;
+
+                    var role = Input.UserRole;
+
+                    switch (role)
+                    {
+                        case "Client":
+
+                            if (userId != null)
+                            {
+                                var client = new ClientUserDetails
+                                {
+                                    ApplicationUserId = userId
+                                };
+                                _clientRepository.AddClient(client);
+                            }
+                            break;
+
+                        case "Mentor":
+                            if (userId != null)
+                            {
+                                var mentor = new MentorUserDetails
+                                {
+                                    ApplicationUserId = userId
+                                };
+                                _mentorRepository.AddMentor(mentor);
+                            }
+                            break;
+
+                        case "HR":
+                            if (userId != null)
+                            {
+                                var HR = new HrUserDetails
+                                {
+                                    ApplicationUserId = userId
+                                };
+                                _hrRepository.AddHr(HR);
+                            }
+                            break;
+                    }
+
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -160,7 +185,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
 
-                    
+
                 }
                 foreach (var error in result.Errors)
                 {

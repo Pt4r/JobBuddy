@@ -28,7 +28,7 @@ namespace JobBuddy.Data.Repositories
             //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
             //            hrDetails = _db.HRs.Where(m => m.ApplicationUserId == Id).ToList();
 
-            ICollection<HrUserDetails> hrDetails = _db.HRs.ToList();
+            ICollection<HrUserDetails> hrDetails = _db.HRs.Include("ApplicationUser").ToList();
             return hrDetails;
         }
 
@@ -36,7 +36,7 @@ namespace JobBuddy.Data.Repositories
         {
             HrUserDetails hrDetail;
 
-            hrDetail = _db.HRs.SingleOrDefault(i => i.Id == id);
+            hrDetail = _db.HRs.Include("ApplicationUser").SingleOrDefault(i => i.Id == id);
 
             return hrDetail;
         }
@@ -80,7 +80,7 @@ namespace JobBuddy.Data.Repositories
 
         public ICollection<JobListing> GetJobListingsFromHr(Guid id)
         {
-            return _db.JobListings.Where(h => h.HrUserId == id).ToList();
+            return _db.JobListings.Include("ApplicationUser").Where(h => h.HrUserId == id).ToList();
         }
 
         //public ICollection<JobListing> GetJobListingsFromLoggedInHr(string id)

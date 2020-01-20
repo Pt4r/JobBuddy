@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JobBuddy.Data.Repositories.IRepositories;
 using JobBuddy.Models.UserDetails;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobBuddy.Data.Repositories
 {
@@ -16,7 +17,7 @@ namespace JobBuddy.Data.Repositories
 
         public ICollection<AdministratorDetails> GetAll()
         {
-            ICollection<AdministratorDetails> admins = _db.Administrators.ToList();
+            ICollection<AdministratorDetails> admins = _db.Administrators.Include("ApplicationUser").ToList();
             return admins;
         }
 
@@ -24,7 +25,7 @@ namespace JobBuddy.Data.Repositories
         {
             AdministratorDetails administrator;
 
-            administrator = _db.Administrators.SingleOrDefault(i => i.Id == id);
+            administrator = _db.Administrators.Include("ApplicationUser").SingleOrDefault(i => i.Id == id);
 
             return administrator;
         }
@@ -76,7 +77,7 @@ namespace JobBuddy.Data.Repositories
         {
             AdministratorDetails administratorFound;
 
-            administratorFound = _db.Administrators.SingleOrDefault(m => m.Id == id);
+            administratorFound = _db.Administrators.Include("ApplicationUser").SingleOrDefault(m => m.Id == id);
 
             return administratorFound;
         }

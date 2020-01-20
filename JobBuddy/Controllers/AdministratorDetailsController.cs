@@ -60,6 +60,7 @@ namespace JobBuddy.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+        
             if (!_administratorDetailsRepository.AddAdministrator(adminCreated))
             {
                 ModelState.AddModelError("", "Something went wrong.");

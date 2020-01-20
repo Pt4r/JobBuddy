@@ -21,7 +21,7 @@ namespace JobBuddy.Data.Repositories
 
         public ICollection<ClientUserDetails> GetAll()
         {
-            ICollection<ClientUserDetails> clients = _db.Clients.ToList();
+            ICollection<ClientUserDetails> clients = _db.Clients.Include("ApplicationUser").ToList();
             return clients;
         }
 
@@ -29,6 +29,7 @@ namespace JobBuddy.Data.Repositories
         {
 
             ClientUserDetails client = _db.Clients
+                                            .Include("ApplicationUser")
                                             //                    .Include("Artist")
                                             //                    .Include("Genre")
                                           .SingleOrDefault(i => i.Id == id);
@@ -70,7 +71,7 @@ namespace JobBuddy.Data.Repositories
 
         public ICollection<ClientUserDetails> GetClientsFromJobListing(Guid jlId)
         {
-            return _db.ClientJobListings.Where(c => c.JobListingId == jlId).Select(i => i.Client).ToList();
+            return _db.ClientJobListings.Where(c => c.JobListingId == jlId).Select(i => i.Client).Include("ApplicationUser").ToList();
         }
 
         public bool Save()

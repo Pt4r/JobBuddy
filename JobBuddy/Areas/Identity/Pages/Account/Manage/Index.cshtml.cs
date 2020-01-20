@@ -36,10 +36,12 @@ namespace JobBuddy.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [MaxLength(50)]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
             [MaxLength(50)]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [Required]

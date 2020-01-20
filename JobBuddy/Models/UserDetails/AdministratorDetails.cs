@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobBuddy.Models.UserDetails
 {
-    public class AdministratorDetails : ApplicationUser
+    public class AdministratorDetails
     {
         
         [Key]

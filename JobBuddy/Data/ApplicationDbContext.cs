@@ -46,25 +46,16 @@ namespace JobBuddy.Data
             
 
             modelBuilder.Entity<AdministratorDetails>().HasKey(a => a.Id);
-            modelBuilder.Entity<AdministratorDetails>().HasOne(a => a.ApplicationUser).WithMany(a => a.Admins);
+         
 
             modelBuilder.Entity<MentorUserDetails>()
                       .HasKey(m => m.Id);
-
-            modelBuilder.Entity<MentorUserDetails>()
-                     .Property(m => m.PhoneNumber)
-                     .HasMaxLength(25)
-                     .IsRequired();
 
             //Πρέπει να δω πώς θα μπει το Rating ..Προς το παρόν μόνο Required
             modelBuilder.Entity<MentorUserDetails>()
                       .Property(m => m.Rating)
                       .IsRequired();
-            //episis na doume pws mpainei kai ti length...
-            modelBuilder.Entity<MentorUserDetails>()
-                      .Property(m => m.ProfilePicture)
-                      .HasColumnName("[Profile Picture]");
-
+           
 
             modelBuilder.Entity<MentorUserDetails>()
                       .Property(m => m.Gender)
@@ -113,7 +104,6 @@ namespace JobBuddy.Data
             modelBuilder.Entity<HrUserDetails>().ToTable("HrUser");
             modelBuilder.Entity<HrUserDetails>().HasKey(i => i.Id);
             modelBuilder.Entity<HrUserDetails>().Property(m => m.Gender);
-            modelBuilder.Entity<HrUserDetails>().Property(i => i.PhoneNumber);
             modelBuilder.Entity<HrUserDetails>().HasOne(I => I.Company).WithMany(C => C.HrUsers).HasForeignKey(I => I.CompanyId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<HrUserDetails>().HasMany(i => i.JobListings).WithOne(c => c.HrUser).HasForeignKey(c => c.HrUserId).OnDelete(DeleteBehavior.NoAction);
 
