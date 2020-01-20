@@ -34,7 +34,7 @@ import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import CompanyModal from "./Forms/CompanyModal.js"
-import { USERS_API_URL } from '../../Constants';
+import { LOCALHOST_API_URL } from '../../Constants';
 import CompanyTable from "./Tables/CompanyTable.jsx"
 
 import axios from "axios"
@@ -75,7 +75,7 @@ class ClientCompanies extends React.Component {
 // }
 
 componentDidMount(){
-  axios.get(`https://localhost:44394/api/companies`)
+  axios.get(`${ LOCALHOST_API_URL }/companies`)
   .then(res => {
     const comp = res.data;
     this.setState({comp});
@@ -86,7 +86,7 @@ componentDidMount(){
 deleteItem = id => {
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
-    fetch(`${USERS_API_URL}/${id}`, {
+    fetch(`${ LOCALHOST_API_URL }/${id}`, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
@@ -292,7 +292,7 @@ export default ClientCompanies;
 // // react component for creating dynamic tables
 // import ReactTable from "react-table";
 // import CompanyModal from "./Tables/CompanyTable.jsx"
-// import { USERS_API_URL } from '../../Constants';
+// import { LOCALHOST_API_URL } from '../../Constants';
 
 
 // // reactstrap components
@@ -331,7 +331,7 @@ export default ClientCompanies;
 // deleteItem = id => {
 //   let confirmDeletion = window.confirm('Do you really wish to delete it?');
 //   if (confirmDeletion) {
-//     fetch(`${USERS_API_URL}/${id}`, {
+//     fetch(`${LOCALHOST_API_URL}/${id}`, {
 //       method: 'delete',
 //       headers: {
 //         'Content-Type': 'application/json'

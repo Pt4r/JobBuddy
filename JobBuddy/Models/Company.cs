@@ -17,7 +17,7 @@ namespace JobBuddy.Models
         public string Address { get; set; }
         //[Required]
         [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
+        //[DataType(DataType.PhoneNumber)]
         public int PhoneNumber { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }        ///anamoni apo spyroMisichtoni

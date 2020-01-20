@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import Axios from 'axios';
+import { LOCALHOST_API_URL } from '../../../Constants';
+import { isConditionalExpression } from 'typescript';
 
 class CompanyForm extends React.Component {
     constructor(props){
@@ -26,17 +28,41 @@ class CompanyForm extends React.Component {
 
     submitNew = e => {
         e.preventDefault()
-        Axios.post('localhost:44394/api/companies/Create', this.state)
-        .then(res => {
+        const comp = {
+        title: this.state.title,
+        address: this.state.address,
+        phoneNumber : this.state.phoneNumber,
+        email: this.state.email
+        }
+        require('axios-debug-log')
+        console.log(comp)
+        Axios.post(`https://localhost:5001/api/companies/Create`, comp)
+        .then(res => {            
         console.log(res)})
         .catch(error => {
             console.log(error)
         })
     }
 
+    // submitNew(event){ 
+    //     event.preventDefault();
+
+    //     fetch(`https://localhost:5001/api/companies/Create`, {
+    //      method: 'post',
+    //      body: {
+    //       "phoneNumber": this.refs.phoneNumber          
+    //     }.then(res =>{
+    //         console.log(res) 
+    //     })         
+    //     .catch(error => {
+    //         console.log(error)
+    //     })
+    //     });
+    //    };
+
     submitEdit = e =>{
         e.preventDefault()
-        Axios.put(`localhost:44394/api/companies/update/${this.state.id}`, this.state)
+        Axios.put(`${LOCALHOST_API_URL}/companies/update/${this.state.id}`, this.state)
         .then(res => {
             console.log(res)
         })

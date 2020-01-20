@@ -19,7 +19,7 @@ import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import JobListingModal from "../../components/Form/JobListingModal.js"
-import { USERS_API_URL } from '../../Constants';
+import { LOCALHOST_API_URL } from '../../Constants';
 
 
 // reactstrap components
@@ -58,7 +58,7 @@ componentDidMount(){
 deleteItem = id => {
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
-    fetch(`${USERS_API_URL}/${id}`, {
+    fetch(`${LOCALHOST_API_URL}/${id}`, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'

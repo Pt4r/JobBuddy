@@ -5,6 +5,7 @@
   "homepage": "https://jobbuddy.com/",
   "dependencies": {
     "axios": "^0.19.1",
+    "axios-debug-log": "^0.6.2",
     "bootstrap": "4.3.1",
     "chart.js": "2.8.0",
     "classnames": "2.2.6",

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import JobListingForm from './JobListingForm';
-import { USERS_API_URL } from '../../Constants';
+import { LOCALHOST_API_URL } from '../../Constants';
 
 class JobListingModal extends Component {
     constructor(props) {

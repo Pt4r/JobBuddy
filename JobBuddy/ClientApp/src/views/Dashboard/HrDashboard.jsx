@@ -15,7 +15,7 @@
 
 */
 import React from "react";
-import { USERS_API_URL } from '../../Constants';
+import { LOCALHOST_API_URL } from '../../Constants';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 // reactstrap components
@@ -43,7 +43,7 @@ class HrDashboard extends React.Component {
       this.getItens();
     }
     getItens = () => {
-      fetch(USERS_API_URL)
+      fetch(`${LOCALHOST_API_URL}/`)
         .then(res => res.json())
         .then(res => this.setState({ items: res }))
         .catch(err => console.log(err));

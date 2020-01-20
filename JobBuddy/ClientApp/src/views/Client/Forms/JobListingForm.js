@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { USERS_API_URL } from '../../Constants';
+import { LOCALHOST_API_URL } from '../../../Constants';
 
 class JobListingForm extends React.Component {
     state = {
@@ -24,7 +24,7 @@ class JobListingForm extends React.Component {
     }
     submitNew = e => {
         e.preventDefault();
-        fetch(`${USERS_API_URL}`, {
+        fetch(`${LOCALHOST_API_URL}/joblistings/create`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ class JobListingForm extends React.Component {
     }
     submitEdit = e => {
         e.preventDefault();
-        fetch(`${USERS_API_URL}/${this.state.id}`, {
+        fetch(`${LOCALHOST_API_URL}/joblistings/update/${this.state.id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import JobListingModal from "../Forms/CompanyModal";
 import axios from "axios";
+import { LOCALHOST_API_URL } from '../../../Constants';
 
 
 
@@ -31,7 +32,7 @@ class CompanyTable extends React.Component {
 
 
 componentDidMount(){
-  axios.get(`https://localhost:44394/api/jobListings`)
+  axios.get(`${ LOCALHOST_API_URL }/jobListings`)
   .then(res => {
     const posts = res.data;
     this.setState({posts: posts});
@@ -42,7 +43,7 @@ componentDidMount(){
 deleteItem = id => {
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
-    const url = `localhost:44394/api/jobListings/delete/${id}`
+    const url = `${ LOCALHOST_API_URL }/jobListings/delete/${id}`
     fetch(url, {
       method: 'delete',
       headers: {
