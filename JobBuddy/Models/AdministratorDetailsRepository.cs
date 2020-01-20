@@ -62,7 +62,7 @@ namespace JobBuddy.Models
 
 
             //Allazw to search me basi to Id tou Logged in user ...Wste na fortwnw se kathe login mono ta dedomena tou xristi//
-            administrators = _administratorDetailsContext.Administrators.Include(m => m.ApplicationUser)/*.Where(m => m.ApplicationUserId == Id)*/.ToList();
+            administrators = _administratorDetailsContext.Administrators.Include(m => m.ApplicationUser1)/*.Where(m => m.ApplicationUserId == Id)*/.ToList();
 
 
             return administrators;

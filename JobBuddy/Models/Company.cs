@@ -22,10 +22,8 @@ namespace JobBuddy.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }        ///anamoni apo spyroMisichtoni
         public virtual ICollection<HrUserDetails> HrUsers { get; set; }
-
-        public virtual ICollection<JobListing> JobListings { get; set; }        //Lista me mentors 
+        //public virtual ICollection<JobListing> JobListings { get; set; }        //Lista me mentors 
         public virtual ICollection<MentorUserDetails> Mentors { get; set; }
-
         [ForeignKey("ApplicationUserId")]
         public JobCategory JobCategory1 { get; set; }
         public string JobCategoryId { get; set; }

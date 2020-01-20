@@ -1,34 +1,14 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React from "react";
-
-// reactstrap components
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import { PanelHeader } from "components";
 
 import icons from "variables/icons";
 
 class Icons extends React.Component {
   render() {
     return (
-      <>
+      <div>
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
@@ -38,9 +18,7 @@ class Icons extends React.Component {
                   <h5 className="title">100 Awesome Nucleo Icons</h5>
                   <p className="category">
                     Handcrafted by our friends from{" "}
-                    <a href="https://nucleoapp.com/?ref=1712" target="_blank">
-                      NucleoApp
-                    </a>
+                    <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a>
                   </p>
                 </CardHeader>
                 <CardBody className="all-icons">
@@ -68,7 +46,7 @@ class Icons extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </div>
     );
   }
 }

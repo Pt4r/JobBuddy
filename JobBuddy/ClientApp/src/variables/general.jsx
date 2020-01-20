@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import {
   UncontrolledButtonDropdown,
@@ -24,6 +8,10 @@ import {
 
 import taskImage1 from "assets/img/ryan.jpg";
 import taskImage2 from "assets/img/eva.jpg";
+
+import taskRTLImage1 from "assets/img/emilyz.jpg";
+import taskRTLImage2 from "assets/img/james.jpg";
+import taskRTLImage3 from "assets/img/mike.jpg";
 
 // ##############################
 // // // tasks list for Tasks card in Dashboard view
@@ -45,6 +33,29 @@ const tasks = [
     image: taskImage2,
     text:
       "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit"
+  }
+];
+
+// ##############################
+// // // tasks list for Tasks card in RTL view
+// #############################
+
+const tasksRTL = [
+  {
+    checked: true,
+    image: taskRTLImage1,
+    text: 'توقيع عقد "ما يخشاه منظمو المؤتمر؟"	'
+  },
+  {
+    checked: false,
+    image: taskRTLImage2,
+    text: "خطوط من الأدب الروسي العظيم؟ أو رسائل البريد الإلكتروني من بلدي بوس؟	"
+  },
+  {
+    checked: true,
+    image: taskRTLImage3,
+    text:
+      "مغمورة: بعد مرور عام ، تقييم ما فقد وما تم العثور عليه عندما اجتاحت الأمطار المدمرة مترو ديترويت	"
   }
 ];
 
@@ -252,6 +263,79 @@ const widgetStories = [
 ];
 
 // ##############################
+// // // stories for RTL view
+// #############################
+
+const widgetStoriesRTL = [
+  {
+    // First story
+    inverted: true,
+    badgeColor: "danger",
+    badgeIcon: "now-ui-icons business_briefcase-24",
+    title: "بعض العنوان",
+    titleColor: "danger",
+    body: (
+      <p>
+        قدم أفضل وجبة يوم الأب على الإطلاق. ممتن جدا سعيد جدا حتى المباركة.
+        شكراً لك على صنع عائلتي لقد استمتعنا بالموضوع "المستقبلي" !!! كانت ليلة
+        ممتعة كل ذلك معا ... عرض كاني فظ دائما في الساعة 2 صباحا بيعت من مشاهير
+        مشاهدة
+      </p>
+    ),
+    footerTitle: "قبل 11 ساعة عبر تويتر"
+  },
+  {
+    // Second story
+    inverted: true,
+    badgeColor: "success",
+    badgeIcon: "now-ui-icons design-2_ruler-pencil",
+    title: "واحدة أخرى",
+    titleColor: "success",
+    body: (
+      <p>
+        أيضًا الإشارة إلى أنه أول ألبوم ينتقل إلى رقم 1 من البث المباشر !!! أنا
+        أحبك إلين وأيضا قاعدة بلدي رقم واحد تصميم أي شيء أفعله من الأحذية إلى
+        الموسيقى إلى المنازل هو أن كيم يجب أن ترغب في ذلك
+      </p>
+    )
+  },
+  {
+    // Third story
+    inverted: true,
+    badgeColor: "info",
+    badgeIcon: "now-ui-icons gestures_tap-01",
+    title: "عنوان آخر",
+    titleColor: "info",
+    body: (
+      <div>
+        <p>
+          يسمى أنا أفتقد كاني القديم هذا كل ما كان كاني وأنا أحبك مثل كاني يحب
+          كاني مشاهدة مشاهير @ Figueroa و 12 في وسط المدينة LA 11:10 PM
+        </p>
+        <p>
+          ماذا لو قدمت كاني أغنية عن كاني رويير لا تصنع سرير الدب القطبي ولكن
+          الأريكة الدببة القطبية هي قطعة الأثاث المفضلة لدينا التي نملكها. لم
+          يكن أي مجموعة من Kanyes على أهدافه كاني
+        </p>
+        <hr />
+      </div>
+    ),
+    footer: (
+      <UncontrolledButtonDropdown group={false}>
+        <DropdownToggle caret className="btn-round" color="info">
+          <i className="now-ui-icons design_bullet-list-67" />
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem>عمل</DropdownItem>
+          <DropdownItem>إجراء آخر</DropdownItem>
+          <DropdownItem>شيء آخر هنا</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
+    )
+  }
+];
+
+// ##############################
 // // // data for datatables.net in DataTables view
 // #############################
 
@@ -367,18 +451,25 @@ const events = [
 // // // for vector map row in Dashboard view
 // #############################
 
-const gr_flag = require("../assets/img/flags/GR.png");
 const us_flag = require("../assets/img/flags/US.png");
-const nl_flag = require("../assets/img/flags/NL.png");
+const de_flag = require("../assets/img/flags/DE.png");
 const au_flag = require("../assets/img/flags/AU.png");
 const gb_flag = require("../assets/img/flags/GB.png");
+const ro_flag = require("../assets/img/flags/RO.png");
+const br_flag = require("../assets/img/flags/BR.png");
 
 const table_data = [
-  { flag: gr_flag, country: "Greece", count: "24"},
-  { flag: nl_flag, country: "Holland", count: "8"},
-  { flag: gb_flag, country: "United Kingdom", count: "5"},
-  { flag: us_flag, country: "USA", count: "2"},
-  { flag: au_flag, country: "Australia", count: "1"},
+  { flag: us_flag, country: "USA", count: "2.920", percentage: "53.23%" },
+  { flag: de_flag, country: "Germany", count: "1.300", percentage: "20.43%" },
+  { flag: au_flag, country: "Australia", count: "760", percentage: "10.35%" },
+  {
+    flag: gb_flag,
+    country: "United Kingdom",
+    count: "690",
+    percentage: "7.87%"
+  },
+  { flag: ro_flag, country: "Romania", count: "600", percentage: "5.94%" },
+  { flag: br_flag, country: "Brasil", count: "550", percentage: "4.34%" }
 ];
 
 // tasks list for Tasks card in Dashboard view
@@ -391,10 +482,12 @@ const table_data = [
 // data for populating the table from Dashboard view
 export {
   tasks,
+  tasksRTL,
   thead,
   tbody,
   stories,
   widgetStories,
+  widgetStoriesRTL,
   dataTable,
   events,
   table_data

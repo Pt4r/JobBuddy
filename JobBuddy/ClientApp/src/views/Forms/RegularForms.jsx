@@ -1,80 +1,73 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Label,
-  FormGroup,
   Form,
+  FormGroup,
+  Label,
   Input,
   FormText,
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  CardFooter,
   Row,
   Col
 } from "reactstrap";
 
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import { PanelHeader, FormInputs, Button } from "components";
 
 class RegularForms extends React.Component {
   render() {
     return (
-      <>
+      <div>
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
-            <Col md="6">
+            <Col md={6} xs={12}>
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Stacked Form</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Form action="#" method="#">
-                    <label>Email address</label>
-                    <FormGroup>
-                      <Input type="email" />
-                    </FormGroup>
-                    <label>Password</label>
-                    <FormGroup>
-                      <Input type="password" />
-                    </FormGroup>
-                    <FormGroup check className="mt-3">
-                      <Label check>
-                        <Input type="checkbox" />
-                        <span className="form-check-sign" />
-                        Subscribe to newsletter
-                      </Label>
-                    </FormGroup>
+                  <Form>
+                    <FormInputs
+                      // ncols={["col-12", "col-12", "col-12"]}
+                      proprieties={[
+                        {
+                          label: "Email address",
+                          inputProps: {
+                            type: "email"
+                          }
+                        },
+                        {
+                          label: "Password",
+                          inputProps: {
+                            type: "password"
+                          }
+                        },
+                        {
+                          label: "Subscribe to newsletter",
+                          labelProps: {
+                            check: true
+                          },
+                          inputProps: {
+                            type: "checkbox"
+                          },
+                          formGroupProps: {
+                            check: true,
+                            className: "mt-3"
+                          }
+                        }
+                      ]}
+                    />
                   </Form>
                 </CardBody>
                 <CardFooter>
-                  <Button className="btn-fill" color="primary" type="submit">
-                    Submit
-                  </Button>
+                  <Button color="primary">Submit</Button>
                 </CardFooter>
               </Card>
             </Col>
-            <Col md="6">
+            <Col md={6} xs={12}>
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Horizontal Form</CardTitle>
@@ -82,32 +75,32 @@ class RegularForms extends React.Component {
                 <CardBody>
                   <Form className="form-horizontal">
                     <Row>
-                      <Label md="3">Username</Label>
-                      <Col md="9">
+                      <Label md={3}>Username</Label>
+                      <Col xs={12} md={9}>
                         <FormGroup>
                           <Input type="text" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label md="3">Email</Label>
-                      <Col md="9">
+                      <Label md={3}>Email</Label>
+                      <Col xs={12} md={9}>
                         <FormGroup>
                           <Input type="email" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label md="3">Password</Label>
-                      <Col md="9">
+                      <Label md={3}>Password</Label>
+                      <Col xs={12} md={9}>
                         <FormGroup>
                           <Input type="password" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col md="3" />
-                      <Col md="9">
+                      <Label md={3} />
+                      <Col xs={12} md={9}>
                         <FormGroup check>
                           <Label check>
                             <Input type="checkbox" />
@@ -121,82 +114,74 @@ class RegularForms extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <Row>
-                    <Col md="3" />
-                    <Col md="9">
-                      <Button
-                        className="btn-fill"
-                        color="primary"
-                        type="submit"
-                      >
-                        Sign in
-                      </Button>
+                    <Label md={3} />
+                    <Col xs={12} md={9}>
+                      <Button color="primary">Sign in</Button>
                     </Col>
                   </Row>
                 </CardFooter>
               </Card>
             </Col>
-            <Col md="12">
+            <Col md={12} xs={12}>
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Form Elements</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Form action="/" className="form-horizontal" method="get">
+                  <Form className="form-horizontal">
                     <Row>
-                      <Label sm="2">With help</Label>
-                      <Col sm="10">
+                      <Label sm={2}>With help</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup>
                           <Input type="text" />
-                          <FormText color="default" tag="span">
+                          <FormText color="default">
                             A block of help text that breaks onto a new line.
                           </FormText>
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Password</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Password</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup>
                           <Input type="password" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Placeholder</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Placeholder</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup>
-                          <Input placeholder="placeholder" type="text" />
+                          <Input type="text" placeholder="placeholder" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Disabled</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Disabled</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup>
                           <Input
-                            defaultValue="Disabled input here.."
-                            disabled
                             type="text"
+                            disabled
+                            placeholder="Disabled input here.."
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Static control</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Static control</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup>
-                          <p className="form-control-static">
-                            hello@creative-tim.com
-                          </p>
+                          <Input plaintext>hello@creative-tim.com</Input>
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Checkboxes and radios</Label>
-                      <Col className="checkbox-radios" sm="10">
+                      <Label sm={2}>Checkboxes and radios</Label>
+                      <Col xs={12} sm={10} className="checkbox-radios">
                         <FormGroup check>
                           <Label check>
-                            <Input type="checkbox" />
+                            <Input type="checkbox" defaultChecked />
                             <span className="form-check-sign" />
                             First Checkbox
                           </Label>
@@ -210,25 +195,14 @@ class RegularForms extends React.Component {
                         </FormGroup>
                         <FormGroup check className="form-check-radio">
                           <Label check>
-                            <Input
-                              defaultChecked
-                              defaultValue="option1"
-                              id="exampleRadios1"
-                              name="exampleRadios"
-                              type="radio"
-                            />
+                            <Input type="radio" name="radios" defaultChecked />
                             <span className="form-check-sign" />
                             First Radio
                           </Label>
                         </FormGroup>
                         <FormGroup check className="form-check-radio">
                           <Label check>
-                            <Input
-                              defaultValue="option2"
-                              id="exampleRadios2"
-                              name="exampleRadios"
-                              type="radio"
-                            />
+                            <Input type="radio" name="radios" />
                             <span className="form-check-sign" />
                             Second Radio
                           </Label>
@@ -236,24 +210,27 @@ class RegularForms extends React.Component {
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Inline checkboxes</Label>
-                      <Col sm="10">
-                        <FormGroup check inline>
+                      <Label sm={2}>Inline checkboxes</Label>
+                      <Col xs={12} sm={10}>
+                        <FormGroup check className="form-check-inline">
                           <Label check>
                             <Input type="checkbox" />
-                            <span className="form-check-sign" />a
+                            <span className="form-check-sign" />
+                            a
                           </Label>
                         </FormGroup>
-                        <FormGroup check inline>
+                        <FormGroup check className="form-check-inline">
                           <Label check>
                             <Input type="checkbox" />
-                            <span className="form-check-sign" />b
+                            <span className="form-check-sign" />
+                            b
                           </Label>
                         </FormGroup>
-                        <FormGroup check inline>
+                        <FormGroup check className="form-check-inline">
                           <Label check>
                             <Input type="checkbox" />
-                            <span className="form-check-sign" />c
+                            <span className="form-check-sign" />
+                            c
                           </Label>
                         </FormGroup>
                       </Col>
@@ -262,16 +239,23 @@ class RegularForms extends React.Component {
                 </CardBody>
               </Card>
             </Col>
-            <Col md="12">
+            <Col md={12} xs={12}>
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Input Variants</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Form action="/" className="form-horizontal" method="get">
+                  <Form className="form-horizontal">
                     <Row>
-                      <Label sm="2">Custom Checkboxes &amp; radios</Label>
-                      <Col className="checkbox-radios" sm={4}>
+                      <Label sm={2}>Custom Checkboxes & radios</Label>
+                      <Col xs={12} sm={4} className="checkbox-radios">
+                        <FormGroup check>
+                          <Label check>
+                            <Input type="checkbox" defaultChecked />
+                            <span className="form-check-sign" />
+                            Checked
+                          </Label>
+                        </FormGroup>
                         <FormGroup check>
                           <Label check>
                             <Input type="checkbox" />
@@ -279,116 +263,94 @@ class RegularForms extends React.Component {
                             Unchecked
                           </Label>
                         </FormGroup>
-                        <FormGroup check>
+                        <FormGroup check disabled>
                           <Label check>
-                            <Input defaultChecked type="checkbox" />
+                            <Input type="checkbox" defaultChecked disabled />
                             <span className="form-check-sign" />
                             Checked
                           </Label>
                         </FormGroup>
                         <FormGroup check disabled>
                           <Label check>
-                            <Input disabled type="checkbox" />
+                            <Input type="checkbox" disabled />
                             <span className="form-check-sign" />
-                            Disabled Unchecked
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check disabled>
-                          <Label check>
-                            <Input disabled type="checkbox" />
-                            <span className="form-check-sign" />
-                            Disabled Checked
+                            Unchecked
                           </Label>
                         </FormGroup>
                       </Col>
-                      <Col className="checkbox-radios" sm="5">
+                      <Col xs={12} sm={5}>
                         <FormGroup check className="form-check-radio">
                           <Label check>
                             <Input
-                              defaultValue="option1"
-                              id="exampleRadios3"
-                              name="exampleRadio"
                               type="radio"
+                              name="ndradios"
+                              defaultChecked
                             />
                             <span className="form-check-sign" />
-                            Radio is off
+                            Checked
                           </Label>
                         </FormGroup>
                         <FormGroup check className="form-check-radio">
                           <Label check>
-                            <Input
-                              defaultChecked
-                              defaultValue="option2"
-                              id="exampleRadios4"
-                              name="exampleRadio"
-                              type="radio"
-                            />
+                            <Input type="radio" name="ndradios" />
                             <span className="form-check-sign" />
-                            Radio is on
+                            Unchecked
                           </Label>
                         </FormGroup>
-                        <FormGroup check className="form-check-radio" disabled>
+                        <FormGroup check disabled className="form-check-radio">
                           <Label check>
                             <Input
-                              defaultValue="option1"
-                              disabled
-                              id="exampleRadios5"
-                              name="exampleRadio1"
                               type="radio"
+                              name="dradios"
+                              defaultChecked
+                              disabled
                             />
                             <span className="form-check-sign" />
-                            Radio is off
+                            Checked
                           </Label>
                         </FormGroup>
-                        <FormGroup check className="form-check-radio" disabled>
+                        <FormGroup check disabled className="form-check-radio">
                           <Label check>
-                            <Input
-                              defaultChecked
-                              defaultValue="option2"
-                              disabled
-                              id="exampleRadios6"
-                              name="exampleRadio1"
-                              type="radio"
-                            />
+                            <Input type="radio" name="dradios" disabled />
                             <span className="form-check-sign" />
-                            Radio is on
+                            Unchecked
                           </Label>
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Input with success</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Input with success</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup className="has-success">
-                          <Input defaultValue="Success" type="text" />
+                          <Input type="text" defaultValue="Success" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Input with error</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Input with error</Label>
+                      <Col xs={12} sm={10}>
                         <FormGroup className="has-danger">
-                          <Input defaultValue="Error" type="text" />
+                          <Input type="text" defaultValue="Error" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Label sm="2">Column sizing</Label>
-                      <Col sm="10">
+                      <Label sm={2}>Column sizing</Label>
+                      <Col xs={12} sm={10}>
                         <Row>
-                          <Col md="3">
+                          <Col xs={12} md={3}>
                             <FormGroup>
-                              <Input placeholder="md={3}" type="text" />
+                              <Input type="text" placeholder="md={3}" />
                             </FormGroup>
                           </Col>
-                          <Col md="4">
+                          <Col xs={12} md={4}>
                             <FormGroup>
-                              <Input placeholder="md={4}" type="text" />
+                              <Input type="text" placeholder="md={4}" />
                             </FormGroup>
                           </Col>
-                          <Col md="5">
+                          <Col xs={12} md={5}>
                             <FormGroup>
-                              <Input placeholder="md={5}" type="text" />
+                              <Input type="text" placeholder="md={5}" />
                             </FormGroup>
                           </Col>
                         </Row>
@@ -400,7 +362,7 @@ class RegularForms extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </div>
     );
   }
 }

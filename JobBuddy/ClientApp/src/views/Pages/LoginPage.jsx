@@ -10,13 +10,14 @@ import {
   Input,
   InputGroup,
   InputGroupAddon,
-  InputGroupText,
-  Button
+  InputGroupText
 } from "reactstrap";
+
+import { Button } from "components";
 
 import nowLogo from "assets/img/AFDempLogo.png";
 
-import bgImage from "assets/img/bg13.jpg";
+import bgImage from "assets/img/bg14.jpg";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -63,7 +64,8 @@ class LoginPage extends React.Component {
   }
   render() {
     return (
-      <>
+      <div className="wrapper wrapper-full-page ps">
+        <div className="full-page section-image">
         <div className="content">
           <div className="login-page">
             <Container>
@@ -122,9 +124,10 @@ class LoginPage extends React.Component {
                     <CardFooter>
                       <Button
                         block
+                        round
                         color="primary"
                         size="lg"
-                        className="mb-3 btn-round"
+                        className="mb-3"
                         type="submit"
                         onClick={e => this.loginSubmit(e)}
                       >
@@ -150,12 +153,13 @@ class LoginPage extends React.Component {
               </Col>
             </Container>
           </div>
-        </div>
+          </div>
         <div
           className="full-page-background"
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         />
-        </>
+      </div>
+      </div>
     );
   }
 }

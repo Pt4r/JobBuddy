@@ -1,27 +1,9 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 // used for making the prop types of this component
 import PropTypes from "prop-types";
 
-// reactstrap components
-import { Button } from "reactstrap";
+import { Button } from "components";
 
-// core components
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
 
@@ -32,9 +14,12 @@ class ImageUpload extends React.Component {
       file: null,
       imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage
     };
-    this.fileInput = React.createRef();
+    this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
-  handleImageChange = e => {
+  handleImageChange(e) {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
@@ -45,50 +30,42 @@ class ImageUpload extends React.Component {
       });
     };
     reader.readAsDataURL(file);
-  };
-  handleSubmit = e => {
+  }
+  handleSubmit(e) {
     e.preventDefault();
     // this.state.file is the file/image uploaded
     // in this function you can save the image (this.state.file) on form submit
     // you have to call it yourself
-  };
-  handleClick = () => {
-    this.fileInput.current.click();
-  };
-  handleRemove = () => {
+  }
+  handleClick() {
+    this.refs.fileInput.click();
+  }
+  handleRemove() {
     this.setState({
       file: null,
       imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage
     });
-    this.fileInput.current.value = null;
-  };
+    this.refs.fileInput.value = null;
+  }
   render() {
     return (
       <div className="fileinput text-center">
-        <input
-          type="file"
-          onChange={this.handleImageChange}
-          ref={this.fileInput}
-        />
+        <input type="file" onChange={this.handleImageChange} ref="fileInput" />
         <div className={"thumbnail" + (this.props.avatar ? " img-circle" : "")}>
           <img src={this.state.imagePreviewUrl} alt="..." />
         </div>
         <div>
           {this.state.file === null ? (
-            <Button className="btn-round" onClick={() => this.handleClick()}>
+            <Button round onClick={() => this.handleClick()}>
               {this.props.avatar ? "Add Photo" : "Select image"}
             </Button>
           ) : (
             <span>
-              <Button className="btn-round" onClick={() => this.handleClick()}>
+              <Button round onClick={() => this.handleClick()}>
                 Change
               </Button>
               {this.props.avatar ? <br /> : null}
-              <Button
-                color="danger"
-                className="btn-round"
-                onClick={() => this.handleRemove()}
-              >
+              <Button color="danger" round onClick={() => this.handleRemove()}>
                 <i className="fa fa-times" /> Remove
               </Button>
             </span>

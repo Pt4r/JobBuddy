@@ -1,6 +1,5 @@
 ﻿using JobBuddy.Models;
 using JobBuddy.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ namespace JobBuddy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize("Admin,Client")]
     public class ClientUserController : Controller
     {
 

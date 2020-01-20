@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JobBuddy.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +10,6 @@ namespace JobBuddy.Controllers
 {
 
     [ApiController]
-    [Authorize("Admin")]
     public class AdministratorDetailsController : ControllerBase
     {
         private IAdministratorDetailsRepository _administratorDetailsRepository;

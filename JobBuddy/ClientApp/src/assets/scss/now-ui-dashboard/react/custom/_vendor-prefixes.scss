@@ -1,5 +1,0 @@
-@mixin panel-gradient($color) {
-  background: $color; /* fallback for old browsers */
-  background:  linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
-  background-size: 105%;
-}
