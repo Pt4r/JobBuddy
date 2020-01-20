@@ -1,11 +1,15 @@
-﻿using System;
+﻿using JobBuddy.Models.UserDetails;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using JobBuddy.Models.enums;
 
 namespace JobBuddy.Models
 {
+    //** TODO **
+
     public class MentorOffer
     {
         public Guid MentorOfferId { get; set; }

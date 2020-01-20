@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace JobBuddy.Models
+﻿namespace JobBuddy.Models.enums
 {
     public enum enumJobCategoryTitle
     {

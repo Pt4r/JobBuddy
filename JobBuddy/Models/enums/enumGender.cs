@@ -1,4 +1,4 @@
-﻿namespace JobBuddy.Models
+﻿namespace JobBuddy.Models.enums
 {
     public enum enumGender
     {
