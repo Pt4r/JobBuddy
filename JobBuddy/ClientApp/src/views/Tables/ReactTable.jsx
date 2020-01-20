@@ -1,21 +1,11 @@
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import { Card, CardBody, CardHeader, CardTitle, Row, Col } from "reactstrap";
 
+import { PanelHeader } from "components";
 
-// reactstrap components
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Row,
-  Col,
-  Button
-} from "reactstrap";
-
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import Button from "components/CustomButton/CustomButton.jsx";
 
 const dataTable = [
   ["Tiger Nixon", "System Architect", "Edinburgh", "61"],
@@ -62,12 +52,6 @@ const dataTable = [
   ["Olivia Liang", "Support Engineer", "Singapore", "64"]
 ];
 
-
-
-
-
-
-
 class ReactTables extends Component {
   constructor(props) {
     super(props);
@@ -98,9 +82,10 @@ class ReactTables extends Component {
                       "\n}."
                   );
                 }}
-                className="btn-icon btn-round"
                 color="info"
                 size="sm"
+                round
+                icon
               >
                 <i className="fa fa-heart" />
               </Button>{" "}
@@ -120,9 +105,10 @@ class ReactTables extends Component {
                       "\n}."
                   );
                 }}
-                className="btn-icon btn-round"
                 color="warning"
                 size="sm"
+                round
+                icon
               >
                 <i className="fa fa-edit" />
               </Button>{" "}
@@ -142,9 +128,10 @@ class ReactTables extends Component {
                   });
                   this.setState({ data: data });
                 }}
-                className="btn-icon btn-round"
                 color="danger"
                 size="sm"
+                round
+                icon
               >
                 <i className="fa fa-times" />
               </Button>{" "}
@@ -154,12 +141,9 @@ class ReactTables extends Component {
       })
     };
   }
-
-
-
   render() {
     return (
-      <>
+      <div>
         <PanelHeader
           content={
             <div className="header text-center">
@@ -168,16 +152,17 @@ class ReactTables extends Component {
                 A powerful react plugin handcrafted by our friends from{" "}
                 <a
                   href="https://react-table.js.org/#/story/readme"
-                  target="_blank" rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   react-table
-                </a>
-                . It is a highly flexible tool, based upon the foundations of
-                progressive enhancement on which you can add advanced
+                </a>. It is a highly flexible tool, based upon the foundations
+                of progressive enhancement on which you can add advanced
                 interaction controls. Please check out their{" "}
                 <a
                   href="https://react-table.js.org/#/story/readme"
-                  target="_blank" rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   full documentation.
                 </a>
@@ -230,7 +215,7 @@ class ReactTables extends Component {
             </Col>
           </Row>
         </div>
-      </>
+      </div>
     );
   }
 }

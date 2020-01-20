@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace JobBuddy.Models
+﻿namespace JobBuddy.Models.enums
 {
     public enum enumJobCategoryTitle
     {
-        IT,
+        IT, 
         Economics,
-        Marketing,
-        Sales,
-        Engineering,
-        Healthcare,
-        Arts,
-        Tourism,
-        CustomerSupport
+        Marketing, 
+        Sales, 
+        Engineering, 
+        Healthcare, 
+        Arts, 
+        Tourism, 
+        CustomerSupport 
     }
 
 }

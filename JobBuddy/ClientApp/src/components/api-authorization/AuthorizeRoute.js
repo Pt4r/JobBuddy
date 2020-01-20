@@ -10,16 +10,13 @@ export default class AuthorizeRoute extends Component {
 
         this.state = {
             ready: false,
-            authenticated: false,
-            authorized: true,
-            userRoles: []
+            authenticated: false
         };
     }
 
     componentDidMount() {
         this._subscription = authService.subscribe(() => this.authenticationChanged());
         this.populateAuthenticationState();
-        this.getUserRole()
     }
 
     componentWillUnmount() {
@@ -27,45 +24,21 @@ export default class AuthorizeRoute extends Component {
     }
 
     render() {
-        const { ready, authenticated, authorized } = this.state;
+        const { ready, authenticated } = this.state;
         const redirectUrl = `${ApplicationPaths.Login}?${QueryParameterNames.ReturnUrl}=${encodeURI(window.location.href)}`
-       
-
         if (!ready) {
             return <div></div>;
         } else {
-            const { render: Render, ...rest } = this.props;
+            const { component: Component, ...rest } = this.props;
             return <Route {...rest}
                 render={(props) => {
-                    
                     if (authenticated) {
-                        if(authorized){
-                            return <Render {...props} />
-                        } else {
-                            return <Redirect to = "/" />
-                        }
+                        return <Component {...props} />
                     } else {
                         return <Redirect to={redirectUrl} />
                     }
                 }} />
         }
-    }
-
-    async getUserRole(){
-        try{
-            await authService.getUser()
-            .then(this.state.userRoles.length = 0)
-            .then(user => this.state.userRoles.push(user.role));
-        } catch (silentError) {
-            // User might not be authenticated, fallback to popup authentication
-            console.log("Silent authentication error: ", silentError);
-        }       
-            
-        var result = this.state.userRoles.some((val) => this.props.allowedRoles.indexOf(val) !== -1);
-
-        this.setState({authorized: result});
-
-        return(result)
     }
 
     async populateAuthenticationState() {

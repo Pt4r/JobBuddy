@@ -1,22 +1,4 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import {
   Form,
   FormGroup,
@@ -28,12 +10,10 @@ import {
   CardTitle,
   CardFooter,
   Row,
-  Col,
-  Button
+  Col
 } from "reactstrap";
 
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import { PanelHeader, Button } from "components";
 
 class ValidationForms extends React.Component {
   constructor(props) {
@@ -322,7 +302,7 @@ class ValidationForms extends React.Component {
   }
   render() {
     return (
-      <>
+      <div>
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
@@ -350,7 +330,6 @@ class ValidationForms extends React.Component {
                       <Label>Password *</Label>
                       <Input
                         type="password"
-                        autoComplete="password"
                         onChange={e => this.registerPassword(e)}
                       />
                     </FormGroup>
@@ -362,7 +341,6 @@ class ValidationForms extends React.Component {
                       <Label>Confirm Password *</Label>
                       <Input
                         type="password"
-                        autoComplete="password"
                         onChange={e => this.registerConfirm(e)}
                       />
                     </FormGroup>
@@ -404,22 +382,24 @@ class ValidationForms extends React.Component {
                         onChange={e => this.loginFullName(e)}
                       />
                     </FormGroup>
+
                     <FormGroup
                       className={"has-label " + this.state.login.emailState}
                     >
                       <Label>Email Address *</Label>
                       <Input type="email" onChange={e => this.loginEmail(e)} />
                     </FormGroup>
+
                     <FormGroup
                       className={"has-label " + this.state.login.passwordState}
                     >
                       <Label>Password *</Label>
                       <Input
                         type="password"
-                        autoComplete="password"
                         onChange={e => this.loginPassword(e)}
                       />
                     </FormGroup>
+                    
                     <div className="category form-category">
                       * Required fields
                     </div>
@@ -610,7 +590,7 @@ class ValidationForms extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </div>
     );
   }
 }

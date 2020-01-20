@@ -1,11 +1,12 @@
 /*!
 
 =========================================================
-* Now UI Dashboard PRO React - v1.3.0
+* Now UI Dashboard React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
 * Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -15,8 +16,6 @@
 
 */
 import React from "react";
-// used for making the prop types of this component
-import PropTypes from "prop-types";
 
 class PanelHeader extends React.Component {
   render() {
@@ -34,17 +33,5 @@ class PanelHeader extends React.Component {
     );
   }
 }
-
-PanelHeader.defaultProps = {
-  size: undefined,
-  content: null
-};
-
-PanelHeader.propTypes = {
-  // size of the panel header
-  size: PropTypes.oneOf(["sm", "lg", undefined]),
-  // content
-  content: PropTypes.node
-};
 
 export default PanelHeader;

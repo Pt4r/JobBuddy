@@ -1,26 +1,29 @@
-.wrapper {
+.wrapper{
   position: relative;
   top: 0;
   height: 100vh;
+  overflow: hidden;
 
-  &.wrapper-full-page {
+  &.wrapper-full-page{
     min-height: 100vh;
     height: auto;
+    display: flex;
+    align-items: center;
   }
 }
 
 .sidebar,
-.off-canvas-sidebar {
+.off-canvas-sidebar{
   position: fixed;
   top: 0;
   height: 100%;
   bottom: 0;
   width: 260px;
   left: 0;
-  z-index: 9999;
+  z-index: 1030;
   box-shadow: $sidebar-box-shadow;
 
-  .sidebar-wrapper {
+  .sidebar-wrapper{
     position: relative;
     height: calc(100vh - 75px);
     overflow: auto;
@@ -28,50 +31,52 @@
     z-index: 4;
     padding-bottom: 100px;
 
-    .dropdown .dropdown-backdrop {
+    .dropdown .dropdown-backdrop{
       display: none !important;
     }
 
-    .navbar-form {
+    .navbar-form{
       border: none;
     }
 
     > .nav,
-    .user .info {
-      [data-toggle="collapse"] ~ div > ul > li > a {
-        span {
+    .user .info{
+      [data-toggle="collapse"] ~ div > ul > li > a{
+        span{
           display: inline-block;
           @extend .animation-transition-general;
         }
 
-        .sidebar-normal {
+        .sidebar-normal{
           margin: 0;
           position: relative;
           transform: translateX(0px);
           opacity: 1;
           white-space: nowrap;
           display: block;
-          line-height: 23px;
           z-index: 1;
+          line-height: 23px;
+          transition: transform 300ms ease 0s, opacity 300ms ease 0s;
         }
 
-        .sidebar-mini-icon {
+        .sidebar-mini-icon{
           text-transform: uppercase;
           width: 34px;
           margin-right: 10px;
+          z-index: 1;
           margin-left: 0px;
           font-size: 12px;
           text-align: center;
           line-height: 25px;
           position: relative;
           float: left;
-          z-index: 1;
           display: inherit;
           line-height: 24px;
           color: $opacity-5;
+          transition: transform 300ms ease 0s, opacity 300ms ease 0s;
         }
 
-        i {
+        i{
           font-size: 17px;
           line-height: 20px;
           width: 26px;
@@ -79,31 +84,39 @@
       }
     }
 
-    [data-toggle="collapse"] ~ div > ul > li.active > a {
-      .sidebar-mini-icon {
-        color: $primary-color;
+    [data-toggle="collapse"] ~ div > ul > li.active > a{
+      background-color: transparent;
+      box-shadow: none;
+
+      .sidebar-mini-icon{
+        color: inherit;
+      }
+
+      &:after{
+        content: "";
+        position: absolute;
+        background-color: $white-color;
+        height: 44px;
+        width: calc(100% - 5px);
+        top: 0;
+        border-radius: 30px;
+        left: 2px;
+        z-index: 0;
+        // box-shadow: $sidebar-active-box-shadow;
+        @extend .animation-transition-general;
       }
     }
   }
 
-  .navbar-minimize {
+  .navbar-minimize{
     position: absolute;
-    right: 18px;
+    right: 20px;
     top: 2px;
     opacity: 1;
 
-    .btn {
-      &,
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: transparent !important;
-      }
-    }
-
     @extend .animation-transition-general;
   }
-  .logo-tim {
+  .logo-tim{
     border-radius: 50%;
     border: 1px solid #333;
     display: block;
@@ -112,28 +125,30 @@
     float: left;
     overflow: hidden;
 
-    img {
+    img{
       width: 60px;
       height: 60px;
     }
   }
 
-  .nav {
+  .nav{
     margin-top: 20px;
     display: block;
 
-    .caret {
+    .caret{
       top: 14px;
       position: absolute;
       right: 10px;
     }
 
-    li {
-      > a + div .nav li > a {
+    li{
+      > a + div .nav li > a{
         margin-top: 7px;
       }
 
-      > a {
+      > a,
+      > a:not([href]):not([tabindex]):focus,
+      > a:not([href]):not([tabindex]):hover{
         margin: 10px 15px 0;
         border-radius: $btn-round-radius;
         color: $white-color;
@@ -147,66 +162,87 @@
         line-height: $line-height-nav-link;
       }
 
-      &:first-child > a {
+      &:first-child > a{
         margin: 0 15px;
       }
 
       &:hover:not(.active) > a,
-      &:focus:not(.active) > a {
+      &:focus:not(.active) > a{
         background-color: $opacity-1;
       }
 
       &:hover:not(.active) > a i,
-      &:focus:not(.active) > a i {
+      &:focus:not(.active) > a i{
         color: $white-color;
       }
 
-      &.active > a:not([data-toggle="collapse"]) {
+      &.active > a{
         background-color: $white-color;
         box-shadow: $box-shadow;
       }
 
-      &.active > a[data-toggle="collapse"] {
+      &.active > a[data-toggle="collapse"],
+      & > a[aria-expanded="true"]{
         background-color: $opacity-1;
         box-shadow: none;
         color: $white-color;
 
-        i {
+        i{
           color: $white-color;
         }
+      }
 
-        & + div .nav .active a {
+      &.active {
+        & ~ li:hover a[aria-expanded="true"],
+        & ~ li:focus a[aria-expanded="true"]{
+          background-color: $opacity-1;
+          i{
+            color: $white-color;
+          }
+        }
+        & ~ li a[aria-expanded="true"],
+        & ~ li a[aria-expanded="true"]{
           background-color: transparent;
-          box-shadow: none;
-
-          &:after {
-            content: "";
-            position: absolute;
-            background-color: $white-color;
-            border-radius: 30px;
-            box-shadow: $box-shadow;
-            color: $primary-color;
-            height: 44px;
-            width: calc(100% - 5px);
-            top: 0;
-            left: 2px;
-            z-index: 0;
+          i{
+            color: $opacity-5;
           }
         }
       }
+
+      a[data-toggle="collapse"] ~ div li:not(.active) > a:after{
+        content: "";
+        position: absolute;
+        width: calc(100% - 5px);
+        background-color: transparent;
+        height: 44px;
+        top: 0;
+        border-radius: 30px;
+        left: 2px;
+        z-index: 0;
+        @extend .animation-transition-general;
+      }
+
+      a[data-toggle="collapse"] ~ div li:not(.active):hover > a{
+        background-color: transparent;
+
+        &:after{
+          background-color: $opacity-1;
+        }
+      }
+
     }
 
-    p {
+    p{
       margin: 0;
       line-height: 30px;
       position: relative;
       display: block;
       height: auto;
       white-space: nowrap;
-      @extend .animation-transition-general;
+      transition: transform 300ms ease 0s, opacity 300ms ease 0s;
     }
 
-    i {
+    i{
       font-size: 20px;
       float: left;
       margin-right: 12px;
@@ -218,7 +254,7 @@
     }
   }
 
-  .sidebar-background {
+  .sidebar-background{
     position: absolute;
     z-index: 1;
     height: 100%;
@@ -229,54 +265,55 @@
     background-size: cover;
     background-position: center center;
 
-    &:after {
+    &:after{
       position: absolute;
       z-index: 3;
       width: 100%;
       height: 100%;
       content: "";
       display: block;
-      background: #ffffff;
+      background: #FFFFFF;
       opacity: 1;
     }
   }
 
-  .logo {
+  .logo{
     position: relative;
     padding: $padding-base-vertical $padding-base-horizontal;
     z-index: 4;
 
     a.logo-mini,
-    a.logo-normal {
+    a.logo-normal{
       @extend .animation-transition-general;
     }
 
-    a.logo-mini {
+    a.logo-mini{
       opacity: 1;
       float: left;
       width: 34px;
       text-align: center;
-      margin-left: 10px;
-      margin-right: 12px;
+      margin-left: 12px;
+      margin-right: 10px;
     }
 
-    a.logo-normal {
+    a.logo-normal{
       display: block;
       opacity: 1;
       @include transform-translate-x(0px);
     }
 
-    &:after {
-      content: "";
+    &:after{
+      content: '';
       position: absolute;
       bottom: 0;
       right: 15px;
       height: 1px;
       width: calc(100% - 30px);
       background-color: $opacity-5;
+
     }
 
-    p {
+    p{
       float: left;
       font-size: 20px;
       margin: 10px 10px;
@@ -285,7 +322,7 @@
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-    .simple-text {
+    .simple-text{
       text-transform: uppercase;
       padding: $padding-base-vertical 0;
       display: block;
@@ -299,7 +336,7 @@
     }
   }
 
-  .logo-tim {
+  .logo-tim{
     border-radius: 50%;
     border: 1px solid #333;
     display: block;
@@ -308,14 +345,14 @@
     float: left;
     overflow: hidden;
 
-    img {
+    img{
       width: 60px;
       height: 60px;
     }
   }
 
   &:before,
-  &:after {
+  &:after{
     display: block;
     content: "";
     opacity: 1;
@@ -325,35 +362,37 @@
     top: 0;
     left: 0;
   }
-
-  &:after {
+  &:after{
     @include icon-gradient($default-color);
     z-index: 3;
   }
-
-  &[data-color="blue"] {
+  &,
+  &[data-color="black"]{
+    @include sidebar-color($black-color);
+  }
+  &[data-color="blue"]{
     @include sidebar-color($info-color);
   }
-  &[data-color="green"] {
+  &[data-color="green"]{
     @include sidebar-color($success-color);
   }
-  &[data-color="orange"] {
+  &[data-color="orange"]{
     @include sidebar-color($orange-color);
   }
-  &[data-color="red"] {
+  &[data-color="red"]{
     @include sidebar-color($danger-color);
   }
-  &[data-color="yellow"] {
+  &[data-color="yellow"]{
     @include sidebar-color($warning-color);
   }
 
-  .user {
+  .user{
     padding-bottom: 20px;
-    margin: 20px auto 0;
+    margin:20px auto 0;
     position: relative;
 
-    &:after {
-      content: "";
+    &:after{
+      content: '';
       position: absolute;
       bottom: 0;
       right: 15px;
@@ -362,7 +401,7 @@
       background-color: $opacity-5;
     }
 
-    .photo {
+    .photo{
       width: 34px;
       height: 34px;
       overflow: hidden;
@@ -374,12 +413,12 @@
       box-shadow: $box-shadow-raised;
       @extend .animation-transition-general;
 
-      img {
+      img{
         width: 100%;
       }
     }
 
-    a {
+    a{
       color: $white-color;
       text-decoration: none;
       padding: $padding-base-vertical 15px;
@@ -387,12 +426,15 @@
       @extend .animation-transition-general;
     }
 
-    .info {
-      > a {
+    .info{
+      > a,
+      > a:not([href]):not([tabindex]):focus,
+      > a:not([href]):not([tabindex]):hover{
         display: block;
         line-height: 18px;
+        color: #FFFFFF;
 
-        > span {
+        > span{
           @extend .animation-transition-general;
           display: block;
           position: relative;
@@ -400,7 +442,7 @@
         }
       }
 
-      .caret {
+      .caret{
         position: absolute;
         top: 8px;
         right: 18px;
@@ -409,55 +451,74 @@
   }
 }
 
-.visible-on-sidebar-regular {
+.visible-on-sidebar-regular{
   display: inline-block !important;
 }
-.visible-on-sidebar-mini {
+.visible-on-sidebar-mini{
   display: none !important;
 }
 
-.off-canvas-sidebar {
+.off-canvas-sidebar{
   .nav {
     > li > a,
-    > li > a:hover {
+    > li > a:hover{
       color: $white-color;
     }
 
-    > li > a:focus {
+    > li > a:focus{
       background: rgba(200, 200, 200, 0.2);
     }
   }
 }
 
-.main-panel {
+
+.main-panel{
   position: relative;
   float: right;
   width: $sidebar-width;
   background-color: #ebecf1;
 
-  @include transition(0.5s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+  @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-  > .content {
+  div.content{
     padding: 0 30px 30px;
     min-height: calc(100vh - 123px);
     margin-top: -30px;
   }
 
-  > .navbar {
+  > .navbar{
     margin-bottom: 0;
   }
 
-  .header {
+
+  .header{
     margin-bottom: 50px;
   }
 }
 
-.perfect-scrollbar-on {
-  .sidebar,
-  .main-panel {
+
+
+// windows os settings for perfect scrollbar off
+.sidebar .sidebar-wrapper,
+.main-panel{
+    .perfect-scrollbar-on &,
+    &{
+        overflow: hidden;
+    }
+}
+
+// regular settings for perfect scrollbar off
+.perfect-scrollbar-off{
+    .sidebar .sidebar-wrapper,
+    .main-panel{
+        overflow: auto;
+    }
+}
+
+.sidebar,
+.main-panel{
     height: 100%;
-    max-height: 100%;
-  }
+    max-height: 100;
 }
 
 .navbar.fixed-top {
@@ -466,31 +527,42 @@
   right: 0;
   left: auto;
 }
+.navbar.fixed-top.pagesNavbar {
+  width: 100%;
+}
 
 @media (max-width: 991px) {
   .navbar.fixed-top {
     width: 100%;
+
+    [class*="container-"] {
+      @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+    }
+  }
+
+  .nav-open .fixed-top [class*="container-"]{
+    @include transform-translate-x(260px);
   }
 }
 
 @media (min-width: 991px) {
   .sidebar,
   .main-panel,
-  .sidebar-wrapper {
-    -webkit-transition-property: top, bottom, width;
-    transition-property: top, bottom, width;
-    -webkit-transition-duration: 0.2s, 0.2s, 0.35s;
-    transition-duration: 0.2s, 0.2s, 0.35s;
-    -webkit-transition-timing-function: linear, linear, ease;
-    transition-timing-function: linear, linear, ease;
+  .sidebar-wrapper{
+    -webkit-transition-property: top,bottom,width;
+    transition-property: top,bottom, width;
+    -webkit-transition-duration: .2s,.2s, .35s;
+    transition-duration: .2s,.2s, .35s;
+    -webkit-transition-timing-function: linear,linear,ease;
+    transition-timing-function: linear,linear,ease;
     -webkit-overflow-scrolling: touch;
   }
 
-  .sidebar-mini {
-    .visible-on-sidebar-regular {
+  .sidebar-mini{
+    .visible-on-sidebar-regular{
       display: none !important;
     }
-    .visible-on-sidebar-mini {
+    .visible-on-sidebar-mini{
       display: inline-block !important;
     }
 
@@ -498,42 +570,35 @@
       width: calc(100%);
     }
 
-    .navbar-minimize {
+    .navbar-minimize{
       opacity: 0;
     }
 
     .sidebar,
-    .sidebar .sidebar-wrapper {
+    .sidebar .sidebar-wrapper{
       width: 80px;
     }
 
-    .main-panel {
+    .main-panel{
       width: $sidebar-mini-width;
     }
 
-    .sidebar {
+    .sidebar{
       display: block;
       z-index: 1030;
 
-      .logo {
-        a.logo-normal {
+      .logo{
+        a.logo-normal{
           opacity: 0;
           @include transform-translate-x(-25px);
         }
       }
 
-      .sidebar-wrapper {
+      .sidebar-wrapper{
         > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
-        .user
-          .info
-          [data-toggle="collapse"]
-          ~ div
-          > ul
-          > li
-          > a
-          .sidebar-normal,
+        .user .info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
         .user .info > a > span,
-        > .nav li > a p {
+        > .nav li > a p{
           @include transform-translate-x(-25px);
           opacity: 0;
         }
@@ -550,23 +615,17 @@
         }
       }
 
-      .navbar-minimize {
+
+      .navbar-minimize{
         opacity: 1;
       }
-      .sidebar-wrapper {
+      .sidebar-wrapper{
         width: 260px;
 
         > .nav li > a p,
         > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
-        .user
-          .info
-          [data-toggle="collapse"]
-          ~ div
-          > ul
-          > li
-          > a
-          .sidebar-normal,
-        .user .info > a > span {
+        .user .info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+        .user .info > a > span{
           @include transform-translate-x(0px);
           opacity: 1;
         }
@@ -579,40 +638,31 @@
   height: 260px;
   padding-top: 80px;
   padding-bottom: 45px;
-  background: #141e30; /* fallback for old browsers */
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#0c2646),
-    color-stop(60%, #204065),
-    to(#2a5788)
-  );
-  background: linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
   position: relative;
+  @include panel-gradient($black-color);
   overflow: hidden;
 
-  .header {
-    .title {
+  .header{
+    .title{
       color: $white-color;
     }
-    .category {
+    .category{
       max-width: 600px;
       color: $opacity-5;
       margin: 0 auto;
       font-size: 13px;
 
-      a {
+      a{
         color: $white-color;
       }
     }
   }
 }
 
-.panel-header-sm {
+.panel-header-sm{
   height: 135px;
 }
 
-.panel-header-lg {
-  height: 380px;
+.panel-header-lg{
+  height: 380px
 }

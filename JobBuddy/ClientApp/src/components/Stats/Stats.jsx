@@ -1,0 +1,28 @@
+import React from "react";
+// used for making the prop types of this component
+import PropTypes from "prop-types";
+
+class Stats extends React.Component {
+  render() {
+    var stats = [];
+    for (var i = 0; i < this.props.children.length; i++) {
+      stats.push(<i className={this.props.children[i].i} key={i} />);
+      stats.push(" " + this.props.children[i].t);
+      if (i !== this.props.children.length - 1) {
+        stats.push(<br />);
+      }
+    }
+    return (
+      <div className={"stats" + (this.props.rtl ? " text-right" : "")}>
+        {stats}
+      </div>
+    );
+  }
+}
+
+Stats.propTypes = {
+  children: PropTypes.array,
+  rtl: PropTypes.bool
+};
+
+export default Stats;

@@ -1,4 +1,5 @@
 .nav-pills {
+
   &.flex-column li > a {
     margin-bottom: 15px;
   }
@@ -25,140 +26,141 @@
     }
   }
 
-  .nav-item {
-    .nav-link {
-      padding: 0 15.5px;
-      text-align: center;
-      padding: $padding-btn-vertical $padding-round-horizontal;
-      min-width: 100px;
-      font-weight: $font-weight-normal;
-      color: $light-black;
-      background-color: $opacity-gray-3;
-
-      &:hover {
-        background-color: $opacity-gray-3;
-      }
-
-      &.active {
-        &,
-        &:focus,
-        &:hover {
-          background-color: $dark-gray;
-          color: $white-color;
-          box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
-        }
-      }
-
-      &.disabled,
-      &:disabled,
-      &[disabled] {
-        opacity: 0.5;
-      }
-    }
-
-    i {
-      display: block;
-      font-size: 20px;
-      line-height: 60px;
-    }
-  }
-
-  &.nav-pills-neutral {
     .nav-item {
-      .nav-link {
-        background-color: $opacity-2;
-        color: $white-color;
+        .nav-link{
+            padding: 0 15.5px;
+            text-align: center;
+            padding: $padding-btn-vertical $padding-round-horizontal;
+            min-width: 100px;
+            font-weight: $font-weight-normal;
+            color: $light-black;
+            background-color: $opacity-gray-3;
 
-        &.active {
-          &,
-          &:focus,
-          &:hover {
-            background-color: $white-color;
-            color: $primary-color;
-          }
-        }
-      }
-    }
-  }
 
-  &.nav-pills-primary {
-    .nav-item {
-      .nav-link.active {
-        &,
-        &:focus,
-        &:hover {
-          background-color: $brand-primary;
-        }
-      }
-    }
-  }
+            &:hover{
+                background-color: $opacity-gray-3;
+            }
 
-  &.nav-pills-info {
-    .nav-item {
-      .nav-link.active {
-        &,
-        &:focus,
-        &:hover {
-          background-color: $brand-info;
-        }
-      }
-    }
-  }
+            &.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $dark-gray;
+                    color: $white-color;
+                    box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
+                }
+            }
 
-  &.nav-pills-success {
-    .nav-item {
-      .nav-link.active {
-        &,
-        &:focus,
-        &:hover {
-          background-color: $brand-success;
+            &.disabled,
+            &:disabled,
+            &[disabled]{
+                opacity: .5;
+            }
         }
-      }
-    }
-  }
 
-  &.nav-pills-warning {
-    .nav-item {
-      .nav-link.active {
-        &,
-        &:focus,
-        &:hover {
-          background-color: $brand-warning;
+        i{
+            display: block;
+            font-size: 20px;
+            line-height: 60px;
         }
-      }
     }
-  }
 
-  &.nav-pills-danger {
-    .nav-item {
-      .nav-link.active {
-        &,
-        &:focus,
-        &:hover {
-          background-color: $brand-danger;
+    &.nav-pills-neutral{
+        .nav-item {
+            .nav-link{
+                background-color: $opacity-2;
+                color: $white-color;
+
+                &.active{
+                    &,
+                    &:focus,
+                    &:hover{
+                        background-color: $white-color;
+                        color: $primary-color;
+                    }
+                }
+            }
         }
-      }
     }
-  }
+
+    &.nav-pills-primary{
+        .nav-item {
+            .nav-link.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $brand-primary;
+                }
+            }
+        }
+    }
+
+    &.nav-pills-info{
+        .nav-item {
+            .nav-link.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $brand-info;
+                }
+            }
+        }
+    }
+
+    &.nav-pills-success{
+        .nav-item {
+            .nav-link.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $brand-success;
+                }
+            }
+        }
+    }
+
+    &.nav-pills-warning{
+        .nav-item {
+            .nav-link.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $brand-warning;
+                }
+            }
+        }
+    }
+
+    &.nav-pills-danger{
+        .nav-item {
+            .nav-link.active{
+                &,
+                &:focus,
+                &:hover{
+                    background-color: $brand-danger;
+                }
+            }
+        }
+    }
 }
-.tab-space {
-  padding: 20px 0 50px 0px;
-}
-
-.tab-content {
-  &.tab-subcategories {
-    margin-top: 20px;
-    background-color: $white-color;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-shadow: $box-shadow;
-  }
+.tab-space{
+    padding: 20px 0 50px 0px;
 }
 
-.nav-align-center {
-  text-align: center;
+.tab-content{
+    &.tab-subcategories{
+        margin-top: 20px;
+        background-color: $white-color;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-shadow: $box-shadow;
+    }
+}
 
-  .nav-pills {
-    display: inline-flex;
-  }
+.nav-align-center{
+    text-align: center;
+
+    .nav-pills{
+        display: inline-flex;
+    }
 }

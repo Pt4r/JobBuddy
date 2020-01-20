@@ -1,11 +1,12 @@
 /*!
 
 =========================================================
-* Now UI Dashboard PRO React - v1.3.0
+* Now UI Dashboard React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
 * Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -15,14 +16,14 @@
 
 */
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-// react plugin for creating notifications
-import NotificationAlert from "react-notification-alert";
+
+// reactstrap components
+import { Route, Switch, Redirect } from "react-router-dom";
 
 // core components
-import Navbar from "components/Navbars/Navbar.jsx";
+import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
@@ -30,30 +31,26 @@ import routes from "routes.js";
 
 var ps;
 
-class Admin extends React.Component {
+class Dashboard extends React.Component {
   state = {
-    sidebarMini: true,
     backgroundColor: "blue"
   };
-  notificationAlert = React.createRef();
   mainPanel = React.createRef();
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
-      document.documentElement.classList.remove("perfect-scrollbar-off");
       ps = new PerfectScrollbar(this.mainPanel.current);
+      document.body.classList.toggle("perfect-scrollbar-on");
     }
   }
   componentWillUnmount() {
     if (navigator.platform.indexOf("Win") > -1) {
       ps.destroy();
-      document.documentElement.className += " perfect-scrollbar-off";
-      document.documentElement.classList.remove("perfect-scrollbar-on");
+      document.body.classList.toggle("perfect-scrollbar-on");
     }
   }
   componentDidUpdate(e) {
     if (e.history.action === "PUSH") {
-      document.documentElement.scrollTop = 0;
+      this.mainPanel.current.scrollTop = 0;
       document.scrollingElement.scrollTop = 0;
       this.mainPanel.current.scrollTop = 0;
     }
@@ -81,72 +78,33 @@ class Admin extends React.Component {
   handleColorClick = color => {
     this.setState({ backgroundColor: color });
   };
-  getRoutes = routes => {
-    return routes.map((prop, key) => {
-      if (prop.collapse) {
-        return this.getRoutes(prop.views);
-      }
-      if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
-      } else {
-        return null;
-      }
-    });
-  };
-  getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
-    for (let i = 0; i < routes.length; i++) {
-      if (routes[i].collapse) {
-        let collapseActiveRoute = this.getActiveRoute(routes[i].views);
-        if (collapseActiveRoute !== activeRoute) {
-          return collapseActiveRoute;
-        }
-      } else {
-        if (
-          window.location.pathname.indexOf(
-            routes[i].layout + routes[i].path
-          ) !== -1
-        ) {
-          return routes[i].name;
-        }
-      }
-    }
-    return activeRoute;
-  };
   render() {
     return (
       <div className="wrapper">
-        <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
-          layout = "/admin"
           routes={routes}
-          minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
-          <Navbar
-            {...this.props}
-            brandText={this.getActiveRoute(routes)}
-          />
+          <DemoNavbar {...this.props} />
           <Switch>
-            {this.getRoutes(routes)}
+            {routes.map((prop, key) => {
+              return (
+                <Route
+                  path={prop.layout + prop.path}
+                  component={prop.component}
+                  key={key}
+                />
+              );
+            })}
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
-          {// we don't want the Footer to be rendered on full screen maps page
-          window.location.href.indexOf("full-screen-maps") !== -1 ? null : (
-            <Footer fluid />
-          )}
+          <Footer fluid />
         </div>
       </div>
     );
   }
 }
 
-export default Admin;
+export default Dashboard;

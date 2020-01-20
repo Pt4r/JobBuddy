@@ -1,20 +1,5 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
+import { Card, CardBody, CardHeader, CardTitle, Row, Col } from "reactstrap";
 // // react components used to create a google map
 import {
   withScriptjs,
@@ -23,11 +8,7 @@ import {
   Marker
 } from "react-google-maps";
 
-// reactstrap components
-import { Card, CardBody, CardHeader, CardTitle, Row, Col } from "reactstrap";
-
-// core components
-import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import { PanelHeader } from "components";
 
 const SatelliteMap = withScriptjs(
   withGoogleMap(props => (
@@ -137,7 +118,7 @@ const CustomSkinMap = withScriptjs(
 class GoogleMaps extends React.Component {
   render() {
     return (
-      <>
+      <div>
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
@@ -185,7 +166,7 @@ class GoogleMaps extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </div>
     );
   }
 }

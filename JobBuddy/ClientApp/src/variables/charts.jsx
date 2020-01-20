@@ -1,11 +1,12 @@
 /*!
 
 =========================================================
-* Now UI Dashboard PRO React - v1.3.0
+* Now UI Dashboard React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
 * Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -57,7 +58,7 @@ const gradientChartOptionsConfiguration = {
         display: 0,
         ticks: {
           display: false,
-          maxTicksLimit: 5
+          maxTicksLimit: 7
         },
         gridLines: {
           zeroLineColor: "transparent",
@@ -110,7 +111,7 @@ var gradientChartOptionsConfigurationWithNumbersAndGrid = {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 5
+          maxTicksLimit: 7
         }
       }
     ],
@@ -246,10 +247,10 @@ const dashboardPanelChart = {
 };
 
 // ##############################
-// // // Dashboard view - Active Users - Card
+// // // Dashboard view - Shipped Products - Card
 // #############################
 
-const dashboardActiveUsersChart = {
+const dashboardShippedProductsChart = {
   data: canvas => {
     var ctx = canvas.getContext("2d");
     var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
@@ -295,142 +296,10 @@ const dashboardActiveUsersChart = {
 };
 
 // ##############################
-// // // Dashboard view - Summer Email Campaign - Card
+// // // Dashboard view - All Products - Card
 // #############################
 
-const dashboardSummerChart = {
-  data: canvas => {
-    var ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientStroke.addColorStop(0, "#18ce0f");
-    gradientStroke.addColorStop(1, chartColor);
-    var gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    gradientFill.addColorStop(1, hexToRGB("#18ce0f", 0.4));
-    return {
-      labels: ["8am,", "10am", "12pm", "2pm", "4pm", "6pm", "8pm", "9pm"],
-      datasets: [
-        {
-          label: "Email Stats",
-          borderColor: "#18ce0f",
-          pointBorderColor: "#FFF",
-          pointBackgroundColor: "#18ce0f",
-          pointBorderWidth: 2,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 1,
-          pointRadius: 4,
-          fill: true,
-          backgroundColor: gradientFill,
-          borderWidth: 2,
-          data: [12, 10, 17, 20, 25, 20, 13, 15]
-        }
-      ]
-    };
-  },
-  options: gradientChartOptionsConfiguration
-};
-
-// ##############################
-// // // Dashboard view - Active Countries - Card
-// #############################
-
-const dashboardActiveCountriesCard = {
-  data: canvas => {
-    var ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientStroke.addColorStop(0, "#2CA8FF");
-    gradientStroke.addColorStop(1, chartColor);
-    var gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    gradientFill.addColorStop(1, hexToRGB("#2CA8FF", 0.4));
-    return {
-      labels: [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      datasets: [
-        {
-          label: "Total Jobs Listings",
-          backgroundColor: gradientFill,
-          borderColor: "#2CA8FF",
-          pointBorderColor: "#FFF",
-          pointBackgroundColor: "#2CA8FF",
-          pointBorderWidth: 2,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 1,
-          pointRadius: 4,
-          fill: true,
-          borderWidth: 2,
-          data: [2, 10, 18, 16, 20, 23, 18, 15, 16, 10]
-        }
-      ]
-    };
-  },
-  options: gradientChartOptionsConfiguration
-};
-
-// ##############################
-// // // Charts view - Line Chart - Card
-// #############################
-
-const chartsLine1 = {
-  data: canvas => {
-    var ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientStroke.addColorStop(0, "#80b6f4");
-    gradientStroke.addColorStop(1, chartColor);
-    var gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
-    return {
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ],
-      datasets: [
-        {
-          label: "Active Users",
-          borderColor: "#f96332",
-          pointBorderColor: "#FFF",
-          pointBackgroundColor: "#f96332",
-          pointBorderWidth: 2,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 1,
-          pointRadius: 4,
-          fill: true,
-          backgroundColor: gradientFill,
-          borderWidth: 2,
-          data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]
-        }
-      ]
-    };
-  },
-  options: gradientChartOptionsConfiguration
-};
-
-// ##############################
-// // // Charts view - Line Chart 2 - Card
-// #############################
-
-const chartsLine2 = {
+const dashboardAllProductsChart = {
   data: canvas => {
     var ctx = canvas.getContext("2d");
     var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
@@ -463,10 +332,10 @@ const chartsLine2 = {
 };
 
 // ##############################
-// // // Charts view - Bar Chart - Card
+// // // Dashboard view - Bar Chart - Card
 // #############################
 
-const chartsBar1 = {
+const dashboard24HoursPerformanceChart = {
   data: canvas => {
     var ctx = canvas.getContext("2d");
     var gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
@@ -523,12 +392,12 @@ const chartsBar1 = {
     scales: {
       yAxes: [
         {
+          ticks: {
+            maxTicksLimit: 7
+          },
           gridLines: {
             zeroLineColor: "transparent",
             drawBorder: false
-          },
-          ticks: {
-            maxTicksLimit: 7
           }
         }
       ],
@@ -553,90 +422,9 @@ const chartsBar1 = {
   }
 };
 
-// ##############################
-// // // Charts view - Bar Chart 2 - Card
-// #############################
-
-const chartsBar2 = {
-  data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    datasets: [
-      {
-        backgroundColor: "#f96332",
-        data: [40, 26, 28, 45, 20, 25, 30, 25, 20, 25, 20, 15]
-      },
-      {
-        backgroundColor: "#2CA8FF",
-        data: [15, 20, 25, 30, 25, 20, 15, 20, 25, 30, 25, 20]
-      }
-    ]
-  },
-  options: {
-    maintainAspectRatio: false,
-    legend: {
-      display: false
-    },
-    tooltips: {
-      bodySpacing: 4,
-      mode: "nearest",
-      intersect: 0,
-      position: "nearest",
-      xPadding: 10,
-      yPadding: 10,
-      caretPadding: 10
-    },
-    responsive: 1,
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            zeroLineColor: "transparent",
-            drawBorder: false
-          },
-          ticks: {
-            maxTicksLimit: 5
-          }
-        }
-      ],
-      xAxes: [
-        {
-          ticks: {
-            display: false
-          },
-          gridLines: {
-            zeroLineColor: "transparent",
-            drawTicks: false,
-            drawBorder: false
-          }
-        }
-      ]
-    },
-    layout: {
-      padding: { left: 0, right: 0, top: 15, bottom: 15 }
-    }
-  }
-};
-
 module.exports = {
   dashboardPanelChart, // Chart for Dashboard view - Will be rendered in panel
-  dashboardActiveUsersChart, // Chart for Dashboard view - Active Users Card
-  dashboardSummerChart, // Chart for Dashboard view - Summer Email Campaign Card
-  dashboardActiveCountriesCard, // Chart for Dashboard view - New Orders Card
-  chartsLine1, // Chart for Charts view - Line Chart - Card
-  chartsLine2, // Chart for Charts view - Line Chart 2 - Card
-  chartsBar1, // Chart for Charts view - Bar Chart - Card
-  chartsBar2 // Chart for Charts view - Bar Chart 2 - Card
+  dashboardShippedProductsChart, // Chart for Dashboard view - Shipped Products Card
+  dashboardAllProductsChart, // Chart for Dashboard view - All products Card
+  dashboard24HoursPerformanceChart // Chart for Dashboard view - 24 Hours Performance Card
 };

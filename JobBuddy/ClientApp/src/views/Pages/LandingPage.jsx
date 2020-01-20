@@ -14,8 +14,8 @@ import {
 
 // core components
 import PagesNavbar from "components/Navbars/PagesNavbar";
-import LandingPageHeader from "components/PanelHeader/LandingPageHeader";
-import PagesFooter from "components/Footer/PagesFooter";
+import LandingPageHeader from "components/Header/LandingPageHeader";
+import {PagesFooter} from "components";
 
 function LandingPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);

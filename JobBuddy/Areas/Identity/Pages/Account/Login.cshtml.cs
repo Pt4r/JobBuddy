@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using JobBuddy.Models;
+using JobBuddy.Models.UserDetails;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -59,7 +60,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
-                ModelState.AddModelError("Error", ErrorMessage);
+                ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -84,25 +85,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-                    var role = user.UserRole;
-
-                    //na doume gia multiple roles
-
-                    switch (role)
-                    {
-                        case "Admin":
-                            return LocalRedirect("/Admin/Dashboard");
-                        case "Client":
-                            return LocalRedirect("/Client/Dashboard");
-                        case "Mentor":
-                            return LocalRedirect("/Mentor/Dashboard");
-                        case "HR":
-                            return LocalRedirect("/HR/Dashboard");
-                        default:
-                            return NotFound();
-                    }
-                    
+                    return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -115,7 +98,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError("Error", "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
             }
