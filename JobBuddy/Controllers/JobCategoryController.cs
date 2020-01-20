@@ -38,7 +38,7 @@ namespace JobBuddy.Controllers
         //api/JobCategory
         [HttpPost]
         [Route("api/JobCategories/Create")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public IActionResult CreateJobCategory([FromBody]JobCategory jobcategorycreated)
         {
             if (!ModelState.IsValid)

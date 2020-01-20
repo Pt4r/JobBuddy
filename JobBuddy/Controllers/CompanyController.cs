@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JobBuddy.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace JobBuddy.Controllers
 {
     
     [ApiController]
+    //[Authorize(Roles = "Admin")]
     public class CompanyController : ControllerBase
     {
         private ICompanyRepository _companyRepository;
@@ -18,7 +20,7 @@ namespace JobBuddy.Controllers
             _companyRepository = companyRepository;
         }
 
-        //api/JobCategory
+        //api/Companies
         [HttpGet]
         [Route("api/Companies")]
         public IActionResult GetCompanies(string id)
@@ -28,10 +30,10 @@ namespace JobBuddy.Controllers
         }
 
         
-        //api/Company
+        //api/Companies/Create
         [HttpPost]
         [Route("api/Companies/Create")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public IActionResult CreateCompany([FromBody]Company companycreated)
         {
             if (!ModelState.IsValid)
@@ -42,7 +44,7 @@ namespace JobBuddy.Controllers
             return Ok();
         }
 
-        //api/Company/id
+        //api/Companies/id
         [HttpDelete]
         [ValidateAntiForgeryToken]
         [Route("api/Companies/Delete/{id}")]
@@ -58,10 +60,10 @@ namespace JobBuddy.Controllers
             return Ok();
 
         }
-        //api/Company/id
+        //api/Companies/id
         [HttpPut, HttpPatch]
         [ValidateAntiForgeryToken]
-        [Route("api/Companies/Update")]
+        [Route("api/Companies/Update/{id}")]
         public IActionResult UpdateCompany([FromBody]Company companycreated)
         {
             if (!ModelState.IsValid)

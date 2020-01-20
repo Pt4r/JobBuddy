@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import CompanyForm from './CompanyForm';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import CompanyForm from "./CompanyForm.js"
 
 
 class CompanyModal extends Component {
@@ -11,11 +11,14 @@ class CompanyModal extends Component {
     };
     this.toggle = this.toggle.bind(this);
 }
+
     toggle () {
         this.setState({
             modal: !this.state.modal
         });
     }
+
+oops=()=> console.log(this.props.company);
 
     render() {
         const isNew = this.props.isNew;
@@ -28,26 +31,22 @@ class CompanyModal extends Component {
             button = <Button
                 color="success"
                 onClick={this.toggle}
-                style={{ minWidth: "200px" }}>Add</Button>;
+                style={{ minWidth: "200px" }}>Add Company</Button>;
         } else {
             button = <Button
                 className="btn-icon btn-round"
                 size="sm"
                 color="warning"
-                onClick={this.toggle}><i className="fa fa-edit" />
+                onClick= {this.toggle} ><i className="fa fa-edit" />
                 </Button>;
         }
-
+        
         return <Fragment>
             {button}
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
                 <ModalBody>
-                    <CompanyForm
-                        addUserToState={this.props.addUserToState}
-                        updateUserIntoState={this.props.updateUserIntoState}
-                        toggle={this.toggle}
-                        company={this.props.company} />
+                  <CompanyForm  comp={this.props.company} />
                 </ModalBody>
             </Modal>
         </Fragment>;
