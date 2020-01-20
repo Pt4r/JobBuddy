@@ -1,23 +1,7 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+
 
 // reactstrap components
 import {
@@ -66,7 +50,7 @@ const dataTable = [
   ["Shou Itou", "Regional Marketing", "Tokyo", "20"],
   ["Michelle House", "Integration Specialist", "Sidney", "37"],
   ["Suki Burks", "Developer", "London", "53"],
-  ["Prescott Baett", "Technical Author", "London", "27"],
+  ["Prescott Bartlett", "Technical Author", "London", "27"],
   ["Gavin Cortez", "Team Leader", "San Francisco", "22"],
   ["Martena Mccray", "Post-Sales support", "Edinburgh", "46"],
   ["Unity Butler", "Marketing Designer", "San Francisco", "47"],
@@ -77,6 +61,12 @@ const dataTable = [
   ["Jackson Bradshaw", "Director", "New York", "65"],
   ["Olivia Liang", "Support Engineer", "Singapore", "64"]
 ];
+
+
+
+
+
+
 
 class ReactTables extends Component {
   constructor(props) {
@@ -164,6 +154,9 @@ class ReactTables extends Component {
       })
     };
   }
+
+
+
   render() {
     return (
       <>
@@ -175,7 +168,7 @@ class ReactTables extends Component {
                 A powerful react plugin handcrafted by our friends from{" "}
                 <a
                   href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   react-table
                 </a>
@@ -184,7 +177,7 @@ class ReactTables extends Component {
                 interaction controls. Please check out their{" "}
                 <a
                   href="https://react-table.js.org/#/story/readme"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   full documentation.
                 </a>

@@ -13,6 +13,8 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
+Spyros
+
 */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -25,6 +27,7 @@ import NotificationAlert from "react-notification-alert";
 import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
+// import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes.js";
 
@@ -100,7 +103,7 @@ class Hr extends React.Component {
     });
   };
   getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+    let activeRoute = "Job Buddy";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = this.getActiveRoute(routes[i].views);
@@ -125,6 +128,7 @@ class Hr extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
+          layout = "/hr"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
@@ -136,7 +140,7 @@ class Hr extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/hr" to="/hr/hrdashboard" />
+            <Redirect from="/hr" to="/hr/dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (

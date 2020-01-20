@@ -18,6 +18,7 @@
                 </div>
             </div>
             <div class="card-body ">
+                <div class="text-center">@Html.ValidationMessage("Error")</div>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                 <div class="input-group no-border form-control-lg">
                     <span class="input-group-prepend">
@@ -38,9 +39,9 @@
                 </div>
                 <div class="input-group no-border form-control-lg">
                     <div class="form-check">
-                        <label asp-for="Input.RememberMe" class="form-check-label" style="color:white">
+                        <label asp-for="Input.RememberMe" class="form-check-label" style="color: white">
                             <input asp-for="Input.RememberMe" class="form-check-input" type="checkbox">
-                            <span class="form-check-sign" style="color:white"></span>
+                            <span class="form-check-sign" style="color: white"></span>
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
                     </div>

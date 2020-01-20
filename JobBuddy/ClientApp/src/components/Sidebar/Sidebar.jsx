@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 /*eslint-disable*/
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -36,6 +20,7 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       openAvatar: false,
+      layout: props.layout,
       ...this.getCollapseStates(props.routes)
     };
     this.sidebar = React.createRef();
@@ -90,6 +75,7 @@ class Sidebar extends React.Component {
   // this function creates the links and collapses that appear in the sidebar (left menu)
   createLinks = routes => {
     return routes.map((prop, key) => {
+      if((prop.layout === this.state.layout) && prop.layout !== "/admin"){
       if (prop.collapse) {
         var st = {};
         st[prop["state"]] = !this.state[prop.state];
@@ -99,7 +85,7 @@ class Sidebar extends React.Component {
             key={key}
           >
             <a
-              href="#pablo"
+              href="#"
               data-toggle="collapse"
               aria-expanded={this.state[prop.state]}
               onClick={e => {
@@ -131,6 +117,7 @@ class Sidebar extends React.Component {
           </li>
         );
       }
+      
       return (
         <li className={this.activeRoute(prop.layout + prop.path)} key={key}>
           <NavLink to={prop.layout + prop.path} activeClassName="">
@@ -148,7 +135,69 @@ class Sidebar extends React.Component {
           </NavLink>
         </li>
       );
-    });
+    } else {
+      if (prop.collapse) {
+        var st = {};
+        st[prop["state"]] = !this.state[prop.state];
+        return (
+          <li
+            className={this.getCollapseInitialState(prop.views) ? "active" : ""}
+            key={key}
+          >
+            <a
+              href="#"
+              data-toggle="collapse"
+              aria-expanded={this.state[prop.state]}
+              onClick={e => {
+                e.preventDefault();
+                this.setState(st);
+              }}
+            >
+              {prop.icon !== undefined ? (
+                <>
+                  <i className={prop.icon} />
+                  <p>
+                    {prop.name}
+                    <b className="caret" />
+                  </p>
+                </>
+              ) : (
+                <>
+                  <span className="sidebar-mini-icon">{prop.mini}</span>
+                  <span className="sidebar-normal">
+                    {prop.name}
+                    <b className="caret" />
+                  </span>
+                </>
+              )}
+            </a>
+            <Collapse isOpen={this.state[prop.state]}>
+              <ul className="nav">{this.createLinks(prop.views)}</ul>
+            </Collapse>
+          </li>
+        );
+      }
+      
+      return (
+        <li className={this.activeRoute(prop.layout + prop.path)} key={key}>
+          <NavLink to={prop.layout + prop.path} activeClassName="">
+            {prop.icon !== undefined ? (
+              <>
+                <i className={prop.icon} />
+                <p>{prop.name}</p>
+              </>
+            ) : (
+              <>
+                <span className="sidebar-mini-icon">{prop.mini}</span>
+                <span className="sidebar-normal">{prop.name}</span>
+              </>
+            )}
+          </NavLink>
+        </li>
+      );
+    }
+
+  });
   };
   // verifies if routeName is the one active (in browser input)
   activeRoute = routeName => {
@@ -160,7 +209,7 @@ class Sidebar extends React.Component {
         <div className="sidebar" data-color={this.props.backgroundColor}>
           <div className="logo">
             <a
-              href="https://www.creative-tim.com?ref=nudr-sidebar"
+              href="#"
               className="simple-text logo-mini"
               target="_blank"
             >
@@ -169,11 +218,11 @@ class Sidebar extends React.Component {
               </div>
             </a>
             <a
-              href="https://www.creative-tim.com?ref=nudr-sidebar"
+              href="#"
               className="simple-text logo-normal"
               target="_blank"
             >
-              Creative Tim
+              Job Buddy
             </a>
             <div className="navbar-minimize">
               <Button
@@ -196,7 +245,7 @@ class Sidebar extends React.Component {
               </div>
               <div className="info">
                 <a
-                  href="#pablo"
+                  href="#"
                   data-toggle="collapse"
                   aria-expanded={this.state.openAvatar}
                   onClick={() =>

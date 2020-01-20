@@ -1,22 +1,10 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import ClientDashboard from "views/Dashboard/ClientDashboard.jsx";
+import ClientJobListings from "views/Client/clientJobListings.jsx"
+import ClientCompanies from "views/Client/clientCompanies.jsx"
+import MentorDashboard from "views/Dashboard/MentorDashboard.jsx";
 import HrDashboard from "views/Dashboard/HrDashboard.jsx";
 import AdminDashboard from "views/Dashboard/Dashboard.jsx";
+
 import Buttons from "views/Components/Buttons.jsx";
 import GridSystem from "views/Components/GridSystem.jsx";
 import Panels from "views/Components/Panels.jsx";
@@ -54,6 +42,21 @@ let routes = [
     layout: "/client"
   },
   {
+    path: "/job-listings",
+    name: "Job Listings",
+    icon: "now-ui-icons files_single-copy-04",
+    component: ClientJobListings,
+    layout: "/client"
+  },
+  {
+    path: "/companies",
+    name: "Companies",
+    icon: "now-ui-icons business_briefcase-24",
+    component: ClientCompanies,
+    layout: "/client"
+  },
+
+  {
     path: "/dashboard",
     name: "Hr Dashboard",
     icon: "now-ui-icons design_app",
@@ -62,17 +65,27 @@ let routes = [
   },
   {
     path: "/dashboard",
+    name: "Mentor Dashboard",
+    icon: "now-ui-icons design_app",
+    component: MentorDashboard,
+    layout: "/mentor"
+  },
+  
+  {
+    path: "/dashboard",
     name: "Admin Dashboard",
     icon: "now-ui-icons design_app",
     component: AdminDashboard,
     layout: "/admin"
   },
+  
   {
     collapse: true,
     path: "/pages",
     name: "Pages",
     state: "openPages",
     icon: "now-ui-icons design_image",
+    layout: "/admin",
     views: [
       {
         path: "/404",
@@ -135,6 +148,7 @@ let routes = [
     name: "Components",
     state: "openComponents",
     icon: "now-ui-icons education_atom",
+    layout: "/admin",
     views: [
       {
         path: "/buttons",
@@ -193,6 +207,7 @@ let routes = [
     name: "Forms",
     state: "openForms",
     icon: "now-ui-icons design_bullet-list-67",
+    layout: "/admin",
     views: [
       {
         path: "/regular-forms",
@@ -230,6 +245,7 @@ let routes = [
     name: "Tables",
     state: "openTables",
     icon: "now-ui-icons files_single-copy-04",
+    layout: "/admin",
     views: [
       {
         path: "/regular-tables",
@@ -260,6 +276,7 @@ let routes = [
     name: "Maps",
     state: "openMaps",
     icon: "now-ui-icons location_pin",
+    layout: "/admin",
     views: [
       {
         path: "/google-maps",

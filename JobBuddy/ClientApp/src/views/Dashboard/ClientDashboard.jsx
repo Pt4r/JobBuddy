@@ -1,19 +1,3 @@
- /*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 // react plugin used to create charts
 import { Line } from "react-chartjs-2";
@@ -23,12 +7,7 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
   Table,
   Progress,
   Row,
@@ -131,7 +110,7 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <h5 className="card-category">Email Stats</h5>
                   <CardTitle tag="h2">53</CardTitle>
-                  <UncontrolledDropdown>
+                  {/* <UncontrolledDropdown>
                     <DropdownToggle
                       className="btn-round btn-icon"
                       color="default"
@@ -147,7 +126,7 @@ class Dashboard extends React.Component {
                         Remove data
                       </DropdownItem>
                     </DropdownMenu>
-                  </UncontrolledDropdown>
+                  </UncontrolledDropdown> */}
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
@@ -189,12 +168,6 @@ class Dashboard extends React.Component {
                     </div>
                   </div>
                 </CardBody>
-                <CardFooter>
-                  <div className="stats">
-                    <i className="now-ui-icons arrows-1_refresh-69" />
-                    Just Updated
-                  </div>
-                </CardFooter>
               </Card>
             </Col>
             <Col xs={12} md={4}>
@@ -202,7 +175,7 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <h5 className="card-category">Countries</h5>
                   <CardTitle tag="h2">40</CardTitle>
-                  <UncontrolledDropdown>
+                  {/* <UncontrolledDropdown>
                     <DropdownToggle
                       className="btn-round btn-icon"
                       color="default"
@@ -218,27 +191,27 @@ class Dashboard extends React.Component {
                         Remove data
                       </DropdownItem>
                     </DropdownMenu>
-                  </UncontrolledDropdown>
+                  </UncontrolledDropdown> */}
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
                     <tbody>{this.createTableData()}</tbody>
                   </Table>
                 </CardBody>
-                <CardFooter>
+                {/* <CardFooter>
                   <div className="stats">
                     <i className="now-ui-icons arrows-1_refresh-69" />
                     Just Updated
                   </div>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             </Col>
            
             <Col xs={12} md={4}>
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Active Countries</h5>
-                  <CardTitle tag="h2">105</CardTitle>
+                  <h5 className="card-category">Active Job Listings</h5>
+                  <CardTitle tag="h2">10</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
@@ -249,12 +222,12 @@ class Dashboard extends React.Component {
                   </div>
                   
                 </CardBody>
-                <CardFooter>
+                {/* <CardFooter>
                   <div className="stats">
                     <i className="now-ui-icons ui-2_time-alarm" />
                     Last 7 days
                   </div>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             </Col>
           </Row>

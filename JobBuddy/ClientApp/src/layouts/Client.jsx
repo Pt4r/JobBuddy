@@ -125,6 +125,7 @@ class Client extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
+          layout = "/client"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}
@@ -136,7 +137,7 @@ class Client extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="/client" to="/client/dashboard" />
+            <Redirect from="/client" to="/client/Dashboard" />
           </Switch>
           {// we don't want the Footer to be rendered on full screen maps page
           window.location.href.indexOf("full-screen-maps") !== -1 ? null : (

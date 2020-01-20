@@ -125,6 +125,7 @@ class Admin extends React.Component {
         <NotificationAlert ref={this.notificationAlert} />
         <Sidebar
           {...this.props}
+          layout = "/admin"
           routes={routes}
           minimizeSidebar={this.minimizeSidebar}
           backgroundColor={this.state.backgroundColor}

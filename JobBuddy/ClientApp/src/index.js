@@ -8,10 +8,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/now-ui-dashboard.scss?v1.2.0";
 import "assets/css/demo.css";
 
+import AdminLayout from "layouts/Admin.jsx";
+import ClientLayout from "layouts/Client.jsx";
+import MentorLayout from "layouts/Mentor.jsx"
+import HrLayout from "layouts/Hr.jsx";
 
 import Index from "views/Pages/LandingPage.jsx";
-import AuthLayout from "layouts/Auth.jsx";
-import Register from "views/Pages/RegisterPage";
 import PageNotFound from "views/Pages/PageNotFound.jsx";
 
 
@@ -26,52 +28,45 @@ const hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-    <Route exact path='/' component={Index} />
 
-    <Route
+      <Route exact path='/' component={Index} />
+
+      <AuthorizeRoute  
         path="/admin"
+        allowedRoles = {["Admin"]}
         render={props => {
           return <AdminLayout {...props} />;
         }}
-      />
-      <Route
+            />
+      
+      <AuthorizeRoute 
         path="/client"
+        allowedRoles = {["Admin","Client"]}
         render={props => {
           return <ClientLayout {...props} />;
         }}
       />
-      <Route
+      <AuthorizeRoute
         path="/hr"
+        allowedRoles = {["Admin","HR"]}
         render={props => {
           return <HrLayout {...props} />;
         }}
       />
-      <Route
+        <AuthorizeRoute
         path="/mentor"
+        allowedRoles = {["Admin","Mentor"]}
         render={props => {
-          return <AuthLayout {...props} />;
+          return <MentorLayout {...props} />;
         }}
       />
-      <Route
-        path="/auth"
-        render={props => {
-          return <AuthLayout {...props} />;
-        }}
-      />
-      <Route
-        path="/register"
-        render={props => {
-          return <Register {...props} />;
-        }}
-      />
-      
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
-      {/*404 page */}
-      {/* <Route component={PageNotFound} /> */}
+        {/*404 page */}
+      <Route component={PageNotFound} />
 
-      {/* Delete this after DEVELOPMENT */}
-      {/* <Redirect to="/client/dashboard" /> */}
+        {/* Delete this after DEVELOPMENT */}
+      {/* <Redirect to="/client/dashboard" /> */} 
       
     </Switch>
   </Router>,

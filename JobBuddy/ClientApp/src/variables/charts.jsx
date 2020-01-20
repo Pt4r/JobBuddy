@@ -345,20 +345,20 @@ const dashboardActiveCountriesCard = {
     gradientFill.addColorStop(1, hexToRGB("#2CA8FF", 0.4));
     return {
       labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October"
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
       ],
       datasets: [
         {
-          label: "Active Countries",
+          label: "Total Jobs Listings",
           backgroundColor: gradientFill,
           borderColor: "#2CA8FF",
           pointBorderColor: "#FFF",
@@ -369,7 +369,7 @@ const dashboardActiveCountriesCard = {
           pointRadius: 4,
           fill: true,
           borderWidth: 2,
-          data: [80, 78, 86, 96, 83, 85, 76, 75, 88, 90]
+          data: [2, 10, 18, 16, 20, 23, 18, 15, 16, 10]
         }
       ]
     };

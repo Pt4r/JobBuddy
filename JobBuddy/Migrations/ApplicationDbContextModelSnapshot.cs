@@ -182,6 +182,9 @@ namespace JobBuddy.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<string>("UserRole")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -390,9 +393,6 @@ namespace JobBuddy.Migrations
                     b.Property<Guid>("ClientId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ClientUserDetailsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
@@ -407,7 +407,7 @@ namespace JobBuddy.Migrations
 
                     b.HasKey("MentorOfferId");
 
-                    b.HasIndex("ClientUserDetailsId");
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("MentorId");
 
@@ -598,7 +598,7 @@ namespace JobBuddy.Migrations
 
             modelBuilder.Entity("JobBuddy.Models.AdministratorDetails", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser1")
+                    b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Admins")
                         .HasForeignKey("ApplicationUserId");
                 });
@@ -606,7 +606,7 @@ namespace JobBuddy.Migrations
             modelBuilder.Entity("JobBuddy.Models.ClientUserDetails", b =>
                 {
                     b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("ClientDetails")
                         .HasForeignKey("ApplicationUserId");
                 });
 
@@ -620,7 +620,7 @@ namespace JobBuddy.Migrations
             modelBuilder.Entity("JobBuddy.Models.HrUserDetails", b =>
                 {
                     b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("HrDetails")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("JobBuddy.Models.ClientUserDetails", null)
@@ -628,8 +628,9 @@ namespace JobBuddy.Migrations
                         .HasForeignKey("ClientUserDetailsId");
 
                     b.HasOne("JobBuddy.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
+                        .WithMany("HrUsers")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("JobBuddy.Models.JobCategory", b =>
@@ -642,7 +643,7 @@ namespace JobBuddy.Migrations
             modelBuilder.Entity("JobBuddy.Models.JobListing", b =>
                 {
                     b.HasOne("JobBuddy.Models.Company", "Company")
-                        .WithMany()
+                        .WithMany("JobListings")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -654,9 +655,9 @@ namespace JobBuddy.Migrations
                         .IsRequired();
 
                     b.HasOne("JobBuddy.Models.JobCategory", "JobCategory")
-                        .WithMany()
+                        .WithMany("JobListings")
                         .HasForeignKey("JobCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -677,9 +678,11 @@ namespace JobBuddy.Migrations
 
             modelBuilder.Entity("JobBuddy.Models.MentorOffer", b =>
                 {
-                    b.HasOne("JobBuddy.Models.ClientUserDetails", null)
+                    b.HasOne("JobBuddy.Models.ClientUserDetails", "Client")
                         .WithMany("OffersReceived")
-                        .HasForeignKey("ClientUserDetailsId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("JobBuddy.Models.MentorUserDetails", "Mentor")
                         .WithMany("OffersReceived")
@@ -691,7 +694,7 @@ namespace JobBuddy.Migrations
             modelBuilder.Entity("JobBuddy.Models.MentorUserDetails", b =>
                 {
                     b.HasOne("JobBuddy.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("MentorDetails")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("JobBuddy.Models.ClientUserDetails", null)
@@ -699,7 +702,7 @@ namespace JobBuddy.Migrations
                         .HasForeignKey("ClientUserDetailsId");
 
                     b.HasOne("JobBuddy.Models.Company", "Company")
-                        .WithMany()
+                        .WithMany("Mentors")
                         .HasForeignKey("CompanyId");
                 });
 
