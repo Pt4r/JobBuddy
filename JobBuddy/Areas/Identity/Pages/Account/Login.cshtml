@@ -1,0 +1,70 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    ViewData["Bg_Image"] = "../../img/bg13.jpg";
+}
+
+
+
+
+<div class="col-md-4 ml-auto mr-auto">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="card card-login card-plain">
+            <div class="card-header ">
+                <div class="logo-container">
+                    <img src="~/img/AFDempLogo.png" alt="">
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="text-center">@Html.ValidationMessage("Error")</div>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <div class="input-group no-border form-control-lg">
+                    <span class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="now-ui-icons users_circle-08"></i>
+                        </div>
+                    </span>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Email" required="required">
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <div class="input-group no-border form-control-lg">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="now-ui-icons text_caps-small"></i>
+                        </div>
+                    </div>
+                    <input asp-for="Input.Password" placeholder="Password" class="form-control" required="required">
+                </div>
+                <div class="input-group no-border form-control-lg">
+                    <div class="form-check">
+                        <label asp-for="Input.RememberMe" class="form-check-label" style="color: white">
+                            <input asp-for="Input.RememberMe" class="form-check-input" type="checkbox">
+                            <span class="form-check-sign" style="color: white"></span>
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">Log in</button>
+                <div class="pull-left">
+                    <h6><a href="/authentication/register" class="link footer-link">Create Account</a></h6>
+                </div>
+                <div class="pull-right">
+                    <h6><a href="/contact" class="link footer-link">Need Help?</a></h6>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
