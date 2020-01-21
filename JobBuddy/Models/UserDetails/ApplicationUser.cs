@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace JobBuddy.Models.UserDetails
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         [MaxLength(50)]
@@ -25,12 +25,7 @@ namespace JobBuddy.Models.UserDetails
                 return FirstName + " " + LastName;
             }
         }
-
-        [Required]
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        public string? PhoneNumber { get; set; }
-
+        
         [Display(Name = "Profile Picture")]
         [DataType(DataType.Upload)]
         public string? ProfilePicture { get; set; }

@@ -89,9 +89,10 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult Delete(Guid Id)
+        public IActionResult Delete([FromBody]JobListing jobListing)
         {
-            var jobListing = _jobListings.GetJobListing(Id);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             if (!_jobListings.DeleteJobListing(jobListing))
             {

@@ -118,7 +118,6 @@ function PagesNavbar() {
             <NavItem>
                 <NavLink
                   href="/authentication/login"
-                  target="_blank"
                   id="dashboard"
                   style={{borderRight: "1px solid silver", marginRight: "10px", paddingRight: "15px" }}
                 >

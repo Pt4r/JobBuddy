@@ -74,10 +74,11 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult DeleteAdmin(Guid id)
+        public IActionResult DeleteAdmin([FromBody]AdministratorDetails adminToDelete)
         {
-            var adminToDelete = _administratorDetailsRepository.GetAdministrator(id);
-            
+            if (!ModelState.IsValid)
+                return BadRequest();
+
             if (adminToDelete == null)
             {
                 ModelState.AddModelError("", "Can't find admin.");

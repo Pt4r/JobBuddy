@@ -74,11 +74,12 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult DeleteHr(Guid hrId)
+        public IActionResult DeleteHr([FromBody]HrUserDetails hrToDelete)
         {
-            var hrToDelete = _hrDetails.GetHr(hrId);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-            if(_hrDetails.GetJobListingsFromHr(hrId).Any() )
+            if(_hrDetails.GetJobListingsFromHr(hrToDelete.Id).Any() )
             {
                 ModelState.AddModelError("", $"There are open Job Listing binded to this account. Delete them first if you want to proceed.");
                 return StatusCode(409);

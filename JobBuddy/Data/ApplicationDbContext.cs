@@ -50,19 +50,10 @@ namespace JobBuddy.Data
             modelBuilder.Entity<MentorUserDetails>()
                       .HasKey(m => m.Id);
 
-            modelBuilder.Entity<MentorUserDetails>()
-                     .Property(m => m.PhoneNumber)
-                     .HasMaxLength(25)
-                     .IsRequired();
-
             //Πρέπει να δω πώς θα μπει το Rating ..Προς το παρόν μόνο Required
             modelBuilder.Entity<MentorUserDetails>()
                       .Property(m => m.Rating)
                       .IsRequired();
-            //episis na doume pws mpainei kai ti length...
-            modelBuilder.Entity<MentorUserDetails>()
-                      .Property(m => m.ProfilePicture)
-                      .HasColumnName("[Profile Picture]");
 
 
             modelBuilder.Entity<MentorUserDetails>()

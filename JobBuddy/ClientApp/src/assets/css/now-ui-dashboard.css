@@ -2548,7 +2548,7 @@ Created using IcoMoon - icomoon.io
         .footer ul li a:hover {
           text-decoration: none; }
   .footer.fixed-bottom {
-    width: calc(100% - 80px);
+    width: calc(100%);
     margin-left: auto; }
   .footer .copyright {
     font-size: 0.8571em;

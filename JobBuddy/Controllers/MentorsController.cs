@@ -74,9 +74,10 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete([FromBody]MentorUserDetails mentorToDelete)
         {
-            var mentorToDelete = _mentorRepository.GetMentor(id);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             if (mentorToDelete == null)
             {

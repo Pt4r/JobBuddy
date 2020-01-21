@@ -73,9 +73,10 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult DeleteClient(Guid id)
+        public IActionResult DeleteClient([FromBody]ClientUserDetails clientToDelete)
         {
-            var clientToDelete = _client.GetClient(id);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             if (clientToDelete == null)
             {

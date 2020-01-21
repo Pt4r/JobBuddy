@@ -78,9 +78,10 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult DeleteJobCategory(Guid id)
+        public IActionResult DeleteJobCategory([FromBody]Company company)
         {
-            var company = _companyRepository.GetCompany(id);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             if (company == null)
             {
