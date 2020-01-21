@@ -1,15 +1,15 @@
 ﻿using JobBuddy.Models;
-using JobBuddy.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JobBuddy.Data.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobBuddy.Controllers
 {
-
+    [Authorize(Roles = "Admin, Client, Mentor, HR")]
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Roles = "Admin")]
@@ -17,23 +17,23 @@ namespace JobBuddy.Controllers
     {
         private readonly IJobListingsRepository _jobListings;
 
-        public JobListingsController(IJobListingsRepository jl)
+        public JobListingsController(IJobListingsRepository jobListingsRepository)
         {
-            _jobListings = jl;
+            _jobListings = jobListingsRepository;
         }
 
 
-
-
         [HttpGet]
-        [Route("api/JobListings/{id}")]
-        public IActionResult GetJobListing(Guid id)
+        public IActionResult GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            var jobListings = _jobListings.GetJobListings().ToList();
+            return Ok(jobListings);
+        }
 
+
+        [HttpGet("{id}", Name = "JobListing")]
+        public IActionResult Get(Guid id)
+        {
             var jobListing = _jobListings.GetJobListing(id);
 
             if (jobListing == null)
@@ -43,33 +43,14 @@ namespace JobBuddy.Controllers
 
             return Ok(jobListing);
         }
+        
 
-
-        //api/JobListings
-        [HttpGet]
-        [Route("all")]
-        public IActionResult GetJobListings()
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var jls = _jobListings.GetJobListings().ToList();
-            return Ok(jls);
-        }
-
-        //api/JobListings/Create
-        [HttpPost]
-        [Route("Create")]
+        [HttpPost("Create")]
         [ProducesResponseType(201, Type = typeof(JobListing))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult CreateJobListing([FromBody]JobListing jobListing)
+        public IActionResult Create([FromBody]JobListing jobListing)
         {
-            if (jobListing == null)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -79,22 +60,18 @@ namespace JobBuddy.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return Ok(); //CreatedAtRoute("GetJobListing", new { id = jobListing.Id }, jobListing);
+            return CreatedAtRoute(routeName:"JobListing",routeValues: new { id = jobListing.Id },value: jobListing);
 
         }
 
-        //api/JobListings/Id
-        [HttpPut("{Id}")]
-        [Route("api/JobListings/Update")]
+
+        [HttpPut("Update/{Id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult UpdateJobListing(Guid jlId, [FromBody]JobListing updatedJobListing)
+        public IActionResult Update(Guid Id, [FromBody]JobListing updatedJobListing)
         {
-            if (updatedJobListing == null)
-                return BadRequest(ModelState);
-
-            if (jlId != updatedJobListing.Id)
+            if (Id != updatedJobListing.Id)
                 return BadRequest(ModelState);
 
             if (!ModelState.IsValid)
@@ -108,48 +85,37 @@ namespace JobBuddy.Controllers
             return NoContent();
         }
 
-        //api/JobListings/Id
-        [HttpDelete("{Id}")]
-        [Route("api/JobListings/Delete/{id}")]
+
+        [HttpDelete("Delete/{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult DeleteJobListing(Guid jlId)
+        public IActionResult Delete([FromBody]JobListing jobListing)
         {
-            var jlToDelete = _jobListings.GetJobListing(jlId);
-
-
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest();
 
-            if (!_jobListings.DeleteJobListing(jlToDelete))
+            if (!_jobListings.DeleteJobListing(jobListing))
             {
-                ModelState.AddModelError("", $"Something went wrong deleting {jlToDelete.Title}");
+                ModelState.AddModelError("", $"Something went wrong deleting {jobListing.Title}");
                 return StatusCode(500, ModelState);
             }
-            return NoContent();
+            return Ok();
         }
 
-        //api/JobListings/Hr/Id
-        [HttpGet("{Id}", Name = "GetJobListingsFromHr")]
-        [Route("api/JobListings/Hr/{id}")]
-        public IActionResult GetJobListingsFromHr(Guid hrId)
+        
+        [HttpGet("HrJobListings/{Id}")]
+        public IActionResult HrJobListings(Guid Id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var jls = _jobListings.GetJobListings().Where(h => h.HrUserId == hrId).ToList();
-            return Ok(jls);
+            var jobListings = _jobListings.GetJobListingsFromHr(Id).ToList();
+            return Ok(jobListings);
         }
 
-        //api/JobListings/Client/Id
-        [HttpGet("{Id}", Name = "GetJobListingsFromClient")]
-        [Route("api/JobListings/Client/{id}")]
-        public IActionResult GetJobListingsFromClient(Guid clId)
+        
+        [HttpGet("ClientJobListings/{Id}")]
+        public IActionResult ClientJobListings(Guid Id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var jobListing = _jobListings.GetJobListingsFromClient(clId).ToList();
+            var jobListing = _jobListings.GetJobListingsFromClient(Id).ToList();
             return Ok(jobListing);
         }
     }

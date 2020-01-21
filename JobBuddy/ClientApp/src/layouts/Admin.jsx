@@ -59,13 +59,13 @@ class Admin extends React.Component {
     }
   }
   minimizeSidebar = () => {
-    var message = "Sidebar mini ";
+    var message = "Sidebar ";
     if (document.body.classList.contains("sidebar-mini")) {
       this.setState({ sidebarMini: false });
-      message += "deactivated...";
+      message += "expanded...";
     } else {
       this.setState({ sidebarMini: true });
-      message += "activated...";
+      message += "collapsed...";
     }
     document.body.classList.toggle("sidebar-mini");
     var options = {};
@@ -74,7 +74,7 @@ class Admin extends React.Component {
       message: message,
       type: "info",
       icon: "now-ui-icons ui-1_bell-53",
-      autoDismiss: 7
+      autoDismiss: 2
     };
     this.notificationAlert.current.notificationAlert(options);
   };

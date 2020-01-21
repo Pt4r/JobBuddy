@@ -57,7 +57,7 @@ function PagesNavbar() {
             <DropdownToggle
               caret
               data-toggle="dropdown"
-              href="#pablo"
+              href="#"
               id="navbarDropdown"
               tag="a"
               onClick={e => e.preventDefault()}
@@ -67,25 +67,19 @@ function PagesNavbar() {
               <span className="button-bar"></span>
             </DropdownToggle>
             <DropdownMenu aria-labelledby="navbarDropdown">
-              <DropdownItem header tag="a">
-                Dropdown header
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Action
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Another action
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Something else here
+
+              <DropdownItem href="/authentication/login">
+                Go to Dashboard
               </DropdownItem>
               <DropdownItem divider></DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                Separated link
+              <DropdownItem href="#about_us">
+                Who we are
               </DropdownItem>
-              <DropdownItem divider></DropdownItem>
-              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                One more separated link
+              <DropdownItem href="#team">
+                Meet the team
+              </DropdownItem>
+              <DropdownItem href="#contact">
+                Contact us
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
@@ -120,7 +114,17 @@ function PagesNavbar() {
             navbar
           >
             <Nav navbar>
-           
+            
+            <NavItem>
+                <NavLink
+                  href="/authentication/login"
+                  id="dashboard"
+                  style={{borderRight: "1px solid silver", marginRight: "10px", paddingRight: "15px" }}
+                >
+                  <p className="d-lg d-xl">Dashboard</p>
+                </NavLink>
+              </NavItem>
+              
             <LoginMenu color="white"/>
              
               <NavItem>
@@ -128,6 +132,7 @@ function PagesNavbar() {
                   href="#"
                   target="_blank"
                   id="twitter-tooltip"
+                  style={{borderLeft: "1px solid silver", marginLeft: "10px", paddingLeft: "20px" }}
                 >
                   <i className="fab fa-twitter"></i>
                   <p className="d-lg-none d-xl-none">Twitter</p>
@@ -169,5 +174,4 @@ function PagesNavbar() {
     </>
   );
 }
-
 export default PagesNavbar;
