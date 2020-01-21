@@ -30,6 +30,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
         private readonly IClientRepository _clientRepository;
         private readonly IHrDetailsRepository _hrRepository;
         private readonly IMentorRepository _mentorRepository;
+        private readonly IAdministratorDetailsRepository _administratorDetailsRepository;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -154,6 +155,17 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                                     ApplicationUserId = userId
                                 };
                                 _hrRepository.AddHr(HR);
+                            }
+                            break;
+
+                        case "Admin":
+                            if (userId != null)
+                            {
+                                var admin = new AdministratorDetails
+                                {
+                                    ApplicationUserId = userId
+                                };
+                                _administratorDetailsRepository.AddAdministrator(admin);
                             }
                             break;
                     }
