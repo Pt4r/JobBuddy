@@ -55,12 +55,18 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\demo.css" />
+    <Content Remove="wwwroot\js\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\Admin.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\bootstrap.min.css" />
     <None Include="wwwroot\css\bootstrap.min.css.map" />
     <None Include="wwwroot\css\demo.css" />
+    <None Include="wwwroot\js\Admin.js" />
     <None Include="wwwroot\js\core\bootstrap.min.js" />
     <None Include="wwwroot\js\core\jquery.min.js" />
     <None Include="wwwroot\js\core\popper.min.js" />

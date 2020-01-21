@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JobBuddy
 {
-    //[Authorize(Roles = "Admin,Client,HR,Mentor")]
-    public class Chat : PageModel
+    //[Authorize(Roles = "Admin")]
+    public class AdminSupportModel : PageModel
     {
         public void OnGet()
         {

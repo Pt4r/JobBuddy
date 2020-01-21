@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace JobBuddy.Areas.Identity.Pages.Account
 {
@@ -22,7 +24,7 @@ namespace JobBuddy.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, 
+        public LoginModel(SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<ApplicationUser> userManager)
         {
@@ -89,9 +91,11 @@ namespace JobBuddy.Areas.Identity.Pages.Account
 
                     //na doume gia multiple roles
 
+
                     switch (role)
                     {
                         case "Admin":
+
                             return LocalRedirect("/Admin/Dashboard");
                         case "Client":
                             return LocalRedirect("/Client/Dashboard");
@@ -102,7 +106,11 @@ namespace JobBuddy.Areas.Identity.Pages.Account
                         default:
                             return NotFound();
                     }
-                    
+
+
+
+
+
                 }
                 if (result.RequiresTwoFactor)
                 {

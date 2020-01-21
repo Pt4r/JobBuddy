@@ -1,14 +1,24 @@
-﻿using System;
+﻿using JobBuddy.Models.ChatModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace JobBuddy.Models.ChatServices
 {
-    interface IChatRoomService
+   public interface IChatRoomService
     {
         Task<Guid> CreateRoom(string connectionId);
 
         Task<Guid> GetRoomForConnectionId(string connectionId);
+
+
+        Task SetRoomName(Guid roomId, string name);
+
+        Task AddMessage(Guid roomId, Message message);
+
+        Task<IEnumerable<Message>> GetMessageHistory(Guid roomId);
+
+        Task<IReadOnlyDictionary<Guid, ChatRoom>> GetAllRooms();
     }
 }

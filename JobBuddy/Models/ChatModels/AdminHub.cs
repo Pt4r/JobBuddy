@@ -1,26 +1,20 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Threading.Tasks;
+﻿
+
+using JobBuddy.Models;
 using JobBuddy.Models.ChatServices;
 using Microsoft.AspNetCore.Authorization;
-using JobBuddy.Models.ChatModels;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace JobBuddy.Models
+namespace JobBuddy.Models.ChatModels
 {
-
-    //[Authorize(Roles = "Admin,Client,HR,Mentor")]
-    public class ChatHub : Hub
+    //[Authorize(Roles = "Admin")]
+    public class AdminHub : Hub
     {
-
-        private readonly IHubContext<AdminHub> _adminHub;
-
-        public ChatHub(
-
-            IHubContext<AdminHub> adminHub)
-        {
-
-            _adminHub = adminHub;
-        }
+  
 
         public override async Task OnConnectedAsync()
         {
@@ -63,10 +57,5 @@ namespace JobBuddy.Models
                 message.Text);
 
         }
-
-
-
-
-
     }
 }

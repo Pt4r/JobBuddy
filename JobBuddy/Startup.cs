@@ -24,7 +24,9 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.Extensions.Logging;
-
+using JobBuddy.Models.ChatServices;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using JobBuddy.Models.ChatModels;
 
 namespace JobBuddy
 {
@@ -41,6 +43,7 @@ namespace JobBuddy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSignalR();
+            services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddCors();
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -56,8 +59,10 @@ namespace JobBuddy
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
+            //Spyros gia Strato
+            //edw autos bazei cookie .. Episis sto Login pou exei ftiaksei kanei kapoia configurations me claims kai douleuei
             services.AddAuthentication()
-                .AddIdentityServerJwt();
+            .AddIdentityServerJwt();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -117,7 +122,8 @@ namespace JobBuddy
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<AdminHub>("/adminHub");
             });
 
             app.UseSpa(spa =>

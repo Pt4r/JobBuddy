@@ -1,10 +1,10 @@
-﻿var chatterName = 'Visitor';
+﻿var chatterName = 'Job Buddy Team';
 
 var dialogEl = document.getElementById('chatDialog');
 
 // Initialize the SignalR client
 var connection = new signalR.HubConnectionBuilder()
-    .withUrl('/chatHub')
+    .withUrl('/adminHub')
     .build();
 
 connection.on('ReceiveMessage', renderMessage);
@@ -36,7 +36,9 @@ function onConnected() {
     connection.invoke('SetName', chatterName);
 }
 
-
+var connection = new signalR.HubConnectionBuilder()
+    .withUrl('/chatHub')
+    .build();
 
 function showChatDialog() {
     dialogEl.style.display = 'block';
@@ -67,7 +69,7 @@ function ready() {
         var name = e.target[0].value;
         if (name && name.length) {
             welcomePanelEl.style.display = 'none';
-            chatterName = name;
+            
             startConnection();
         }
     });
