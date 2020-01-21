@@ -49,11 +49,16 @@ class CompanyTable extends React.Component {
 
 
 componentDidMount(){
-  axios.get(`${ LOCALHOST_API_URL }/companies`)
+  this.getCompanies();
+}
+
+getCompanies=() => {
+axios.get(`${ LOCALHOST_API_URL }/company`)
   .then(res => {
     const posts = res.data;
     this.setState({posts: posts});
   })
+
 }
 
 
@@ -75,14 +80,31 @@ componentDidMount(){
 // }
 
 
-deleteItem=id => {
- 
+deleteItem=(comp) => {
+  const compa = {
+    Id: comp.id,
+    title: comp.title,
+    address: comp.address,
+    phoneNumber : comp.phoneNumber,
+   email: comp.email
+  }
+  console.log(compa)
+//const url = `${LOCALHOST_API_URL}/company/delete`
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
-  axios.delete(`${LOCALHOST_API_URL}/companies/delete/${id}`)
+    axios({
+      method: 'DELETE',
+      url:`${LOCALHOST_API_URL}/company/delete` , 
+      data: JSON.stringify(compa), 
+      headers:{'Content-Type': 'application/json; charset=utf-8'}
+  })  
+  //axios.delete(`${LOCALHOST_API_URL}/company/delete`, compa)
   .then(res => {
-  this.props.deleteItemFromState(id)})
-	.then(res => console.log(res.data));
+  this.getCompanies})
+  .then(res => console.log(res.data))
+  .catch(error => {
+    console.log(error)
+})
 }}
 
 
@@ -143,7 +165,7 @@ deleteItem=id => {
             {/* use this button to remove the data row */}
             <Button
               onClick={() => {
-                this.deleteItem(row.original.id);
+                this.deleteItem(row.original);
               }}
               className="btn-icon btn-round"
               color="danger"

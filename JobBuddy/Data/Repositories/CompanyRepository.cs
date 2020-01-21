@@ -22,12 +22,12 @@ namespace JobBuddy.Data.Repositories
         {
 
             IEnumerable<Company> companies;
-            return companies = _db.Companies.Include("ApplicationUser").ToList();
+            return companies = _db.Companies.ToList();
         }
 
         public Company GetCompany(Guid id)
         {
-            Company companies = _db.Companies.Include("ApplicationUser").SingleOrDefault(i => i.Id == id);
+            Company companies = _db.Companies.SingleOrDefault(i => i.Id == id);
             return companies;
         }
 
@@ -40,7 +40,6 @@ namespace JobBuddy.Data.Repositories
 
             company.Id = Guid.NewGuid();
             _db.Companies.Add(company);
-            _db.SaveChanges();
             return Save();
         }
 
@@ -55,7 +54,7 @@ namespace JobBuddy.Data.Repositories
         {
             Company companyFound;
 
-            companyFound = _db.Companies.Include("ApplicationUser").SingleOrDefault(m => m.Id == id);
+            companyFound = _db.Companies.SingleOrDefault(m => m.Id == id);
 
             return companyFound;
         }

@@ -10,16 +10,16 @@ namespace JobBuddy.Models
 {
     public class Company
     {
-        //[Key]
+        [Key]
         public Guid Id { get; set; }
-        //[Required]
+        [Required]
         public string Title { get; set; }
         //[Required]
         public string Address { get; set; }
         //[Required]
         [Display(Name = "Phone Number")]
         //[DataType(DataType.PhoneNumber)]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }        ///anamoni apo spyroMisichtoni
         public virtual ICollection<HrUserDetails> HrUsers { get; set; }

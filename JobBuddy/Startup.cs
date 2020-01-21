@@ -68,6 +68,7 @@ namespace JobBuddy
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -49,11 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200114220647_MakingRegisterUpdateAspNetUsersAndDetailsModels.cs" />
-    <Compile Remove="Migrations\20200114220647_MakingRegisterUpdateAspNetUsersAndDetailsModels.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="wwwroot\css\demo.css" />
   </ItemGroup>
 

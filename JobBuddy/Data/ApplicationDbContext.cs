@@ -67,9 +67,9 @@ namespace JobBuddy.Data
 
             //Company-Mentor relationship
             modelBuilder.Entity<MentorUserDetails>()
-                .HasOne(m => m.Company);
-//  /////                      .WithMany(c => c.Mentors)
-//  /////                      .HasForeignKey(m => m.CompanyId);
+                     .HasOne(m => m.Company)
+                     .WithMany(c => c.Mentors)
+                     .HasForeignKey(m => m.CompanyId);
                         //.OnDelete(DeleteBehavior.SetNull);
 
             //Mentor-MentorOffer Relationship

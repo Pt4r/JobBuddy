@@ -11,7 +11,7 @@ class CompanyForm extends React.Component {
         id: '',
         title: '',
         address: '',
-        phoneNumber : '',
+        phoneNumber: 0  ,
         email: ''
         }
     }
@@ -36,7 +36,7 @@ class CompanyForm extends React.Component {
         }
         require('axios-debug-log')
         console.log(comp)
-        Axios.post(`https://localhost:5001/api/companies/Create`, comp)
+        Axios.post(`https://localhost:5001/api/company/Create`, comp)
         .then(res => {            
         console.log(res)})
         .catch(error => {

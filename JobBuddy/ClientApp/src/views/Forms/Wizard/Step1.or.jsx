@@ -33,18 +33,18 @@ class Step1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobTitle: "",
-      Details: "",
-      jobCategory: "",
+      firstname: "",
+      lastname: "",
+      email: "",
       firstnameState: "",
       lastnameState: "",
       emailState: ""
     };
-    this.jobTitleChange = this.jobTitleChange.bind(this);
+    this.firstNameChange = this.firstNameChange.bind(this);
   }
-  jobTitleChange(e) {
+  firstNameChange(e) {
     this.setState({
-      jobTitle: e.target.value
+      firstname: e.target.value
     });
     if (e.target.value.length > 2) {
       this.setState({
@@ -56,7 +56,7 @@ class Step1 extends React.Component {
       });
     }
   }
-  DetailsChange(e) {
+  lastNameChange(e) {
     this.setState({
       lastname: e.target.value
     });
@@ -85,35 +85,33 @@ class Step1 extends React.Component {
       });
     }
   }
-
-  //will not use probably
   isValidated() {
     if (
-      this.state.firstnameState !== " has-success" 
-      // || this.state.lastnameState !== " has-success" 
-      // || this.state.emailState !== " has-success"
+      this.state.firstnameState !== " has-success" ||
+      this.state.lastnameState !== " has-success" ||
+      this.state.emailState !== " has-success"
     ) {
       this.setState({
         firstnameState: " has-danger",
-        lastnameState: " has-danger"
-       //, emailState: " has-danger"
+        lastnameState: " has-danger",
+        emailState: " has-danger"
       });
       return false;
     }
     return true;
   }
-
-
   render() {
     return (
       <>
         <h5 className="info-text">
           {" "}
-          Let's start with writing about the job you are interested in 
+          Let's start with the basic information (with validation)
         </h5>
         <Row className="justify-content-center">
-
-          <Col xs={10} lg="4">
+          <Col xs={12} sm="4">
+            <PictureUpload />
+          </Col>
+          <Col xs={12} sm="6">
             <InputGroup
               className={
                 "form-control-lg" +
@@ -127,13 +125,13 @@ class Step1 extends React.Component {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-                defaultValue={this.state.jobTitle}
+                defaultValue={this.state.firstname}
                 type="text"
-                placeholder="Job Title (required)"
-                name="jobTitle"
+                placeholder="First Name (required)"
+                name="firstname"
                 onFocus={e => this.setState({ firstnameFocus: true })}
                 onBlur={e => this.setState({ firstnameFocus: false })}
-                onChange={e => this.jobTitleChange(e)}
+                onChange={e => this.firstNameChange(e)}
               />
             </InputGroup>
             <InputGroup
@@ -149,18 +147,18 @@ class Step1 extends React.Component {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-                defaultValue={this.state.Details}
-                type="textarea"
-                placeholder="Details (required)"
-                name="Details"
+                defaultValue={this.state.lastname}
+                type="text"
+                placeholder="Last Name (required)"
+                name="lastname"
                 onFocus={e => this.setState({ lastnameFocus: true })}
                 onBlur={e => this.setState({ lastnameFocus: false })}
-                onChange={e => this.DetailsChange(e)}
+                onChange={e => this.lastNameChange(e)}
               />
             </InputGroup>
-          {/* </Col> */}
-          {/* <Col xs={12} lg={10} className="mt-3"> */}
-            {/* <InputGroup
+          </Col>
+          <Col xs={12} lg={10} className="mt-3">
+            <InputGroup
               className={
                 "form-control-lg" +
                 (this.state.emailState ? this.state.emailState : "") +
@@ -181,8 +179,8 @@ class Step1 extends React.Component {
                 onBlur={e => this.setState({ emailFocus: false })}
                 onChange={e => this.emailChange(e)}
               />
-            </InputGroup>*/}
-          </Col> 
+            </InputGroup>
+          </Col>
         </Row>
       </>
     );

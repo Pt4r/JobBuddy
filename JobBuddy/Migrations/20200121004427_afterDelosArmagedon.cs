@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobBuddy.Migrations
 {
-    public partial class testingloginregister : Migration
+    public partial class afterDelosArmagedon : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,8 @@ namespace JobBuddy.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    ProfilePicture = table.Column<string>(nullable: true)
+                    ProfilePicture = table.Column<string>(nullable: true),
+                    UserRole = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,12 +109,12 @@ namespace JobBuddy.Migrations
                 name: "Administrators",
                 columns: table => new
                 {
-                    AdminId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Administrators", x => x.AdminId);
+                    table.PrimaryKey("PK_Administrators", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Administrators_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
@@ -212,8 +213,6 @@ namespace JobBuddy.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    ProfilePicture = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<int>(nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     CurrentStatus = table.Column<int>(nullable: false),
@@ -239,8 +238,6 @@ namespace JobBuddy.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
-                    PhoneNumber = table.Column<int>(nullable: false),
-                    ProfilePic = table.Column<byte>(nullable: false),
                     CompanyId = table.Column<Guid>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     ClientUserDetailsId = table.Column<Guid>(nullable: true)
@@ -266,19 +263,17 @@ namespace JobBuddy.Migrations
                 name: "Mentors",
                 columns: table => new
                 {
-                    MentorId = table.Column<Guid>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(maxLength: 25, nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     Rating = table.Column<byte>(nullable: false),
-                    ProfilePicture = table.Column<string>(name: "[Profile Picture]", nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 2000, nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true),
                     CompanyId = table.Column<Guid>(nullable: true),
                     ClientUserDetailsId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mentors", x => x.MentorId);
+                    table.PrimaryKey("PK_Mentors", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Mentors_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
@@ -302,23 +297,22 @@ namespace JobBuddy.Migrations
                     MentorId = table.Column<Guid>(nullable: false),
                     OfferStatus = table.Column<int>(nullable: false),
                     PostDate = table.Column<DateTime>(nullable: false),
-                    ExpirationDate = table.Column<DateTime>(nullable: false),
-                    ClientUserDetailsId = table.Column<Guid>(nullable: true)
+                    ExpirationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MentorOffers", x => x.MentorOfferId);
                     table.ForeignKey(
-                        name: "FK_MentorOffers_Clients_ClientUserDetailsId",
-                        column: x => x.ClientUserDetailsId,
+                        name: "FK_MentorOffers_Clients_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MentorOffers_Mentors_MentorId",
                         column: x => x.MentorId,
                         principalTable: "Mentors",
-                        principalColumn: "MentorId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -345,7 +339,7 @@ namespace JobBuddy.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    JobCategoryTitle = table.Column<int>(nullable: false),
+                    JobCategoryTitle = table.Column<string>(nullable: false),
                     Subcategory_1 = table.Column<string>(nullable: false),
                     Subcategory_2 = table.Column<string>(nullable: false),
                     CompanyId = table.Column<Guid>(nullable: true)
@@ -360,7 +354,7 @@ namespace JobBuddy.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: true),
@@ -386,9 +380,9 @@ namespace JobBuddy.Migrations
                     Title = table.Column<string>(maxLength: 250, nullable: false),
                     Info = table.Column<string>(maxLength: 1000, nullable: true),
                     PostDate = table.Column<DateTime>(nullable: false),
-                    HrUserId = table.Column<Guid>(nullable: false),
-                    JobCategoryId = table.Column<Guid>(nullable: false),
-                    CompanyId = table.Column<Guid>(nullable: false)
+                    HrUserId = table.Column<Guid>(nullable: true),
+                    JobCategoryId = table.Column<Guid>(nullable: true),
+                    CompanyId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -398,7 +392,7 @@ namespace JobBuddy.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_JobListing_HrUser_HrUserId",
                         column: x => x.HrUserId,
@@ -408,8 +402,7 @@ namespace JobBuddy.Migrations
                         name: "FK_JobListing_JobCategories_JobCategoryId",
                         column: x => x.JobCategoryId,
                         principalTable: "JobCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -518,9 +511,9 @@ namespace JobBuddy.Migrations
                 column: "JobCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MentorOffers_ClientUserDetailsId",
+                name: "IX_MentorOffers_ClientId",
                 table: "MentorOffers",
-                column: "ClientUserDetailsId");
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MentorOffers_MentorId",
@@ -557,8 +550,7 @@ namespace JobBuddy.Migrations
                 table: "HrUser",
                 column: "CompanyId",
                 principalTable: "Companies",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Mentors_Companies_CompanyId",
