@@ -21,15 +21,18 @@ import Select from "react-select";
 // reactstrap components
 import { Row, Col, FormGroup, Label, Input } from "reactstrap";
 import Axios from "axios";
+import {LOCALHOST_URL_API} from "../../../Constants"
 
 // core components
 var selectOptions = [
-  { value: "one", label: "One" },
-  { value: "two", label: "Two" },
-  { value: "three", label: "Three" },
-  { value: "four", label: "Four" },
-  { value: "five", label: "Five" },
-  { value: "six", label: "Six" }
+  { value: "IT", label: "IT" },
+  { value: "Economics", label: "Economics" },
+  { value: "Marketing", label: "Marketing" },
+  { value: "Sales", label: "Sales" },
+  { value: "Engineering", label: "Engineering" },
+  { value: "Arts", label: "Arts" },
+  { value: "Tourism", label: "Tourism" },
+  { value: "CustomerSupport", label: "CustomerSupport" }
 ];
 
 class Step3 extends React.Component {
@@ -42,7 +45,7 @@ class Step3 extends React.Component {
   }
 
 componentDidMount(){
-  Axios.get(`localhost:44394/api/jobcategories`)
+  Axios.get(`${LOCALHOST_API_URL}/jobcategories`)
   .then(res => {
     const jobcat = res.data;
     this.setState({jobcategories: jobcat});
@@ -91,7 +94,7 @@ selectOpt = () => {
               placeholder="Single Select"
               name="singleSelect"
               value={this.state.select}
-              options={this.state.jobcategories}
+              options={selectOptions}
               onChange={value => this.setState({ select: value })}
             />
           </Col>

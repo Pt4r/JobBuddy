@@ -113,7 +113,6 @@ class Step1 extends React.Component {
         </h5>
         <Row className="justify-content-center">
           <Col xs={12} sm="4">
-            <PictureUpload />
           </Col>
           <Col xs={12} sm="6">
             <InputGroup

@@ -126,7 +126,7 @@ class Step3 extends React.Component {
               placeholder="Single Select"
               name="singleSelect"
               value={this.state.select}
-              options={this.state.jobcategories  }
+              options={selectOptions  }
               onChange={value => this.setState({ select: value })}
             />
           </Col>
