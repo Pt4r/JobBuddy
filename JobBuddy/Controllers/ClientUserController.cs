@@ -69,7 +69,7 @@ namespace JobBuddy.Controllers
         }
 
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("Delete")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]

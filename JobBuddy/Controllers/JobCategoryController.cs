@@ -67,7 +67,7 @@ namespace JobBuddy.Controllers
             return CreatedAtRoute("JobCategory", new { id = jobCategoryCreated.Id }, jobCategoryCreated);
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("Delete")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]

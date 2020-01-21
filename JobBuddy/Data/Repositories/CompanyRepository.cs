@@ -40,7 +40,6 @@ namespace JobBuddy.Data.Repositories
 
             company.Id = Guid.NewGuid();
             _db.Companies.Add(company);
-            _db.SaveChanges();
             return Save();
         }
 
