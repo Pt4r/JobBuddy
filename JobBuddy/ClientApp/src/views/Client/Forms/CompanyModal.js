@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import CompanyForm from "./CompanyForm.js"
+import { textSpanIsEmpty } from 'typescript';
 
 
 class CompanyModal extends Component {
@@ -46,7 +47,7 @@ oops=()=> console.log(this.props.company);
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
                 <ModalBody>
-                  <CompanyForm  comp={this.props.company} toggle={this.toggle}  modalState={this.state.modal} getComp={this.props.getCompanies} tableSt={this.props.tableState} />
+                  <CompanyForm  comp={this.props.company} toggle={this.toggle}  modalState={this.state.modal} getCompanies={this.props.getCompanies} tableSt={this.props.tableState} />
                 </ModalBody>
             </Modal>
         </Fragment>;

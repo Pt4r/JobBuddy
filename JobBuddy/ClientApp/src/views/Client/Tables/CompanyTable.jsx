@@ -144,7 +144,7 @@ test(){
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Companies</CardTitle>
-                  <CompanyModal isNew/>
+                  <CompanyModal isNew getCompanies={this.getCompanies} tableState={this.state.posts} />
                 </CardHeader>
                 <CardBody>
                   <ReactTable
