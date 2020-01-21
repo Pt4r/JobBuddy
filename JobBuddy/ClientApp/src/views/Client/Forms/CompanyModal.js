@@ -46,10 +46,12 @@ oops=()=> console.log(this.props.company);
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
                 <ModalBody>
-                  <CompanyForm  comp={this.props.company} />
+                  <CompanyForm  comp={this.props.company} toggle={this.toggle}  modalState={this.state.modal} getComp={this.props.getCompanies} tableSt={this.props.tableState} />
                 </ModalBody>
             </Modal>
         </Fragment>;
     }
     }
 export default CompanyModal;
+
+//

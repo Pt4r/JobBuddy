@@ -62,52 +62,30 @@ axios.get(`${ LOCALHOST_API_URL }/company`)
 }
 
 
-// deleteItem = id => {
-//   let confirmDeletion = window.confirm('Do you really wish to delete it?');
-//   if (confirmDeletion) {
-//     const url = `${ LOCALHOST_API_URL }/companies/delete/${id}`
-//     fetch(url, {
-//       method: 'delete',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       }
-//     })
-//       .then(res => {
-//         this.props.deleteItemFromState(id);
-//       })
-//       .catch(err => console.log(err));
-//   }
-// }
-
 
 deleteItem=(comp) => {
-  const compa = {
-    Id: comp.id,
-    title: comp.title,
-    address: comp.address,
-    phoneNumber : comp.phoneNumber,
-   email: comp.email
-  }
-  console.log(compa)
 //const url = `${LOCALHOST_API_URL}/company/delete`
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
     axios({
       method: 'DELETE',
       url:`${LOCALHOST_API_URL}/company/delete` , 
-      data: JSON.stringify(compa), 
+      data: JSON.stringify(comp), 
       headers:{'Content-Type': 'application/json; charset=utf-8'}
   })  
-  //axios.delete(`${LOCALHOST_API_URL}/company/delete`, compa)
-  .then(res => {
-  this.getCompanies})
   .then(res => console.log(res.data))
+  .then(this.getCompanies)
   .catch(error => {
     console.log(error)
 })
 }}
 
 
+
+
+test(){
+  console.log("test is good")
+}
 
 
 
@@ -139,30 +117,8 @@ deleteItem=(comp) => {
         row =>
         {return ( 
             <div className="actions-right">
-              <CompanyModal company={row.original} /> 
-               {/* <Button 
-              onClick={() =>{this.getTrProps}
-              //let ogj = {this.onRowClick.map((original, key))}  
-              //let obj = this.state.posts.find(o => o.id === key);
-                // alert(
-                //   "You've clicked LIKE button on \n{ \nName: " +
-                //     obj.name +
-                //     ", \nposition: " +
-                //     obj.position +
-                //     ", \noffice: " +
-                //     obj.office +
-                //     ", \nage: " +
-                //     obj.age +
-                //     "\n}."
-                // );
-              }
-              className="btn-icon btn-round"
-              color="info"
-              size="sm" 
-            >
-              <i className="fa fa-heart" />
-            </Button>{" "}                */}
-            {/* use this button to remove the data row */}
+              <CompanyModal company={row.original} getCompanies={this.getCompanies} tableState={this.state.posts} /> 
+              
             <Button
               onClick={() => {
                 this.deleteItem(row.original);
@@ -217,6 +173,23 @@ export default CompanyTable;
 
 
 
+
+// deleteItem = id => {
+//   let confirmDeletion = window.confirm('Do you really wish to delete it?');
+//   if (confirmDeletion) {
+//     const url = `${ LOCALHOST_API_URL }/companies/delete/${id}`
+//     fetch(url, {
+//       method: 'delete',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     })
+//       .then(res => {
+//         this.props.deleteItemFromState(id);
+//       })
+//       .catch(err => console.log(err));
+//   }
+// }
 // Might be usefull in the future 
 
   // toggle = () => {
@@ -230,3 +203,27 @@ export default CompanyTable;
   //     isModalOpen: true
   //   });
   // }
+
+   {/* <Button 
+              onClick={() =>{this.getTrProps}
+              //let ogj = {this.onRowClick.map((original, key))}  
+              //let obj = this.state.posts.find(o => o.id === key);
+                // alert(
+                //   "You've clicked LIKE button on \n{ \nName: " +
+                //     obj.name +
+                //     ", \nposition: " +
+                //     obj.position +
+                //     ", \noffice: " +
+                //     obj.office +
+                //     ", \nage: " +
+                //     obj.age +
+                //     "\n}."
+                // );
+              }
+              className="btn-icon btn-round"
+              color="info"
+              size="sm" 
+            >
+              <i className="fa fa-heart" />
+            </Button>{" "}                */}
+            {/* use this button to remove the data row */}

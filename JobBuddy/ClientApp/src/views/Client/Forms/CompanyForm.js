@@ -11,7 +11,7 @@ class CompanyForm extends React.Component {
         id: '',
         title: '',
         address: '',
-        phoneNumber: 0  ,
+        phoneNumber: '',
         email: ''
         }
     }
@@ -28,21 +28,89 @@ class CompanyForm extends React.Component {
 
     submitNew = e => {
         e.preventDefault()
+        console.log("new")
         const comp = {
         title: this.state.title,
         address: this.state.address,
         phoneNumber : this.state.phoneNumber,
         email: this.state.email
         }
+        console.log(comp)
         require('axios-debug-log')
         console.log(comp)
         Axios.post(`https://localhost:5001/api/company/Create`, comp)
+        //.then(this.props.getComp)
         .then(res => {            
         console.log(res)})
         .catch(error => {
             console.log(error)
         })
     }
+
+
+
+    submitEdit = e =>{
+        e.preventDefault()
+        console.log("edit")
+        Axios.put(`${LOCALHOST_API_URL}/company/update/${this.state.id}`, this.state)
+        .then(res => {
+            console.log(res)            
+        })
+        .then(this.setState({
+            id: '',
+            title: '',
+            address: '',
+            phoneNumber: '',
+            email: ''
+        }))
+        //.then(this.props.getComp)
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    onClick() {
+        if(this.state.id.length >3){
+            console.log("edit")
+            this.submitEdit
+
+        }
+        else if(!this.state.id || this.state.id.length <3)
+        {
+            console.log("new")
+            this.submitNew
+        }
+        else(console.log("error"))
+    }
+
+
+//this.state ? this.submitEdit : this.submitNew                    onClick={this.props.toggle}
+    render() {
+        const comp = this.props.comp
+       //const {id, title, address, phoneNumber,  email} = this.props.company.map
+        return <Form onSubmit={this.state ? this.submitEdit : this.submitNew}>
+            <FormGroup>
+                <Label for="name">Name:</Label>
+                <Input type="text" name="title" onChange={this.onChange} value={this.state.title === null ? '' : this.state.title} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="address">Address:</Label>
+                <Input type="text" name="address" onChange={this.onChange} value={this.state.address === null ? '' : this.state.address} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="phoneNumber">Phone Number:</Label>
+                <Input type="number" name="phoneNumber" onChange={this.onChange} value={this.state.phoneNumber === null ? '' : this.state.phoneNumber} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="email">Email:</Label>
+                <Input type="email" name="email" onChange={this.onChange} value={this.state.email === null ? '' : this.state.email} />
+            </FormGroup>
+            <Button type="submit" >Submit</Button>
+        </Form>;
+    }
+}
+export default CompanyForm;
+
 
     // submitNew(event){ 
     //     event.preventDefault();
@@ -59,43 +127,6 @@ class CompanyForm extends React.Component {
     //     })
     //     });
     //    };
-
-    submitEdit = e =>{
-        e.preventDefault()
-        Axios.put(`${LOCALHOST_API_URL}/companies/update/${this.state.id}`, this.state)
-        .then(res => {
-            console.log(res)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
-
-    render() {
-        const comp = this.props.comp
-       //const {id, title, address, phoneNumber,  email} = this.props.company.map
-        return <Form onSubmit={this.props.company ? this.submitEdit : this.submitNew}>
-            <FormGroup>
-                <Label for="name">Name:</Label>
-                <Input type="text" name="title" onChange={this.onChange} value={this.state.title} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="address">Address:</Label>
-                <Input type="text" name="address" onChange={this.onChange} value={this.state.address === null ? '' : this.state.address} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="phoneNumber">Phone Number:</Label>
-                <Input type="number" name="phoneNumber" onChange={this.onChange} value={this.state.phoneNumber === null ? '' : this.state.phoneNumber} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="email">Email:</Label>
-                <Input type="email" name="email" onChange={this.onChange} value={this.state.email === null ? '' : this.state.email} />
-            </FormGroup>
-            <Button type="submit">Submit</Button>
-        </Form>
-    }
-}
-export default CompanyForm;
 
 
 //{this.state.Title === '' ? '' : this.state.Title}
