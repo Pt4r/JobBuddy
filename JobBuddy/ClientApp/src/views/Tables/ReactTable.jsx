@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import axios from "axios";
 
 
 // reactstrap components
@@ -72,6 +73,7 @@ class ReactTables extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
       data: dataTable.map((prop, key) => {
         return {
           id: key,
@@ -153,6 +155,13 @@ class ReactTables extends Component {
         };
       })
     };
+  }
+  componentDidMount(){
+    axios.get(`https://localhost:44394/api/companies`)
+    .then(res => {
+      const posts = res.data;
+      this.setState({dataTable: posts});
+    })
   }
 
 

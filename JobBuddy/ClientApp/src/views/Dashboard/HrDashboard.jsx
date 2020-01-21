@@ -15,7 +15,7 @@
 
 */
 import React from "react";
-import { USERS_API_URL } from '../../Constants';
+import { LOCALHOST_API_URL } from '../../Constants';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 // reactstrap components
@@ -34,7 +34,7 @@ import { table_data } from "variables/general.jsx";
 import HrTable from "views/Tables/HrTable.jsx";
 
 
-class Dashboard extends React.Component {
+class HrDashboard extends React.Component {
   
     state = {
       items: []
@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
       this.getItens();
     }
     getItens = () => {
-      fetch(USERS_API_URL)
+      fetch(`${LOCALHOST_API_URL}/`)
         .then(res => res.json())
         .then(res => this.setState({ items: res }))
         .catch(err => console.log(err));
@@ -109,7 +109,8 @@ class Dashboard extends React.Component {
       production: 'YOUR-PRODUCTION-APP-ID',
   }
     return (
-      <>
+          
+     <>
         <PanelHeader
           size="lg"
           content={
@@ -1089,8 +1090,9 @@ class Dashboard extends React.Component {
          </Row> */}
         </div>
       </>
+    
     );
   }
 }
 
-export default Dashboard;
+export default HrDashboard;

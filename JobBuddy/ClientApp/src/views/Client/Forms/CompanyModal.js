@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import JobListingForm from './JobListingForm';
-import { LOCALHOST_API_URL } from '../../Constants';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import CompanyForm from "./CompanyForm.js"
 
-class JobListingModal extends Component {
+
+class CompanyModal extends Component {
     constructor(props) {
         super(props);
     this.state = {
@@ -11,46 +11,45 @@ class JobListingModal extends Component {
     };
     this.toggle = this.toggle.bind(this);
 }
+
     toggle () {
         this.setState({
             modal: !this.state.modal
         });
     }
 
+oops=()=> console.log(this.props.company);
+
     render() {
         const isNew = this.props.isNew;
 
-        let title = 'Edit User';
+        let title = 'Edit Company';
         let button = '';
         if (isNew) {
-            title = 'Add User';
+            title = 'Add Company';
 
             button = <Button
                 color="success"
                 onClick={this.toggle}
-                style={{ minWidth: "200px" }}>Add</Button>;
+                style={{ minWidth: "200px" }}>Add Company</Button>;
         } else {
             button = <Button
                 className="btn-icon btn-round"
                 size="sm"
                 color="warning"
-                onClick={this.toggle}><i className="fa fa-edit" />
+                onClick= {this.toggle} ><i className="fa fa-edit" />
                 </Button>;
         }
-
+        
         return <Fragment>
             {button}
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
                 <ModalBody>
-                    <JobListingForm
-                        addUserToState={this.props.addUserToState}
-                        updateUserIntoState={this.props.updateUserIntoState}
-                        toggle={this.toggle}
-                        user={this.props.user} />
+                  <CompanyForm  comp={this.props.company} />
                 </ModalBody>
             </Modal>
         </Fragment>;
     }
     }
-export default JobListingModal;
+export default CompanyModal;

@@ -29,5 +29,6 @@ namespace JobBuddy.Models
         {
             Clients = new HashSet<ClientJobListing>();
         }
+
     }
 }

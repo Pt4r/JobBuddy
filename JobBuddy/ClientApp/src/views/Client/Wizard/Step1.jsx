@@ -89,14 +89,14 @@ class Step1 extends React.Component {
   //will not use probably
   isValidated() {
     if (
-      this.state.firstnameState !== " has-success" 
-      // || this.state.lastnameState !== " has-success" 
-      // || this.state.emailState !== " has-success"
+      this.state.firstnameState !== " has-success" ||
+      this.state.lastnameState !== " has-success" ||
+      this.state.emailState !== " has-success"
     ) {
       this.setState({
         firstnameState: " has-danger",
-        lastnameState: " has-danger"
-       //, emailState: " has-danger"
+        lastnameState: " has-danger",
+        emailState: " has-danger"
       });
       return false;
     }
@@ -112,8 +112,9 @@ class Step1 extends React.Component {
           Let's start with writing about the job you are interested in 
         </h5>
         <Row className="justify-content-center">
-
-          <Col xs={10} lg="4">
+          <Col xs={12} sm="4">
+          </Col>
+          <Col xs={12} sm="6">
             <InputGroup
               className={
                 "form-control-lg" +
@@ -150,7 +151,7 @@ class Step1 extends React.Component {
               </InputGroupAddon>
               <Input
                 defaultValue={this.state.Details}
-                type="textarea"
+                type="text"
                 placeholder="Details (required)"
                 name="Details"
                 onFocus={e => this.setState({ lastnameFocus: true })}
@@ -158,9 +159,9 @@ class Step1 extends React.Component {
                 onChange={e => this.DetailsChange(e)}
               />
             </InputGroup>
-          {/* </Col> */}
-          {/* <Col xs={12} lg={10} className="mt-3"> */}
-            {/* <InputGroup
+          </Col>
+          <Col xs={12} lg={10} className="mt-3">
+            <InputGroup
               className={
                 "form-control-lg" +
                 (this.state.emailState ? this.state.emailState : "") +
@@ -181,8 +182,8 @@ class Step1 extends React.Component {
                 onBlur={e => this.setState({ emailFocus: false })}
                 onChange={e => this.emailChange(e)}
               />
-            </InputGroup>*/}
-          </Col> 
+            </InputGroup>
+          </Col>
         </Row>
       </>
     );

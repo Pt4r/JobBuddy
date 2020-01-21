@@ -2,24 +2,24 @@
 
 namespace JobBuddy.Migrations
 {
-    public partial class initial2 : Migration
+    public partial class phoneNumbertostring : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
                 name: "PhoneNumber",
-                table: "AspNetUsers",
+                table: "Companies",
                 nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldClrType: typeof(int),
+                oldType: "int");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
+            migrationBuilder.AlterColumn<int>(
                 name: "PhoneNumber",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+                table: "Companies",
+                type: "int",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);

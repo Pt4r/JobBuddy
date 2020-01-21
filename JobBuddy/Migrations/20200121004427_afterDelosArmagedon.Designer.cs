@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200120230654_initial2")]
-    partial class initial2
+    [Migration("20200121004427_afterDelosArmagedon")]
+    partial class afterDelosArmagedon
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -140,6 +140,7 @@ namespace JobBuddy.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -158,8 +159,9 @@ namespace JobBuddy.Migrations
                     b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("JobCategoryTitle")
-                        .HasColumnType("int");
+                    b.Property<string>("JobCategoryTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subcategory_1")
                         .IsRequired()

@@ -68,6 +68,7 @@ namespace JobBuddy
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -80,12 +81,15 @@ namespace JobBuddy
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
+
+
             services.AddScoped<IJobCategoriesRepository, JobCategoryRepository>();
             services.AddScoped<IMentorRepository, MentorRepository>();
             services.AddScoped<IHrDetailsRepository, HrDetailsRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IJobListingsRepository, JobListingsRepository>();
             services.AddScoped<IMentorOfferRepository, MentorOfferRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

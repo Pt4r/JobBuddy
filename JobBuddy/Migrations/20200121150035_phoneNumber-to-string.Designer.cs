@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200120230625_initial")]
-    partial class initial
+    [Migration("20200121150035_phoneNumber-to-string")]
+    partial class phoneNumbertostring
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,10 +136,11 @@ namespace JobBuddy.Migrations
                     b.Property<string>("JobCategoryId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -158,8 +159,9 @@ namespace JobBuddy.Migrations
                     b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("JobCategoryTitle")
-                        .HasColumnType("int");
+                    b.Property<string>("JobCategoryTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subcategory_1")
                         .IsRequired()
@@ -307,7 +309,6 @@ namespace JobBuddy.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")

@@ -1,25 +1,10 @@
-/*!
-
-=========================================================
-* Now UI Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import JobListingModal from "../../components/Form/JobListingModal.js"
-import { LOCALHOST_API_URL } from '../../Constants';
+import JobListingModal from "../Forms/CompanyModal";
+import axios from "axios";
+import { LOCALHOST_API_URL } from '../../../Constants';
+
 
 
 // reactstrap components
@@ -34,10 +19,9 @@ import {
   ButtonToolBar
 } from "reactstrap";
 
-// core components
- var data
 
-class ReactTables extends React.Component {
+
+class CompanyTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,19 +30,21 @@ class ReactTables extends React.Component {
   }
 
 
+
 componentDidMount(){
-  const url = "https://jsonplaceholder.typicode.com/users";
-  fetch(url, {
-    method: "GET"
-  }).then(res => res.json()).then(posts => {
-    this.setState({posts: posts})
+  axios.get(`${ LOCALHOST_API_URL }/jobListings`)
+  .then(res => {
+    const posts = res.data;
+    this.setState({posts: posts});
   })
 }
+
 
 deleteItem = id => {
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
-    fetch(`${LOCALHOST_API_URL}/${id}`, {
+    const url = `${ LOCALHOST_API_URL }/jobListings/delete/${id}`
+    fetch(url, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
@@ -71,26 +57,56 @@ deleteItem = id => {
   }
 }
 
+
+
+
   render() {
-    //const posts = this.props.posts;
+   
     const columns =[
       {
-        Header: "Name",
-        accessor: "name"
+        Header: "Id",
+        accessor: "id",
+        show: false
       },
       {
-        Header: "Email",
-        accessor: "email"
+        Header: "Name",
+        accessor: "title"
+      },
+      {
+        Header: "info",
+        accessor: "info"
+      },
+      {
+        Header: "post Date",
+        accessor: "postDate"
+      },
+      {
+        Header: "hrUser",
+        accessor: "hrUser"
+      },
+      {
+        Header: "jobCategory",
+        accessor: "jobCategory"
+      },
+      {
+        Header: "company",
+        accessor: "company"
+      },
+      {
+        Header: "client",
+        accessor: "client"
       },
       {
         Header: "Actions",
-        Cell: props =>{
-          return ( 
+        Cell:       
+        row =>
+        {return ( 
             <div className="actions-right">
-            <JobListingModal   />
-              <Button 
-              onClick={() =>{this.toggle}
-                // let obj = this.state.posts.find(o => o.id === key);
+              <JobListingModal company={row.original} /> 
+               {/* <Button 
+              onClick={() =>{this.getTrProps}
+              //let ogj = {this.onRowClick.map((original, key))}  
+              //let obj = this.state.posts.find(o => o.id === key);
                 // alert(
                 //   "You've clicked LIKE button on \n{ \nName: " +
                 //     obj.name +
@@ -105,10 +121,10 @@ deleteItem = id => {
               }
               className="btn-icon btn-round"
               color="info"
-              size="sm"
+              size="sm" 
             >
               <i className="fa fa-heart" />
-            </Button>{" "}               
+            </Button>{" "}                */}
             {/* use this button to remove the data row */}
             <Button
               onClick={() => {
@@ -134,7 +150,8 @@ deleteItem = id => {
             <Col xs={12} md={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Job Listings</CardTitle>
+                  <CardTitle tag="h4">Companies</CardTitle>
+                  <JobListingModal isNew/>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
@@ -144,6 +161,8 @@ deleteItem = id => {
                     defaultPageSize={10}
                     showPaginationTop
                     showPaginationBottom={false}
+                    // getTdProps={this.getTdProps}
+                    // getTrProps={this.getTrProps}
                     className="-striped -highlight"
                     />                 
                 </CardBody>
@@ -155,22 +174,4 @@ deleteItem = id => {
   }
 }
 
-export default ReactTables;
-
-
-
-
-
-// Might be usefull in the future 
-
-  // toggle = () => {
-  //     this.setState(previous => ({
-  //         modal: !previous.modal
-  //     }));
-  // }
-  
-  // showModal() {
-  //   this.setState({
-  //     isModalOpen: true
-  //   });
-  // }
+export default CompanyTable;

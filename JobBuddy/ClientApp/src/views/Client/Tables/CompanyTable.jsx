@@ -18,8 +18,10 @@
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import JobListingModal from "../../components/Form/JobListingModal.js"
-import { LOCALHOST_API_URL } from '../../Constants';
+import CompanyModal from "../Forms/CompanyModal";
+import axios from "axios";
+import { LOCALHOST_API_URL } from '../../../Constants';
+
 
 
 // reactstrap components
@@ -34,10 +36,9 @@ import {
   ButtonToolBar
 } from "reactstrap";
 
-// core components
- var data
 
-class ReactTables extends React.Component {
+
+class CompanyTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,51 +47,103 @@ class ReactTables extends React.Component {
   }
 
 
+
 componentDidMount(){
-  const url = "https://jsonplaceholder.typicode.com/users";
-  fetch(url, {
-    method: "GET"
-  }).then(res => res.json()).then(posts => {
-    this.setState({posts: posts})
-  })
+  this.getCompanies();
 }
 
-deleteItem = id => {
+getCompanies=() => {
+axios.get(`${ LOCALHOST_API_URL }/company`)
+  .then(res => {
+    const posts = res.data;
+    this.setState({posts: posts});
+  })
+
+}
+
+
+// deleteItem = id => {
+//   let confirmDeletion = window.confirm('Do you really wish to delete it?');
+//   if (confirmDeletion) {
+//     const url = `${ LOCALHOST_API_URL }/companies/delete/${id}`
+//     fetch(url, {
+//       method: 'delete',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     })
+//       .then(res => {
+//         this.props.deleteItemFromState(id);
+//       })
+//       .catch(err => console.log(err));
+//   }
+// }
+
+
+deleteItem=(comp) => {
+  const compa = {
+    Id: comp.id,
+    title: comp.title,
+    address: comp.address,
+    phoneNumber : comp.phoneNumber,
+   email: comp.email
+  }
+  console.log(compa)
+//const url = `${LOCALHOST_API_URL}/company/delete`
   let confirmDeletion = window.confirm('Do you really wish to delete it?');
   if (confirmDeletion) {
-    fetch(`${LOCALHOST_API_URL}/${id}`, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        this.props.deleteItemFromState(id);
-      })
-      .catch(err => console.log(err));
-  }
-}
+    axios({
+      method: 'DELETE',
+      url:`${LOCALHOST_API_URL}/company/delete` , 
+      data: JSON.stringify(compa), 
+      headers:{'Content-Type': 'application/json; charset=utf-8'}
+  })  
+  //axios.delete(`${LOCALHOST_API_URL}/company/delete`, compa)
+  .then(res => {
+  this.getCompanies})
+  .then(res => console.log(res.data))
+  .catch(error => {
+    console.log(error)
+})
+}}
+
+
+
+
+
 
   render() {
-    //const posts = this.props.posts;
+   
     const columns =[
       {
-        Header: "Name",
-        accessor: "name"
+        Header: "Id",
+        accessor: "id",
+        show: false
       },
       {
-        Header: "Email",
-        accessor: "email"
+        Header: "Name",
+        accessor: "title"
+      },
+      {
+        Header: "Address",
+        accessor: "adress"
+      },
+      {
+        Header: "Phone Number",
+        accessor: "phoneNumber"
       },
       {
         Header: "Actions",
-        Cell: props =>{
-          return ( 
+        Cell: 
+      
+        row =>
+        {return ( 
             <div className="actions-right">
-            <JobListingModal   />
-              <Button 
-              onClick={() =>{this.toggle}
-                // let obj = this.state.posts.find(o => o.id === key);
+              <CompanyModal company={row.original} /> 
+               {/* <Button 
+              onClick={() =>{this.getTrProps}
+              //let ogj = {this.onRowClick.map((original, key))}  
+              //let obj = this.state.posts.find(o => o.id === key);
                 // alert(
                 //   "You've clicked LIKE button on \n{ \nName: " +
                 //     obj.name +
@@ -105,14 +158,14 @@ deleteItem = id => {
               }
               className="btn-icon btn-round"
               color="info"
-              size="sm"
+              size="sm" 
             >
               <i className="fa fa-heart" />
-            </Button>{" "}               
+            </Button>{" "}                */}
             {/* use this button to remove the data row */}
             <Button
               onClick={() => {
-                this.deleteItem(props.original.id);
+                this.deleteItem(row.original);
               }}
               className="btn-icon btn-round"
               color="danger"
@@ -134,7 +187,8 @@ deleteItem = id => {
             <Col xs={12} md={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Job Listings</CardTitle>
+                  <CardTitle tag="h4">Companies</CardTitle>
+                  <CompanyModal isNew/>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
@@ -144,6 +198,8 @@ deleteItem = id => {
                     defaultPageSize={10}
                     showPaginationTop
                     showPaginationBottom={false}
+                    // getTdProps={this.getTdProps}
+                    // getTrProps={this.getTrProps}
                     className="-striped -highlight"
                     />                 
                 </CardBody>
@@ -155,7 +211,7 @@ deleteItem = id => {
   }
 }
 
-export default ReactTables;
+export default CompanyTable;
 
 
 

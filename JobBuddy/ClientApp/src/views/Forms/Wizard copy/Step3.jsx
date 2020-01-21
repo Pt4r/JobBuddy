@@ -18,29 +18,21 @@ import React from "react";
 // react plugin used to create DropdownMenu for selecting items
 import Select from "react-select";
 import Axios from "axios";
-import {LOCALHOST_API_URL} from "../../../Constants"
 
 // reactstrap components
 import { Row, Col, FormGroup, Label, Input } from "reactstrap";
 
 // core components
 var selectOptions = [
-  { value: "IT", label: "IT" },
-  { value: "Economics", label: "Economics" },
-  { value: "Marketing", label: "Marketing" },
-  { value: "Sales", label: "Sales" },
-  { value: "Engineering", label: "Engineering" },
-  { value: "Arts", label: "Arts" },
-  { value: "Tourism", label: "Tourism" },
-  { value: "CustomerSupport", label: "CustomerSupport" }
+  { value: "one", label: "One" },
+  { value: "two", label: "Two" },
+  { value: "three", label: "Three" },
+  { value: "four", label: "Four" },
+  { value: "five", label: "Five" },
+  { value: "six", label: "Six" }
 ];
 
 
-function parseJobCategories(jobCategories){
-  return jobCategories.map((jc) => {
-    return { label: jc.jobCategoryTitle, value: jc.jobCategoryTitle };
-  });
-}
 
 class Step3 extends React.Component {
   constructor(props) {
@@ -50,15 +42,22 @@ class Step3 extends React.Component {
       jobcategories: []
     };
   }
-
-  componentDidMount(){
-    Axios.get(`${LOCALHOST_API_URL}/jobcategory`)
-    .then(res => {
-      const jobcat = res.data;
-      this.setState({jobcategories: parseJobCategories(jobcat)});
-    })
+  selectOpt = () => {
+    let table = []
+  
+    for (let i = 0; i < this.state.jobcategories.length; i++) {
+      
+    }
+    return table
   }
 
+  componentDidMount(){
+    Axios.get(`localhost:44394/api/jobcategories`)
+    .then(res => {
+      const jobcat = res.data;
+      this.setState({jobcategories: jobcat});
+    })
+  }
 
 // componentDidMount() {
 //     fetch(title_URL)
@@ -77,35 +76,33 @@ class Step3 extends React.Component {
 //             })
 //         });
 // }
-// updatedJobCat = this.state.jobcategories
-//     .map((company, compIndex, compArr) => {
-//       return company.keys.map((key, keyIndex, keyArr) => {
-//         return {
-//           key_name: key,
-//           jobCategoryTitle: company.jobCategoryTitle,
-//         };
-//       });
-//     })
-//     .reduce((acc, cur) => {
-//       return [...acc, ...cur];
-//     }, [])
-//     .filter((item, index, array) => {
-//       return array.indexOf(item.dtype);
-//     })
+
 
 
   render() {
-    let jobcat = this.state.jobcategories;
-    let jobcatItems = jobcat.map((jc ,i) =>
-                <option key={i} label={jc.jobcategorytitle} value={jc.jobcategorytitle} />
-    );
+    const updatedJobCat = this.state.jobcategories
+    .map((company, compIndex, compArr) => {
+      return company.keys.map((key, keyIndex, keyArr) => {
+        return {
+          key_name: key,
+          jobCategoryTitle: company.jobCategoryTitle,
+        };
+      });
+    })
+    .reduce((acc, cur) => {
+      return [...acc, ...cur];
+    }, [])
+    .filter((item, index, array) => {
+      return array.indexOf(item.dtype);
+    })
+
     return (
       <>
-        <h5 className="info-text"> Please add Company and Contact Person Details </h5>
+        <h5 className="info-text"> Are you living in a nice area? </h5>
         <Row className="justify-content-center">
           <Col xs={12} sm={7}>
             <FormGroup>
-              <Label>Company Name</Label>
+              <Label>Street Name</Label>
               <Input type="text" />
             </FormGroup>
           </Col>
@@ -129,43 +126,9 @@ class Step3 extends React.Component {
               placeholder="Single Select"
               name="singleSelect"
               value={this.state.select}
-              options={this.state.jobcategories  }
-              onChange={value => this.setState({ select: value })}
-            />
-          </Col>
-        </Row>
-        <hr/>
-        <Row className="justify-content-center">
-          <Col xs={12} sm={7}>
-            <FormGroup>
-              <Label>Contact Person</Label>
-              <Input type="text" />
-            </FormGroup>
-          </Col>
-          <Col xs={12} sm={3}>
-            <FormGroup>
-              <Label>Street No.</Label>
-              <Input type="text" />
-            </FormGroup>
-          </Col>
-          <Col xs={12} sm={5}>
-            <FormGroup>
-              <Label>City</Label>
-              <Input type="text" />
-            </FormGroup>
-          </Col>
-          <Col xs={12} sm={5}>
-            <Label>Country</Label>
-            {/* <Select
-              className="primary react-select"
-              classNamePrefix="react-select"
-              placeholder="Single Select"
-              name="singleSelect"
-              value={this.state.select}
               options={selectOptions  }
               onChange={value => this.setState({ select: value })}
-            /> */}
-            <select >{jobcatItems}</select>
+            />
           </Col>
         </Row>
       </>

@@ -15,6 +15,7 @@ namespace JobBuddy.Controllers
     [Authorize(Roles = "Admin, Client, Mentor, HR")]
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Admin")]
     public class CompanyController : ControllerBase
     {
         private ICompanyRepository _companyRepository;
@@ -53,6 +54,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(201, Type = typeof(Company))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+
         public IActionResult Create([FromBody]Company companyCreated)
         {
             if (companyCreated == null)
@@ -78,6 +80,7 @@ namespace JobBuddy.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
+        [Route("Delete")]
         public IActionResult DeleteJobCategory([FromBody]Company company)
         {
             if (!ModelState.IsValid)

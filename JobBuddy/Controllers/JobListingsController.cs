@@ -12,7 +12,8 @@ namespace JobBuddy.Controllers
     [Authorize(Roles = "Admin, Client, Mentor, HR")]
     [Route("api/[controller]")]
     [ApiController]
-    public class JobListingsController : Controller
+    //[Authorize(Roles = "Admin")]
+    public class JobListingsController : ControllerBase
     {
         private readonly IJobListingsRepository _jobListings;
 
