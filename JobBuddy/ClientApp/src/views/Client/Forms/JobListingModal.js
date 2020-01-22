@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import JobListingForm from './JobListingForm';
+import { useHistory } from 'react-router-dom';
 
 
 class JobListingModal extends Component {
@@ -17,6 +18,10 @@ class JobListingModal extends Component {
         });
     }
 
+    routeChange=()=> {
+        window.location.href="/admin/wizard"
+      }
+
     render() {
         const isNew = this.props.isNew;
 
@@ -27,8 +32,11 @@ class JobListingModal extends Component {
 
             button = <Button
                 color="success"
-                onClick={this.toggle}
-                style={{ minWidth: "200px" }}>Add Job Listing</Button>;
+                onClick={this.routeChange}
+                style={{ minWidth: "200px" }}
+
+                >
+                    Add Job Listing</Button>;
         } else {
             button = <Button
                 className="btn-icon btn-round"
