@@ -49,6 +49,13 @@ let routes = [
     layout: "/client"
   },
   {
+      path: "/wizard",
+      name: "Create Job Listing",
+      icon: "now-ui-icons files_single-copy-04",
+      component: Wizard,
+      layout: "/client"
+    },
+  {
     path: "/companies",
     name: "Companies",
     icon: "now-ui-icons business_briefcase-24",
@@ -70,6 +77,7 @@ let routes = [
     component: ClientJobListings,
     layout: "/hr"
   },
+  
   {
     path: "/companies",
     name: "Companies",
@@ -283,13 +291,13 @@ let routes = [
         component: ValidationForms,
         layout: "/admin"
       },
-      {
-        path: "/wizard",
-        name: "Wizard",
-        mini: "W",
-        component: Wizard,
-        layout: "/client"
-      }
+      // {
+      //   path: "/wizard",
+      //   name: "Wizard",
+      //   mini: "W",
+      //   component: Wizard,
+      //   layout: "/client"
+      // }
     ]
   },
   {
