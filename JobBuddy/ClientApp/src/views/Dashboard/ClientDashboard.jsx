@@ -2,6 +2,8 @@ import React from "react";
 // react plugin used to create charts
 import { Line } from "react-chartjs-2";
 
+import PanelClient from "views/Components/PanelClient"
+
 // reactstrap components
 import {
   Card,
@@ -49,7 +51,19 @@ class Dashboard extends React.Component {
         <PanelHeader
           size="sm"
         />
-        <div className="content">
+          <Row className="text-center justify-content-center">
+        <Col sm={12} lg={12} >
+            <div >
+
+            
+            <PanelClient>
+      
+            </PanelClient>
+            </div>
+            </Col>
+          </Row> 
+        <div>
+          
           <Row>
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
@@ -105,131 +119,7 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-           <Col xs={12} md={4}>
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Email Stats</h5>
-                  <CardTitle tag="h2">53</CardTitle>
-                  {/* <UncontrolledDropdown>
-                    <DropdownToggle
-                      className="btn-round btn-icon"
-                      color="default"
-                      outline
-                    >
-                      <i className="now-ui-icons loader_gear" />
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another Action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                      <DropdownItem className="text-danger">
-                        Remove data
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown> */}
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-                    <Line
-                      data={dashboardSummerChart.data}
-                      options={dashboardSummerChart.options}
-                    />
-                  </div>
-                  <div className="card-progress">
-                    <div className="progress-container">
-                      <span className="progress-badge">Delivery Rate</span>
-                      <Progress max="100" value="90">
-                        <span className="progress-value">98%</span>
-                      </Progress>
-                    </div>
-                    <div className="progress-container progress-success">
-                      <span className="progress-badge">Open Rate</span>
-                      <Progress max="100" value="60">
-                        <span className="progress-value">60%</span>
-                      </Progress>
-                    </div>
-                    <div className="progress-container progress-info">
-                      <span className="progress-badge">Click Rate</span>
-                      <Progress max="100" value="12">
-                        <span className="progress-value">12%</span>
-                      </Progress>
-                    </div>
-                    <div className="progress-container progress-warning">
-                      <span className="progress-badge">Hard Bounce</span>
-                      <Progress max="100" value="5">
-                        <span className="progress-value">2%</span>
-                      </Progress>
-                    </div>
-                    <div className="progress-container progress-danger">
-                      <span className="progress-badge">Spam Report</span>
-                      <Progress max="100" value="0.11">
-                        <span className="progress-value">0.11%</span>
-                      </Progress>
-                    </div>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col xs={12} md={4}>
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Countries</h5>
-                  <CardTitle tag="h2">40</CardTitle>
-                  {/* <UncontrolledDropdown>
-                    <DropdownToggle
-                      className="btn-round btn-icon"
-                      color="default"
-                      outline
-                    >
-                      <i className="now-ui-icons loader_gear" />
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another Action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                      <DropdownItem className="text-danger">
-                        Remove data
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown> */}
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <tbody>{this.createTableData()}</tbody>
-                  </Table>
-                </CardBody>
-                {/* <CardFooter>
-                  <div className="stats">
-                    <i className="now-ui-icons arrows-1_refresh-69" />
-                    Just Updated
-                  </div>
-                </CardFooter> */}
-              </Card>
-            </Col>
            
-            <Col xs={12} md={4}>
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Active Job Listings</h5>
-                  <CardTitle tag="h2">10</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-                    <Line
-                      data={dashboardActiveCountriesCard.data}
-                      options={dashboardActiveCountriesCard.options}
-                    />
-                  </div>
-                  
-                </CardBody>
-                {/* <CardFooter>
-                  <div className="stats">
-                    <i className="now-ui-icons ui-2_time-alarm" />
-                    Last 7 days
-                  </div>
-                </CardFooter> */}
-              </Card>
-            </Col>
           </Row>
           
           </div>

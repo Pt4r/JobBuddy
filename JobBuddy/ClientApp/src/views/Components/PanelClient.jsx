@@ -77,7 +77,7 @@ class PanelsMentor extends React.Component {
               <Card>
               <CardHeader>
                   <CardTitle tag="h4" margin="auto">
-                    Welcome to your Mentor Dashboard!
+                  Welcome to your Personal Dashboard!
                     
                   </CardTitle>
                 </CardHeader>
@@ -88,7 +88,7 @@ class PanelsMentor extends React.Component {
                         className={this.state.hTabs === "ht1" ? "active" : ""}
                         onClick={() => this.setState({ hTabs: "ht1" })}
                       >
-                        Profile
+                       Job Openings
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -96,7 +96,7 @@ class PanelsMentor extends React.Component {
                         className={this.state.hTabs === "ht2" ? "active" : ""}
                         onClick={() => this.setState({ hTabs: "ht2" })}
                       >
-                        Schedule
+                        Your Schedule
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -104,7 +104,7 @@ class PanelsMentor extends React.Component {
                         className={this.state.hTabs === "ht3" ? "active" : ""}
                         onClick={() => this.setState({ hTabs: "ht3" })}
                       >
-                        Offers
+                        Profile
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -113,16 +113,17 @@ class PanelsMentor extends React.Component {
                     className="tab-space"
                   >
                     <TabPane tabId="ht1">
-                    Increase Your Profile Views and Offers by keeping your Profile  Up to Date!
+                    Check all your Available Job Openings and don't  miss a chance!
                       <div></div>
                       
                      
                     </TabPane>
                     <TabPane tabId="ht2">
-                     Organize your Appointments in a proffessional way!
+                    Organize your Schedule in a proffessional way!
+
                     </TabPane>
                     <TabPane tabId="ht3">
-                     Check and handle your offers in time!
+                    Increase Your Profile Views and Offers by keeping your Profile  Up to Date!
                    
                     </TabPane>
                   </TabContent>

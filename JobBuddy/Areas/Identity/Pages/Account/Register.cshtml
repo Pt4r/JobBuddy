@@ -112,26 +112,27 @@
                     </div>
 
                     <span asp-validation-for="Input.UserRole" class="text-danger"></span>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="now-ui-icons users_circle-08"></i>
-                            </div>
+                    <div class="class="form-group col-md-4"">
+                        <select asp-for="Input.UserRole" class="form-control" id="select">
+                            <option selected value="" disabled> Looking for...</option>
+                            <option value="Client">Job Openings</option>
+                            <option value="HR">Job Candidates</option>
+                            <option value="Mentor">People to offer your Career Insights </option>
+
+                        </select>
                         </div>
-                        <input asp-for="Input.UserRole" class="form-control" placeholder="UserRole" required="required">
+                        <div class="form-check text-left">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="termsAndCond" required="required">
+                                <span class="form-check-sign"></span>
+                                I agree to the terms and conditions.
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check text-left">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="termsAndCond" required="required">
-                            <span class="form-check-sign"></span>
-                            I agree to the terms and conditions.
-                        </label>
+                    <div class="card-footer ">
+                        <button type="submit" class="btn btn-primary btn-round btn-lg">Register</button>
                     </div>
-                </div>
-                <div class="card-footer ">
-                    <button type="submit" class="btn btn-primary btn-round btn-lg">Register</button>
-                </div>
-            </form>
+</form>
         </div>
     </div>
 </div>
