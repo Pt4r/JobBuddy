@@ -3,6 +3,7 @@ import React from "react";
 
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import JobListingTable from "./Tables/JobListingTable"
 
 import ReactTables from "views/Tables/ReactTable.jsx";
 import axios from 'axios';
@@ -51,16 +52,7 @@ componentDidMount(){
       return (
         <>
         <PanelHeader size="sm" />
-        <ReactTables
-        title="Job Listings"
-        columns={this.state.columns}
-        data={this.state.data}
-        filterable
-        defaultPageSize={10}
-        showPaginationTop
-        showPaginationBottom={false}
-        className="-striped -highlight"
-      />
+        <JobListingTable/>
       </>
       );
   };
