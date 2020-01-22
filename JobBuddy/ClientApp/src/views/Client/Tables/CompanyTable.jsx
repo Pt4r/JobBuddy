@@ -104,7 +104,7 @@ test(){
       },
       {
         Header: "Address",
-        accessor: "adress"
+        accessor: "address"
       },
       {
         Header: "Phone Number",
@@ -112,12 +112,14 @@ test(){
       },
       {
         Header: "Actions",
-        Cell: 
-      
+        Cell:       
         row =>
         {return ( 
             <div className="actions-right">
-              <CompanyModal company={row.original} getCompanies={this.getCompanies} tableState={this.state.posts} /> 
+              <CompanyModal 
+              company={row.original} 
+              getCompanies={this.getCompanies} 
+              tableState={this.state.posts} /> 
               
             <Button
               onClick={() => {

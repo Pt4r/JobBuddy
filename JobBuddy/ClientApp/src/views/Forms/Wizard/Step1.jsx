@@ -33,18 +33,17 @@ class Step1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobTitle: "",
-      Details: "",
-      jobCategory: "",
+      title: "",
+      info: "",
       firstnameState: "",
-      lastnameState: "",
-      emailState: ""
+      lastnameState: ""
+      
     };
     this.jobTitleChange = this.jobTitleChange.bind(this);
   }
   jobTitleChange(e) {
     this.setState({
-      jobTitle: e.target.value
+      title: e.target.value
     });
     if (e.target.value.length > 2) {
       this.setState({
@@ -58,35 +57,37 @@ class Step1 extends React.Component {
   }
   DetailsChange(e) {
     this.setState({
-      lastname: e.target.value
+      info: e.target.value
     });
-    if (e.target.value.length > 2) {
-      this.setState({
-        lastnameState: " has-success"
-      });
-    } else {
-      this.setState({
-        lastnameState: " has-danger"
-      });
-    }
+    // if (e.target.value.length > 2) {
+    //   this.setState({
+    //     lastnameState: " has-success"
+    //   });
+    // } else {
+    //   this.setState({
+    //     lastnameState: " has-danger"
+    //   });
+    // }
   }
-  emailChange(e) {
-    this.setState({
-      email: e.target.value
-    });
-    var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRex.test(e.target.value)) {
-      this.setState({
-        emailState: " has-success"
-      });
-    } else {
-      this.setState({
-        emailState: " has-danger"
-      });
-    }
-  }
+  // emailChange(e) {
+  //   this.setState({
+  //     email: e.target.value
+  //   });
+  //   var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   if (emailRex.test(e.target.value)) {
+  //     this.setState({
+  //       emailState: " has-success"
+  //     });
+  //   } else {
+  //     this.setState({
+  //       emailState: " has-danger"
+  //     });
+  //   }
+  // }
 
   //will not use probably
+  
+  
   isValidated() {
     if (
       this.state.firstnameState !== " has-success" 
@@ -94,8 +95,7 @@ class Step1 extends React.Component {
       // || this.state.emailState !== " has-success"
     ) {
       this.setState({
-        firstnameState: " has-danger",
-        lastnameState: " has-danger"
+        firstnameState: " has-danger"
        //, emailState: " has-danger"
       });
       return false;
@@ -127,7 +127,7 @@ class Step1 extends React.Component {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-                defaultValue={this.state.jobTitle}
+                defaultValue={this.state.title}
                 type="text"
                 placeholder="Job Title (required)"
                 name="jobTitle"
@@ -149,10 +149,10 @@ class Step1 extends React.Component {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-                defaultValue={this.state.Details}
+                defaultValue={this.state.info}
                 type="textarea"
-                placeholder="Details (required)"
-                name="Details"
+                placeholder="Details"
+                name="info"
                 onFocus={e => this.setState({ lastnameFocus: true })}
                 onBlur={e => this.setState({ lastnameFocus: false })}
                 onChange={e => this.DetailsChange(e)}

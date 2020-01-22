@@ -34,10 +34,21 @@ class Step2 extends React.Component {
       activeChoices: newState
     });
   };
+
+  activeChoiceValidation=number => {
+    let newState = []
+    //if(this.state.activeChoices.length >1)
+    //{
+      newState = newState.concat([number]);
+           
+    //}
+    this.setState({activeChoices:newState}); 
+  }
+
   render() {
     return (
       <>
-        <h5 className="info-text"> What are you doing? (checkboxes) </h5>
+        <h5 className="info-text"> What stage are you on?</h5>
         <Row className="justify-content-center">
           <Col xs={12} lg={10}>
             <Row>
@@ -47,13 +58,13 @@ class Step2 extends React.Component {
                     active: this.state.activeChoices.includes(1)
                   })}
                   data-toggle="wizard-checkbox"
-                  onClick={() => this.choiceChange(1)}
+                  onClick={() => this.activeChoiceValidation(1)}
                 >
                   <input
                     defaultValue="Design"
                     name="jobb"
                     type="checkbox"
-                    onChange={() => this.choiceChange(1)}
+                    onChange={() => this.activeChoiceValidation(1)}
                     checked={classnames({
                       active: this.state.activeChoices.includes(1)
                     })}
@@ -61,7 +72,7 @@ class Step2 extends React.Component {
                   <div className="icon">
                     <i className="now-ui-icons design-2_ruler-pencil" />
                   </div>
-                  <h6>Design</h6>
+                  <h6>Will send CV</h6>
                 </div>
               </Col>
               <Col sm="4">
@@ -70,13 +81,13 @@ class Step2 extends React.Component {
                     active: this.state.activeChoices.includes(2)
                   })}
                   data-toggle="wizard-checkbox"
-                  onClick={() => this.choiceChange(2)}
+                  onClick={() => this.activeChoiceValidation(2)}
                 >
                   <input
                     defaultValue="Code"
                     name="jobb"
                     type="checkbox"
-                    onChange={() => this.choiceChange(2)}
+                    onChange={() => this.activeChoiceValidation(2)}
                     checked={classnames({
                       active: this.state.activeChoices.includes(2)
                     })}
@@ -84,7 +95,7 @@ class Step2 extends React.Component {
                   <div className="icon">
                     <i className="now-ui-icons business_bulb-63" />
                   </div>
-                  <h6>Code</h6>
+                  <h6>Have sent CV</h6>
                 </div>
               </Col>
               <Col sm="4">
@@ -93,13 +104,13 @@ class Step2 extends React.Component {
                     active: this.state.activeChoices.includes(3)
                   })}
                   data-toggle="wizard-checkbox"
-                  onClick={() => this.choiceChange(3)}
+                  onClick={() => this.activeChoiceValidation(3)}
                 >
                   <input
                     defaultValue="Develop"
                     name="jobb"
                     type="checkbox"
-                    onChange={() => this.choiceChange(3)}
+                    onChange={() => this.activeChoiceValidation(3)}
                     checked={classnames({
                       active: this.state.activeChoices.includes(3)
                     })}
@@ -107,7 +118,7 @@ class Step2 extends React.Component {
                   <div className="icon">
                     <i className="now-ui-icons tech_tv" />
                   </div>
-                  <h6>Develop</h6>
+                  <h6>Made interview</h6>
                 </div>
               </Col>
             </Row>

@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
     }
     return tableRows;
   }
-  render() {
+  render() {    
     return (
       <>
         <PanelHeader

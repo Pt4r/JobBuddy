@@ -19,6 +19,7 @@ import React from "react";
 import Select from "react-select";
 import Axios from "axios";
 import {LOCALHOST_API_URL} from "../../../Constants"
+import CompanyModal from "../../Client/Forms/CompanyModal"
 
 // reactstrap components
 import { Row, Col, FormGroup, Label, Input } from "reactstrap";
@@ -38,7 +39,7 @@ var selectOptions = [
 
 function parseJobCategories(jobCategories){
   return jobCategories.map((jc) => {
-    return { label: jc.jobCategoryTitle, value: jc.jobCategoryTitle };
+    return { label: jc.id, value: jc.jobCategoryTitle };
   });
 }
 
@@ -46,18 +47,119 @@ class Step3 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      select: null,
-      jobcategories: []
+      selectJobCat: null,
+      selectComp: null,
+      jobcategories: [],
+      companies:[],
+      
+
     };
   }
 
-  componentDidMount(){
-    Axios.get(`${LOCALHOST_API_URL}/jobcategory`)
-    .then(res => {
-      const jobcat = res.data;
-      this.setState({jobcategories: parseJobCategories(jobcat)});
-    })
+  // componentDidMount(){
+  //   Axios.get(`${LOCALHOST_API_URL}/jobcategory`)
+  //   .then(data => {
+  //     let jobCat = data.map((jc,i) => {
+  //       return {value: jc.Id, label: jc.JobCategoryTitle}
+  //     }).then(res =>{
+  //     this.setState({jobCat})
+  //     })
+  //   .catch(error => {
+  //     console.log(error);
+  //   });
+  // })}
+
+  componentDidMount() {
+    this.getJobCategories();
+    this.getCompanies();
   }
+
+  getJobCategories(){
+    fetch("https://localhost:5001/api/jobcategory")
+      .then((response) => {
+        return response.json();
+      })
+      .then(data => {
+        let teamsFromApi = data.map(team => {
+          return {value: team.id, label: team.jobCategoryTitle}
+        });
+        this.setState({
+          jobcategories:teamsFromApi
+        });
+        console.log(this.state.jobcategories)
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  getCompanies(){
+    fetch("https://localhost:5001/api/company")
+      .then((response) => {
+        return response.json();
+      })
+      .then(data => {
+        let teamsFromApi = data.map(team => {
+          return {value: team.id, label: team.title}
+        })
+        this.setState({
+          companies:teamsFromApi
+        })})
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+
+
+
+
+  render() {
+    return (
+      <>
+        <h5 className="info-text"> Please add Company and Contact Person Details </h5>
+   
+        <hr/>
+        <Row className="justify-content-center">
+          <Col xs={12} sm={4}>
+          <Label>JobCategory</Label>
+            <Select
+              className="primary react-select"
+              classNamePrefix="react-select"
+              placeholder="Single Select"
+              name="singleSelect"
+              value={this.state.select}
+              options={this.state.jobcategories  }
+              onChange={value => this.setState({ selectJobCat: value })}
+            /> 
+            </Col>
+            </Row>
+            <hr/>
+            <Row className="justify-content-center">
+            <Col xs={12} sm={4}>
+            <Label>Company</Label>
+              <Select
+              className="primary react-select"
+              classNamePrefix="react-select"
+              placeholder="Single Select"
+              name="singleSelect2"
+              value={this.state.selectcomp}
+              options={this.state.companies  }
+              onChange={value => this.setState({ selectComp: value })}
+            /> 
+          </Col>
+          </Row>
+          <Row className="justify-content-center">
+ 
+            <CompanyModal isNew  getCompanies={this.getCompanies} tableState={this.state.companies}/>
+        
+        </Row>
+      </>
+    );
+  }
+}
+
+export default Step3;
+
 
 
 // componentDidMount() {
@@ -77,8 +179,7 @@ class Step3 extends React.Component {
 //             })
 //         });
 // }
-// updatedJobCat = this.state.jobcategories
-//     .map((company, compIndex, compArr) => {
+// updatedJobCat = this.state.jobcategories.map((company, compIndex, compArr) => {
 //       return company.keys.map((key, keyIndex, keyArr) => {
 //         return {
 //           key_name: key,
@@ -93,16 +194,11 @@ class Step3 extends React.Component {
 //       return array.indexOf(item.dtype);
 //     })
 
+//     onclick(){
+//       console.log(this.updatedJobCat)
+//     }
 
-  render() {
-    let jobcat = this.state.jobcategories;
-    let jobcatItems = jobcat.map((jc ,i) =>
-                <option key={i} label={jc.jobcategorytitle} value={jc.jobcategorytitle} />
-    );
-    return (
-      <>
-        <h5 className="info-text"> Please add Company and Contact Person Details </h5>
-        <Row className="justify-content-center">
+     {/* <Row className="justify-content-center">
           <Col xs={12} sm={7}>
             <FormGroup>
               <Label>Company Name</Label>
@@ -134,43 +230,4 @@ class Step3 extends React.Component {
             />
           </Col>
         </Row>
-        <hr/>
-        <Row className="justify-content-center">
-          <Col xs={12} sm={7}>
-            <FormGroup>
-              <Label>Contact Person</Label>
-              <Input type="text" />
-            </FormGroup>
-          </Col>
-          <Col xs={12} sm={3}>
-            <FormGroup>
-              <Label>Street No.</Label>
-              <Input type="text" />
-            </FormGroup>
-          </Col>
-          <Col xs={12} sm={5}>
-            <FormGroup>
-              <Label>City</Label>
-              <Input type="text" />
-            </FormGroup>
-          </Col>
-          <Col xs={12} sm={5}>
-            <Label>Country</Label>
-            {/* <Select
-              className="primary react-select"
-              classNamePrefix="react-select"
-              placeholder="Single Select"
-              name="singleSelect"
-              value={this.state.select}
-              options={selectOptions  }
-              onChange={value => this.setState({ select: value })}
-            /> */}
-            <select >{jobcatItems}</select>
-          </Col>
-        </Row>
-      </>
-    );
-  }
-}
-
-export default Step3;
+        */}

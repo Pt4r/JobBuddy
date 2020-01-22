@@ -23,6 +23,8 @@ import { Col } from "reactstrap";
 
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import Axios from 'axios';
+import { withRouter } from "react-router";
 
 import Step1 from "./Step1.jsx";
 import Step2 from "./Step2.jsx";
@@ -30,23 +32,59 @@ import Step3 from "./Step3.jsx";
 
 var steps = [
   {
-    stepName: "About",
+    stepName: "Job Listing Info",
     stepIcon: "now-ui-icons users_circle-08",
     component: Step1
   },
   {
-    stepName: "Account",
+    stepName: "Stage",
     stepIcon: "now-ui-icons ui-1_settings-gear-63",
     component: Step2
   },
   {
-    stepName: "Address",
+    stepName: "Company & Job Category",
     stepIcon: "now-ui-icons ui-1_email-85",
-    component: Step3
+    component: Step3,
+    stepProps: {}
+    
+
   }
 ];
 
-class Wizard extends Component {
+class Wizard extends React.Component {
+  constructor(props){
+    super(props)   
+  this.state = {
+    title: '',
+    info: '',
+    jobCategoyId: '',
+    companyId: ''
+    }
+}
+
+
+  finishButtonClick(allStepStates){
+  
+    const joblisting = {
+      title: allStepStates.JobListingInfo.title,
+      info: allStepStates.JobListingInfo.info,
+      companyId: allStepStates.CompanyJobCategory.selectComp.value,
+      jobCategoyId: allStepStates.CompanyJobCategory.selectJobCat.value
+
+    }
+    console.log(this.state)
+    Axios.post(`https://localhost:5001/api/joblistings/Create`, joblisting)        
+          .then(res => {            
+          console.log(res)
+          })
+          .then(() => {
+            this.props.history.push('/client/dashboard/')})
+          .catch(error => {
+              console.log(error)
+          })
+  }
+
+  
   render() {
     return (
       <>
@@ -64,6 +102,7 @@ class Wizard extends Component {
               finishButtonClasses="btn-wd"
               nextButtonClasses="btn-wd"
               previousButtonClasses="btn-wd"
+              finishButtonClick={this.finishButtonClick}
             />
           </Col>
         </div>

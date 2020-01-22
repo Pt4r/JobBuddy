@@ -4,63 +4,53 @@ import { LOCALHOST_API_URL } from '../../../Constants';
 
 class JobListingForm extends React.Component {
     state = {
-        id: 0,
+        id: '',
         title: '',
         info: '',
         postDate: '',
-        hrUser: '',
         jobCategory: '',
-        company: '',
-        client: '',
+        company: ''
     }
     componentDidMount() {
-        if (this.props.user) {
-            const { id, title, info, postDate, hrUser, jobCategory, company, client } = this.props.jl
-            this.setState({  id, title, info, postDate, hrUser, jobCategory, company, client });
+        if (this.props.getjl) {
+            const { id, title, info, jobCategory, company } = this.props.getjl
+            this.setState({  id, title, info, jobCategory, company });
         }
     }
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
-    submitNew = e => {
-        e.preventDefault();
-        fetch(`${LOCALHOST_API_URL}/joblistings/create`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.email,
-            })
+
+
+
+  
+
+    submitEdit = e =>{
+        e.preventDefault()
+        console.log("edit")
+        Axios.put(`${LOCALHOST_API_URL}/jobListings/update/${this.state.id}`, this.state)
+        .then(res => {
+            console.log(res)            
         })
-            .then(res => res.json())
-            .then(user => {
-                this.props.addUserToState(user);
-                this.props.toggle();
-            })
-            .catch(err => console.log(err));
-    }
-    submitEdit = e => {
-        e.preventDefault();
-        fetch(`${LOCALHOST_API_URL}/joblistings/update/${this.state.id}`, {
-            method: 'put',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.info,
-            })
+        .then(this.setState({
+            id: '',
+            title: '',
+            info: '',
+            jobCategory: '',
+            company: ''
+        }))
+        .then(this.props.getCompanies)
+        .catch(error => {
+            console.log(error)
         })
-            .then(() => {
-                this.props.toggle();
-                this.props.updateUserIntoState(this.state.id);
-            })
-            .catch(err => console.log(err));
     }
+
+
+
+
+
     render() {
-        return <Form onSubmit={this.props.user ? this.submitEdit : this.submitNew}>
+        return <Form onSubmit={this.submitEdit }>
             <FormGroup>
                 <Label for="name">Title:</Label>
                 <Input type="text" name="title" onChange={this.onChange} value={this.state.title === '' ? '' : this.state.title} />
@@ -70,14 +60,6 @@ class JobListingForm extends React.Component {
                 <Input type="text" name="info" onChange={this.onChange} value={this.state.info === null ? '' : this.state.info} />
             </FormGroup>
             <FormGroup>
-                <Label for="postDate">postDate:</Label>
-                <Input type="text" name="postDate" onChange={this.onChange} value={this.state.postDate === null ? '' : this.state.postDate} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="hrUser">hrUser:</Label>
-                <Input type="text" name="hrUser" onChange={this.onChange} value={this.state.hrUser === null ? '' : this.state.hrUser} />
-            </FormGroup>
-            <FormGroup>
                 <Label for="jobCategory">jobCategory:</Label>
                 <Input type="text" name="jobCategory" onChange={this.onChange} value={this.state.jobCategory === null ? '' : this.state.jobCategory} />
             </FormGroup>
@@ -85,11 +67,7 @@ class JobListingForm extends React.Component {
                 <Label for="company">company:</Label>
                 <Input type="text" name="company" onChange={this.onChange} value={this.state.company === null ? '' : this.state.company} />
             </FormGroup>
-            <FormGroup>
-                <Label for="client">client:</Label>
-                <Input type="text" name="client" onChange={this.onChange} value={this.state.client === null ? '' : this.state.client} />
-            </FormGroup>
-            <Button type="submit">Send</Button>
+            <Button type="submit" onClick={this.props.toggle}>Submit</Button>
         </Form>;
     }
 }

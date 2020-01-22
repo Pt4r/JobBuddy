@@ -43,7 +43,12 @@ class JobListingModal extends Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
                 <ModalBody>
-                    <JobListingForm  jl={this.props.jl} />
+                    <JobListingForm  
+                    jl={this.props.jl} 
+                    toggle={this.toggle}  
+                    modalState={this.state.modal} 
+                    getjl={this.props.getjl} 
+                    tableSt={this.props.tableState} />
                 </ModalBody>
             </Modal>
         </Fragment>;

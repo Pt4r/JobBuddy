@@ -39,13 +39,6 @@ class CompanyForm extends React.Component {
         .then(res => {            
         console.log(res)
         })
-        .then(this.setState({
-            id: '',
-            title: '',
-            address: '',
-            phoneNumber: '',
-            email: ''
-        }))
         .then(this.props.getCompanies)
         .catch(error => {
             console.log(error)

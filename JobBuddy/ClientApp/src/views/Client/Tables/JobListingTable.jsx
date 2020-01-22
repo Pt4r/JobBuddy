@@ -31,31 +31,39 @@ class CompanyTable extends React.Component {
 
 
 
-componentDidMount(){
-  axios.get(`${ LOCALHOST_API_URL }/jobListings`)
-  .then(res => {
-    const posts = res.data;
-    this.setState({posts: posts});
-  })
-}
 
 
-deleteItem = id => {
-  let confirmDeletion = window.confirm('Do you really wish to delete it?');
-  if (confirmDeletion) {
-    const url = `${ LOCALHOST_API_URL }/jobListings/delete/${id}`
-    fetch(url, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        this.props.deleteItemFromState(id);
-      })
-      .catch(err => console.log(err));
+  componentDidMount(){
+    this.getCompanies();
   }
-}
+  
+  getCompanies=() => {
+  axios.get(`${ LOCALHOST_API_URL }/joblistings`)
+    .then(res => {
+      const posts = res.data;
+      this.setState({posts: posts});
+    })
+  
+  }
+  
+  
+  
+  deleteItem=(comp) => {
+  //const url = `${LOCALHOST_API_URL}/company/delete`
+    let confirmDeletion = window.confirm('Do you really wish to delete it?');
+    if (confirmDeletion) {
+      axios({
+        method: 'DELETE',
+        url:`${LOCALHOST_API_URL}/joblistings/delete` , 
+        data: JSON.stringify(comp), 
+        headers:{'Content-Type': 'application/json; charset=utf-8'}
+    })  
+    .then(res => console.log(res.data))
+    .then(this.getCompanies)
+    .catch(error => {
+      console.log(error)
+  })
+  }}
 
 
 
@@ -77,14 +85,6 @@ deleteItem = id => {
         accessor: "info"
       },
       {
-        Header: "post Date",
-        accessor: "postDate"
-      },
-      {
-        Header: "hrUser",
-        accessor: "hrUser"
-      },
-      {
         Header: "jobCategory",
         accessor: "jobCategory"
       },
@@ -93,42 +93,19 @@ deleteItem = id => {
         accessor: "company"
       },
       {
-        Header: "client",
-        accessor: "client"
-      },
-      {
         Header: "Actions",
         Cell:       
         row =>
         {return ( 
             <div className="actions-right">
-              <JobListingModal company={row.original} /> 
-               {/* <Button 
-              onClick={() =>{this.getTrProps}
-              //let ogj = {this.onRowClick.map((original, key))}  
-              //let obj = this.state.posts.find(o => o.id === key);
-                // alert(
-                //   "You've clicked LIKE button on \n{ \nName: " +
-                //     obj.name +
-                //     ", \nposition: " +
-                //     obj.position +
-                //     ", \noffice: " +
-                //     obj.office +
-                //     ", \nage: " +
-                //     obj.age +
-                //     "\n}."
-                // );
-              }
-              className="btn-icon btn-round"
-              color="info"
-              size="sm" 
-            >
-              <i className="fa fa-heart" />
-            </Button>{" "}                */}
-            {/* use this button to remove the data row */}
+              <JobListingModal 
+              company={row.original} 
+              getCompanies={this.getCompanies} 
+              tableState={this.state.posts}
+              /> 
             <Button
               onClick={() => {
-                this.deleteItem(props.original.id);
+                this.deleteItem(row.original);
               }}
               className="btn-icon btn-round"
               color="danger"
@@ -150,7 +127,7 @@ deleteItem = id => {
             <Col xs={12} md={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Companies</CardTitle>
+                  <CardTitle tag="h4">Job Listings</CardTitle>
                   <JobListingModal isNew/>
                 </CardHeader>
                 <CardBody>
