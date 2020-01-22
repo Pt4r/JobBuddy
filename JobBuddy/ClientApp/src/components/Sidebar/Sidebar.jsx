@@ -178,7 +178,7 @@ class Sidebar extends React.Component {
           </li>
         );
       }
-      
+      if(prop.hidden != true){
       return (
         <li className={this.activeRoute(prop.layout + prop.path)} key={key}>
           <NavLink to={prop.layout + prop.path} activeClassName="">
@@ -196,6 +196,7 @@ class Sidebar extends React.Component {
           </NavLink>
         </li>
       );
+    }
     }
     }
 

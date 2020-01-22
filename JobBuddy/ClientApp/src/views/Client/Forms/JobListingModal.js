@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import JobListingForm from './JobListingForm';
-
+import { Link } from 'react-router-dom';
 
 
 class JobListingModal extends Component {
@@ -29,14 +29,16 @@ class JobListingModal extends Component {
         let button = '';
         if (isNew) {
             title = 'Add Job Listing';
-
-            button = <Button
-                color="success"
-                onClick={this.routeChange}
-                style={{ minWidth: "200px" }}
-
-                >
-                    Add Job Listing</Button>;
+            button = 
+            <Link 
+            to="/client/wizard">
+                <Button
+                    color="success"
+                    style={{ minWidth: "200px" }}
+                    >
+                    Add Job Listing
+                </Button>
+            </Link>;
         } else {
             button = <Button
                 className="btn-icon btn-round"

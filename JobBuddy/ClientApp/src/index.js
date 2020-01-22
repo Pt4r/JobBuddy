@@ -18,6 +18,7 @@ import PageNotFound from "views/Pages/PageNotFound.jsx";
 import AuthorizeRoute from 'components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from 'components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from 'components/api-authorization/ApiAuthorizationConstants';
+import Wizard from "views/Client/Wizard/Wizard";
 
 
 const hist = createBrowserHistory();
@@ -57,6 +58,10 @@ ReactDOM.render(
           return <MentorLayout {...props} />;
         }}
       />
+
+      <Route
+      path="/client/wizard"
+     component={Wizard}/>
 
       <Route path="/chat"/>
       

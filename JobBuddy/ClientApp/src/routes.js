@@ -49,12 +49,13 @@ let routes = [
     layout: "/client"
   },
   {
-      path: "/wizard",
-      name: "Create Job Listing",
-      icon: "now-ui-icons files_single-copy-04",
-      component: Wizard,
-      layout: "/client"
-    },
+    path: "/wizard",
+    name: "Create Job Listing",
+    icon: "now-ui-icons files_single-copy-04",
+    component: Wizard,
+    layout: "/client",
+    hidden: true
+  },
   {
     path: "/companies",
     name: "Companies",
