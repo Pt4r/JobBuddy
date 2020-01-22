@@ -60,7 +60,7 @@ function LandingPage() {
                     <img
                         alt="..."
                         className="rounded-circle img-fluid img-raised"
-                        // src={require("assets/img/stratos.jpg")}
+                        src={require("assets/img/stratos.jpg")}
                     ></img>
                     <h4 className="title">Stratos<br />Palaiologos</h4>
                     <p className="category text-info">Project Manager</p>
@@ -76,7 +76,7 @@ function LandingPage() {
                   <img
                       alt="..."
                       className="rounded-circle img-fluid img-raised"
-                      // src={require("assets/img/misichronis.jpg")}
+                      src={require("assets/img/misichronis.jpg")}
                   ></img>
                   <h4 className="title">Spyros<br />Misichronis</h4>
                   <p className="category text-info">Frontend Developer</p>
@@ -92,7 +92,7 @@ function LandingPage() {
                   <img
                       alt="..."
                       className="rounded-circle img-fluid img-raised"
-                      // src={require("assets/img/theofilatos.jpg")}
+                      src={require("assets/img/theofilatos.jpg")}
                   ></img>
                   <h4 className="title">Spyros<br />Theofilatos</h4>
                   <p className="category text-info">Backend Developer</p>
@@ -108,7 +108,7 @@ function LandingPage() {
                     <img
                         alt="..."
                         className="rounded-circle img-fluid img-raised"
-                        // src={require("assets/img/delos.jpg")}
+                        src={require("assets/img/delos.jpg")}
                     ></img>
                     <h4 className="title">Pantelis<br />Bakogeorgos</h4>
                     <p className="category text-info">HTML5/CSS Developer</p>
