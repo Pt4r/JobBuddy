@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobBuddy.Migrations
 {
-    public partial class afterDelosArmagedon : Migration
+    public partial class Build : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -356,7 +356,7 @@ namespace JobBuddy.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<int>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<Guid>(nullable: true),
                     JobCategoryId = table.Column<string>(nullable: true)

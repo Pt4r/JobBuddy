@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200121004427_afterDelosArmagedon")]
-    partial class afterDelosArmagedon
+    [Migration("20200122033648_SolveError")]
+    partial class SolveError
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,8 +136,8 @@ namespace JobBuddy.Migrations
                     b.Property<string>("JobCategoryId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -422,7 +422,6 @@ namespace JobBuddy.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
 
@@ -430,7 +429,6 @@ namespace JobBuddy.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte?>("Rating")
-                        .IsRequired()
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");

@@ -51,18 +51,18 @@ namespace JobBuddy.Data
                       .HasKey(m => m.Id);
 
             //Πρέπει να δω πώς θα μπει το Rating ..Προς το παρόν μόνο Required
-            modelBuilder.Entity<MentorUserDetails>()
-                      .Property(m => m.Rating)
-                      .IsRequired();
+            //modelBuilder.Entity<MentorUserDetails>()
+            //          .Property(m => m.Rating)
+                      //.IsRequired();
 
 
-            modelBuilder.Entity<MentorUserDetails>()
-                      .Property(m => m.Gender)
-                      .IsRequired();
+            //modelBuilder.Entity<MentorUserDetails>()
+            //          .Property(m => m.Gender);
+            //          //.IsRequired();
 
             modelBuilder.Entity<MentorUserDetails>()
                         .Property(m => m.Description)
-                        .IsRequired()
+                        //.IsRequired()
                         .HasMaxLength(2000);
 
             //Company-Mentor relationship

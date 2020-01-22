@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200121150035_phoneNumber-to-string")]
-    partial class phoneNumbertostring
+    [Migration("20200122000943_Build")]
+    partial class Build
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
