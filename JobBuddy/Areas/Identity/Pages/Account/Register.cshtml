@@ -45,7 +45,7 @@
     <div class="col-md-4 mr-auto">
         <div class="card card-signup text-center">
             <div class="card-header ">
-                <h4 class="card-title">Register with:</h4>
+                <h4 class="card-title" style="color:black">Register with:</h4>
                 <div class="social">
                     <button class="btn btn-icon btn-round btn-twitter">
                         <i class="fab fa-twitter"></i>
@@ -112,27 +112,30 @@
                     </div>
 
                     <span asp-validation-for="Input.UserRole" class="text-danger"></span>
-                    <div class="class="form-group col-md-4"">
-                        <select asp-for="Input.UserRole" class="form-control" id="select">
-                            <option selected value="" disabled> Looking for...</option>
-                            <option value="Client">Job Openings</option>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <select class="selectpicker" data-size="4" data-style="btn btn-primary btn-round btn-block">
+                            <option disabled selected>Select an option...</option>
+                            <option value="Client">Job Openings and CV tracking</option>
                             <option value="HR">Job Candidates</option>
                             <option value="Mentor">People to offer your Career Insights </option>
-
                         </select>
-                        </div>
-                        <div class="form-check text-left">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="termsAndCond" required="required">
-                                <span class="form-check-sign"></span>
-                                I agree to the terms and conditions.
-                            </label>
-                        </div>
                     </div>
-                    <div class="card-footer ">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">Register</button>
+
+                    <div class="form-check text-left">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="termsAndConds" required="required">
+                            <span class="form-check-sign"></span>
+                            I agree to the terms and conditions.
+                        </label>
                     </div>
-</form>
+                </div>
+                <div class="card-footer ">
+                    <button type="submit" class="btn btn-primary btn-round btn-lg">Register</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

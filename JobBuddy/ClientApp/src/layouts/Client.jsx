@@ -82,11 +82,11 @@ class Client extends React.Component {
     this.setState({ backgroundColor: color });
   };
   getRoutes = routes => {
-    return routes.map((prop, key) => {
-      if (prop.collapse) {
-        return this.getRoutes(prop.views);
-      }
+    return routes.map((prop, key) => {     
       if (prop.layout === "/client") {
+        if (prop.collapse) {
+          return this.getRoutes(prop.views);
+        }
         return (
           <Route
             path={prop.layout + prop.path}

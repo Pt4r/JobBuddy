@@ -9698,8 +9698,8 @@ be a descendant of the grid when it is being dragged.
   .full-page.section-image {
     position: initial; }
   .full-page > .content {
-    padding-bottom: 130px;
-    padding-top: 130px;
+    padding-bottom: 100px;
+    padding-top: 100px;
     width: 100%; }
   .full-page .footer {
     position: absolute;

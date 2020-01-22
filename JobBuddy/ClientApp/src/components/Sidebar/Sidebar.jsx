@@ -136,6 +136,7 @@ class Sidebar extends React.Component {
         </li>
       );
     } else {
+      if((prop.layout == this.state.layout)){
       if (prop.collapse) {
         var st = {};
         st[prop["state"]] = !this.state[prop.state];
@@ -195,6 +196,7 @@ class Sidebar extends React.Component {
           </NavLink>
         </li>
       );
+    }
     }
 
   });
