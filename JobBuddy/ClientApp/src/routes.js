@@ -64,13 +64,36 @@ let routes = [
     layout: "/hr"
   },
   {
+    path: "/job-listings",
+    name: "Job Listings",
+    icon: "now-ui-icons files_single-copy-04",
+    component: ClientJobListings,
+    layout: "/hr"
+  },
+  {
+    path: "/companies",
+    name: "Companies",
+    icon: "now-ui-icons business_briefcase-24",
+    component: ClientCompanies,
+    layout: "/hr"
+  },
+
+  {
     path: "/dashboard",
     name: "Mentor Dashboard",
     icon: "now-ui-icons design_app",
     component: MentorDashboard,
     layout: "/mentor"
   },
+  {
+    path: "/companies",
+    name: "Companies",
+    icon: "now-ui-icons business_briefcase-24",
+    component: ClientCompanies,
+    layout: "/hr"
+  },
   
+
   {
     path: "/dashboard",
     name: "Admin Dashboard",
@@ -78,7 +101,37 @@ let routes = [
     component: AdminDashboard,
     layout: "/admin"
   },
+
+  {
+    path: "/pricing-page",
+    name: "Pricing Page",
+    icon: "now-ui-icons business_money-coins",
+    component: PricingPage,
+    layout: "/client"
+  },
   
+  {
+    path: "/calendar",
+    name: "Calendar",
+    icon: "now-ui-icons media-1_album",
+    component: Calendar,
+    layout: "/client"
+  },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    icon: "now-ui-icons media-1_album",
+    component: Calendar,
+    layout: "/mentor"
+  },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    icon: "now-ui-icons media-1_album",
+    component: Calendar,
+    layout: "/hr"
+  },
+
   {
     collapse: true,
     path: "/pages",
@@ -313,13 +366,6 @@ let routes = [
     name: "Charts",
     icon: "now-ui-icons business_chart-pie-36",
     component: Charts,
-    layout: "/admin"
-  },
-  {
-    path: "/calendar",
-    name: "Calendar",
-    icon: "now-ui-icons media-1_album",
-    component: Calendar,
     layout: "/admin"
   }
 ];
