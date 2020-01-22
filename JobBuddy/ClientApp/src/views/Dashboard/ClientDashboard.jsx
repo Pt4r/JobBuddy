@@ -3,6 +3,7 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 
 import PanelClient from "views/Components/PanelClient"
+import JobListingTable from "../Client/Tables/JobListingTable"
 
 // reactstrap components
 import {
@@ -122,6 +123,7 @@ class Dashboard extends React.Component {
            
           </Row>
           
+          <JobListingTable/>
           </div>
       </>
     );

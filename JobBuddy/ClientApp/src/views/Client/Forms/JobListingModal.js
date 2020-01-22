@@ -28,7 +28,7 @@ class JobListingModal extends Component {
             button = <Button
                 color="success"
                 onClick={this.toggle}
-                style={{ minWidth: "200px" }}>Add</Button>;
+                style={{ minWidth: "200px" }}>Add Job Listing</Button>;
         } else {
             button = <Button
                 className="btn-icon btn-round"

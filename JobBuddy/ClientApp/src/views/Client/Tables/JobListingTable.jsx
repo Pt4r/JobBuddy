@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import JobListingModal from "../Forms/CompanyModal";
+import JobListingModal from "../Forms/JobListingModal";
 import axios from "axios";
 import { LOCALHOST_API_URL } from '../../../Constants';
 
@@ -21,7 +21,7 @@ import {
 
 
 
-class CompanyTable extends React.Component {
+class JobListingTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,6 +43,7 @@ class CompanyTable extends React.Component {
       const posts = res.data;
       this.setState({posts: posts});
     })
+    console.log(this.state.posts)
   
   }
   
@@ -99,8 +100,8 @@ class CompanyTable extends React.Component {
         {return ( 
             <div className="actions-right">
               <JobListingModal 
-              company={row.original} 
-              getCompanies={this.getCompanies} 
+              jl={row.original} 
+              getjl={this.getCompanies} 
               tableState={this.state.posts}
               /> 
             <Button
@@ -128,7 +129,7 @@ class CompanyTable extends React.Component {
               <Card>
                 <CardHeader>
                   <CardTitle tag="h4">Job Listings</CardTitle>
-                  <JobListingModal isNew/>
+                  <JobListingModal isNew getjl={this.getCompanies} tableState={this.state.posts}/>
                 </CardHeader>
                 <CardBody>
                   <ReactTable
@@ -151,4 +152,4 @@ class CompanyTable extends React.Component {
   }
 }
 
-export default CompanyTable;
+export default JobListingTable;

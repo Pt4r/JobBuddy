@@ -1,20 +1,18 @@
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { LOCALHOST_API_URL } from '../../../Constants';
+import Axios from 'axios';
 
 class JobListingForm extends React.Component {
     state = {
         id: '',
         title: '',
-        info: '',
-        postDate: '',
-        jobCategory: '',
-        company: ''
+        info: ''
     }
     componentDidMount() {
-        if (this.props.getjl) {
-            const { id, title, info, jobCategory, company } = this.props.getjl
-            this.setState({  id, title, info, jobCategory, company });
+        if (this.props.jl) {
+            const { id, title, info } = this.props.jl
+            this.setState({  id, title, info });
         }
     }
     onChange = e => {
@@ -28,7 +26,12 @@ class JobListingForm extends React.Component {
     submitEdit = e =>{
         e.preventDefault()
         console.log("edit")
-        Axios.put(`${LOCALHOST_API_URL}/jobListings/update/${this.state.id}`, this.state)
+        Axios({
+        method: 'PUT',
+        url:`${LOCALHOST_API_URL}/joblistings/update/${this.state.id}` , 
+        data: JSON.stringify(this.state), 
+        headers:{'Content-Type': 'application/json; charset=utf-8'}
+    })  
         .then(res => {
             console.log(res)            
         })
@@ -39,7 +42,7 @@ class JobListingForm extends React.Component {
             jobCategory: '',
             company: ''
         }))
-        .then(this.props.getCompanies)
+        .then(this.props.getjl)
         .catch(error => {
             console.log(error)
         })
