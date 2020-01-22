@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200122033648_SolveError")]
-    partial class SolveError
+    [Migration("20200122090715_Something wrong with AspNetUsers")]
+    partial class SomethingwrongwithAspNetUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

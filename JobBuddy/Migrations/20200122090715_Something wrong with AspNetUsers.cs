@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobBuddy.Migrations
 {
-    public partial class Build : Migration
+    public partial class SomethingwrongwithAspNetUsers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -264,9 +264,9 @@ namespace JobBuddy.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Rating = table.Column<byte>(nullable: false),
+                    Rating = table.Column<byte>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(maxLength: 2000, nullable: false),
+                    Description = table.Column<string>(maxLength: 2000, nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     CompanyId = table.Column<Guid>(nullable: true),
                     ClientUserDetailsId = table.Column<Guid>(nullable: true)
