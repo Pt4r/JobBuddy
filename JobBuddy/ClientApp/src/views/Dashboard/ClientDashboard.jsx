@@ -52,19 +52,16 @@ class Dashboard extends React.Component {
         <PanelHeader
           size="sm"
         />
-          <Row className="text-center justify-content-center">
-        <Col sm={12} lg={12} >
-            <div >
+        <div className="content">
 
-            
-            <PanelClient>
-      
-            </PanelClient>
-            </div>
+          <Row className="text-center justify-content-center">
+            <Col sm={12} lg={12} >
+              <div >
+                <PanelClient/>
+              </div>
             </Col>
           </Row> 
-        <div>
-          
+
           <Row>
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
@@ -119,11 +116,8 @@ class Dashboard extends React.Component {
               </Card>
             </Col>
           </Row>
-          <Row>
-           
-          </Row>
-          
-          <JobListingTable/>
+
+            <JobListingTable/>
           </div>
       </>
     );
