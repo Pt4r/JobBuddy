@@ -28,6 +28,8 @@ using Microsoft.IdentityModel.Tokens;
 using JobBuddy.Data.Repositories;
 using JobBuddy.Data.Repositories.IRepositories;
 using JobBuddy.Models.UserDetails;
+using JobBuddy.Models.ChatServices;
+using JobBuddy.Models.ChatModels;
 
 namespace JobBuddy
 {
@@ -43,6 +45,8 @@ namespace JobBuddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
+            services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -130,6 +134,8 @@ namespace JobBuddy
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<AgentHub>("/agentHub");
             });
 
             app.UseSpa(spa =>

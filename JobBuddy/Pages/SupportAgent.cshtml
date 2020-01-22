@@ -1,0 +1,56 @@
+﻿@page
+@model JobBuddy.Pages.SupportAgentModel
+@{
+    ViewData["Title"] = "Support Admin Dashboard";
+    ViewData["Subtitle"] = "Connect with customers and answer questions live.";
+    Layout = "_layout2";
+}
+
+
+
+@section Scripts {
+    <script src="~/js/agent.js"></script>
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link rel="stylesheet" href="~/css/chat.css" />
+<link rel="stylesheet" href="~/css/main.css" />
+<link rel="stylesheet" href="~/css/fonts.css" />
+
+<link rel="stylesheet" href="~/css/chat.css" />
+
+<link href="~/css/main.css" rel="stylesheet" type="text/css" media="screen, projection">
+
+<link rel="stylesheet" href="~/css/fonts.css" />
+
+
+<div class="jumbotron">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p class="lead">@ViewData["Subtitle"]</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="roomList" class="list-group">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <ul id="chatHistory" class="card-body"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="chatForm" class="form-inline mt-2">
+                        <input id="messageTextbox" type="text" placeholder="Type a message" class="form-control mr-sm-2 flex-grow-1" />
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
