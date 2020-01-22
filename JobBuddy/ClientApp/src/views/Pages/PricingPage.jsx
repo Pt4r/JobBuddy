@@ -15,6 +15,9 @@
 
 */
 import React from "react";
+import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
+import PaypalExpressBtn from 'react-paypal-express-checkout';
+import {Link} from 'react-router-dom'
 
 // reactstrap components
 import {
@@ -26,6 +29,7 @@ import {
   Row,
   Col,
   Button
+  
 } from "reactstrap";
 
 // core components
@@ -39,22 +43,51 @@ class Pricing extends React.Component {
     document.body.classList.remove("pricing-page");
   }
   render() {
+    const onSuccess = (payment) => {
+      // Congratulation, it came here means everything's fine!
+              console.log("The payment was succeeded!", payment);
+              // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+  }
+
+  const onCancel = (data) => {
+      // User pressed "cancel" or close Paypal's popup!
+      console.log('The payment was cancelled!', data);
+      // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
+  }
+
+  const onError = (err) => {
+      // The main Paypal's script cannot be loaded or somethings block the loading of that script!
+      console.log("Error!", err);
+      // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
+      // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
+  }
+
+  let env = 'sandbox'; // you can set here to 'production' for production
+  let currency = 'USD'; // or you can set this value from your props or state
+  let total = 10; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
+  // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
+
+  const client = {
+      sandbox:    'AVn-UVUHx7-h3rAMKdBuD_bfG1hMil5qm_mESB4w6HF7Pa9675n8X5chXecUq_pScbY0MAO2OmN9ScC6',
+      production: 'YOUR-PRODUCTION-APP-ID',
+  }
     return (
       <>
+
+<PanelHeader size="sm" />
         <div className="content">
           <div className="pricing-page">
-            <Container>
+            <Container >
               <Row>
                 <Col xs={12} md={6} className="ml-auto mr-auto text-center">
-                  <h2 className="title">Pick the best plan for you</h2>
+                  <h2 className="title"></h2>
                   <h5 className="description">
-                    You have Free Unlimited Updates and Premium Support on each
-                    package.
+                  This is the best plan for you
                   </h5>
                 </Col>
               </Row>
-              <Row>
-                <Col lg="3" md="6">
+              <Row className="justify-content-center">
+                <Col lg="5" md="6">
                   <Card className="card-pricing card-plain">
                     <h6 className="card-category">Bravo Pack</h6>
                     <CardBody>
@@ -63,94 +96,13 @@ class Pricing extends React.Component {
                       </div>
                       <CardTitle tag="h3">10$</CardTitle>
                       <ul>
-                        <li>Complete documentation</li>
-                        <li>Working materials in Sketch</li>
+                        <li>Downloadable CV Template</li>
+                        <li>Unlimited Job Listings</li>
                       </ul>
                     </CardBody>
                     <CardFooter>
-                      <Button
-                        className="btn-round btn-neutral"
-                        color="warning"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                      >
-                        Add to Cart
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </Col>
-                <Col lg="3" md="6">
-                  <Card className="card-pricing">
-                    <h6 className="card-category">Alpha Pack</h6>
-                    <CardBody>
-                      <div className="card-icon icon-primary">
-                        <i className="now-ui-icons objects_diamond" />
-                      </div>
-                      <CardTitle tag="h3">69$</CardTitle>
-                      <ul>
-                        <li>Working materials in EPS</li>
-                        <li>6 months access to the library</li>
-                      </ul>
-                    </CardBody>
-                    <CardFooter>
-                      <Button
-                        className="btn-round"
-                        color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                      >
-                        Add to Cart
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </Col>
-                <Col lg="3" md="6">
-                  <Card className="card-pricing card-plain">
-                    <h6 className="card-category">Charlie Pack</h6>
-                    <CardBody>
-                      <div className="card-icon icon-success">
-                        <i className="now-ui-icons media-2_sound-wave" />
-                      </div>
-                      <CardTitle tag="h3">69$</CardTitle>
-                      <ul>
-                        <li>Working materials in PSD</li>
-                        <li>1 year access to the library</li>
-                      </ul>
-                    </CardBody>
-                    <CardFooter>
-                      <Button
-                        className="btn-round btn-neutral"
-                        color="success"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                      >
-                        Add to Cart
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </Col>
-                <Col lg="3" md="6">
-                  <Card className="card-pricing card-plain">
-                    <h6 className="card-category">Extra Pack</h6>
-                    <CardBody>
-                      <div className="card-icon icon-danger">
-                        <i className="now-ui-icons education_atom" />
-                      </div>
-                      <CardTitle tag="h3">159$</CardTitle>
-                      <ul>
-                        <li>Complete documentation</li>
-                        <li>2GB cloud storage</li>
-                      </ul>
-                    </CardBody>
-                    <CardFooter>
-                      <Button
-                        className="btn-round btn-neutral"
-                        color="danger"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                      >
-                        Add to Cart
-                      </Button>
+                    <PaypalExpressBtn env={env} client={client} currency={currency} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />
+                    <Button color="primary" className="btn-round" href='/cv.pdf' download>Click to download</Button>
                     </CardFooter>
                   </Card>
                 </Col>

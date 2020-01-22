@@ -130,7 +130,7 @@ let routes = [
         short: "Pricing",
         mini: "PP",
         component: PricingPage,
-        layout: "/auth"
+        layout: "/client"
       },
       {
         path: "/lock-screen-page",
