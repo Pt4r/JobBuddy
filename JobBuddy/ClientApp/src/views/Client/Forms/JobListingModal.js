@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import JobListingForm from './JobListingForm';
-import { useHistory } from 'react-router-dom';
+
 
 
 class JobListingModal extends Component {
@@ -19,7 +19,7 @@ class JobListingModal extends Component {
     }
 
     routeChange=()=> {
-        window.location.href="/admin/wizard"
+        window.location.href="/client/wizard"
       }
 
     render() {

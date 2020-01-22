@@ -235,7 +235,7 @@ let routes = [
         name: "Wizard",
         mini: "W",
         component: Wizard,
-        layout: "/admin"
+        layout: "/client"
       }
     ]
   },

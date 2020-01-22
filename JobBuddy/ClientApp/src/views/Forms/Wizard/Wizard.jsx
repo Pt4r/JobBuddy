@@ -79,7 +79,10 @@ class Wizard extends React.Component {
           })
           .catch(error => {
               console.log(error)
-          })
+          });
+          
+            window.location.href="/client/dashboard"
+          
   }
 
   
@@ -94,8 +97,8 @@ class Wizard extends React.Component {
               steps={steps}
               navSteps
               validate
-              title="Build Your Profile"
-              description="This information will let us know more about you."
+              title="Create Job Listing"
+              description="You can now create a new Job Listing"
               headerTextCenter
               color="blue"
               finishButtonClasses="btn-wd"
