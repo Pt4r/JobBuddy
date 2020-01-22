@@ -59,8 +59,6 @@ namespace JobBuddy
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            //Spyros gia Strato
-            //edw autos bazei cookie .. Episis sto Login pou exei ftiaksei kanei kapoia configurations me claims kai douleuei
             services.AddAuthentication()
             .AddIdentityServerJwt();
 
@@ -123,7 +121,7 @@ namespace JobBuddy
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chatHub");
-                endpoints.MapHub<AdminHub>("/adminHub");
+                endpoints.MapHub<AgentHub>("/agentHub");
             });
 
             app.UseSpa(spa =>

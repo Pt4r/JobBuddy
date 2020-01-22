@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace JobBuddy
+namespace JobBuddy.Pages
 {
-    //[Authorize(Roles = "Admin")]
-    public class AdminSupportModel : PageModel
+//    [Authorize]
+    public class SupportAgentModel : PageModel
     {
         public void OnGet()
         {

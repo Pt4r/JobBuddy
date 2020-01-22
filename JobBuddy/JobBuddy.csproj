@@ -37,14 +37,18 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Compile Remove="ClientApp.or\**" />
     <Compile Remove="Data\Migrations\**" />
+    <Compile Remove="Pages\Chat\**" />
     <Content Remove="$(SpaRoot)**" />
     <Content Remove="ClientApp.or\**" />
     <Content Remove="Data\Migrations\**" />
+    <Content Remove="Pages\Chat\**" />
     <EmbeddedResource Remove="ClientApp.or\**" />
     <EmbeddedResource Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="Pages\Chat\**" />
     <None Remove="$(SpaRoot)**" />
     <None Remove="ClientApp.or\**" />
     <None Remove="Data\Migrations\**" />
+    <None Remove="Pages\Chat\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -55,18 +59,14 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\demo.css" />
-    <Content Remove="wwwroot\js\Admin.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\Admin.js" />
+    <Content Remove="wwwroot\js\agent.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\bootstrap.min.css" />
     <None Include="wwwroot\css\bootstrap.min.css.map" />
     <None Include="wwwroot\css\demo.css" />
-    <None Include="wwwroot\js\Admin.js" />
+    <None Include="wwwroot\js\agent.js" />
     <None Include="wwwroot\js\core\bootstrap.min.js" />
     <None Include="wwwroot\js\core\jquery.min.js" />
     <None Include="wwwroot\js\core\popper.min.js" />
@@ -89,10 +89,6 @@
     <None Include="wwwroot\js\plugins\nouislider.min.js" />
     <None Include="wwwroot\js\plugins\perfect-scrollbar.jquery.min.js" />
     <None Include="wwwroot\js\plugins\sweetalert2.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Chat\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

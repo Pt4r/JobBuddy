@@ -8,15 +8,17 @@ namespace JobBuddy.Models.ChatServices
 {
     public class InMemoryChatRoomService : IChatRoomService
     {
-        private readonly Dictionary<Guid, ChatRoom> _roomInfo = new Dictionary<Guid, ChatRoom>();
+        private readonly Dictionary<Guid, ChatRoom> _roomInfo
+            = new Dictionary<Guid, ChatRoom>();
 
-        private readonly Dictionary<Guid, List<Message>>
-           _messageHistory = new Dictionary<Guid, List<Message>>();
-        public Task AddMessage(Guid roomId, Message message)
+        private readonly Dictionary<Guid, List<ChatMessage>>
+            _messageHistory = new Dictionary<Guid, List<ChatMessage>>();
+
+        public Task AddMessage(Guid roomId, ChatMessage message)
         {
             if (!_messageHistory.ContainsKey(roomId))
             {
-                _messageHistory[roomId] = new List<Message>();
+                _messageHistory[roomId] = new List<ChatMessage>();
             }
 
             _messageHistory[roomId].Add(message);
@@ -35,18 +37,17 @@ namespace JobBuddy.Models.ChatServices
             return Task.FromResult(id);
         }
 
-
         public Task<IReadOnlyDictionary<Guid, ChatRoom>> GetAllRooms()
         {
             return Task.FromResult(
                 _roomInfo as IReadOnlyDictionary<Guid, ChatRoom>);
         }
 
-        public Task<IEnumerable<Message>> GetMessageHistory(Guid roomId)
+        public Task<IEnumerable<ChatMessage>> GetMessageHistory(Guid roomId)
         {
             _messageHistory.TryGetValue(roomId, out var messages);
 
-            messages = messages ?? new List<Message>();
+            messages = messages ?? new List<ChatMessage>();
             var sortedMessages = messages
                 .OrderBy(x => x.SentAt)
                 .AsEnumerable();

@@ -5,20 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JobBuddy.Models
+namespace JobBuddy.Models.ChatModels
 {
-    public class Message
+    public class ChatMessage
     {
-        [Key]
-        public Guid Id { get; set; }
-
-        [Required]
         public string SenderName { get; set; }
 
-        [Required]
         public string Text { get; set; }
 
-        [Required]
         public DateTimeOffset SentAt { get; set; }
 
 
