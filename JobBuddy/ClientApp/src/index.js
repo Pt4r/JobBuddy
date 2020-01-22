@@ -58,6 +58,8 @@ ReactDOM.render(
         }}
       />
 
+      <Route path="/chat"/>
+      
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
         {/*404 page */}

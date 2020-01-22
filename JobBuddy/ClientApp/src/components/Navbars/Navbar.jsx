@@ -15,6 +15,7 @@
 
 */
 import React from "react";
+import { Link } from "react-router-dom";
 // used for making the prop types of this component
 import PropTypes from "prop-types";
 
@@ -35,7 +36,7 @@ import {
   InputGroupText,
   Input
 } from "reactstrap";
-import PaypalExpressBtn from 'react-paypal-express-checkout';
+
 
 class AdminNavbar extends React.Component {
   state = {
@@ -141,8 +142,8 @@ class AdminNavbar extends React.Component {
             navbar
             className="justify-content-end"
           >
-            <div>
-            
+            <div style={{marginRight:"30px"}}>
+            <Link to="/chat">Chat with us!</Link>
             </div>
             <form>
               <InputGroup className="no-border">
