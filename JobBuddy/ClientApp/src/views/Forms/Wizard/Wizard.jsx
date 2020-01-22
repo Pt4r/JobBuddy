@@ -25,6 +25,7 @@ import { Col } from "reactstrap";
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 import Axios from 'axios';
 
+
 import Step1 from "./Step1.jsx";
 import Step2 from "./Step2.jsx";
 import Step3 from "./Step3.jsx";
@@ -83,6 +84,7 @@ class Wizard extends React.Component {
 
   
   render() {
+    
     return (
       <>
         <PanelHeader size="sm" />
