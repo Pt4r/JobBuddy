@@ -24,11 +24,12 @@ import { Col } from "reactstrap";
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 import Axios from 'axios';
-import { withRouter } from "react-router";
+
 
 import Step1 from "./Step1.jsx";
 import Step2 from "./Step2.jsx";
 import Step3 from "./Step3.jsx";
+import { useState } from "react";
 
 var steps = [
   {
@@ -51,20 +52,20 @@ var steps = [
   }
 ];
 
+
+
 class Wizard extends React.Component {
   constructor(props){
     super(props)   
   this.state = {
-    title: '',
-    info: '',
-    jobCategoyId: '',
-    companyId: ''
+
     }
 }
 
 
-  finishButtonClick(allStepStates){
-  
+
+
+  finishButtonClick(allStepStates){    
     const joblisting = {
       title: allStepStates.JobListingInfo.title,
       info: allStepStates.JobListingInfo.info,
@@ -77,8 +78,6 @@ class Wizard extends React.Component {
           .then(res => {            
           console.log(res)
           })
-          .then(() => {
-            this.props.history.push('/client/dashboard/')})
           .catch(error => {
               console.log(error)
           })
@@ -86,6 +85,7 @@ class Wizard extends React.Component {
 
   
   render() {
+ 
     return (
       <>
         <PanelHeader size="sm" />

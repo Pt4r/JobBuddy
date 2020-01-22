@@ -15,7 +15,7 @@ import Typography from "views/Components/Typography.jsx";
 import RegularForms from "views/Forms/RegularForms.jsx";
 import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 import ValidationForms from "views/Forms/ValidationForms.jsx";
-import Wizard from "./views/Client/Wizard/Wizard";
+import Wizard from "views/Forms/Wizard/Wizard.jsx";
 import RegularTables from "views/Tables/RegularTables.jsx";
 import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 import ReactTable from "views/Tables/ReactTable.jsx";
@@ -77,13 +77,6 @@ let routes = [
     icon: "now-ui-icons design_app",
     component: AdminDashboard,
     layout: "/admin"
-  },
-  {
-    path: "/wizard",
-    name: "Create Job Listing",
-    mini: "JL",
-    component: Wizard,
-    layout: "/client"
   },
   
   {
