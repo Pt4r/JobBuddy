@@ -1,6 +1,4 @@
 # JobBuddy
-Asp.net Core, React 
-
 
 
 CV Ticketing Project made by The Curly Brackets Team.
