@@ -7,7 +7,11 @@ Made in Asp.Net Core, EF Core and React.
 
 
 #The Curly Brackets Team
+
 Stratos Palaiologos
+
 Spyros Theofilatos
+
 Spyros Misichronis
+
 Panteleimon Bakogorgios
