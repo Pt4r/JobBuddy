@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://jobbuddy.com/",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "axios-debug-log": "^0.6.2",
     "bootstrap": "4.3.1",
     "chart.js": "2.8.0",
